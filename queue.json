@@ -19,9 +19,10 @@
       "title": "Your map is lying to you",
       "date": "2026-07-15",
       "image": "002.png",
-      "published": false,
-      "published_at": null,
-      "caption": "Your world map has been lying to you your whole life.\n\nThe Mercator projection was built for navigation in 1569: it keeps compass courses straight — but the price is area. The further from the equator, the more the map inflates. Greenland ends up looking like Africa's twin.\n\nIn reality: Africa covers about 30.4 million km², Greenland about 2.2 million km². Africa is roughly 14 times larger — the USA, China and India would fit inside it together, with room to spare.\n\nSource: Snyder, Map Projections — A Working Manual (USGS).\n\nWhich country's true size surprised you the most?\n\n#maps #cartography #geography #mercator #africa #greenland #dataviz"
+      "published": true,
+      "published_at": "2026-07-15 08:09 UTC",
+      "caption": "Your world map has been lying to you your whole life.\n\nThe Mercator projection was built for navigation in 1569: it keeps compass courses straight — but the price is area. The further from the equator, the more the map inflates. Greenland ends up looking like Africa's twin.\n\nIn reality: Africa covers about 30.4 million km², Greenland about 2.2 million km². Africa is roughly 14 times larger — the USA, China and India would fit inside it together, with room to spare.\n\nSource: Snyder, Map Projections — A Working Manual (USGS).\n\nWhich country's true size surprised you the most?\n\n#maps #cartography #geography #mercator #africa #greenland #dataviz",
+      "media_id": "17880362766613325"
     },
     {
       "post": "003",
