@@ -44,7 +44,8 @@ jobs:
           fi
 
       - name: Commit updated queue
-        if: ${{ always() && inputs.dry_run != true }}        run: |
+        if: ${{ always() && inputs.dry_run != true }}
+        run: |
           if git diff --quiet -- queue.json; then
             echo "No queue change to commit."
           else
