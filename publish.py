@@ -23,7 +23,8 @@ import urllib.request
 import urllib.parse
 import urllib.error
 
-GRAPH = "https://graph.facebook.com/v21.0"
+# Instagram API with Instagram Login uses the graph.instagram.com host.
+GRAPH = "https://graph.instagram.com/v21.0"
 QUEUE_FILE = "queue.json"
 
 
