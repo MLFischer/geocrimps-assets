@@ -1,25 +1,24 @@
 #!/usr/bin/env python3
 """
-GeoCrimps daily Instagram publisher.
+GeoCrimps daily publisher — Instagram + Bluesky, independently.
 
-Posts the first queue item with "published": false to the Instagram
-account @geocrimps via the Instagram Graph API, then marks it published
-in queue.json (the workflow commits the change back).
+Each platform advances on its own: a failure on one (e.g. Instagram temporarily
+blocking API access) never stops the other. Per-platform progress is tracked in
+queue.json via `published_ig` and `published_bsky`. The workflow commits the
+updated queue even when the run is flagged as failed (if: always()), so a
+platform that DID succeed is never re-posted.
 
-Secrets are read from environment variables (GitHub repo secrets):
+Secrets (GitHub repo secrets, read from the environment):
   IG_USER_ID              Instagram Business/Creator account ID (numeric)
   IG_ACCESS_TOKEN         Long-lived Instagram access token (content publish)
-  BLUESKY_HANDLE          (optional) Bluesky handle, e.g. geocrimps.bsky.social
-  BLUESKY_APP_PASSWORD    (optional) Bluesky app password (Settings -> App Passwords)
-
-If the two BLUESKY_* secrets are set, each post is also cross-posted to Bluesky
-at the same time. Bluesky cross-posting is best-effort: a Bluesky failure is
-logged as a warning but never breaks the Instagram pipeline.
+  BLUESKY_HANDLE          Bluesky handle, e.g. geocrimps.bsky.social
+  BLUESKY_APP_PASSWORD    Bluesky app password (Settings -> App Passwords)
 
 Run modes:
-  python publish.py            -> publish the next pending post
-  python publish.py --dry-run  -> show what WOULD be posted, call nothing
-  python publish.py --check    -> verify token/account works (GET only)
+  python publish.py                 -> publish the next pending post per platform
+  python publish.py --dry-run       -> show what WOULD be posted, call nothing
+  python publish.py --check         -> verify the IG token/account works (GET only)
+  python publish.py --bluesky 1,2   -> post the given posts to Bluesky ONLY
 """
 import json
 import os
@@ -49,6 +48,75 @@ def _post(url, data):
 def _fail(msg):
     print(f"::error::{msg}")
     sys.exit(1)
+
+
+def load_queue():
+    with open(QUEUE_FILE, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_queue(q):
+    with open(QUEUE_FILE, "w", encoding="utf-8") as f:
+        json.dump(q, f, ensure_ascii=False, indent=2)
+
+
+def creds():
+    uid = os.environ.get("IG_USER_ID", "").strip()
+    tok = os.environ.get("IG_ACCESS_TOKEN", "").strip()
+    if not uid or not tok:
+        raise RuntimeError("IG_USER_ID and IG_ACCESS_TOKEN must be set as environment variables.")
+    return uid, tok
+
+
+# ---------------- Instagram ----------------
+def ig_publish(item, base):
+    """Create the media container, wait for processing, publish. Returns media id
+    or raises RuntimeError with the API message."""
+    uid, tok = creds()
+    image_url = base + item["image"]
+    try:
+        container = _post(
+            f"{GRAPH}/{uid}/media",
+            {"image_url": image_url, "caption": item["caption"], "access_token": tok},
+        )
+    except urllib.error.HTTPError as e:
+        raise RuntimeError("container creation: " + e.read().decode("utf-8", "ignore"))
+    cid = container.get("id")
+    if not cid:
+        raise RuntimeError(f"no creation id returned: {container}")
+
+    for _ in range(10):
+        time.sleep(5)
+        st = _get(f"{GRAPH}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
+        code = st.get("status_code")
+        if code == "FINISHED":
+            break
+        if code == "ERROR":
+            raise RuntimeError(f"container processing error: {st}")
+    else:
+        raise RuntimeError("container never reached FINISHED status")
+
+    try:
+        result = _post(
+            f"{GRAPH}/{uid}/media_publish",
+            {"creation_id": cid, "access_token": tok},
+        )
+    except urllib.error.HTTPError as e:
+        raise RuntimeError("publish: " + e.read().decode("utf-8", "ignore"))
+    mid = result.get("id")
+    if not mid:
+        raise RuntimeError(f"no media id returned: {result}")
+    return mid
+
+
+def check():
+    try:
+        uid, tok = creds()
+        info = _get(f"{GRAPH}/{uid}?fields=username,name&access_token={urllib.parse.quote(tok)}")
+    except (RuntimeError, urllib.error.HTTPError) as e:
+        detail = e.read().decode("utf-8", "ignore") if isinstance(e, urllib.error.HTTPError) else str(e)
+        _fail(f"Token/account check failed: {detail}")
+    print(f"OK - connected to IG account: @{info.get('username')} ({info.get('name')})")
 
 
 # ---------------- Bluesky (AT Protocol) ----------------
@@ -86,7 +154,7 @@ def bluesky_text(caption):
 
 
 def post_bluesky(image_path, text, alt):
-    """Best-effort cross-post to Bluesky. Returns the post URI or None."""
+    """Post one crimp to Bluesky. Returns the post URI, or None on failure."""
     handle = os.environ.get("BLUESKY_HANDLE", "").strip()
     app_pw = os.environ.get("BLUESKY_APP_PASSWORD", "").strip()
     if not handle or not app_pw:
@@ -127,117 +195,115 @@ def post_bluesky(image_path, text, alt):
         return res.get("uri")
     except urllib.error.HTTPError as e:
         print(f"::warning::Bluesky post failed: {e.read().decode('utf-8', 'ignore')}")
-    except Exception as e:  # best-effort: never break the Instagram pipeline
+    except Exception as e:
         print(f"::warning::Bluesky post error: {e}")
     return None
 
 
-def load_queue():
-    with open(QUEUE_FILE, encoding="utf-8") as f:
-        return json.load(f)
+# ---------------- per-platform progress ----------------
+def ig_done(it):
+    # fall back to the legacy `published` flag for items created before per-platform tracking
+    return bool(it.get("published_ig", it.get("published")))
 
 
-def save_queue(q):
-    with open(QUEUE_FILE, "w", encoding="utf-8") as f:
-        json.dump(q, f, ensure_ascii=False, indent=2)
+def bsky_done(it):
+    return bool(it.get("published_bsky"))
 
 
-def creds():
-    uid = os.environ.get("IG_USER_ID", "").strip()
-    tok = os.environ.get("IG_ACCESS_TOKEN", "").strip()
-    if not uid or not tok:
-        _fail("IG_USER_ID and IG_ACCESS_TOKEN must be set as environment variables.")
-    return uid, tok
-
-
-def check():
-    uid, tok = creds()
-    try:
-        info = _get(f"{GRAPH}/{uid}?fields=username,name&access_token={urllib.parse.quote(tok)}")
-    except urllib.error.HTTPError as e:
-        _fail(f"Token/account check failed: {e.read().decode('utf-8', 'ignore')}")
-    print(f"OK - connected to IG account: @{info.get('username')} ({info.get('name')})")
-
-
-def next_pending(q):
-    for item in q["items"]:
-        if not item.get("published"):
-            return item
+def next_for(q, done_fn):
+    for it in q["items"]:
+        if not done_fn(it):
+            return it
     return None
 
 
 def publish():
     dry = "--dry-run" in sys.argv
     q = load_queue()
-    item = next_pending(q)
-    if not item:
-        print("Nothing to publish - all queue items are marked published.")
+    base = q.get("image_base_url", "")
+    ig_item = next_for(q, ig_done)
+    bsky_item = next_for(q, bsky_done)
+
+    if not ig_item and not bsky_item:
+        print("Nothing to publish - all items done on both platforms.")
         return
-    image_url = q["image_base_url"] + item["image"]
-    caption = item["caption"]
-    print(f"Next post: #{item['post']} - {item['title']}")
-    print(f"Image: {image_url}")
+
     if dry:
         print("--- DRY RUN, nothing sent ---")
-        print(caption)
-        print("\n--- Bluesky version (<=300 chars) ---")
-        print(bluesky_text(caption))
+        if ig_item:
+            print(f"Instagram next: #{ig_item['post']} - {ig_item['title']}")
+        if bsky_item:
+            print(f"Bluesky next:   #{bsky_item['post']} - {bsky_item['title']}")
+            print("--- Bluesky text ---")
+            print(bluesky_text(bsky_item["caption"]))
         return
 
-    uid, tok = creds()
-    # 1) create media container
-    try:
-        container = _post(
-            f"{GRAPH}/{uid}/media",
-            {"image_url": image_url, "caption": caption, "access_token": tok},
+    failures = []
+
+    # --- Instagram (independent) ---
+    if ig_item:
+        try:
+            mid = ig_publish(ig_item, base)
+            ig_item["published_ig"] = True
+            ig_item["published"] = True  # legacy compat
+            ig_item["media_id"] = mid
+            if not ig_item.get("published_at"):
+                ig_item["published_at"] = time.strftime("%Y-%m-%d %H:%M %Z")
+            print(f"Instagram: published #{ig_item['post']} (media {mid})")
+        except Exception as e:
+            failures.append(f"Instagram #{ig_item['post']}: {e}")
+            print(f"::warning::Instagram failed for #{ig_item['post']}: {e}")
+
+    # --- Bluesky (independent) ---
+    if bsky_item:
+        uri = post_bluesky(
+            bsky_item["image"], bluesky_text(bsky_item["caption"]), bsky_item.get("title", "GeoCrimps")
         )
-    except urllib.error.HTTPError as e:
-        _fail(f"Container creation failed: {e.read().decode('utf-8', 'ignore')}")
-    cid = container.get("id")
-    if not cid:
-        _fail(f"No creation id returned: {container}")
-    print(f"Container created: {cid}")
+        if uri:
+            bsky_item["published_bsky"] = True
+            bsky_item["bluesky_uri"] = uri
+            print(f"Bluesky: published #{bsky_item['post']}")
+        else:
+            failures.append(f"Bluesky #{bsky_item['post']}")
 
-    # 2) wait until the container is FINISHED (image fetched & processed)
-    for attempt in range(10):
-        time.sleep(5)
-        st = _get(f"{GRAPH}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
-        code = st.get("status_code")
-        print(f"  status: {code}")
-        if code == "FINISHED":
-            break
-        if code == "ERROR":
-            _fail(f"Container processing error: {st}")
-    else:
-        _fail("Container never reached FINISHED status.")
-
-    # 3) publish
-    try:
-        result = _post(
-            f"{GRAPH}/{uid}/media_publish",
-            {"creation_id": cid, "access_token": tok},
-        )
-    except urllib.error.HTTPError as e:
-        _fail(f"Publish failed: {e.read().decode('utf-8', 'ignore')}")
-    media_id = result.get("id")
-    print(f"Published! media id: {media_id}")
-
-    # 3b) cross-post to Bluesky (best-effort; never blocks the IG pipeline).
-    # item["image"] (e.g. "002.png") sits at the repo root, checked out by CI.
-    bsky_uri = post_bluesky(item["image"], bluesky_text(caption), item.get("title", "GeoCrimps"))
-
-    # 4) mark published and persist
-    item["published"] = True
-    item["published_at"] = time.strftime("%Y-%m-%d %H:%M %Z")
-    item["media_id"] = media_id
-    if bsky_uri:
-        item["bluesky_uri"] = bsky_uri
     save_queue(q)
     print("queue.json updated.")
 
+    if failures:
+        # Exit non-zero so the run is flagged (and the maintainer is notified),
+        # but the queue is already saved and committed by the workflow's
+        # `if: always()` step, so the platform that succeeded is not re-posted.
+        _fail("Some platforms failed: " + " | ".join(failures))
+
+
+def backfill_bluesky(ids):
+    """Post the given posts (by number) to Bluesky ONLY - no Instagram, no queue change."""
+    q = load_queue()
+    by_id = {it["post"]: it for it in q["items"]}
+    ok = True
+    for pid in ids:
+        pid = pid.strip().zfill(3)
+        it = by_id.get(pid)
+        if not it:
+            print(f"::warning::post {pid} not found in queue")
+            ok = False
+            continue
+        uri = post_bluesky(it["image"], bluesky_text(it["caption"]), it.get("title", "GeoCrimps"))
+        if uri:
+            print(f"#{pid} posted to Bluesky: {uri}")
+        else:
+            print(f"::error::Bluesky post for #{pid} failed")
+            ok = False
+    if not ok:
+        sys.exit(1)
+
 
 if __name__ == "__main__":
-    if "--check" in sys.argv:
+    if "--bluesky" in sys.argv:
+        i = sys.argv.index("--bluesky")
+        ids = sys.argv[i + 1].split(",") if len(sys.argv) > i + 1 else []
+        backfill_bluesky(ids)
+    elif "--check" in sys.argv:
         check()
     else:
         publish()
