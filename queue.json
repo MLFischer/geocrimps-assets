@@ -3,12 +3,12 @@
   "timezone": "Europe/Berlin",
   "post_time": "18:00",
   "image_base_url": "https://raw.githubusercontent.com/MLFischer/geocrimps-assets/main/",
-  "note": "publish.py posts the first item with published=false each run (one per day). #001 already posted manually.",
+  "note": "publish.py posts the first item with published=false each run (one per day). Week 1 = #001 (Mon 2026-07-13) … #007 (Sun 2026-07-19). #001 & #002 posted manually.",
   "items": [
     {
       "post": "001",
       "title": "Why Font feels like glass",
-      "date": "2026-07-14",
+      "date": "2026-07-13",
       "image": "001.png",
       "published": true,
       "published_at": "2026-07-14 (manual)",
@@ -17,7 +17,7 @@
     {
       "post": "002",
       "title": "Your map is lying to you",
-      "date": "2026-07-15",
+      "date": "2026-07-14",
       "image": "002.png",
       "published": true,
       "published_at": "2026-07-15 08:09 UTC",
@@ -27,7 +27,7 @@
     {
       "post": "003",
       "title": "Why wet sandstone breaks",
-      "date": "2026-07-16",
+      "date": "2026-07-15",
       "image": "003.png",
       "published": false,
       "published_at": null,
@@ -36,7 +36,7 @@
     {
       "post": "004",
       "title": "Velvet vs. sandpaper",
-      "date": "2026-07-17",
+      "date": "2026-07-16",
       "image": "004.png",
       "published": false,
       "published_at": null,
@@ -45,7 +45,7 @@
     {
       "post": "005",
       "title": "Crystals you can crimp",
-      "date": "2026-07-18",
+      "date": "2026-07-17",
       "image": "005.png",
       "published": false,
       "published_at": null,
@@ -54,7 +54,7 @@
     {
       "post": "006",
       "title": "Your crimps were carved by ice",
-      "date": "2026-07-19",
+      "date": "2026-07-18",
       "image": "006.png",
       "published": false,
       "published_at": null,
@@ -63,7 +63,7 @@
     {
       "post": "007",
       "title": "When the Sahara was green",
-      "date": "2026-07-20",
+      "date": "2026-07-19",
       "image": "007.png",
       "published": false,
       "published_at": null,
