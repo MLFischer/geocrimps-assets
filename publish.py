@@ -277,7 +277,8 @@ def publish():
 
 
 def backfill_bluesky(ids):
-    """Post the given posts (by number) to Bluesky ONLY - no Instagram, no queue change."""
+    """Post the given posts (by number) to Bluesky ONLY - no Instagram. Marks
+    published_bsky=true and saves the queue so the daily run won't re-post them."""
     q = load_queue()
     by_id = {it["post"]: it for it in q["items"]}
     ok = True
@@ -290,10 +291,14 @@ def backfill_bluesky(ids):
             continue
         uri = post_bluesky(it["image"], bluesky_text(it["caption"]), it.get("title", "GeoCrimps"))
         if uri:
+            it["published_bsky"] = True
+            it["bluesky_uri"] = uri
             print(f"#{pid} posted to Bluesky: {uri}")
         else:
             print(f"::error::Bluesky post for #{pid} failed")
             ok = False
+    save_queue(q)
+    print("queue.json updated.")
     if not ok:
         sys.exit(1)
 
