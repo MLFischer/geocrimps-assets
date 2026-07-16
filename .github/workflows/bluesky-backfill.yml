@@ -1,0 +1,46 @@
+name: Bluesky backfill
+
+# One-off helper: post specific crimps to Bluesky ONLY (no Instagram).
+# Use to back-fill posts that already went to Instagram. Marks published_bsky
+# in queue.json so the daily run won't re-post them.
+
+on:
+  workflow_dispatch:
+    inputs:
+      posts:
+        description: "Comma-separated post numbers to post to Bluesky only"
+        default: "003"
+
+permissions:
+  contents: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Post selected crimps to Bluesky
+        env:
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+        run: python publish.py --bluesky "${{ inputs.posts }}"
+
+      - name: Commit updated queue
+        if: ${{ always() }}
+        run: |
+          if git diff --quiet -- queue.json; then
+            echo "No queue change to commit."
+          else
+            git config user.name "geocrimps-bot"
+            git config user.email "actions@github.com"
+            git add queue.json
+            git commit -m "Backfill Bluesky [skip ci]"
+            git push
+          fi
