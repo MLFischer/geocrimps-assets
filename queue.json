@@ -85,11 +85,13 @@
       "title": "When the Sahara was green",
       "date": "2026-07-19",
       "image": "007.png",
-      "published": false,
-      "published_at": null,
+      "published": true,
+      "published_at": "2026-07-19 17:01 UTC",
       "caption": "8,000 years ago, you could have paddled across the Sahara.\n\nBetween roughly 11,000 and 5,000 years ago — the African Humid Period — a wobble in Earth's orbit (precession, a ~20,000-year cycle) pushed the West African monsoon far north. The world's largest desert turned into savannah with rivers, grazing herds and giant lakes.\n\nThe biggest of them, Lake Mega-Chad, covered ~350,000 km² — nearly the size of today's Caspian Sea. Its dusty remains are today's Bodélé Depression, which now fertilizes the Amazon with airborne dust.\n\nRock art in the central Sahara still shows people swimming.\n\nSource: deMenocal & Tierney, Green Sahara (Nature Education) · Drake & Bristow, Holocene Lake Mega-Chad.\n\nWhich \"lost world\" would you visit first?\n\n#sahara #climate #paleoclimate #geography #africa #earthhistory #greensahara",
-      "published_ig": false,
-      "published_bsky": false
+      "published_ig": true,
+      "published_bsky": true,
+      "media_id": "18123359866764573",
+      "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3mqzayxirl72n"
     }
   ]
 }
