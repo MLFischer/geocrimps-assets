@@ -2,6 +2,10 @@
 """
 GeoCrimps daily publisher — Instagram + Bluesky, independently.
 
+Supports single-image posts AND carousels: if an item has an "images" list, it is
+published as an Instagram carousel (children + carousel container) and a Bluesky
+multi-image post (max 4). Items with only "image" keep the old single-image path.
+
 Each platform advances on its own: a failure on one (e.g. Instagram temporarily
 blocking API access) never stops the other. Per-platform progress is tracked in
 queue.json via `published_ig` and `published_bsky`. The workflow commits the
@@ -68,38 +72,86 @@ def creds():
     return uid, tok
 
 
-# ---------------- Instagram ----------------
-def ig_publish(item, base):
-    """Create the media container, wait for processing, publish. Returns media id
-    or raises RuntimeError with the API message."""
-    uid, tok = creds()
-    image_url = base + item["image"]
-    try:
-        container = _post(
-            f"{GRAPH}/{uid}/media",
-            {"image_url": image_url, "caption": item["caption"], "access_token": tok},
-        )
-    except urllib.error.HTTPError as e:
-        raise RuntimeError("container creation: " + e.read().decode("utf-8", "ignore"))
-    cid = container.get("id")
-    if not cid:
-        raise RuntimeError(f"no creation id returned: {container}")
+def media_list(item):
+    """Image filenames for an item, carousel-aware. `images` (list) wins over `image`."""
+    imgs = item.get("images")
+    if imgs:
+        return list(imgs)
+    return [item["image"]]
 
+
+# ---------------- Instagram ----------------
+def _wait_finished(cid, tok):
+    """Poll a media container until it reaches FINISHED, or raise."""
     for _ in range(10):
         time.sleep(5)
         st = _get(f"{GRAPH}/{cid}?fields=status_code,status&access_token={urllib.parse.quote(tok)}")
         code = st.get("status_code")
         if code == "FINISHED":
-            break
+            return
         if code == "ERROR":
             raise RuntimeError(f"container processing error: {st}")
+    raise RuntimeError("container never reached FINISHED status")
+
+
+def _ig_child(uid, tok, image_url):
+    """Create one carousel child container (no caption). Returns its id."""
+    try:
+        child = _post(
+            f"{GRAPH}/{uid}/media",
+            {"image_url": image_url, "is_carousel_item": "true", "access_token": tok},
+        )
+    except urllib.error.HTTPError as e:
+        raise RuntimeError("child container: " + e.read().decode("utf-8", "ignore"))
+    cid = child.get("id")
+    if not cid:
+        raise RuntimeError(f"no child id returned: {child}")
+    return cid
+
+
+def ig_publish(item, base):
+    """Create the media container(s), wait for processing, publish. Single image or
+    carousel depending on item['images']. Returns the published media id or raises."""
+    uid, tok = creds()
+    imgs = media_list(item)
+
+    if len(imgs) == 1:
+        try:
+            container = _post(
+                f"{GRAPH}/{uid}/media",
+                {"image_url": base + imgs[0], "caption": item["caption"], "access_token": tok},
+            )
+        except urllib.error.HTTPError as e:
+            raise RuntimeError("container creation: " + e.read().decode("utf-8", "ignore"))
+        parent_id = container.get("id")
+        if not parent_id:
+            raise RuntimeError(f"no creation id returned: {container}")
+        _wait_finished(parent_id, tok)
     else:
-        raise RuntimeError("container never reached FINISHED status")
+        child_ids = [_ig_child(uid, tok, base + fn) for fn in imgs]
+        for ccid in child_ids:
+            _wait_finished(ccid, tok)
+        try:
+            parent = _post(
+                f"{GRAPH}/{uid}/media",
+                {
+                    "media_type": "CAROUSEL",
+                    "children": ",".join(child_ids),
+                    "caption": item["caption"],
+                    "access_token": tok,
+                },
+            )
+        except urllib.error.HTTPError as e:
+            raise RuntimeError("carousel container: " + e.read().decode("utf-8", "ignore"))
+        parent_id = parent.get("id")
+        if not parent_id:
+            raise RuntimeError(f"no carousel id returned: {parent}")
+        _wait_finished(parent_id, tok)
 
     try:
         result = _post(
             f"{GRAPH}/{uid}/media_publish",
-            {"creation_id": cid, "access_token": tok},
+            {"creation_id": parent_id, "access_token": tok},
         )
     except urllib.error.HTTPError as e:
         raise RuntimeError("publish: " + e.read().decode("utf-8", "ignore"))
@@ -122,6 +174,7 @@ def check():
 # ---------------- Bluesky (AT Protocol) ----------------
 BSKY = "https://bsky.social/xrpc"
 BSKY_LIMIT = 300  # Bluesky limit is 300 graphemes; approximated with characters.
+BSKY_MAX_IMAGES = 4
 
 
 def _http_json(url, payload, headers=None):
@@ -153,29 +206,36 @@ def bluesky_text(caption):
     return cut.rstrip() + "…"
 
 
-def post_bluesky(image_path, text, alt):
-    """Post one crimp to Bluesky. Returns the post URI, or None on failure."""
+def post_bluesky(image_paths, text, alt):
+    """Post one crimp to Bluesky (1-4 images). Returns the post URI, or None on failure."""
     handle = os.environ.get("BLUESKY_HANDLE", "").strip()
     app_pw = os.environ.get("BLUESKY_APP_PASSWORD", "").strip()
     if not handle or not app_pw:
         print("Bluesky: BLUESKY_HANDLE/BLUESKY_APP_PASSWORD not set - skipping.")
         return None
+    if isinstance(image_paths, str):
+        image_paths = [image_paths]
+    image_paths = image_paths[:BSKY_MAX_IMAGES]
     try:
         sess = _http_json(
             f"{BSKY}/com.atproto.server.createSession",
             {"identifier": handle, "password": app_pw},
         )
         jwt, did = sess["accessJwt"], sess["did"]
-        with open(image_path, "rb") as f:
-            blob_bytes = f.read()
-        req = urllib.request.Request(
-            f"{BSKY}/com.atproto.repo.uploadBlob",
-            data=blob_bytes,
-            headers={"Content-Type": "image/png", "Authorization": f"Bearer {jwt}"},
-            method="POST",
-        )
-        with urllib.request.urlopen(req, timeout=60) as r:
-            blob = json.loads(r.read().decode("utf-8"))["blob"]
+        images_embed = []
+        for idx, path in enumerate(image_paths, start=1):
+            with open(path, "rb") as f:
+                blob_bytes = f.read()
+            req = urllib.request.Request(
+                f"{BSKY}/com.atproto.repo.uploadBlob",
+                data=blob_bytes,
+                headers={"Content-Type": "image/png", "Authorization": f"Bearer {jwt}"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=60) as r:
+                blob = json.loads(r.read().decode("utf-8"))["blob"]
+            slide_alt = alt if len(image_paths) == 1 else f"{alt} (slide {idx})"
+            images_embed.append({"alt": slide_alt, "image": blob})
         record = {
             "$type": "app.bsky.feed.post",
             "text": text,
@@ -183,7 +243,7 @@ def post_bluesky(image_path, text, alt):
             "langs": ["en"],
             "embed": {
                 "$type": "app.bsky.embed.images",
-                "images": [{"alt": alt, "image": blob}],
+                "images": images_embed,
             },
         }
         res = _http_json(
@@ -231,9 +291,9 @@ def publish():
     if dry:
         print("--- DRY RUN, nothing sent ---")
         if ig_item:
-            print(f"Instagram next: #{ig_item['post']} - {ig_item['title']}")
+            print(f"Instagram next: #{ig_item['post']} - {ig_item['title']} ({len(media_list(ig_item))} img)")
         if bsky_item:
-            print(f"Bluesky next:   #{bsky_item['post']} - {bsky_item['title']}")
+            print(f"Bluesky next:   #{bsky_item['post']} - {bsky_item['title']} ({len(media_list(bsky_item))} img)")
             print("--- Bluesky text ---")
             print(bluesky_text(bsky_item["caption"]))
         return
@@ -257,7 +317,7 @@ def publish():
     # --- Bluesky (independent) ---
     if bsky_item:
         uri = post_bluesky(
-            bsky_item["image"], bluesky_text(bsky_item["caption"]), bsky_item.get("title", "GeoCrimps")
+            media_list(bsky_item), bluesky_text(bsky_item["caption"]), bsky_item.get("title", "GeoCrimps")
         )
         if uri:
             bsky_item["published_bsky"] = True
@@ -289,7 +349,7 @@ def backfill_bluesky(ids):
             print(f"::warning::post {pid} not found in queue")
             ok = False
             continue
-        uri = post_bluesky(it["image"], bluesky_text(it["caption"]), it.get("title", "GeoCrimps"))
+        uri = post_bluesky(media_list(it), bluesky_text(it["caption"]), it.get("title", "GeoCrimps"))
         if uri:
             it["published_bsky"] = True
             it["bluesky_uri"] = uri
