@@ -3,7 +3,7 @@
   "timezone": "Europe/Berlin",
   "post_time": "18:00",
   "image_base_url": "https://raw.githubusercontent.com/MLFischer/geocrimps-assets/main/",
-  "note": "publish.py posts the first item with published=false each run (one per day). Use item['images'] (list) if present else [item['image']]. IG -> carousel (children + carousel container); Bluesky -> image array (max 4). Week 2 (#008-#014) are 4-slide carousels: main slide + 3 explainer slides.",
+  "note": "publish.py posts the first item with published=false each run (one per day). Use item['images'] (list) if present else [item['image']]. IG -> carousel, Bluesky -> image array (max 4). #001-#010 already posted (singles); #011-#014 are 4-slide carousels (main + 3 explainer).",
   "items": [
     {
       "post": "001",
@@ -94,26 +94,48 @@
       "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3mqzayxirl72n"
     },
     {
+      "post": "008",
+      "title": "Why limestone is full of pockets",
+      "date": "2026-07-21",
+      "image": "008.png",
+      "published": true,
+      "published_ig": true,
+      "published_bsky": true,
+      "caption": "Two-finger pockets, monos, huecos — nobody carved them. They dissolved.\n\nRain picks up CO₂ from the air and the soil and turns into a weak acid. Trickling over limestone for thousands of years, it slowly dissolves the rock — and it attacks the weakest spots first: fossils, burrows, fine fractures. Wherever the chemistry wins, a pocket opens.\n\nFun fact: water seeping through soil can carry far more CO₂ than rain picks up from the air — the ground itself sharpens the acid.\n\nSource: Ford & Williams (2007), Karst Hydrogeology and Geomorphology.\n\nWhat's the best pocket line you've ever pulled on?\n\n#climbing #bouldering #limestone #karst #geology #earthscience #frankenjura",
+      "media_id": "18102265352179802",
+      "published_at": "2026-07-20 18:08 UTC",
+      "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3mr3v6xjiqr2z"
+    },
+    {
+      "post": "009",
+      "title": "What chalk actually does",
+      "date": "2026-07-22",
+      "image": "009.png",
+      "published": true,
+      "published_ig": true,
+      "published_bsky": true,
+      "caption": "Chalk is the one piece of gear almost nobody questions. Science does.\n\nMagnesium carbonate counters the moisture on your skin, and most lab studies measure higher finger–hold friction with a light layer of chalk. But there's a limit: a thick coat of loose powder can act like a layer of tiny rolling particles between skin and rock — and friction drops again.\n\nFun fact: one early lab study famously concluded that chalk *reduces* friction. The debate has kept sports scientists busy ever since.\n\nSource: Li et al. (2001), J. Sports Sciences · Amca et al. (2012), J. Sports Sciences · Clarke et al. (2024), Proc. IMechE Part P.\n\nLight dust or full powder glove — how do you chalk up?\n\n#climbing #bouldering #chalk #climbingscience #friction #sportscience #beta",
+      "media_id": "18605567611050366",
+      "published_at": "2026-07-21 17:25 UTC",
+      "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3mr6db6tzdo25"
+    },
+    {
       "post": "010",
       "title": "Everest's summit is ancient seafloor",
       "date": "2026-07-23",
-      "image": "010_1.png",
-      "published": false,
-      "published_ig": false,
-      "published_bsky": false,
+      "image": "010.png",
+      "published": true,
+      "published_ig": true,
+      "published_bsky": true,
       "caption": "The highest rock on Earth is seafloor.\n\nThe summit of Mount Everest is made of the Qomolangma Formation: marine limestone deposited in a warm, shallow sea about 450 million years ago, in the Ordovician. When India collided with Asia — starting around 50 million years ago — that seafloor was stacked, folded and pushed to 8,849 metres.\n\nFun fact: rock samples collected within metres of the summit contain fragments of marine fossils — trilobites, crinoids, ostracods. The top of the world is full of sea creatures.\n\nSource: Myrow et al. (2009), GSA Bulletin · IUGS Geoheritage: The Ordovician rocks of Mount Everest.\n\nWould you rather stand on Everest or send your dream line?\n\n#everest #himalaya #geology #earthhistory #limestone #fossils #mountains",
-      "images": [
-        "010_1.png",
-        "010_2.png",
-        "010_3.png",
-        "010_4.png"
-      ],
-      "format": "carousel"
+      "media_id": "18098113496264490",
+      "published_at": "2026-07-22 17:24 UTC",
+      "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3mrato7l6lr2t"
     },
     {
       "post": "011",
       "title": "Why granite splits into perfect cracks",
-      "date": "2026-07-24",
+      "date": "2026-07-23",
       "image": "011_1.png",
       "published": false,
       "published_ig": false,
@@ -130,7 +152,7 @@
     {
       "post": "012",
       "title": "Tufa: the rock that grows",
-      "date": "2026-07-25",
+      "date": "2026-07-24",
       "image": "012_1.png",
       "published": false,
       "published_ig": false,
@@ -147,7 +169,7 @@
     {
       "post": "013",
       "title": "The Mediterranean was a desert",
-      "date": "2026-07-26",
+      "date": "2026-07-25",
       "image": "013_1.png",
       "published": false,
       "published_ig": false,
@@ -164,7 +186,7 @@
     {
       "post": "014",
       "title": "Why sandstone turns red",
-      "date": "2026-07-27",
+      "date": "2026-07-26",
       "image": "014_1.png",
       "published": false,
       "published_ig": false,
