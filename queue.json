@@ -137,9 +137,9 @@
       "title": "Why granite splits into perfect cracks",
       "date": "2026-07-23",
       "image": "011_1.png",
-      "published": false,
-      "published_ig": false,
-      "published_bsky": false,
+      "published": true,
+      "published_ig": true,
+      "published_bsky": true,
       "caption": "Perfect splitters aren't luck. They're physics.\n\nGranite crystallizes kilometres underground, squeezed by the weight of everything above it. When erosion strips that load away, the rock expands — and cracks. Sheets split off parallel to the surface (exfoliation), while older, roughly right-angled joint sets open into the clean vertical cracks climbers jam.\n\nFun fact: on Yosemite's domes, these curved sheets peel like onion layers — Half Dome owes its shape to them.\n\nSource: Martel (2017), Journal of Structural Geology · Huber (1987), The Geologic Story of Yosemite National Park.\n\nWhat's the finest crack you've ever jammed?\n\n#yosemite #cracklimbing #tradclimbing #granite #climbing #geology #splitter",
       "images": [
         "011_1.png",
@@ -147,7 +147,10 @@
         "011_3.png",
         "011_4.png"
       ],
-      "format": "carousel"
+      "format": "carousel",
+      "media_id": "18044117741799801",
+      "published_at": "2026-07-23 17:27 UTC",
+      "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3mrdectfygj2m"
     },
     {
       "post": "012",
