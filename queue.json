@@ -197,9 +197,9 @@
       "title": "Why sandstone turns red",
       "date": "2026-07-26",
       "image": "014_1.png",
-      "published": false,
-      "published_ig": false,
-      "published_bsky": false,
+      "published": true,
+      "published_ig": true,
+      "published_bsky": true,
       "caption": "Red rock is mostly not red. It's painted.\n\nThe quartz grains in red sandstone are usually pale grey. What makes whole canyons glow is a coating of hematite — iron oxide — wrapped around each grain, often thinner than a human hair. The pigment is a trace by volume, but it dominates everything your eye sees.\n\nFun fact: much of that colour formed *after* burial, as iron-bearing fluids moved through the sand. A red cliff tells you less about the desert it was born in than about the chemistry that soaked it later.\n\nSource: Walker (1967), GSA Bulletin · Turner (1980), Continental Red Beds.\n\nFavourite red-rock destination — Utah, Todra, or somewhere else?\n\n#sandstone #redrocks #desertclimbing #geology #climbing #moab #earthscience",
       "images": [
         "014_1.png",
@@ -207,7 +207,10 @@
         "014_3.png",
         "014_4.png"
       ],
-      "format": "carousel"
+      "format": "carousel",
+      "media_id": "18125993197664598",
+      "published_at": "2026-07-26 17:06 UTC",
+      "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3mrkukrmijg2t"
     }
   ]
 }
