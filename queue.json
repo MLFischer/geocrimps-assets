@@ -764,10 +764,13 @@
         "042_4.png"
       ],
       "format": "carousel",
-      "published": false,
-      "published_ig": false,
-      "published_bsky": false,
-      "caption": "There is a rock that records the moment the planet started breathing.\n\nFor most of Earth's early history there was no free oxygen. Iron from volcanoes and weathering stayed dissolved in seawater, because dissolved iron only rusts out when oxygen is around. Then cyanobacteria worked out photosynthesis and began releasing oxygen. From about 2.4 billion years ago it accumulated — the Great Oxidation Event. The dissolved iron met it, turned into insoluble iron oxide and sank. What settled is banded iron formation: alternating layers of iron oxide and silica, red and dark, stacked in stripes.\n\nFun fact: these rocks are not forming anywhere today. The oceans have oxygen now, so iron can no longer build up dissolved in seawater. Banded iron belongs to the deep past — and it is where most of the world's iron ore comes from.\n\nSource: Great Oxidation Event and banded iron formations, standard Precambrian geology · BIF composition: alternating iron oxide (hematite, magnetite) and chert layers.\n\nWould you rather see the ocean before oxygen, or the day it changed?\n\n#bandedironformation #geology #earthhistory #deeptime #oxygen #precambrian #earthscience"
+      "published": true,
+      "published_ig": true,
+      "published_bsky": true,
+      "caption": "There is a rock that records the moment the planet started breathing.\n\nFor most of Earth's early history there was no free oxygen. Iron from volcanoes and weathering stayed dissolved in seawater, because dissolved iron only rusts out when oxygen is around. Then cyanobacteria worked out photosynthesis and began releasing oxygen. From about 2.4 billion years ago it accumulated — the Great Oxidation Event. The dissolved iron met it, turned into insoluble iron oxide and sank. What settled is banded iron formation: alternating layers of iron oxide and silica, red and dark, stacked in stripes.\n\nFun fact: these rocks are not forming anywhere today. The oceans have oxygen now, so iron can no longer build up dissolved in seawater. Banded iron belongs to the deep past — and it is where most of the world's iron ore comes from.\n\nSource: Great Oxidation Event and banded iron formations, standard Precambrian geology · BIF composition: alternating iron oxide (hematite, magnetite) and chert layers.\n\nWould you rather see the ocean before oxygen, or the day it changed?\n\n#bandedironformation #geology #earthhistory #deeptime #oxygen #precambrian #earthscience",
+      "media_id": "18490245772096797",
+      "published_at": "2026-08-24 16:42 UTC",
+      "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3mttqpoprjv2w"
     }
   ]
 }
