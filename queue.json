@@ -904,10 +904,13 @@
         "049_4.png"
       ],
       "format": "carousel",
-      "published": false,
-      "published_ig": false,
-      "published_bsky": false,
-      "caption": "There is a place so flat that satellites use it to check themselves.\n\nSalar de Uyuni sits at about 3,700 m in the Bolivian Altiplano: the largest salt flat on Earth, 9,000 km² with less than one metre of vertical relief across the whole of it. It is the low point of a basin with no outlet, flooded and evaporated over and over through the late Quaternary, each cycle leaving salt behind. Periodic flooding still dissolves and redeposits that salt, and the authors of the survey say this appears to be responsible for maintaining the salar's extraordinary smoothness. When a thin sheet of water covers it, the whole thing turns into a mirror.\n\nThat flatness is scientifically useful. A broad, level, cloud-free surface is an ideal reference target for satellite altimeters, so in 2002 a team drove GPS receivers across a 45 × 54 km grid to provide ground truth for NASA's ICESat laser altimeter.\n\nFun fact: the resulting elevation model shows a range of just 77 cm over 50 kilometres — and its long-wavelength shape follows the geoid, the shape of Earth's own gravity field. The salt surface is quietly tracing gravity.\n\nSource: Borsa, Fricker, Bills, Minster, Carabajal & Quinn (2008), Topography of the salar de Uyuni, Bolivia from kinematic GPS, Geophysical Journal International 172:31–40.\n\nWhere's the flattest ground you've ever stood on?\n\n#geology #salardeuyuni #bolivia #geodesy #satellites #saltflat #earthscience"
+      "published": true,
+      "published_ig": true,
+      "published_bsky": true,
+      "caption": "There is a place so flat that satellites use it to check themselves.\n\nSalar de Uyuni sits at about 3,700 m in the Bolivian Altiplano: the largest salt flat on Earth, 9,000 km² with less than one metre of vertical relief across the whole of it. It is the low point of a basin with no outlet, flooded and evaporated over and over through the late Quaternary, each cycle leaving salt behind. Periodic flooding still dissolves and redeposits that salt, and the authors of the survey say this appears to be responsible for maintaining the salar's extraordinary smoothness. When a thin sheet of water covers it, the whole thing turns into a mirror.\n\nThat flatness is scientifically useful. A broad, level, cloud-free surface is an ideal reference target for satellite altimeters, so in 2002 a team drove GPS receivers across a 45 × 54 km grid to provide ground truth for NASA's ICESat laser altimeter.\n\nFun fact: the resulting elevation model shows a range of just 77 cm over 50 kilometres — and its long-wavelength shape follows the geoid, the shape of Earth's own gravity field. The salt surface is quietly tracing gravity.\n\nSource: Borsa, Fricker, Bills, Minster, Carabajal & Quinn (2008), Topography of the salar de Uyuni, Bolivia from kinematic GPS, Geophysical Journal International 172:31–40.\n\nWhere's the flattest ground you've ever stood on?\n\n#geology #salardeuyuni #bolivia #geodesy #satellites #saltflat #earthscience",
+      "media_id": "18111672794108923",
+      "published_at": "2026-08-31 21:23 UTC",
+      "bluesky_uri": "at://did:plc:rbmqfgdiibkkctf4u2ifmqah/app.bsky.feed.post/3muftotxubc2j"
     },
     {
       "post": "050",
