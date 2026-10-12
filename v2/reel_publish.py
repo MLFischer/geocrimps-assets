@@ -8,6 +8,7 @@ Ablauf je faelligem Reel (status "ready", nicht "hold", Termin erreicht, hoechst
 
 Modi:  python3 v2/reel_publish.py                 faellige Reels veroeffentlichen
        python3 v2/reel_publish.py --probe [ID]    Probelauf: Container bis FINISHED, NICHT veroeffentlichen
+                                                  (ohne ID: naechstes unveroeffentlichtes Reel ohne bestandenen Probelauf)
 Umgebung: IG_USER_ID, IG_ACCESS_TOKEN (GitHub-Secrets). Das Token wird nie ausgegeben.
 """
 import datetime as dt
@@ -153,6 +154,8 @@ def main():
         i = sys.argv.index("--probe")
         rid = sys.argv[i + 1] if len(sys.argv) > i + 1 else None
         cand = [r for r in q["reels"] if r.get("status") != "published" and (rid is None or r["id"] == rid)]
+        if rid is None:                     # ohne ID: naechstes Reel ohne bestandenen Probelauf
+            cand = [r for r in cand if (r.get("probe") or {}).get("result") != "FINISHED"] or cand
         if not cand:
             log("Kein Reel fuer den Probelauf gefunden."); sys.exit(1)
         item = cand[0]
