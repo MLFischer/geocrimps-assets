@@ -1,0 +1,12 @@
+# GeoCrimp #040 — Quellen & Faktencheck
+
+| Claim (im Post) | Quelle | Status |
+|---|---|---|
+| Kluftabstand in geschichteten Sedimentgesteinen ist proportional zur Mächtigkeit der Schicht | [Narr & Suppe (1991), Joint spacing in sedimentary rocks, JSG](https://www.sciencedirect.com/science/article/abs/pii/019181419190055N) · [Ladeira & Price (1981), Relationship between fracture spacing and bed thickness, JSG](https://www.sciencedirect.com/science/article/abs/pii/0191814181900134) | ✅ web-verifiziert 06.08.2026 |
+| Jede Bank wirkt als eigene „mechanische Einheit"; Abstand und Verteilung werden von der Stratigraphie gesteuert, nicht primär von der Tektonik | [Spacing and distribution of bed-perpendicular joints … (Granada Basin), Tectonophysics](https://www.sciencedirect.com/science/article/abs/pii/S0040195112006415) | ✅ web-verifiziert 06.08.2026 |
+| Fracture saturation: ab einem bestimmten Verhältnis Abstand/Mächtigkeit entstehen keine neuen Klüfte mehr, weitere Dehnung öffnet nur die vorhandenen | [Bai & Pollard, Fracture spacing in layered rocks: a new explanation based on the stress transition, JSG (1999/2000)](https://www.sciencedirect.com/science/article/pii/S0191814199001376) · [Nature 405, „Explanation for fracture spacing in layered materials"](https://www.nature.com/articles/35001550) | ✅ web-verifiziert 06.08.2026 |
+| Das Verhältnis Abstand : Mächtigkeit variiert stark (< 0,1 bis > 10, je nach Lithologie) | [Power-law relationship between joint spacing and bed thickness in sedimentary rocks, JSG (2021)](https://www.sciencedirect.com/science/article/abs/pii/S0191814121001371) | ✅ verifiziert — deshalb steht im Post **keine** Verhältniszahl |
+
+**Titel-Korrektur (wichtig):** Die Warteschlange führte das Thema als „Rissbreiten sind Kluftabstände". Das ist sachlich falsch: Die Literatur verknüpft Bankmächtigkeit mit dem **Abstand** der Klüfte, nicht mit der **Breite** eines Risses. Rissbreite hängt an Öffnungsbetrag und Verwitterung, nicht an der Bankmächtigkeit. Der Post wurde entsprechend auf Abstände umgestellt („Thick beds, far-apart cracks").
+
+**Geltungsbereich eingegrenzt:** Der Post spricht ausdrücklich von **geschichtetem Sedimentgestein**. Für Granit (Exfoliation, Abkühlungsklüfte — s. #011) gilt die Skalierung so nicht; das wird im Post nicht behauptet. „Roughly, the thicker the layer, the wider the spacing" statt einer festen Zahl, weil das Verhältnis lithologieabhängig um Größenordnungen schwankt.
