@@ -7,7 +7,11 @@
 | `reels/` | Fertige Reels (MP4 1080×1920) und Cover (JPG). Öffentlich über GitHub Pages: `https://mlfischer.github.io/geocrimps-assets/reels/…` – Instagram lädt die Videos von dort. |
 | `v2/reels.json` | Warteschlange: Termin, Caption, Quellen-Kommentar, Status `review` → `ready` → `published`. `"hold": true` hält ein Reel an. |
 | `v2/reel_publish.py` | Veröffentlicht fällige Reels (Container → Status FINISHED → Publish → Quellen-Kommentar); `--probe` testet ohne Veröffentlichung. |
-| `v2/engine/` | Reel-Engine: Corporate Design V2 (`outcrop.py`), Bewegung, Ton und Export (`motion.py`), ein Skript pro Reel unter `reels/`, Schriften (OFL) und CC0-Klänge mit Lizenzregister. |
+| `v2/engine/` | Reel-Engine: Corporate Design V2 (`outcrop.py`), Bewegung, Ton und Export (`motion.py`), gemeinsame Bausteine und Hauptprogramm (`reelkit.py`, ab r003), ein Skript pro Reel unter `reels/`, Schriften (OFL) und CC0-Klänge mit Lizenzregister. |
+| `v2/PRODUKTION.md` | Anleitung für jedes neue Reel (auch für die geplante Claude-Aufgabe): Ablauf, Formate, Regeln, Prüfungen. |
+| `v2/themenplan.json` | Termine mit Format, Thema, Hook-Entwurf und Vorbedingungen; die Produktion nimmt den nächsten freien Termin. |
+| `v2/faktenbasis/` | `caption.md` und `sources.md` der Posts #001–#063 und die Themenbibliothek: jede Aussage im Reel muss dort belegt sein. |
+| `v2/qc/` | Prüfberichte je Reel: Messwerte, Hook-Score, Faktencheck, Kontaktbogen, Tonverlauf. |
 | `.github/workflows/reel-publish.yml` | Zeitplan Di/Fr, mehrere Versuche pro Termin, schreibt die Queue zurück. |
 | `.github/workflows/reel-probe.yml` | Probelauf auf Knopfdruck oder bei Änderung von `v2/probe.trigger`. |
 | `v1/` | Archiv V1 „Bedrock“ (Bilder #001–#063, alte Queue, `publish.py`, Workflows). Wird nicht mehr ausgeführt. |

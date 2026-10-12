@@ -1,0 +1,36 @@
+{
+ "slug": "2026-10-12_whodunit-01",
+ "dauer_s": 16.8,
+ "fps": 30,
+ "frames": 504,
+ "mp4_mb": 7.8,
+ "woerter_im_bild": 36,
+ "labels": 4,
+ "payoff_anteil": 0.777,
+ "loudnorm": {
+  "loudnorm_ziel": -12.7,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.1,
+  "TP_dBFS": -1.7
+ },
+ "messung": {
+  "I_LUFS": -14.1,
+  "TP_dBFS": -1.7
+ },
+ "toene": {
+  "kreide-tick": "CC0 Kenney: tick_001.ogg",
+  "uebergang": "CC0 Kenney: maximize_001.ogg",
+  "bohrhaken": "CC0 Kenney: impactMetal_light_000.ogg",
+  "frage": "CC0 Kenney: question_001.ogg",
+  "tropfen": "CC0 Kenney: drop_001.ogg",
+  "riss": "CC0 Kenney: impactMining_000.ogg",
+  "aufloesen": "selbst erzeugt (fizz)",
+  "steigerung": "selbst erzeugt (riser)",
+  "treffer": "CC0 Kenney: impactPunch_heavy_000.ogg",
+  "kreide-wisch": "CC0 Kenney: scratch_001.ogg",
+  "klanglogo": "CC0 Kenney: pluck_001.ogg (drei Tonhoehen)",
+  "klatsch": "CC0 Kenney: impactGeneric_light_000.ogg",
+  "zeit-grollen": "selbst erzeugt (rumble)",
+  "flaeche": "selbst erzeugt (pad)"
+ }
+}

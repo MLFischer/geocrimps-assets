@@ -1,0 +1,186 @@
+{
+ "slug": "2026-10-16_mythorrock-01",
+ "dauer_s": 13.1,
+ "fps": 30,
+ "frames": 393,
+ "mp4_mb": 7.18,
+ "woerter_im_bild": 33,
+ "labels": 2,
+ "woerter_gesamt_mit_labels": 35,
+ "payoff_anteil": 0.733,
+ "loudnorm": {
+  "loudnorm_ziel": -13.0,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.1,
+  "TP_dBFS": -1.4
+ },
+ "messung": {
+  "I_LUFS": -14.1,
+  "TP_dBFS": -1.4
+ },
+ "toene": {
+  "kreide-tick": [
+   "CC0 Kenney: tick_001.ogg",
+   "CC0 Kenney: tick_002.ogg",
+   "CC0 Kenney: tick_004.ogg"
+  ],
+  "uebergang": [
+   "CC0 Kenney: maximize_001.ogg"
+  ],
+  "bohrhaken": [
+   "CC0 Kenney: impactMetal_light_000.ogg",
+   "CC0 Kenney: impactMetal_light_001.ogg",
+   "CC0 Kenney: impactMetal_light_002.ogg"
+  ],
+  "frage": [
+   "CC0 Kenney: question_001.ogg"
+  ],
+  "tropfen": [
+   "CC0 Kenney: drop_001.ogg",
+   "CC0 Kenney: drop_004.ogg"
+  ],
+  "einsickern": [
+   "selbst erzeugt (fizz)"
+  ],
+  "abtrocknen": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "zug": [
+   "CC0 Kenney: scratch_001.ogg"
+  ],
+  "bruch": [
+   "CC0 Kenney: impactMining_001.ogg"
+  ],
+  "fallen": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "aufschlag": [
+   "CC0 Kenney: impactMining_002.ogg"
+  ],
+  "steigerung": [
+   "selbst erzeugt (riser)"
+  ],
+  "treffer": [
+   "CC0 Kenney: impactPunch_heavy_000.ogg"
+  ],
+  "kreide-wisch": [
+   "CC0 Kenney: scratch_001.ogg",
+   "CC0 Kenney: scratch_002.ogg"
+  ],
+  "klanglogo": [
+   "CC0 Kenney: pluck_001.ogg"
+  ],
+  "klatsch": [
+   "CC0 Kenney: impactGeneric_light_000.ogg"
+  ],
+  "flaeche": [
+   "selbst erzeugt (pad)"
+  ]
+ },
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_40_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true
+ },
+ "alle_pruefungen_ok": true,
+ "probe": {
+  "at": "2026-10-12T19:46:25+00:00",
+  "result": "FINISHED"
+ },
+ "hook_score": {
+  "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
+  "varianten": [
+   {
+    "hook": "LOOKS DRY. SAFE TO CLIMB?",
+    "punkte": [
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "summe": 10,
+    "gewaehlt": true
+   },
+   {
+    "hook": "WET SANDSTONE IS JUST SLIPPERY?",
+    "punkte": [
+     2,
+     2,
+     1,
+     2,
+     2
+    ],
+    "summe": 9
+   },
+   {
+    "hook": "RAIN WON'T HURT THIS BOULDER?",
+    "punkte": [
+     2,
+     1,
+     2,
+     2,
+     2
+    ],
+    "summe": 9
+   },
+   {
+    "hook": "FONT AFTER RAIN: JUST WAIT FOR GRIP?",
+    "punkte": [
+     1,
+     2,
+     1,
+     1,
+     2
+    ],
+    "summe": 7
+   },
+   {
+    "hook": "ONE WET SESSION. ONE LESS HOLD?",
+    "punkte": [
+     1,
+     2,
+     1,
+     2,
+     1
+    ],
+    "summe": 7
+   }
+  ]
+ },
+ "faktencheck": [
+  {
+   "aussage": "Harte Kruste ueber weicherem Sand (Bild, Label CRUST/SAND)",
+   "beleg": "015/sources.md Zeile 1: Thiry & Marechal (2001)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "DRY CRUST. WET SAND BELOW.",
+   "beleg": "015/sources.md, neue Zeile vom 12.10.2026: Goncalves (2012), Perzan/UNLV (8 News Now 2026), Access Fund",
+   "status": "neu belegt und nachgetragen"
+  },
+  {
+   "aussage": "WET SANDSTONE BREAKS EASIER.",
+   "beleg": "015/sources.md Zeile 2: Duda & Renner (2013)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "IT NEVER GROWS BACK.",
+   "beleg": "015/sources.md Zeile 4: Krustenbruch irreversibel, langsame Krustenbildung",
+   "status": "belegt"
+  },
+  {
+   "aussage": "FALSE. WAIT A DAY OR TWO.",
+   "beleg": "015/sources.md Kalibrierung 'a day or two' (wetterabhaengig); Caption nennt 'laenger bei kuehl-feuchtem Wetter' (Access Fund)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Mechanismus nicht als Loesung des Zements darstellen",
+   "beleg": "Korrekturlauf 27.07.2026 in 015/sources.md",
+   "status": "eingehalten (Bild zeigt Wasser in den Poren, keine Aufloesung)"
+  }
+ ]
+}

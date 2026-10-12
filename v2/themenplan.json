@@ -1,0 +1,114 @@
+{
+  "_hinweis": "Themenplan V2, Stand 12.10.2026. Dienstag 18:07 = Geschichte (WHODUNIT, REWIND, SCALE JUMP, 15-25 s), Freitag 17:07 = Kurzformat (HOLD ID, MYTH OR ROCK, 8-15 s), Berliner Zeit. Ab 25.10.2026 Winterzeit (+01:00). Die geplante Produktion nimmt den fruehesten Termin mit reel = null, der mindestens 20 Stunden in der Zukunft liegt, und traegt danach die Reel-ID hier ein. Rotation: WHODUNIT+HOLD ID / REWIND+MYTH OR ROCK / SCALE JUMP+HOLD ID / WHODUNIT+MYTH OR ROCK.",
+  "slots": [
+    {
+      "termin": "2026-10-12T20:11:00+02:00",
+      "format": "WHODUNIT",
+      "post": "#008",
+      "thema": "Loesungstaschen im Kalk",
+      "hook": "NOBODY DRILLED THESE HOLES.",
+      "vor_produktion": "",
+      "reel": "r001"
+    },
+    {
+      "termin": "2026-10-13T18:07:00+02:00",
+      "format": "HOLD ID",
+      "post": "#029",
+      "thema": "Quarzgang als Leiste",
+      "hook": "WHY DOES THIS STRIPE STICK OUT?",
+      "vor_produktion": "",
+      "reel": "r002"
+    },
+    {
+      "termin": "2026-10-16T17:07:00+02:00",
+      "format": "MYTH OR ROCK",
+      "post": "#015",
+      "thema": "Font nach Regen",
+      "hook": "LOOKS DRY. SAFE TO CLIMB?",
+      "vor_produktion": "",
+      "reel": "r003"
+    },
+    {
+      "termin": "2026-10-20T18:07:00+02:00",
+      "format": "REWIND",
+      "post": "#018",
+      "thema": "Zugspitze war ein Riff",
+      "hook": "REWIND THIS SUMMIT.",
+      "vor_produktion": "Alter 235-240 Ma beibehalten",
+      "reel": null
+    },
+    {
+      "termin": "2026-10-23T17:07:00+02:00",
+      "format": "HOLD ID",
+      "post": "#012",
+      "thema": "Sinter waechst",
+      "hook": "THIS ROCK GROWS.",
+      "vor_produktion": "",
+      "reel": null
+    },
+    {
+      "termin": "2026-10-27T18:07:00+01:00",
+      "format": "SCALE JUMP",
+      "post": "#059",
+      "thema": "Kreide ist Plankton (unveroeffentlicht)",
+      "hook": "ZOOM INTO A CHALK CLIFF.",
+      "vor_produktion": "Anteil 'a fifth at most' halten",
+      "reel": null
+    },
+    {
+      "termin": "2026-10-30T17:07:00+01:00",
+      "format": "MYTH OR ROCK",
+      "post": "#039",
+      "thema": "Frankenjura ist Dolomit",
+      "hook": "FRANKENJURA IS LIMESTONE?",
+      "vor_produktion": "'Kalk und Dolomit' als Urteil",
+      "reel": null
+    },
+    {
+      "termin": "2026-11-03T18:07:00+01:00",
+      "format": "WHODUNIT",
+      "post": "#061",
+      "thema": "Schwarze Partikel sind Schuhgummi (unveroeffentlicht)",
+      "hook": "WHAT ARE THESE BLACK SPECKS?",
+      "vor_produktion": "Befund (orange) vom 29.08. beheben, sonst Thema tauschen",
+      "reel": null
+    },
+    {
+      "termin": "2026-11-06T17:07:00+01:00",
+      "format": "HOLD ID",
+      "post": "#026",
+      "thema": "Tafoni",
+      "hook": "WHO HOLLOWED OUT THIS BOULDER?",
+      "vor_produktion": "",
+      "reel": null
+    },
+    {
+      "termin": "2026-11-10T18:07:00+01:00",
+      "format": "WHODUNIT",
+      "post": "#057",
+      "thema": "Gradierte Schichtung (unveroeffentlicht)",
+      "hook": "WHICH WAY WAS UP?",
+      "vor_produktion": "",
+      "reel": null
+    },
+    {
+      "termin": "2026-11-13T17:07:00+01:00",
+      "format": "MYTH OR ROCK",
+      "post": "#031",
+      "thema": "Gletscherschliff ist eine Schicht",
+      "hook": "GLACIER POLISH IS JUST WORN ROCK?",
+      "vor_produktion": "keine Reibungsaussage",
+      "reel": null
+    },
+    {
+      "termin": "2026-11-17T18:07:00+01:00",
+      "format": "REWIND",
+      "post": "#051",
+      "thema": "Gritstone kommt aus einem Hochland (unveroeffentlicht)",
+      "hook": "REWIND A GRITSTONE EDGE.",
+      "vor_produktion": "",
+      "reel": null
+    }
+  ],
+  "danach": "Weitere Termine im selben Rhythmus anlegen und Themen aus v2/faktenbasis/Themenbibliothek.md nach Reel-Potenzial-Score waehlen (je 0-2: sichtbare Verwandlung, Kletterbezug, Hook-Luecke, Formatpassung, Beleglage). #053 und #054 erst nach Korrektur ihrer Befunde. #047 (Duenen) ist als Thema moeglich, aber ohne Fischgraetenschichtung im Bild (Befund des V1-Titelbilds, wird dort nicht korrigiert)."
+}
