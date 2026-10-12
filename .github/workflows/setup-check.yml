@@ -1,0 +1,73 @@
+name: Setup-Check V2
+
+# Prueft die Zugaenge fuer V2, ohne etwas zu veroeffentlichen:
+#  - Instagram-Token: gueltig, passendes Konto, Rechte fuer Posten, Kennzahlen, Kommentare
+#  - GH_ADMIN_TOKEN: darf Secrets schreiben (legt ein Test-Secret an und loescht es sofort)
+# Startet, wenn sich .github/setup-check.trigger aendert, oder per Hand ("Run workflow").
+# Das Ergebnis landet ohne Geheimnisse in .github/setup-check-result.md auf demselben Branch.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/setup-check.trigger"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: setup-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Kopf
+        run: |
+          printf '# Setup-Check V2\n\nLauf vom %s UTC, Commit %s\n' "$(date -u '+%Y-%m-%d %H:%M')" "${GITHUB_SHA::7}" > result.md
+
+      - name: Instagram-Token pruefen (veroeffentlicht nichts)
+        id: ig
+        continue-on-error: true
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python3 .github/scripts/setup_check_ig.py
+
+      - name: GH_ADMIN_TOKEN pruefen (Test-Secret anlegen und loeschen)
+        id: gh
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+        run: |
+          set -uo pipefail
+          printf '\n## GH_ADMIN_TOKEN\n\n' >> result.md
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "- FEHLT: Secret GH_ADMIN_TOKEN ist leer oder nicht vorhanden" | tee -a result.md
+            exit 1
+          fi
+          if gh secret set SETUP_CHECK --repo "$GITHUB_REPOSITORY" --body "ok" >/dev/null 2>err.txt \
+             && gh secret delete SETUP_CHECK --repo "$GITHUB_REPOSITORY" >/dev/null 2>>err.txt; then
+            echo "- OK: darf Secrets schreiben (Test-Secret angelegt und wieder geloescht)" | tee -a result.md
+          else
+            echo "- FEHLT: Secrets schreiben nicht erlaubt ($(head -c 160 err.txt | tr '\n|' '  '))" | tee -a result.md
+            exit 1
+          fi
+          exp=$(gh api -i "repos/$GITHUB_REPOSITORY" 2>/dev/null | grep -i '^github-authentication-token-expiration:' | cut -d' ' -f2- | tr -d '\r')
+          echo "- Ablaufdatum laut GitHub: ${exp:-keines gemeldet}" | tee -a result.md
+
+      - name: Ergebnis festhalten
+        if: always()
+        run: |
+          printf '\n## Zusammenfassung\n\n- Instagram: %s\n- GH_ADMIN_TOKEN: %s\n' "${{ steps.ig.outcome }}" "${{ steps.gh.outcome }}" >> result.md
+          cat result.md >> "$GITHUB_STEP_SUMMARY"
+          mv result.md .github/setup-check-result.md
+          git config user.name "geocrimps-bot"
+          git config user.email "actions@github.com"
+          git add .github/setup-check-result.md
+          git commit -m "Setup-Check: Ergebnis [skip ci]" || echo "Nichts zu committen."
+          git push || echo "Push des Ergebnisses fehlgeschlagen."
