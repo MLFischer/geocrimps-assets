@@ -1,5 +1,5 @@
 {
-  "_hinweis": "V2-Warteschlange. status: review (wartet auf Markus) -> ready (freigegeben) -> published. hold: true haelt an. Zeiten in Europe/Berlin mit Offset.",
+  "_hinweis": "V2-Warteschlange. status: review (wartet auf Markus) -> ready (freigegeben oder stilles OK) -> published. hold: true haelt an. Zeiten in Europe/Berlin mit Offset.",
   "timezone": "Europe/Berlin",
   "pages_base": "https://mlfischer.github.io/geocrimps-assets/",
   "rhythmus": "Di 18:07, Fr 17:07 (ab 13.10.2026); Start mit Reel #1 am Mo 12.10.2026",
@@ -31,6 +31,29 @@
         "durch": "Markus (Chat: heute veroeffentlichen)"
       },
       "first_comment_posted": true
+    },
+    {
+      "id": "r002",
+      "slug": "2026-10-13_holdid-01",
+      "format": "HOLD ID",
+      "nr": 1,
+      "post_ref": "#029",
+      "thema": "Quarzgang als Leiste",
+      "video": "reels/2026-10-13_holdid-01.mp4",
+      "cover": "reels/2026-10-13_holdid-01.jpg",
+      "caption": "HOLD ID #01 · An animated pale stripe on a rock wall, cut open to show how it formed and why it sticks out as an edge.\n\nIt started as a crack. Hot water moving through the crust carried dissolved silica; when it cooled or the pressure dropped, quartz crystallised on the crack walls and grew inward until the crack was sealed. Much later, at the surface, the vein can outlast the rock around it: quartz is one of the minerals most resistant to chemical weathering. Not every vein sticks out, and a fractured one can come off as a plate, so test it like any other hold.\n\nSend this to the friend who always goes straight for the white edge.\n\nWhat's the most obvious vein-hold at your local crag?\n\nSource: Bons (2000), Journal of the Virtual Explorer. Full sources in the first comment.\n\n#climbing #bouldering #geology #quartz",
+      "first_comment": "Sources: Bons, P. D. (2000): The formation of veins and their microstructures. Journal of the Virtual Explorer 2, doi:10.3809/jvirtex.2000.00007. · Okamoto, A. & Vinis, E. (2025): Oscillations in fluid pressure caused by silica precipitation in a fracture. Nature Communications 16. · Späth et al. (2022): Incomplete crack sealing causes localization of fracturing in hydrothermal quartz veins. Geophysical Research Letters. · Goldich, S. S. (1938): A study in rock-weathering. Journal of Geology 46.",
+      "audio_name": "GeoCrimps – HOLD ID",
+      "scheduled": "2026-10-13T18:07:00+02:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung (Konzept-Vorschlag); Markus am 12.10.2026 informiert, Stopp per hold:true",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "media_id": null,
+      "permalink": null,
+      "published_at": null
     }
   ]
 }
