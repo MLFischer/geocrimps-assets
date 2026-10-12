@@ -80,7 +80,11 @@
       "hold": false,
       "media_id": null,
       "permalink": null,
-      "published_at": null
+      "published_at": null,
+      "probe": {
+        "at": "2026-10-12T19:46:25+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
