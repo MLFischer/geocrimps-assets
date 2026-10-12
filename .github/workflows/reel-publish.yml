@@ -4,10 +4,14 @@ name: Reel veroeffentlichen
 # Termine stehen in Berliner Zeit in der Queue; der Zeitplan unten laeuft in UTC und deckt
 # Di 18:07 und Fr 17:07 in Sommer- und Winterzeit mit mehreren Versuchen ab.
 # Ein Lauf ohne faelliges Reel endet sofort ("Nichts faellig").
+# Ausser der Reihe: Termin in der Queue setzen und v2/publish.trigger aendern (oder "Run workflow").
 
 on:
   schedule:
     - cron: "7,22,37,52 15-17 * * 2,5"
+  push:
+    paths:
+      - "v2/publish.trigger"
   workflow_dispatch:
 
 permissions:

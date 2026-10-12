@@ -17,7 +17,7 @@ from outcrop import C, P
 from motion import X0, W, H, FPS, seg, seilzug, sturz, griff, lerp, put
 
 DUR = 16.8
-SLUG = "2026-10-13_whodunit-01"
+SLUG = "2026-10-12_whodunit-01"
 ON_SCREEN = ["WHODUNIT", "NOBODY DRILLED THESE HOLES.", "3 SUSPECTS", "CLIMBERS WITH A DRILL", "WIND AND SAND",
              "RAIN", "Pause. Your guess?", "RAIN GRABS CO₂ FROM AIR AND SOIL.", "IT EATS THE WEAK SPOTS FIRST.",
              "VERDICT", "RAIN.", "DISSOLVED, NOT CARVED."]

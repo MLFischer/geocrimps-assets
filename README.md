@@ -1,6 +1,6 @@
 # GeoCrimps – Assets und Veröffentlichung
 
-**Aktive Version: V2 „Outcrop“** – Reels über Klettergeologie, zweimal pro Woche (Di 18:07, Fr 17:07, Berliner Zeit), vollautomatisch produziert und über die Instagram-API veröffentlicht. Seit 13.10.2026.
+**Aktive Version: V2 „Outcrop“** – Reels über Klettergeologie, zweimal pro Woche (Di 18:07, Fr 17:07, Berliner Zeit), vollautomatisch produziert und über die Instagram-API veröffentlicht. Seit 12.10.2026 (Reel #1), danach Di/Fr.
 
 | Ordner / Datei | Inhalt |
 |---|---|
