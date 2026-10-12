@@ -1,12 +1,17 @@
 # Setup-Check V2
 
-Lauf vom 2026-10-12 07:00 UTC, Commit 4d0f0aa
+Lauf vom 2026-10-12 17:25 UTC, Commit a1b2cb5
 
 ## Instagram-Token
 
 | Pruefung | Status | Detail |
 |---|---|---|
-| Token gueltig (instagram_business_basic) | FEHLT | Token abgelaufen oder ungueltig (Code 190): Error validating access token: Session has expired on Sunday, 13-Sep-26 00:50:41 PDT. The current time is Monday, 12-Oct-26 00:00:39 PDT |
+| Token gueltig (instagram_business_basic) | OK | Konto @geocrimps |
+| IG_USER_ID passt zum Token | OK | passt |
+| Veroeffentlichen (instagram_business_content_publish) | OK | heutige API-Posts: 0 |
+| Letzter Post lesbar | OK | CAROUSEL_ALBUM vom 2026-09-01 |
+| Kennzahlen (instagram_business_manage_insights) | OK | Reichweite abrufbar |
+| Kommentare (instagram_business_manage_comments) | OK | Kommentare abrufbar |
 
 ## GH_ADMIN_TOKEN
 
@@ -15,5 +20,5 @@ Lauf vom 2026-10-12 07:00 UTC, Commit 4d0f0aa
 
 ## Zusammenfassung
 
-- Instagram: failure
+- Instagram: success
 - GH_ADMIN_TOKEN: success
