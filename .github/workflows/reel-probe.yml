@@ -1,0 +1,52 @@
+name: Reel-Probelauf
+
+# Probelauf ohne Veroeffentlichung: legt fuer das naechste (oder angegebene) Reel einen Container an
+# und wartet, bis Instagram das Video als FINISHED meldet. Prueft so Hosting, Format und Token.
+# Startet, wenn sich v2/probe.trigger aendert, oder per Hand ("Run workflow").
+
+on:
+  push:
+    paths:
+      - "v2/probe.trigger"
+  workflow_dispatch:
+    inputs:
+      reel:
+        description: "Reel-ID (leer = naechstes unveroeffentlichtes)"
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reel-publish
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Probelauf (veroeffentlicht nichts)
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python3 v2/reel_publish.py --probe ${{ github.event.inputs.reel }}
+
+      - name: Ergebnis festhalten
+        if: always()
+        run: |
+          if git diff --quiet -- v2/reels.json; then
+            echo "Keine Aenderung."
+          else
+            git config user.name "geocrimps-bot"
+            git config user.email "actions@github.com"
+            git add v2/reels.json
+            git commit -m "Reel-Probelauf: Ergebnis [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi

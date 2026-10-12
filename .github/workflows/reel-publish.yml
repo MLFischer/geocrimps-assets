@@ -1,0 +1,48 @@
+name: Reel veroeffentlichen
+
+# Veroeffentlicht faellige Reels aus v2/reels.json (status "ready", Termin erreicht, nicht "hold").
+# Termine stehen in Berliner Zeit in der Queue; der Zeitplan unten laeuft in UTC und deckt
+# Di 18:07 und Fr 17:07 in Sommer- und Winterzeit mit mehreren Versuchen ab.
+# Ein Lauf ohne faelliges Reel endet sofort ("Nichts faellig").
+
+on:
+  schedule:
+    - cron: "7,22,37,52 15-17 * * 2,5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reel-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Faellige Reels veroeffentlichen
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python3 v2/reel_publish.py
+
+      - name: Queue zurueckschreiben
+        if: always()
+        run: |
+          if git diff --quiet -- v2/reels.json; then
+            echo "Keine Aenderung an der Queue."
+          else
+            git config user.name "geocrimps-bot"
+            git config user.email "actions@github.com"
+            git add v2/reels.json
+            git commit -m "Reel-Queue aktualisiert [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi

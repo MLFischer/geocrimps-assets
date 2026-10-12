@@ -1,0 +1,27 @@
+{
+  "_hinweis": "V2-Warteschlange. status: review (wartet auf Markus) -> ready (freigegeben) -> published. hold: true haelt an. Zeiten in Europe/Berlin mit Offset.",
+  "timezone": "Europe/Berlin",
+  "pages_base": "https://mlfischer.github.io/geocrimps-assets/",
+  "rhythmus": "Di 18:07, Fr 17:07",
+  "reels": [
+    {
+      "id": "r001",
+      "slug": "2026-10-13_whodunit-01",
+      "format": "WHODUNIT",
+      "nr": 1,
+      "post_ref": "#008",
+      "thema": "Loesungstaschen im Kalk",
+      "video": "reels/2026-10-13_whodunit-01.mp4",
+      "cover": "reels/2026-10-13_whodunit-01.jpg",
+      "caption": "WHODUNIT #01 · An animated limestone wall full of finger pockets, and three suspects for who made them.\n\nThe culprit is rain. Rainwater picks up CO₂ from the air, and far more from the soil it seeps through, and becomes a weak acid. Over thousands of years it dissolves limestone and attacks the weakest spots first: fossils, burrows, fine cracks. (Not every pocket forms this way.)\n\nSend this to the friend who lives for pocket routes.\n\nDid you guess C before the verdict?\n\nSource: Ford & Williams (2007), Karst Hydrogeology and Geomorphology. Full sources in the first comment.\n\n#climbing #bouldering #karst #geology #frankenjura",
+      "first_comment": "Sources: Ford, D. & Williams, P. (2007): Karst Hydrogeology and Geomorphology. Wiley. · Earle, S.: Environmental Geology, 12.1 Karst Landscapes and Systems (LibreTexts). · Johnson, Affolter, Inkenbrandt & Mosher: An Introduction to Geology, 11.10 Karst (LibreTexts).",
+      "audio_name": "GeoCrimps – WHODUNIT",
+      "scheduled": "2026-10-13T18:07:00+02:00",
+      "status": "review",
+      "hold": false,
+      "media_id": null,
+      "permalink": null,
+      "published_at": null
+    }
+  ]
+}
