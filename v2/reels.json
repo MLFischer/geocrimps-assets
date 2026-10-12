@@ -17,11 +17,11 @@
       "first_comment": "Sources: Ford, D. & Williams, P. (2007): Karst Hydrogeology and Geomorphology. Wiley. · Earle, S.: Environmental Geology, 12.1 Karst Landscapes and Systems (LibreTexts). · Johnson, Affolter, Inkenbrandt & Mosher: An Introduction to Geology, 11.10 Karst (LibreTexts).",
       "audio_name": "GeoCrimps – WHODUNIT",
       "scheduled": "2026-10-12T20:11:00+02:00",
-      "status": "ready",
+      "status": "published",
       "hold": false,
-      "media_id": null,
-      "permalink": null,
-      "published_at": null,
+      "media_id": "18064352324513089",
+      "permalink": "https://www.instagram.com/reel/DeZ2XaFgWzw/",
+      "published_at": "2026-10-12T18:13:02+0000",
       "probe": {
         "at": "2026-10-12T17:56:22+00:00",
         "result": "FINISHED"
@@ -29,7 +29,8 @@
       "freigabe": {
         "am": "2026-10-12T20:11:00+02:00",
         "durch": "Markus (Chat: heute veroeffentlichen)"
-      }
+      },
+      "first_comment_posted": true
     }
   ]
 }
