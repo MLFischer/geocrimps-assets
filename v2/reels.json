@@ -84,7 +84,10 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-13T08:30:07+00:00",
+        "result": "FINISHED"
+      },
       "muster": "offene_frage",
       "version": "13.10.2026: neu gebaut mit dem Muster Offene Frage (Wunsch Markus), Hook 3,3 s"
     }
