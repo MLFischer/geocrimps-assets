@@ -5,7 +5,7 @@ Prueft
   1. Instagram-Token: gueltig (GET /me), Ablauf laut v2/status/token.json, letzte Erneuerung erfolgreich
   2. GH_ADMIN_TOKEN: Ablaufdatum (Kopfzeile github-authentication-token-expiration)
   3. Queue v2/reels.json: verpasste Termine, last_error, fehlender Quellen-Kommentar
-  4. Puffer: jeder Termin der naechsten 96 h hat ein Reel mit status "ready", bestandenem Probelauf
+  4. Puffer: jeder Termin der naechsten 120 h hat ein Reel mit status "ready", bestandenem Probelauf
      und erreichbarem Video und Cover (GitHub Pages)
   5. Fehlgeschlagene Workflow-Laeufe der letzten 26 h
 Meldet Fehler als GitHub-Issue "Waechter: ..." mit Erwaehnung von Markus (Mail). Ist alles wieder in Ordnung,
@@ -27,7 +27,7 @@ from ig_api import (IG, GitHub, OWNER_MENTION, REPO, berlin, fehlertext, load_js
 
 STATUS = "v2/status/waechter.json"
 TITLE = "Wächter: "
-WINDOW_H = 96              # so weit im Voraus muss ein fertiges Reel bereitstehen
+WINDOW_H = 120             # so weit im Voraus muss ein fertiges Reel bereitstehen (Produktion So/Mi: 5-6 Tage vorher)
 MISSED_AFTER_MIN = 75      # so lange nach dem Termin gilt ein nicht veroeffentlichtes Reel als verpasst
 MAX_LATE_H = 6             # wie reel_publish.py: so lange darf nachgeholt werden
 TOKEN_WARN_D = 20          # Instagram-Token: Alarm, wenn weniger Tage uebrig

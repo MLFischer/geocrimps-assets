@@ -1,7 +1,7 @@
 name: Wächter
 
 # Gesundheitscheck der Reel-Automatik, veroeffentlicht nichts: Instagram-Token, GH_ADMIN_TOKEN, verpasste Termine,
-# Puffer der naechsten 96 h (Reel fertig, Probelauf bestanden, Video und Cover erreichbar), fehlgeschlagene Laeufe.
+# Puffer der naechsten 120 h (Reel fertig, Probelauf bestanden, Video und Cover erreichbar), fehlgeschlagene Laeufe.
 # Bei Fehlern oeffnet er ein Issue mit Erwaehnung von @MLFischer (Mail); ist alles wieder in Ordnung, schliesst er es.
 # Zeiten in UTC: taeglich 05:23 (Berlin 07:23 Sommer / 06:23 Winter) und Di/Fr 18:23 nach dem Veroeffentlichungsfenster.
 # Ausser der Reihe: v2/waechter.trigger aendern. Eine Zeile, die nur aus dem Wort TESTALARM besteht, erzeugt einen
