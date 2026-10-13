@@ -55,7 +55,10 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-13T10:06:08+00:00",
+        "result": "FINISHED"
+      },
       "version": "13.10.2026: Hook 1 s laenger; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0 (Wunsch Markus 11:42), neu gerendert",
       "ablauf": "erklaerkette"
     },
