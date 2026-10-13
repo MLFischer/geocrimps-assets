@@ -91,7 +91,7 @@ Erster Kommentar: „Sources: “ und die vollständigen Quellen (Autor, Jahr, T
 
 ## 9. Ablage
 
-Video und Cover liegen unter `reels/<slug>.mp4` und `.jpg`, die QC unter `v2/qc/<slug>/`. Der Projektordner auf Markus’ Mac wird nicht automatisch befüllt; die nächste Sitzung mit Zugriff auf den Mac legt neue Reels unter `V2 Outcrop/04 Reels/` ab.
+Video und Cover liegen unter `reels/<slug>.mp4` und `.jpg`, die QC unter `v2/qc/<slug>/`. Die Produktion legt nichts auf Markus’ Mac ab. Das übernimmt die geplante Aufgabe „GeoCrimps – Mac-Ordner abgleichen“ (täglich 12:43, nur wenn der Mac erreichbar ist): Sie kopiert jedes Reel aus `v2/reels.json` nach `V2 Outcrop/04 Reels/<id> <FORMAT> #<NN> (<Tag> <Datum>)/` und schreibt dort den aktuellen Status in `Caption_und_Kommentar.txt`.
 
 ## 10. Bildmittel bisher (für die Abwechslung)
 
@@ -102,3 +102,28 @@ Das neue Reel weicht in mindestens einer Spalte vom vorigen ab und hat einen and
 | r001 | 12.10.2026 | WHODUNIT #01 | quiz | Isolinien-Welle, Riss-Linie | drei Verdächtige als Chips, Regen mit CO₂, Schwachstellen | Urteil, Chip C leuchtet, Kreide-Wisch | Grundton |
 | r002 | 13.10.2026 | HOLD ID #01 | erklaerkette | Schnittlinie, Isolinien-Welle | Querschnitt: Quarz wächst, Zeitraffer der Verwitterung | Antwort groß, Kreide-Wisch, Stempel HOLD ID | Grundton |
 | r003 | 16.10.2026 | MYTH OR ROCK #01 | offene_frage | Lichtstreifen, Zoom auf den Griff | Zeitraffer Regen und Abtrocknen, Bruch zeigt das Innere | Antwort groß, Stempel MYTH, Kreide-Wisch | Quarte höher (`ratio=1.335`) |
+
+## 11. Betrieb: was automatisch läuft und was bei einer Meldung zu tun ist
+
+| Was | Wann (Berliner Zeit) | Wo |
+| --- | --- | --- |
+| Reel produzieren und einplanen | So und Mi 07:41 | geplante Claude-Aufgabe, dieses Dokument |
+| Probelauf bei Instagram | nach jeder Produktion | `.github/workflows/reel-probe.yml`, Auslöser `v2/probe.trigger` |
+| Veröffentlichen und Quellen-Kommentar | Di 18:07, Fr 17:07 (Versuche alle 15 min, höchstens 6 h verspätet) | `.github/workflows/reel-publish.yml` |
+| Instagram-Token erneuern | 1. und 15. des Monats, 06:17 bzw. 05:17 | `.github/workflows/token-refresh.yml`, Status `v2/status/token.json` |
+| Wächter (Gesundheitscheck) | täglich 07:23 bzw. 06:23, Di/Fr zusätzlich 20:23 bzw. 19:23 | `.github/workflows/waechter.yml`, Stand `v2/status/waechter.json` |
+| Kurzbericht Kennzahlen | Mo 08:47 bzw. 07:47 | `.github/workflows/kennzahlen.yml`, Dateien `v2/kennzahlen/` |
+| Mac-Ordner abgleichen | täglich 12:43, wenn der Mac erreichbar ist | geplante Claude-Aufgabe |
+
+Die erste Zeit gilt für die Sommerzeit, die zweite ab 25.10.2026 (die Workflows laufen in UTC).
+
+**Meldungen:** Der Wächter öffnet bei Handlungsbedarf ein Issue „Wächter: …“ im Repo und erwähnt Markus (Mail). Er schließt es selbst, sobald alles passt. Der Kurzbericht erscheint jeden Montag als Kommentar im Issue „Kennzahlen: Kurzbericht“. Typische Meldungen und was hilft:
+
+- **Termin verpasst:** Bis 6 h nach dem Termin `v2/publish.trigger` ändern und pushen (oder Claude Bescheid geben); danach `scheduled` in `v2/reels.json` auf einen neuen Termin setzen.
+- **Termin ohne Reel / Reel im Status review:** Die geplante Produktion ist ausgefallen oder hat ein Problem gemeldet. Claude Bescheid geben; Claude produziert das Reel nach diesem Dokument oder behebt den gemeldeten Fehler.
+- **Probelauf fehlt oder Video nicht erreichbar:** `v2/probe.trigger` ändern und pushen; hilft das nicht, GitHub Pages prüfen.
+- **Instagram-Token ungültig oder läuft ab:** Workflow „Instagram-Token erneuern“ von Hand starten (`v2/token.trigger` ändern). Ist das Token schon abgelaufen, muss Markus im Meta-Entwicklerportal ein neues erzeugen und als Secret `IG_ACCESS_TOKEN` speichern; Tokens gehören nie in Chat, Dateien oder Commits.
+- **GH_ADMIN_TOKEN läuft ab** (zuerst am 10.01.2027): Markus legt auf GitHub einen neuen fine-grained Token nur für `geocrimps-assets` mit Schreibrecht auf Secrets an und speichert ihn als Secret `GH_ADMIN_TOKEN`.
+- **Workflow fehlgeschlagen:** Link im Issue öffnen; der Lauf zeigt, welcher Schritt scheiterte.
+
+Testen: Eine Zeile, die nur `TESTALARM` enthält, in `v2/waechter.trigger` erzeugt einen Testfehler; der nächste normale Lauf schließt das Issue wieder.

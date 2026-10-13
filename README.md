@@ -14,8 +14,14 @@
 | `v2/qc/` | Prüfberichte je Reel: Messwerte, Hook-Score, Faktencheck, Kontaktbogen, Tonverlauf. |
 | `.github/workflows/reel-publish.yml` | Zeitplan Di/Fr, mehrere Versuche pro Termin, schreibt die Queue zurück. |
 | `.github/workflows/reel-probe.yml` | Probelauf auf Knopfdruck oder bei Änderung von `v2/probe.trigger`. |
+| `.github/workflows/token-refresh.yml` | Erneuert das Instagram-Token am 1. und 15. jedes Monats und speichert es als Secret; Status ohne Token in `v2/status/token.json`. |
+| `.github/workflows/waechter.yml` | Täglicher Gesundheitscheck (Tokens, Termine, Puffer, Probeläufe, Videos, fehlgeschlagene Läufe); meldet per Issue. |
+| `.github/workflows/kennzahlen.yml` | Montags-Kurzbericht mit den Kennzahlen je Reel nach `v2/kennzahlen/` und als Issue-Kommentar. |
+| `v2/status/`, `v2/kennzahlen/` | Stand von Token und Wächter; Kurzberichte als Markdown, JSON und Verlauf (CSV). |
 | `v1/` | Archiv V1 „Bedrock“ (Bilder #001–#063, alte Queue, `publish.py`, Workflows). Wird nicht mehr ausgeführt. |
 
 Secrets: `IG_USER_ID`, `IG_ACCESS_TOKEN` (Instagram Login, 60 Tage gültig), `GH_ADMIN_TOKEN` (darf nur Secrets dieses Repos schreiben; für die automatische Token-Erneuerung), `BLUESKY_*` (V1).
+
+Betrieb und Meldungen: `v2/PRODUKTION.md`, Abschnitt 11.
 
 Konzept und Fahrplan: Claude-Dokument „GeoCrimps V2 Outcrop – Reel-Konzept & Fahrplan Runde 2“ (Markdown-Kopie im Projektordner unter `V2 Outcrop/01 Konzept/`).
