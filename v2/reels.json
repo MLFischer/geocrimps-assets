@@ -54,7 +54,10 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-13T08:18:08+00:00",
+        "result": "FINISHED"
+      },
       "version": "13.10.2026: Hook 1 s laenger, neu gerendert"
     },
     {
