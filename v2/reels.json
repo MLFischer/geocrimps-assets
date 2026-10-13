@@ -84,7 +84,10 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-13T10:07:15+00:00",
+        "result": "FINISHED"
+      },
       "ablauf": "offene_frage",
       "version": "13.10.2026: Ablauf Offene Frage, Hook 3,3 s, Callback 1,25 s; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0"
     }
