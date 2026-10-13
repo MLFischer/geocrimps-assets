@@ -46,21 +46,22 @@
       "first_comment": "Sources: Bons, P. D. (2000): The formation of veins and their microstructures. Journal of the Virtual Explorer 2, doi:10.3809/jvirtex.2000.00007. · Okamoto, A. & Vinis, E. (2025): Oscillations in fluid pressure caused by silica precipitation in a fracture. Nature Communications 16. · Späth et al. (2022): Incomplete crack sealing causes localization of fracturing in hydrothermal quartz veins. Geophysical Research Letters. · Goldich, S. S. (1938): A study in rock-weathering. Journal of Geology 46.",
       "audio_name": "GeoCrimps – HOLD ID",
       "scheduled": "2026-10-13T18:07:00+02:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
         "am": "2026-10-12"
       },
       "hold": false,
-      "media_id": null,
-      "permalink": null,
-      "published_at": null,
+      "media_id": "17972556726169029",
+      "permalink": "https://www.instagram.com/reel/DecRmY-FAvt/",
+      "published_at": "2026-10-13T16:49:32+0000",
       "probe": {
         "at": "2026-10-13T10:06:08+00:00",
         "result": "FINISHED"
       },
       "version": "13.10.2026: Hook 1 s laenger; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0 (Wunsch Markus 11:42), neu gerendert",
-      "ablauf": "erklaerkette"
+      "ablauf": "erklaerkette",
+      "first_comment_posted": true
     },
     {
       "id": "r003",
