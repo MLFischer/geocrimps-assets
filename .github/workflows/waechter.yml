@@ -4,7 +4,8 @@ name: Wächter
 # Puffer der naechsten 96 h (Reel fertig, Probelauf bestanden, Video und Cover erreichbar), fehlgeschlagene Laeufe.
 # Bei Fehlern oeffnet er ein Issue mit Erwaehnung von @MLFischer (Mail); ist alles wieder in Ordnung, schliesst er es.
 # Zeiten in UTC: taeglich 05:23 (Berlin 07:23 Sommer / 06:23 Winter) und Di/Fr 18:23 nach dem Veroeffentlichungsfenster.
-# Ausser der Reihe: v2/waechter.trigger aendern. Steht dort TESTALARM, erzeugt der Lauf einen Testfehler (prueft die Mail).
+# Ausser der Reihe: v2/waechter.trigger aendern. Eine Zeile, die nur aus dem Wort TESTALARM besteht, erzeugt einen
+# Testfehler (prueft die Mail).
 
 on:
   schedule:
@@ -35,7 +36,7 @@ jobs:
       - name: Testalarm angefordert?
         if: github.event_name == 'push'
         run: |
-          if grep -q TESTALARM v2/waechter.trigger; then
+          if grep -qx 'TESTALARM' v2/waechter.trigger; then
             echo "WAECHTER_TESTALARM=1" >> "$GITHUB_ENV"
             echo "Testalarm angefordert."
           fi
