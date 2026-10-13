@@ -1,0 +1,33 @@
+{
+  "stand": "2026-10-13T11:31:56+00:00",
+  "konto": {
+    "username": "geocrimps",
+    "followers_count": 27,
+    "media_count": 56
+  },
+  "reels": [
+    {
+      "datum": "2026-10-13",
+      "reel": "r001",
+      "slug": "2026-10-12_whodunit-01",
+      "format": "WHODUNIT #01",
+      "ablauf": "quiz",
+      "tage_online": 0.7,
+      "views": 325,
+      "reach": 273,
+      "skip_rate_prozent": 52.3,
+      "avg_watch_s": 5.79,
+      "dauer_s": 16.8,
+      "wiedergabequote": 34.5,
+      "likes": 4,
+      "comments": 1,
+      "shares": 0,
+      "saved": 0,
+      "shares_pro_reichweite": 0.0,
+      "saves_pro_reichweite": 0.0,
+      "followers": 27,
+      "permalink": "https://www.instagram.com/reel/DeZ2XaFgWzw/",
+      "fehlend": []
+    }
+  ]
+}
