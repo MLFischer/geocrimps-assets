@@ -2,7 +2,7 @@
 """Reel 002 -- HOLD ID #01: "Why does this stripe stick out?" (Faktenbasis: Post #029, Quarzgang).
 
 Format HOLD ID: Griffform -> Querschnitt -> Entstehung in zwei Zuegen -> Stempel mit Nummer.
-Dramaturgie (Topo): Hook mit Schnittlinie 0-2,25 s | Zug 1 im Querschnitt: Riss, heisses Wasser, Quarz waechst
+Dramaturgie (Topo, ab 13.10. mit 1 s laengerem Hook): Hook mit Schnittlinie 0-3,25 s | Zug 1 im Querschnitt: Riss, heisses Wasser, Quarz waechst
 von den Waenden nach innen 2,45-5,35 s | Zug 2: viel spaeter wittert das Gestein drumherum zurueck 5,55-8,2 s |
 Payoff 8,2 s (68 %) | Stempel 9,35 s | Folge fuers Klettern 10,0 s | Endsignet 11,2-12,0 s.
 Aufruf:  python3 r002_holdid_029.py --out ../../../reels --qc <Ordner fuer QC>
@@ -18,7 +18,7 @@ import motion as m
 from outcrop import C, P
 from motion import X0, W, H, FPS, seg, seilzug, sturz, griff, lerp, put
 
-DUR = 12.0
+DUR = 13.0
 SLUG = "2026-10-13_holdid-01"
 ON_SCREEN = ["HOLD ID", "WHY DOES THIS STRIPE STICK OUT?", "HOT WATER SEALS A CRACK WITH QUARTZ.",
              "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.", "QUARTZ LASTS LONGER.",
@@ -30,21 +30,23 @@ QZ, QZ_EDGE, QZ_SIDE = "#DAD5CA", "#A9A395", "#7D786E"
 QZ_PATCH = ["#E4DFD5", "#D1CBBF", "#DEDACF", "#CBC5B9", "#E8E4DB"]
 
 # ------------------------------------------------------------------ Zeitplan
-T_SEC = 1.50                     # Schnittlinie quer zum Gang
-T_W1, T_S2 = 2.25, 2.45          # Welle -> Querschnitt (Zug 1)
-T_CRACK, T_OPEN = 2.70, 2.95     # Riss zeichnet sich, Riss oeffnet sich
-T_FLOW = (3.00, 4.45)            # heisses Wasser stroemt
-T_GROW0, T_GROW1 = 3.45, 4.75    # Quarz waechst von beiden Waenden nach innen
-T_LAB = 4.85
-T_W2, T_S3 = 5.35, 5.55          # Welle -> viel spaeter (Zug 2)
-T_E0, T_E1 = 5.80, 7.95          # Gestein wittert zurueck, Gang bleibt stehen
-T_EDGE = 7.55                    # Label EDGE am vorstehenden Gang
-T_RISE = 7.25
-T_S4 = 8.20                      # Payoff
-T_SWIPE = 8.75
-T_STAMP = 9.35
-T_SAFE = 10.00
-T_END = 11.20
+# 13.10.2026: Hook-Frage steht 1,0 s laenger (Markus: "die Frage braucht eine Sekunde laenger zum Lesen").
+HOOK_EXTRA = 1.0
+T_SEC = 2.40                     # Schnittlinie quer zum Gang (im letzten Drittel des Hooks)
+T_W1, T_S2 = 2.25 + HOOK_EXTRA, 2.45 + HOOK_EXTRA          # Welle -> Querschnitt (Zug 1)
+T_CRACK, T_OPEN = 2.70 + HOOK_EXTRA, 2.95 + HOOK_EXTRA     # Riss zeichnet sich, Riss oeffnet sich
+T_FLOW = (3.00 + HOOK_EXTRA, 4.45 + HOOK_EXTRA)            # heisses Wasser stroemt
+T_GROW0, T_GROW1 = 3.45 + HOOK_EXTRA, 4.75 + HOOK_EXTRA    # Quarz waechst von beiden Waenden nach innen
+T_LAB = 4.85 + HOOK_EXTRA
+T_W2, T_S3 = 5.35 + HOOK_EXTRA, 5.55 + HOOK_EXTRA          # Welle -> viel spaeter (Zug 2)
+T_E0, T_E1 = 5.80 + HOOK_EXTRA, 7.95 + HOOK_EXTRA          # Gestein wittert zurueck, Gang bleibt stehen
+T_EDGE = 7.55 + HOOK_EXTRA                                 # Label EDGE am vorstehenden Gang
+T_RISE = 7.25 + HOOK_EXTRA
+T_S4 = 8.20 + HOOK_EXTRA                                   # Payoff
+T_SWIPE = 8.75 + HOOK_EXTRA
+T_STAMP = 9.35 + HOOK_EXTRA
+T_SAFE = 10.00 + HOOK_EXTRA
+T_END = 11.20 + HOOK_EXTRA
 
 RAIL_N = 2
 RAIL_Y = [1300 - (1300 - 330 - 60) / RAIL_N * (i + 0.5) for i in range(RAIL_N)]
@@ -521,7 +523,7 @@ class Reel:
 
 def shimmer(f, t):
     """Aufsteigende Waerme unter dem Riss (Zug 1)."""
-    v = seg(t, 2.55, 0.4) * (1 - seg(t, 4.95, 0.35))
+    v = seg(t, 2.55 + HOOK_EXTRA, 0.4) * (1 - seg(t, 4.95 + HOOK_EXTRA, 0.35))
     if v <= 0:
         return
     dr = ImageDraw.Draw(f)
@@ -561,13 +563,13 @@ def sound_events():
     f(clacks[0], T_S2, -7.0, "bohrhaken")
     f(K("impact-sounds", "impactMining_000.ogg"), T_CRACK, -4.0, "riss")
     s("fizz", T_FLOW[0], -14.0, "heisses-wasser", dur=1.5, seed=3)
-    for k, (t0, fr) in enumerate(zip((3.55, 3.85, 4.15, 4.42, 4.68), (1567.98, 1760.0, 2093.0, 2349.3, 2637.0))):
+    for k, (t0, fr) in enumerate(zip((4.55, 4.85, 5.15, 5.42, 5.68), (1567.98, 1760.0, 2093.0, 2349.3, 2637.0))):
         s("tone", t0, -21.0 + k * 0.8, "kristall", dur=0.4, freq=fr)
     f(ticks[1], T_LAB, -6.0, "kreide-tick")
     f(whoosh, T_W2, -7.0, "uebergang")
     f(clacks[1], T_S3, -7.0, "bohrhaken")
     s("rumble", T_S3 + 0.05, -8.5, "zeit-grollen", dur=2.5, seed=2)
-    for t0, nm in ((6.35, "impactMining_001.ogg"), (6.95, "impactMining_002.ogg"), (7.5, "impactMining_001.ogg")):
+    for t0, nm in ((7.35, "impactMining_001.ogg"), (7.95, "impactMining_002.ogg"), (8.5, "impactMining_001.ogg")):
         f(K("impact-sounds", nm), t0, -16.0, "abbroeckeln")
     s("riser", T_RISE, -9.0, "steigerung", dur=0.8)
     f(K("impact-sounds", "impactPunch_heavy_000.ogg"), T_S4, -2.0, "treffer")
@@ -581,7 +583,7 @@ def sound_events():
         ev.append((T_END + 0.12 * k, m.pitch(pl, r), -3.0))
     used["klanglogo"] = "CC0 Kenney: pluck_001.ogg (drei Tonhoehen)"
     f(K("impact-sounds", "impactGeneric_light_000.ogg"), T_END + 0.45, -5.0, "klatsch")
-    for t0, t1, g in ((0.0, 8.05, -9.0), (8.2, T_END, -11.0)):  # Flaeche, vor dem Payoff kurz Stille
+    for t0, t1, g in ((0.0, T_S4 - 0.15, -9.0), (T_S4, T_END, -11.0)):  # Flaeche, vor dem Payoff kurz Stille
         pad = m.synth("pad", dur=t1 - t0, seed=int(t0) + 2)
         rel = [(t - t0, smp, gg) for t, smp, gg in ev if t0 <= t < t1]
         ev.append((t0, m.duck(pad, rel, depth_db=-6.0), g))
@@ -609,7 +611,7 @@ def main():
     Image.fromarray(r.fin(f0, s0)).save(os.path.join(a.out, SLUG + ".jpg"), quality=92)
     if a.qc:                                                      # QC-Kontaktbogen
         os.makedirs(a.qc, exist_ok=True)
-        ts = [0.0, 1.2, 1.9, 2.6, 2.85, 3.3, 3.9, 4.5, 5.1, 6.0, 6.9, 7.9, 8.5, 9.7, 10.6, 11.6]
+        ts = [0.0, 1.6, 2.9, 3.6, 3.85, 4.3, 4.9, 5.5, 6.1, 7.0, 7.9, 8.9, 9.5, 10.7, 11.6, 12.6]
         thumbs = []
         for t in ts:
             f, s = r.frame(t)

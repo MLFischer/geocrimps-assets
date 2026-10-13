@@ -1,14 +1,14 @@
 {
  "slug": "2026-10-13_holdid-01",
- "dauer_s": 12.0,
+ "dauer_s": 13.0,
  "fps": 30,
- "frames": 360,
- "mp4_mb": 6.81,
+ "frames": 390,
+ "mp4_mb": 7.09,
  "woerter_im_bild": 37,
  "labels": 2,
- "payoff_anteil": 0.683,
+ "payoff_anteil": 0.708,
  "loudnorm": {
-  "loudnorm_ziel": -13.0,
+  "loudnorm_ziel": -13.4,
   "tp_grenze": -2.5,
   "I_LUFS": -14.1,
   "TP_dBFS": -1.7
@@ -35,21 +35,6 @@
   "klatsch": "CC0 Kenney: impactGeneric_light_000.ogg",
   "flaeche": "selbst erzeugt (pad)"
  },
- "probe": {
-  "at": "2026-10-12T18:34:53+00:00",
-  "result": "FINISHED"
- },
- "text_im_bild": [
-  "HOLD ID",
-  "WHY DOES THIS STRIPE STICK OUT?",
-  "HOT WATER SEALS A CRACK WITH QUARTZ.",
-  "QUARTZ (Label)",
-  "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.",
-  "EDGE (Label)",
-  "QUARTZ LASTS LONGER.",
-  "HOLD ID #01 / QUARTZ VEIN (Stempel)",
-  "Test it: veins can flake off."
- ],
  "hook_score": {
   "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
   "varianten": [
@@ -144,5 +129,17 @@
    "beleg": "bewusst neutral: Quarzgaenge kommen in vielen Gesteinen vor",
    "status": "Hinweis"
   }
- ]
+ ],
+ "text_im_bild": [
+  "HOLD ID",
+  "WHY DOES THIS STRIPE STICK OUT?",
+  "HOT WATER SEALS A CRACK WITH QUARTZ.",
+  "QUARTZ (Label)",
+  "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.",
+  "EDGE (Label)",
+  "QUARTZ LASTS LONGER.",
+  "HOLD ID #01 / QUARTZ VEIN (Stempel)",
+  "Test it: veins can flake off."
+ ],
+ "aenderung": "13.10.2026: Hook-Frage steht 1,0 s laenger (0-3,25 s), alle folgenden Zeiten +1,0 s, Dauer 13,0 s."
 }
