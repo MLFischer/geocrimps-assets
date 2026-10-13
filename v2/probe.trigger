@@ -1,2 +1,2 @@
 Aenderung startet .github/workflows/reel-probe.yml (Probelauf ohne Veroeffentlichung).
-2026-10-12T19:45:42Z Probelauf r003 (MYTH OR ROCK #01)
+2026-10-13T08:17:26Z Probelauf r002 neu (Hook +1 s)
