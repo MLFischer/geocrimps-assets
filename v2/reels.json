@@ -84,7 +84,10 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-13T08:44:46+00:00",
+        "result": "FINISHED"
+      },
       "ablauf": "offene_frage",
       "version": "13.10.2026: neu gebaut mit dem Ablauf Offene Frage (Wunsch Markus), Hook 3,3 s, Callback 1,25 s"
     }
