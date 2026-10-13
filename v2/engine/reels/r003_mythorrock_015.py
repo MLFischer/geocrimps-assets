@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Reel 003 -- MYTH OR ROCK #01: "Looks dry. Safe to climb?" (Faktenbasis: Post #015, Font nach Regen).
+"""Reel 003 -- MYTH OR ROCK #01: "Looks dry. So why wait?" (Faktenbasis: Post #015, Font nach Regen).
 
-Format MYTH OR ROCK: Behauptung -> Mitmach-Pause -> Beleg in zwei Zuegen -> Urteil TRUE / FALSE / IT DEPENDS.
-Dramaturgie (Topo): Hook 0-2,25 s | Pause mit TRUE/FALSE 2,45-4,05 s | Zug 1 im Querschnitt: Regen sickert ein,
-die Kruste trocknet, der Sand darunter bleibt nass 4,25-6,75 s | Zug 2: nasser Sandstein bricht, die Kruste
-waechst nicht nach 6,95-9,45 s | Urteil 9,6 s (73 %) | Folge fuers Klettern 10,15 s | Endsignet 12,3-13,1 s.
+Fassung 2 vom 13.10.2026, Muster "Offene Frage" (statt Quiz): offene W-Frage ohne Antwortauswahl, die Hook-Frage
+steht 3,3 s; Zug 1 scheint harmlos (die Oberflaeche trocknet zuerst), Zug 2 bringt die Wendung (am Griff ziehen ->
+er bricht, innen ist der Sand nass), die Frage kehrt kurz zurueck (Callback), dann die Antwort.
+Andere Bildmittel als r001/r002: Lichtstreifen statt Isolinien-Welle, Zeitraffer statt Querschnitt, Zoom auf den
+Griff, der Bruch selbst zeigt das Innere; Flaeche eine Quarte hoeher.
+Dramaturgie (Topo): Hook 0-3,3 s | Zug 1 Regen und Abtrocknen 3,55-6,55 s | Zug 2 Zoom, Ziehen, Bruch 6,8-9,35 s |
+Callback 9,35 s | Payoff 9,95 s (72 %) | Folge: Urteil MYTH, warten 11,05-13,0 s | Endsignet 13,0-13,8 s.
 Aufruf:  python3 r003_mythorrock_015.py --out ../../../reels --qc <Ordner>   (--stills 0,4.8 fuer Einzelbilder)
 """
 import math, os, random, sys
@@ -19,35 +22,35 @@ import reelkit as rk
 from outcrop import C, P
 from motion import X0, W, H, seg, seilzug, sturz, griff, lerp, put
 
-DUR = 13.1
+DUR = 13.8
 META = dict(
-    slug="2026-10-16_mythorrock-01", dur_range=[10, 15], payoff_t=9.60, title="GeoCrimps r003 MYTH OR ROCK #01",
-    on_screen=["MYTH OR ROCK", "LOOKS DRY. SAFE TO CLIMB?", "TRUE", "FALSE", "Pause. Your guess?",
-               "DRY CRUST. WET SAND BELOW.", "WET SANDSTONE BREAKS EASIER.", "IT NEVER GROWS BACK.",
-               "VERDICT", "FALSE.", "WAIT A DAY OR TWO."],
-    labels=["CRUST", "SAND"],
-    qc_times=[0.0, 1.5, 2.65, 3.5, 4.35, 4.85, 5.4, 6.2, 6.85, 7.3, 7.7, 8.1, 8.9, 9.75, 10.9, 12.7],
-    marks=[(0, "Hook"), (2.25, "Welle"), (2.85, "Pause"), (4.25, "Zug 1"), (4.8, "Regen"), (5.4, "trocknet"),
-           (6.75, "Welle"), (6.95, "Zug 2"), (7.6, "Bruch"), (8.6, "Steigerung"), (9.45, "Stille"), (9.6, "PAYOFF"),
-           (10.15, "Wisch"), (12.3, "Klanglogo")])
+    slug="2026-10-16_mythorrock-01", dur_range=[11, 16], payoff_t=9.95, title="GeoCrimps r003 MYTH OR ROCK #01 (Offene Frage)",
+    on_screen=["MYTH OR ROCK", "LOOKS DRY. SO WHY WAIT?", "THE SURFACE DRIES FIRST.", "BUT PULL ON IT\u2026",
+               "SO WHY WAIT?", "STILL WET INSIDE.", "MYTH", "WAIT A DAY OR TWO."],
+    labels=["WET SAND"],
+    qc_times=[0.0, 1.6, 3.0, 3.45, 3.9, 4.4, 5.3, 6.2, 6.9, 7.3, 7.95, 8.4, 9.5, 10.3, 11.8, 13.4],
+    marks=[(0, "Hook"), (3.30, "Lichtstreifen"), (3.55, "Zug 1"), (4.0, "Regen"), (4.95, "trocknet"), (6.55, "Zoom"),
+           (6.8, "Zug 2"), (7.1, "Ziehen"), (8.1, "Bruch"), (9.35, "Callback"), (9.8, "Stille"), (9.95, "PAYOFF"),
+           (11.05, "Zoom zurueck"), (11.25, "Stempel"), (11.55, "Wisch"), (13.0, "Klanglogo")])
 
 # ------------------------------------------------------------------ Zeitplan
-T_W1, T_S2 = 2.25, 2.45            # Welle -> Mitmach-Pause
-T_CHIPS = (2.60, 2.75)
-T_PAUSE = 2.85                     # "Pause. Your guess?" bis 4,05 (1,2 s)
-T_W2, T_S3 = 4.05, 4.25            # Welle -> Zug 1 (Querschnitt)
-T_RAIN = [4.36 + 0.09 * k for k in range(7)]
-FALL = 0.45
-T_SEEP = 4.62                      # Wasser sickert ein (bis ca. 5,8)
-T_LAB = (4.95, 5.10)               # Labels CRUST, SAND
-T_DRY = 5.40                       # Kruste trocknet ab (bis 6,15), Text "DRY CRUST." / "WET SAND BELOW."
-T_CR, T_S4 = 6.75, 6.95            # Welle -> Zug 2
-T_PULL, T_BREAK, T_DROP = 7.15, 7.60, 7.85
-T_NEVER = 8.55                     # "IT NEVER GROWS BACK."
-T_RISE = 8.60
-T_S5 = 9.60                        # Urteil (Payoff)
-T_SWIPE, T_OR = 10.15, 10.55
-T_END = 12.30
+T_HOOK = 3.30                      # Hook-Frage steht 3,3 s (Lesezeit), dann Lichtstreifen
+T_S2 = 3.55                        # Zug 1: Regen, dann trocknet die Oberflaeche
+T_RAIN = [3.62 + 0.08 * k for k in range(7)]
+FALL = 0.40
+T_DRY = 4.95                       # Abtrocknen bis ca. 6,25
+T_Z0, T_Z1 = 6.55, 7.05            # Zoom auf die Schulter
+ZOOM, ZC = 1.22, (880, 1040)
+T_S3 = 6.80                        # Zug 2
+T_PULL, T_JIG, T_CRACK, T_SNAP = 7.10, 7.45, 7.85, 8.10
+T_DRIPS = (8.45, 8.85, 9.25)
+T_LAB = 8.55
+T_CALL = 9.35                      # Callback: die Frage kehrt zurueck
+T_RISE = 9.05
+T_S4 = 9.95                        # Payoff
+T_S5 = 11.05                       # Zoom zurueck, Urteil und Folge
+T_STAMP, T_SWIPE, T_OR = 11.25, 11.55, 11.90
+T_END = 13.00
 
 # ------------------------------------------------------------------ Block (Font-Sloper) und Farben
 XL, XR, HB = 120, 1030, 520        # Block: linke/rechte Fusskante, Hoehe
@@ -56,7 +59,8 @@ CX, HA = (XL + XR) / 2, (XR - XL) / 2
 _CTRL = [(0.00, 0), (0.02, 150), (0.06, 290), (0.13, 400), (0.25, 470), (0.40, 505), (0.55, 512), (0.68, 495),
          (0.79, 455), (0.88, 390), (0.94, 300), (0.98, 190), (0.995, 80), (1.0, 0)]
 CRUST, CRUST_IN, SCAR = "#D8C6A3", "#9E8A68", "#B89A6E"
-YB_MAIN, YB_PAY = 1420, 1560       # Fusslinie in Szene 1-4 bzw. im Urteil (Platz fuer den Text)
+WET_SAND, WET_EDGE = "#3D352C", "#6E6150"      # feuchter Sand in der Bruchflaeche
+YB_MAIN = 1420                     # Fusslinie
 F0, F1 = 830, 985                  # Bruchstueck an der rechten Schulter (x-Bereich)
 
 def _catmull(pts, n=24):
@@ -118,7 +122,7 @@ def puddles(im, yb):
         d.arc([P(cx - rx * 0.7, yb + 14 - ry * 0.6), P(cx + rx * 0.5, yb + 14 + ry * 0.4)], 200, 330,
               fill=o.rgb(C["ice"], 200), width=int(2 * o.S))
 
-def boulder_front(im, yb, broken=False, ticks=True):
+def boulder_front(im, yb, broken=False, ticks=True, wet=False):
     """Block von der Seite: neutrale Oberflaeche, duenne helle Kruste als Rand, Kreide-Ticks auf dem Sloper."""
     outer = surface(yb)
     poly = outer + [(CX + HA, yb), (CX - HA, yb)]
@@ -139,38 +143,33 @@ def boulder_front(im, yb, broken=False, ticks=True):
     d.line([P(*p) for p in rim], fill=o.rgb(CRUST_IN, 160), width=int(1.6 * o.S))
     d.line([P(*p) for p in outer], fill=o.rgb(C["magnesia"]), width=int(3 * o.S), joint="curve")
     if broken:
-        _scar(im, yb, front=True)
+        _scar(im, yb, front=True, wet=wet)
     if ticks:
         o.chalk_ticks(im, 640, top_y(640, yb) + 52, angle_deg=-30, seed=2)
 
-def _scar(im, yb, front):
-    """Bruchstelle: Schulter fehlt, frische Bruchflaeche ohne Kruste."""
+def _scar(im, yb, front, wet=False):
+    """Bruchstelle: Schulter fehlt, Bruchflaeche ohne Kruste; wet=True: innen dunkel-feucht mit Wasserglanz."""
     inner, outer = crack_curve(yb)
     d = ImageDraw.Draw(im)
     cut = outer + inner[::-1]
     cut_out = [(x + 2.5 * (x - CX) / HA, y - 3) for x, y in outer] + inner[::-1]
     d.polygon([P(*p) for p in cut_out], fill=o.rgb(C["obsidian"]))
-    face = offset(inner, 13 if front else 8)
-    d.polygon([P(*p) for p in inner + face[::-1]], fill=o.rgb(SCAR, 230 if front else 190))
-    d.line([P(*p) for p in inner], fill=o.rgb(SCAR), width=int(4 * o.S), joint="curve")
+    if wet:
+        face = offset(inner, 32)
+        d.polygon([P(*p) for p in inner + face[::-1]], fill=o.rgb(WET_SAND))
+        rnd = random.Random(14)
+        for _ in range(150):
+            i = rnd.randrange(len(inner)); f = rnd.uniform(0.15, 0.95)
+            x = inner[i][0] + (face[i][0] - inner[i][0]) * f; y = inner[i][1] + (face[i][1] - inner[i][1]) * f
+            r = rnd.uniform(1.4, 3.2)
+            d.ellipse([P(x - r, y - r), P(x + r, y + r)], fill=o.rgb(rnd.choice([C["water"], C["water"], C["ice"]]), 230))
+        d.line([P(*p) for p in inner], fill=o.rgb(WET_EDGE), width=int(4 * o.S), joint="curve")
+    else:
+        face = offset(inner, 13 if front else 8)
+        d.polygon([P(*p) for p in inner + face[::-1]], fill=o.rgb(SCAR, 230 if front else 190))
+        d.line([P(*p) for p in inner], fill=o.rgb(SCAR), width=int(4 * o.S), joint="curve")
     return cut
 
-def boulder_section(im, yb, broken=False):
-    """Querschnitt: Sand (Sandstein-Signatur), dicke Kruste, Fusslinie."""
-    outer = surface(yb)
-    poly = outer + [(CX + HA, yb), (CX - HA, yb)]
-    o.rock_body(im, poly, fill=C["graphite"], pattern="sandstone", pat_color="#39424A", seed=4)
-    rim = offset(outer, 16)
-    d = ImageDraw.Draw(im)
-    d.polygon([P(*p) for p in outer + rim[::-1]], fill=o.rgb(CRUST))
-    rnd = random.Random(6)
-    for (x, y), (x2, y2) in zip(outer[::3], rim[::3]):               # feine Kornstruktur in der Kruste
-        if rnd.random() < 0.6:
-            d.line([P(x, y), P(x2, y2)], fill=o.rgb(CRUST_IN, 120), width=int(1.2 * o.S))
-    d.line([P(*p) for p in rim], fill=o.rgb(CRUST_IN), width=int(2 * o.S))
-    d.line([P(*p) for p in outer], fill=o.rgb(C["magnesia"]), width=int(3 * o.S), joint="curve")
-    if broken:
-        _scar(im, yb, front=False)
 
 
 class Reel(rk.ReelBase):
@@ -178,215 +177,238 @@ class Reel(rk.ReelBase):
 
     def __init__(self):
         super().__init__()
-        self.rail = rk.Rail(3)
+        self.rail = rk.Rail(2)
         self.end = rk.EndSting()
-        self.stamp = m.text_sprite("MYTH OR ROCK", X0, 300, "stencil", 40, C["slate"], tracking=0.12)
-        # Szene 1: Hook (Frame 0 = Cover)
-        def bg1(im):
-            o.contour_field(im, 820, 1700, n=9, r0=140, step=64, alpha=90)
-            ground(im, YB_MAIN); puddles(im, YB_MAIN); boulder_front(im, YB_MAIN); o.route_rail(im, 0, 3)
-        self.bg1 = m.background(bg1)
-        self.hook, _ = m.lines_sprite(["LOOKS DRY.", "SAFE TO", "CLIMB?"], 352)
-        # Szene 2: Mitmach-Pause
-        def bg2(im):
-            ground(im, YB_MAIN); puddles(im, YB_MAIN); boulder_front(im, YB_MAIN)
-            im.alpha_composite(Image.new("RGBA", im.size, o.rgb(C["obsidian"], 170))); o.route_rail(im, 1, 3)
-        self.bg2 = m.background(bg2)
-        self.claim, yc = m.lines_sprite(["LOOKS DRY.", "SAFE TO CLIMB?"], 352, role="display_xb", size=104)
-        self.chip_t = m.sprite(lambda im: o.hold_label(im, X0, yc + 50, "TRUE", C["magnesia"], size=58, role="stencil", pad=(26, 12)))
-        wt = o.text_width("TRUE", "stencil", 58) + 2 * 26
-        self.chip_f = m.sprite(lambda im: o.hold_label(im, X0 + wt + 40, yc + 50, "FALSE", C["magnesia"], size=58, role="stencil", pad=(26, 12)))
-        self.pause = m.text_sprite("Pause. Your guess?", X0, yc + 180, "text_b", 54, C["magnesia"])
-        # Szene 3: Querschnitt -- Regen, Einsickern, Abtrocknen
-        def bg3(im):
-            ground(im, YB_MAIN); boulder_section(im, YB_MAIN); o.route_rail(im, 2, 3)
-        self.bg3 = m.background(bg3)
-        outer = surface(YB_MAIN); rim = offset(outer, 16)
+        self.rails = [rk.rail_sprite(0, 2), rk.rail_sprite(1, 2), rk.rail_sprite(2, 2), rk.rail_sprite(2, 2, logo_on=True)]
+        self.label = m.text_sprite("MYTH OR ROCK", X0, 300, "stencil", 40, C["slate"], tracking=0.12)
+        outer = surface(YB_MAIN)
+        # Hintergruende ohne Topo-Linie (die kommt als Sprite, weil Szene 3 gezoomt wird)
+        def sky(im):
+            o.contour_field(im, 820, 1700, n=9, r0=140, step=64, alpha=80)
+            d = ImageDraw.Draw(im); sx, sy, r = 968, 760, 40
+            for k in range(12):                                         # Sonne: Scheibe und Strahlen
+                a = 2 * math.pi * k / 12
+                d.line([P(sx + math.cos(a) * (r + 14), sy + math.sin(a) * (r + 14)), P(sx + math.cos(a) * (r + 34), sy + math.sin(a) * (r + 34))],
+                       fill=o.rgb(C["magnesia"], 170), width=int(4 * o.S))
+            d.ellipse([P(sx - r, sy - r), P(sx + r, sy + r)], fill=o.rgb(C["magnesia"], 235))
+        def bg_dry(im):
+            sky(im); ground(im, YB_MAIN); puddles(im, YB_MAIN); boulder_front(im, YB_MAIN)
+        def bg_wet(im):
+            sky(im); ground(im, YB_MAIN); puddles(im, YB_MAIN); boulder_front(im, YB_MAIN, broken=True, wet=True)
+        self.bg = m.background(bg_dry)
+        self.bg_broken = m.background(bg_wet)
+        self.hook, _ = m.lines_sprite(["LOOKS DRY.", "SO WHY WAIT?"], 352)
+        # Zug 1: Regen -> Perlen auf der Kruste -> Abtrocknen
+        rim = offset(outer, 9)
         self.crust_wet = m.sprite(lambda im: ImageDraw.Draw(im).polygon([P(*p) for p in outer + rim[::-1]], fill=o.rgb(C["water"])))
-        self.text3a, ya = m.lines_sprite(["DRY CRUST."], 352, role="display_xb", size=118)
-        self.text3b, _ = m.lines_sprite(["WET SAND BELOW."], ya, role="display_xb", size=118)
-        self.lab_crust = m.text_sprite("CRUST", 740, 830, "mono", 30, C["magnesia"], tracking=0.1)
-        self.lab_sand = m.text_sprite("SAND", 330, 1060, "mono", 30, C["magnesia"], tracking=0.1)
-        rnd = random.Random(11); self.water = []
-        while len(self.water) < 420:
-            x = rnd.uniform(XL + 26, XR - 26); ty = top_y(x, YB_MAIN)
-            dep = rnd.uniform(22, 260); y = ty + dep
-            if y > YB_MAIN - 14 or not XL + 26 < x < XR - 26:
-                continue
-            self.water.append((x, y, rnd.uniform(2.4, 4.6), T_SEEP + dep / 260 * 1.05 + rnd.uniform(0, 0.25)))
-        self.drop = m.sprite(lambda im: o.droplet(im, 540, 960, size=34))
-        self.rain_x = [250, 370, 480, 600, 710, 820, 925]
-        # Szene 4: Bruch
-        def bg4(im):
-            ground(im, YB_MAIN); boulder_section(im, YB_MAIN); o.route_rail(im, 3, 3)
-        def bg4b(im):
-            ground(im, YB_MAIN); boulder_section(im, YB_MAIN, broken=True); o.route_rail(im, 3, 3)
-        base4 = m.background(bg4); broken4 = m.background(bg4b)
-        dr = ImageDraw.Draw(base4); dr2 = ImageDraw.Draw(broken4)       # nasser Sand bleibt sichtbar
+        body_poly = outer + [(XR, YB_MAIN), (XL, YB_MAIN)]
+        self.body_dark = m.sprite(lambda im: ImageDraw.Draw(im).polygon([P(*p) for p in body_poly], fill=o.rgb(C["obsidian"])))
+        rnd = random.Random(21)
+        self.beads = []
+        for k in range(30):
+            x = rnd.uniform(XL + 40, XR - 40); y = top_y(x, YB_MAIN) + rnd.uniform(-2, 4)
+            self.beads.append((x, y, rnd.uniform(4.0, 7.5), T_RAIN[k % 7] + FALL + rnd.uniform(0, 0.15), rnd.uniform(0, 0.5)))
+        self.drop = m.sprite(lambda im: o.droplet(im, 540, 960, size=30))
+        self.rain_x = [230, 350, 470, 590, 700, 810, 905]
+        def cloud(im):
+            d = ImageDraw.Draw(im)
+            for cx, cy, r in ((900, 770, 70), (975, 742, 62), (1040, 778, 56), (840, 792, 48), (960, 800, 58)):
+                d.ellipse([P(cx - r, cy - r * 0.72), P(cx + r, cy + r * 0.72)], fill=o.rgb("#4A545D"))
+            d.rectangle([P(800, 790), P(1090, 830)], fill=o.rgb("#4A545D"))
+        self.cloud = m.sprite(cloud)
+        self.text1, _ = m.lines_sprite(["THE SURFACE", "DRIES FIRST."], 352, role="display_xb", size=118)
+        # Zug 2: Bruchstueck (aus dem trockenen Hintergrund geschnitten)
         inner, outer_f = crack_curve(YB_MAIN)
-        self.flake_poly = outer_f + inner[::-1]
-        mk = rk.mask_from(self.flake_poly)
-        for x, y, r, _ in self.water:
-            for d_ in (dr, dr2):
-                d_.ellipse([x - r, y - r, x + r, y + r], fill=o.rgb(C["water"], 200))
-        broken4.paste(m.background(bg4b).crop((0, 0, W, H)), (0, 0), mk)  # Bruchstelle ohne Wasserpunkte
-        self.bg4, self.bg4b = base4, broken4
-        bb = mk.getbbox()
-        fl = base4.copy(); fl.putalpha(mk); fl = fl.crop(bb)
-        self.flake = (fl, bb)
-        self.text4, y4 = m.lines_sprite(["WET SANDSTONE", "BREAKS EASIER."], 352, role="display_xb", size=118)
-        self.text4b, _ = m.lines_sprite(["IT NEVER GROWS BACK."], y4 + 28, role="display_xb", size=84, fill=C["slate"])
+        self.inner = inner
+        mk = rk.mask_from(outer_f + inner[::-1])
+        self.flake_box = mk.getbbox()
+        fl = self.bg.copy(); fl.putalpha(mk); self.flake = fl.crop(self.flake_box)
         sx = (F0 + F1) / 2; sy = top_y(sx, YB_MAIN)
-        self.pull = (sx - 20, sy - 70, sx + 70, sy + 30)
-        # Szene 5: Urteil
-        self.verdict = m.text_sprite("VERDICT", X0, 330, "stencil", 64, C["slate"], tracking=0.1)
-        self.false_, y5 = m.lines_sprite(["FALSE."], 400, size=260)
+        self.pull = (sx - 26, sy - 78, sx + 70, sy + 22)
+        self.text2, y2 = m.lines_sprite(["BUT PULL", "ON IT\u2026"], 352, role="display_xb", size=118)
+        mid = inner[len(inner) // 2]
+        self.lab = m.text_sprite("WET SAND", mid[0] - 230, mid[1] + 40, "mono", 30, C["magnesia"], tracking=0.1)
+        self.lab_tick = m.sprite(lambda im: ImageDraw.Draw(im).line([P(mid[0] - 92, mid[1] + 56), P(mid[0] - 12, mid[1] + 18)],
+                                                                     fill=o.rgb(C["magnesia"]), width=int(3 * o.S)))
+        self.drip_src = [inner[int(len(inner) * f)] for f in (0.55, 0.75, 0.9)]
+        self.call, _ = m.lines_sprite(["SO WHY WAIT?"], 352, role="display_xb", size=96, fill=C["slate"])
+        # Payoff
+        self.answer, ya = m.lines_sprite(["STILL WET", "INSIDE."], 352, size=200)
+        # Folge: Urteil und Warten
         sw = o.text_width("WAIT A DAY", "display", 150)
-        y5 += 30
+        y5 = 360
         self.swipe = m.sprite(lambda im: o.chalk_swipe(im, X0 - 8, y5 + 18, X0 + sw + 14, y5 + 168, seed=9))
         self.wait = m.text_sprite("WAIT A DAY", X0, y5 + 8, "display", 150, C["obsidian"])
         self.ortwo = m.text_sprite("OR TWO.", X0, y5 + 184, "display", 150, C["magnesia"])
         self.swipe_box = (X0 - 8, y5 + 18, X0 + sw + 14, y5 + 168)
-        def bg5(im):
-            ground(im, YB_PAY); puddles(im, YB_PAY); boulder_front(im, YB_PAY, broken=True); o.route_rail(im, 3, 3, logo_on=True)
-        self.bg5 = m.background(bg5)
+        self.stamp = self.make_stamp(700, 770, -7)
+
+    def make_stamp(self, cx, cy, angle):
+        s = o.S; f1 = o.font("stencil", 96); t1 = "MYTH"
+        w1 = f1.getlength(t1); bw = int(w1 + 2 * 34 * s); bh = int((96 + 2 * 26) * s)
+        im = Image.new("RGBA", (bw + 40 * s, bh + 40 * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+        ox, oy = 20 * s, 20 * s; col = o.rgb(C["magnesia"])
+        d.rounded_rectangle([ox, oy, ox + bw, oy + bh], radius=14 * s, outline=col, width=6 * s)
+        d.text((ox + bw / 2, oy + bh / 2 + 4 * s), t1, font=f1, fill=col, anchor="mm")
+        rng = np.random.default_rng(6)
+        a = np.asarray(im.getchannel("A"), np.float32)
+        noise = np.asarray(Image.fromarray((rng.random(a.shape) * 255).astype(np.uint8)).resize(im.size), np.float32) / 255
+        a *= np.clip(1.4 - noise * 1.05, 0.3, 1.0)
+        im.putalpha(Image.fromarray(a.astype(np.uint8)))
+        im = im.rotate(angle, resample=Image.BICUBIC, expand=True)
+        small = im.resize((im.width // s, im.height // s), Image.LANCZOS)
+        return m.Sprite(small, int(cx - small.width / 2), int(cy - small.height / 2))
+
+    # -------------------------------------------------------------- Szene in Weltkoordinaten (vor dem Zoom)
+    def world(self, t):
+        """Block, Wetter und Bruch zum Zeitpunkt t -- ohne Text und Topo-Linie."""
+        if t < T_JIG:
+            f = self.bg.copy()
+        elif t < T_SNAP:
+            f = self.bg.copy()
+            jig = 2.0 * math.sin(t * 70)
+            bb = self.flake_box
+            f.paste(self.bg_broken.crop(bb), (bb[0], bb[1]))
+            f.alpha_composite(self.flake, (int(bb[0] + jig), bb[1]))
+            if t >= T_CRACK:
+                n = max(2, int(len(self.inner) * sturz(seg(t, T_CRACK, 0.22))))
+                ImageDraw.Draw(f).line(self.inner[:n], fill=o.rgb(C["magnesia"]), width=4)
+        else:
+            f = self.bg_broken.copy()
+            u = seg(t, T_SNAP, 0.75)
+            if u < 1:
+                bb = self.flake_box
+                rot = self.flake.rotate(-38 * sturz(u), resample=Image.BICUBIC, expand=True)
+                cx = (bb[0] + bb[2]) / 2 + 110 * u; cy = (bb[1] + bb[3]) / 2 + 900 * u * u
+                rot.putalpha(rot.getchannel("A").point(lambda a, k=1 - 0.3 * u: int(a * k)))
+                m.composite(f, rot, int(cx - rot.width / 2), int(cy - rot.height / 2))
+            dr = ImageDraw.Draw(f)
+            for k, (x0, y0) in enumerate(self.drip_src):           # Wasser tropft aus der Bruchflaeche
+                for rep in range(3):
+                    t0 = T_DRIPS[k] + rep * 1.15
+                    v = seg(t, t0, 0.55)
+                    if 0 < v < 1:
+                        y = y0 + 8 + 260 * v * v; a = int(230 * (1 - v * 0.6))
+                        dr.ellipse([x0 - 4, y - 6, x0 + 4, y + 6], fill=o.rgb(C["water"], a))
+        if T_S2 <= t < T_Z0 + 0.3:                                   # Regen, Perlen, Abtrocknen
+            wet = seg(t, T_RAIN[0] + FALL - 0.05, 0.4) * (1 - seg(t, T_DRY, 1.1))
+            put(f, self.body_dark, op=0.38 * wet)
+            put(f, self.crust_wet, op=0.6 * wet)
+            dr = ImageDraw.Draw(f)
+            for x, y, r, ta, ph in self.beads:
+                v = seg(t, ta, 0.2); dry = seg(t, T_DRY + ph, 0.8)
+                rr = r * v * (1 - dry)
+                if rr > 0.6:
+                    dr.ellipse([x - rr, y - rr * 0.8, x + rr, y + rr * 0.55], fill=o.rgb(C["water"], 230))
+                    dr.ellipse([x - rr * 0.4, y - rr * 0.6, x - rr * 0.05, y - rr * 0.25], fill=o.rgb(C["ice"], 230))
+            cin = seilzug(seg(t, T_S2 - 0.05, 0.35)); cout = seilzug(seg(t, T_DRY - 0.1, 0.6))
+            if cin > 0 and cout < 1:                                 # Wolke schiebt sich vor die Sonne, dann wieder weg
+                put(f, self.cloud, dx=lerp(260, 0, cin) + lerp(0, 300, cout), op=min(1, cin * 1.5) * (1 - cout))
+            for k, (x, t0) in enumerate(zip(self.rain_x, T_RAIN)):
+                u = seg(t, t0, FALL)
+                if 0 < u < 1:
+                    y = lerp(820 + 25 * (k % 3), top_y(x, YB_MAIN) - 14, sturz(u)); put(f, self.drop, dx=x - 540, dy=y - 960, op=min(1, u * 5))
+        if t < T_S2 or T_DRY <= t < T_Z0 + 0.3:                      # Verdunstung (Hook und Abtrocknen)
+            v = (t % 2.2) / 2.2 if t < T_S2 else seg(t, T_DRY, 1.3)
+            dr = ImageDraw.Draw(f)
+            for k, x in enumerate(range(230, 990, 95)):
+                ph = (v + k * 0.17) % 1.0
+                yl = top_y(x, YB_MAIN) - 12 - 80 * ph
+                pts = [(x + 6 * math.sin(yy / 9 + k), yy) for yy in range(int(yl), int(yl) - 34, -3)]
+                dr.line(pts, fill=o.rgb(C["slate"], int(150 * math.sin(math.pi * ph))), width=3)
+        return f
 
     # -------------------------------------------------------------- Frames
     def frame(self, t):
-        if t < T_S2:                                               # Szene 1: Hook
-            f = m.zoomed(self.bg1, 1 + 0.03 * seilzug(seg(t, 0, T_W1)), 640, 1000)
-            put(f, self.stamp); put(f, self.hook)
-            if t >= T_W1:
-                put(f, rk.wave(seg(t, T_W1, 0.5), cx=640, cy=1000))
-            return f, 31
-        if t < T_S3:                                               # Szene 2: Pause
-            f = self.bg2.copy()
-            put(f, self.stamp)
-            u = seilzug(seg(t, T_S2 + 0.03, 0.3)); put(f, self.claim, dx=lerp(-40, 0, u), op=u)
-            for spr, t0 in ((self.chip_t, T_CHIPS[0]), (self.chip_f, T_CHIPS[1])):
-                u = seg(t, t0, 0.3); put(f, spr, op=min(1, u * 1.8), scale=lerp(0.6, 1.0, griff(u)) if u < 1 else 1.0)
-            u = seilzug(seg(t, T_PAUSE, 0.35)); put(f, self.pause, dx=lerp(-30, 0, u), op=u)
-            self.rail.pop(f, t, 0, T_S2)
-            if t < T_W1 + 0.5:
-                put(f, rk.wave(seg(t, T_W1, 0.5), cx=640, cy=1000))
-            if t >= T_W2:
-                put(f, rk.wave(seg(t, T_W2, 0.45), cy=500))
-            return f, 32
-        if t < T_S4:                                               # Szene 3: Regen, Einsickern, Abtrocknen
-            f = self.bg3.copy()
-            wet = seg(t, T_RAIN[0] + FALL - 0.05, 0.4) * (1 - seg(t, T_DRY, 0.75))
-            put(f, self.crust_wet, op=0.62 * wet)
-            dr = ImageDraw.Draw(f)
-            for x, y, r, ta in self.water:
-                v = seg(t, ta, 0.25)
-                if v > 0:
-                    rr = r * (0.4 + 0.6 * seilzug(v)); dr.ellipse([x - rr, y - rr, x + rr, y + rr], fill=o.rgb(C["water"], int(200 * v)))
-            for k, (x, t0) in enumerate(zip(self.rain_x, T_RAIN)):
-                yl = top_y(x, YB_MAIN)
-                u = seg(t, t0, FALL)
-                if 0 < u < 1:
-                    y = lerp(760 + 30 * (k % 3), yl - 16, sturz(u)); put(f, self.drop, dx=x - 540, dy=y - 960, op=min(1, u * 5))
-                elif u >= 1:
-                    v = seg(t, t0 + FALL, 0.5)
-                    if v < 1:
-                        rr = 10 + 30 * seilzug(v); a = int(220 * (1 - v))
-                        dr.ellipse([x - rr, yl - rr * 0.3, x + rr, yl + rr * 0.3], outline=o.rgb(C["water"], a), width=3)
-            v = seg(t, T_DRY, 0.8)                                 # Verdunstung an der Oberflaeche
-            if 0 < v < 1:
-                for k, x in enumerate(range(240, 960, 90)):
-                    yl = top_y(x, YB_MAIN) - 10 - 70 * seilzug(v) - (k % 2) * 14
-                    pts = [(x + 6 * math.sin(yy / 9 + k), yy) for yy in range(int(yl), int(yl) - 34, -3)]
-                    dr.line(pts, fill=o.rgb(C["slate"], int(170 * math.sin(math.pi * v))), width=3)
-            u = seilzug(seg(t, T_DRY + 0.03, 0.35)); put(f, self.text3a, dx=lerp(-40, 0, u), op=u)
-            u = seilzug(seg(t, T_DRY + 0.33, 0.35)); put(f, self.text3b, dx=lerp(-40, 0, u), op=u)
-            for spr, t0 in ((self.lab_crust, T_LAB[0]), (self.lab_sand, T_LAB[1])):
-                u = seg(t, t0, 0.3); put(f, spr, op=min(1, u * 1.8), scale=lerp(0.7, 1.0, griff(u)) if u < 1 else 1.0)
+        if t < T_HOOK + 0.25:                                        # Szene 1: Hook (Frame 0 = Cover)
+            f = m.zoomed(self.world(t), 1 + 0.03 * seilzug(seg(t, 0, T_HOOK)), 640, 1000)
+            put(f, self.rails[0]); put(f, self.label); put(f, self.hook)
+            if t >= T_HOOK:
+                put(f, rk.light_sweep(seg(t, T_HOOK, 0.35)))
+            return f, 41
+        if t < T_S5:
+            z = 1.0 if t < T_Z0 else lerp(1.0, ZOOM, seilzug(seg(t, T_Z0, T_Z1 - T_Z0)))
+            f = m.zoomed(self.world(t), z, *ZC)
+            if t < T_S3:                                             # Szene 2: Zug 1
+                put(f, self.rails[1]); self.rail.pop(f, t, 0, T_S2)
+                u = seilzug(seg(t, T_S2 + 0.05, 0.35)); put(f, self.text1, dx=lerp(-40, 0, u), op=u * (1 - seg(t, T_Z0, 0.25)))
+                if t < T_HOOK + 0.35:
+                    put(f, rk.light_sweep(seg(t, T_HOOK, 0.35)))
+                return f, 42
+            put(f, self.rails[3] if t >= T_S4 else self.rails[2])    # Szene 3: Zug 2, Callback, Payoff
             self.rail.pop(f, t, 1, T_S3)
-            if t < T_W2 + 0.45:
-                put(f, rk.wave(seg(t, T_W2, 0.45), cy=500))
-            if t >= T_CR:
-                put(f, rk.wave(seg(t, T_CR, 0.45), cy=500))
-            return f, 33
-        if t < T_S5:                                               # Szene 4: Bruch
-            fl, bb = self.flake
-            if t < T_DROP:
-                f = self.bg4.copy()
-                jig = 2.0 * math.sin(t * 70) * seg(t, T_PULL + 0.3, 0.1) if t >= T_PULL + 0.3 else 0
-                if jig:
-                    f.paste(self.bg4b.crop(bb), (bb[0], bb[1]))
-                    f.alpha_composite(fl, (int(bb[0] + jig), bb[1]))
-                if t >= T_BREAK:                                    # Riss laeuft durch den nassen Sand
-                    inner, _ = crack_curve(YB_MAIN); n = max(2, int(len(inner) * sturz(seg(t, T_BREAK, 0.22))))
-                    ImageDraw.Draw(f).line(inner[:n], fill=o.rgb(C["magnesia"]), width=4)
-            else:
-                f = self.bg4b.copy()
-                u = seg(t, T_DROP, 0.75)
-                if u < 1:
-                    rot = fl.rotate(-38 * sturz(u), resample=Image.BICUBIC, expand=True)
-                    cx = (bb[0] + bb[2]) / 2 + 110 * u; cy = (bb[1] + bb[3]) / 2 + 900 * u * u
-                    rot.putalpha(rot.getchannel("A").point(lambda a, k=1 - 0.3 * u: int(a * k)))
-                    m.composite(f, rot, int(cx - rot.width / 2), int(cy - rot.height / 2))
-            u = seilzug(seg(t, T_PULL, 0.3))                       # Zug am Sloper
-            if 0 < u and t < T_DROP + 0.3:
+            u = seilzug(seg(t, T_S3 + 0.05, 0.35)); put(f, self.text2, dx=lerp(-40, 0, u), op=u * (1 - seg(t, T_CALL - 0.15, 0.15)))
+            u = seilzug(seg(t, T_PULL, 0.35))                       # Zug am Sloper (Pfeil, in Bildkoordinaten)
+            if u > 0 and t < T_SNAP + 0.3:
                 x0, y0, x1, y1 = self.pull
-                xe, ye = lerp(x0, x1, u), lerp(y0, y1, u)
-                a = 1 - seg(t, T_DROP, 0.3)
-                def draw(d, X, Y, xe=xe, ye=ye, a=a):
-                    d.line([(X(x0), Y(y0)), (X(xe), Y(ye))], fill=o.rgb(C["magnesia"], int(255 * a)), width=int(6 * o.S))
-                    ang = math.atan2(ye - y0, xe - x0)
-                    for s in (-1, 1):
-                        d.line([(X(xe), Y(ye)), (X(xe - 26 * math.cos(ang + s * 0.5)), Y(ye - 26 * math.sin(ang + s * 0.5)))],
-                               fill=o.rgb(C["magnesia"], int(255 * a)), width=int(6 * o.S))
-                put(f, rk.region(x0 - 40, y0 - 40, x1 + 40, y1 + 40, draw))
-            u = seilzug(seg(t, T_S4 + 0.03, 0.35)); put(f, self.text4, dx=lerp(-40, 0, u), op=u)
-            u = seilzug(seg(t, T_NEVER, 0.35)); put(f, self.text4b, dx=lerp(-30, 0, u), op=u)
-            self.rail.pop(f, t, 2, T_S4)
-            if t < T_CR + 0.45:
-                put(f, rk.wave(seg(t, T_CR, 0.45), cy=500))
-            return f, 34
-        if t < T_END:                                              # Szene 5: Urteil
-            f = self.bg5.copy()
-            put(f, self.verdict, op=seg(t, T_S5, 0.15))
-            u = seg(t, T_S5, 0.22); put(f, self.false_, op=min(1, u * 2), scale=lerp(1.18, 1.0, seilzug(u)), anchor=(X0, 400))
-            self.rail.logo_pop(f, t, T_S5)
+                tx = lambda x: ZC[0] + (x - ZC[0]) * z; ty = lambda y: ZC[1] + (y - ZC[1]) * z
+                xs, ys, xe, ye = tx(x0), ty(y0), tx(lerp(x0, x1, u)), ty(lerp(y0, y1, u))
+                a = 1 - seg(t, T_SNAP, 0.3)
+                def draw(d, X, Y, xs=xs, ys=ys, xe=xe, ye=ye, a=a):
+                    col = o.rgb(C["magnesia"], int(255 * a))
+                    d.line([(X(xs), Y(ys)), (X(xe), Y(ye))], fill=col, width=int(7 * o.S))
+                    ang = math.atan2(ye - ys, xe - xs)
+                    for sgn in (-1, 1):
+                        d.line([(X(xe), Y(ye)), (X(xe - 30 * math.cos(ang + sgn * 0.5)), Y(ye - 30 * math.sin(ang + sgn * 0.5)))], fill=col, width=int(7 * o.S))
+                put(f, rk.region(min(xs, xe) - 50, min(ys, ye) - 50, max(xs, xe) + 50, max(ys, ye) + 50, draw))
+            u = seg(t, T_LAB, 0.3)
+            if u > 0:
+                tx = lambda x: ZC[0] + (x - ZC[0]) * z; ty = lambda y: ZC[1] + (y - ZC[1]) * z
+                for spr in (self.lab, self.lab_tick):
+                    dx = tx(spr.x) - spr.x; dy = ty(spr.y) - spr.y
+                    put(f, spr, dx=dx, dy=dy, op=min(1, u * 1.8) * (1 - seg(t, T_S5 - 0.2, 0.2)))
+            u = seilzug(seg(t, T_CALL, 0.3)); put(f, self.call, dx=lerp(-30, 0, u), op=u * (1 - seg(t, T_S4, 0.12)))
+            u = seg(t, T_S4, 0.22)
+            if u > 0:
+                self.rail.logo_pop(f, t, T_S4)
+                put(f, self.answer, op=min(1, u * 2) * (1 - seg(t, T_S5 - 0.2, 0.2)), scale=lerp(1.18, 1.0, seilzug(u)), anchor=(X0, 352))
+            return f, 43
+        if t < T_END:                                                # Szene 4: Urteil und Folge
+            z = lerp(ZOOM, 1.0, seilzug(seg(t, T_S5, 0.3)))
+            f = m.zoomed(self.world(t), z, *ZC)
+            put(f, self.rails[3])
+            u = seg(t, T_STAMP, 0.24)
+            if u > 0:
+                put(f, self.stamp, op=min(1, u * 3), scale=lerp(1.65, 1.0, griff(u)) if u < 1 else 1.0)
+            rk.dust(f, t, T_STAMP + 0.18, (self.stamp.x + 30, self.stamp.y + 30, self.stamp.x + self.stamp.w - 30, self.stamp.y + self.stamp.h - 30), seed=78)
             put(f, m.reveal(self.swipe, seilzug(seg(t, T_SWIPE, 0.2))))
             put(f, self.wait, op=seg(t, T_SWIPE + 0.08, 0.12))
             u = seilzug(seg(t, T_OR, 0.3)); put(f, self.ortwo, dx=lerp(-40, 0, u), op=u)
             rk.dust(f, t, T_SWIPE + 0.1, self.swipe_box)
-            return f, 35
-        return self.end.frame(t, T_END), 36
+            return f, 44
+        return self.end.frame(t, T_END), 45
 
 
-# ------------------------------------------------------------------ Ton
+# ------------------------------------------------------------------ Ton (Flaeche eine Quarte hoeher als r001/r002)
 def sound_events(b):
-    b.kenney("interface-sounds", "tick_001.ogg", 0.35, -8.0, "kreide-tick")
-    b.kenney("interface-sounds", "maximize_001.ogg", T_W1, -7.0, "uebergang")
+    b.synth("whoosh", 0.6, -18.0, "dampf", dur=1.4, seed=3)
+    b.kenney("interface-sounds", "tick_001.ogg", 0.45, -9.0, "kreide-tick")
+    b.synth("whoosh", T_HOOK, -9.0, "lichtstreifen", dur=0.5, seed=4)
     b.kenney("impact-sounds", "impactMetal_light_000.ogg", T_S2, -7.0, "bohrhaken")
-    b.kenney("interface-sounds", "tick_002.ogg", T_CHIPS[0], -6.0, "kreide-tick")
-    b.kenney("interface-sounds", "tick_004.ogg", T_CHIPS[1], -6.0, "kreide-tick")
-    b.kenney("interface-sounds", "question_001.ogg", T_PAUSE, -7.0, "frage")
-    b.kenney("interface-sounds", "maximize_001.ogg", T_W2, -7.0, "uebergang")
-    b.kenney("impact-sounds", "impactMetal_light_001.ogg", T_S3, -7.0, "bohrhaken")
     for k, t0 in enumerate(T_RAIN):
-        b.kenney("interface-sounds", ("drop_001.ogg", "drop_004.ogg")[k % 2], t0 + FALL, -5.0 - (k % 3), "tropfen")
-    b.synth("fizz", T_SEEP, -18.0, "einsickern", dur=1.2, seed=5)
-    b.kenney("interface-sounds", "tick_001.ogg", T_LAB[0], -8.0, "kreide-tick")
-    b.kenney("interface-sounds", "tick_002.ogg", T_LAB[1], -8.0, "kreide-tick")
-    b.synth("whoosh", T_DRY, -15.0, "abtrocknen", dur=0.8, seed=7)
-    b.kenney("interface-sounds", "maximize_001.ogg", T_CR, -7.0, "uebergang")
-    b.kenney("impact-sounds", "impactMetal_light_002.ogg", T_S4, -7.0, "bohrhaken")
-    b.kenney("interface-sounds", "scratch_001.ogg", T_PULL, -12.0, "zug")
-    b.kenney("impact-sounds", "impactMining_001.ogg", T_BREAK, -4.0, "bruch")
-    b.synth("whoosh", T_DROP, -14.0, "fallen", dur=0.5, seed=9)
-    b.kenney("impact-sounds", "impactMining_002.ogg", T_DROP + 0.55, -9.0, "aufschlag")
-    b.synth("riser", T_RISE, -9.0, "steigerung", dur=0.85)
-    b.kenney("impact-sounds", "impactPunch_heavy_000.ogg", T_S5, -2.0, "treffer")
-    b.kenney("impact-sounds", "impactMetal_light_000.ogg", T_S5 + 0.02, -9.0, "bohrhaken")
+        b.kenney("interface-sounds", ("drop_001.ogg", "drop_004.ogg")[k % 2], t0 + FALL, -6.0 - (k % 3), "tropfen")
+    b.synth("fizz", T_DRY, -17.0, "abtrocknen", dur=1.3, seed=5)
+    b.kenney("interface-sounds", "maximize_001.ogg", T_Z0, -8.0, "zoom")
+    b.kenney("impact-sounds", "impactMetal_light_001.ogg", T_S3, -7.0, "bohrhaken")
+    b.kenney("interface-sounds", "scratch_001.ogg", T_PULL, -11.0, "zug")
+    b.kenney("impact-sounds", "impactMining_000.ogg", T_CRACK, -5.0, "riss")
+    b.kenney("impact-sounds", "impactMining_001.ogg", T_SNAP, -3.0, "bruch")
+    b.synth("whoosh", T_SNAP + 0.05, -14.0, "fallen", dur=0.5, seed=9)
+    b.kenney("impact-sounds", "impactMining_002.ogg", T_SNAP + 0.65, -10.0, "aufschlag")
+    for k, t0 in enumerate(T_DRIPS):
+        b.synth("drip", t0 + 0.5, -9.0 - k, "tropfen-innen", seed=11 + k)
+    b.kenney("interface-sounds", "tick_002.ogg", T_LAB, -8.0, "kreide-tick")
+    b.kenney("interface-sounds", "question_002.ogg", T_CALL, -9.0, "frage")
+    b.synth("riser", T_RISE, -9.0, "steigerung", dur=0.75)
+    b.kenney("impact-sounds", "impactPunch_heavy_000.ogg", T_S4, -2.0, "treffer")
+    b.kenney("impact-sounds", "impactMetal_light_002.ogg", T_S4 + 0.02, -9.0, "bohrhaken")
+    b.kenney("interface-sounds", "maximize_001.ogg", T_S5, -10.0, "zoom")
+    b.kenney("impact-sounds", "impactPunch_heavy_001.ogg", T_STAMP + 0.16, -5.0, "stempel")
     b.kenney("interface-sounds", "scratch_001.ogg", T_SWIPE, -5.0, "kreide-wisch")
     b.kenney("interface-sounds", "scratch_002.ogg", T_SWIPE + 0.08, -7.0, "kreide-wisch")
     b.kenney("interface-sounds", "tick_004.ogg", T_OR, -8.0, "kreide-tick")
     b.sound_logo(T_END)
-    b.pads([(0.0, 9.45, -9.0), (9.60, T_END, -11.0)])
+    b.pads([(0.0, 9.80, -9.0), (T_S4, T_END, -11.0)], ratio=1.335)
 
 
 if __name__ == "__main__":

@@ -88,6 +88,24 @@ def wave(u, cx=540, cy=1100):
             dr.line(pts, fill=o.rgb(C["magnesia"], a), width=int(3 * o.S))
     return m.sprite(d)
 
+def light_sweep(u, color=C["magnesia"], alpha=95, width=260):
+    """Lichtstreifen-Uebergang: ein weicher, schraeger Streifen wischt von links nach rechts (Zeitraffer, Abwechslung zur Welle)."""
+    if not 0 < u < 1:
+        return None
+    x = lerp(-width * 2, W + width, seilzug(u))
+    def d(im):
+        lay = Image.new("L", (W * o.S, H * o.S), 0); dl = ImageDraw.Draw(lay)
+        for k in range(12):
+            a = int(alpha * math.sin(math.pi * (k + 0.5) / 12) * math.sin(math.pi * u))
+            xx = x + k * width / 12
+            dl.polygon([P(xx, 0), P(xx + width / 12 + 1, 0), P(xx + width / 12 + 1 - 420, H), P(xx - 420, H)], fill=a)
+        layer = Image.new("RGBA", lay.size, o.rgb(color)); layer.putalpha(lay); im.alpha_composite(layer)
+    return m.sprite(d)
+
+def rail_sprite(clipped, total, logo_on=False):
+    """Topo-Linie als eigenes Sprite (fuer Szenen, deren Hintergrund gezoomt wird)."""
+    return m.sprite(lambda im: o.route_rail(im, clipped, total, logo_on=logo_on))
+
 def crackline(u, alpha=255, x=560, y0=620, seed=12):
     """Riss-Uebergang: zackige Linie von oben nach unten (unterhalb des Textblocks beginnen)."""
     rnd = random.Random(seed); pts = []
@@ -176,10 +194,13 @@ class SoundBook:
             self.kenney("interface-sounds", "pluck_001.ogg", t_end + 0.12 * k, -3.0, "klanglogo", ratio=r)
         self.kenney("impact-sounds", "impactGeneric_light_000.ogg", t_end + 0.45, -5.0, "klatsch")
 
-    def pads(self, spans, depth_db=-6.0):
-        """Flaeche je Abschnitt (t0, t1, gain_db), unter den Ereignissen geduckt. Luecken = Stille."""
+    def pads(self, spans, depth_db=-6.0, ratio=1.0):
+        """Flaeche je Abschnitt (t0, t1, gain_db), unter den Ereignissen geduckt. Luecken = Stille.
+        ratio != 1 verschiebt die Tonart (z. B. 1.335 = Quarte hoeher), damit nicht jedes Reel gleich klingt."""
         for t0, t1, g in spans:
-            pad = m.synth("pad", dur=t1 - t0, seed=int(t0 * 10) + 2)
+            pad = m.synth("pad", dur=(t1 - t0) * ratio + 0.05, seed=int(t0 * 10) + 2)
+            if abs(ratio - 1.0) > 1e-3:
+                pad = m.pitch(pad, ratio)[: int((t1 - t0) * SR)]
             rel = [(t - t0, smp, gg) for t, smp, gg in self.ev if t0 <= t < t1]
             self.ev.append((t0, m.duck(pad, rel, depth_db=depth_db), g))
         self.used.setdefault("flaeche", set()).add("selbst erzeugt (pad)")

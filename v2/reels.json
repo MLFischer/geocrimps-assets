@@ -30,7 +30,8 @@
         "am": "2026-10-12T20:11:00+02:00",
         "durch": "Markus (Chat: heute veroeffentlichen)"
       },
-      "first_comment_posted": true
+      "first_comment_posted": true,
+      "muster": "quiz"
     },
     {
       "id": "r002",
@@ -58,7 +59,8 @@
         "at": "2026-10-13T08:18:08+00:00",
         "result": "FINISHED"
       },
-      "version": "13.10.2026: Hook 1 s laenger, neu gerendert"
+      "version": "13.10.2026: Hook 1 s laenger, neu gerendert",
+      "muster": "erklaerkette"
     },
     {
       "id": "r003",
@@ -69,7 +71,7 @@
       "thema": "Font nach Regen",
       "video": "reels/2026-10-16_mythorrock-01.mp4",
       "cover": "reels/2026-10-16_mythorrock-01.jpg",
-      "caption": "MYTH OR ROCK #01 · An animated Fontainebleau-style sandstone boulder after rain, cut open to test a climbing claim: if it looks dry, it's safe to climb.\n\nIt's a myth. Font sandstone wears a thin, hard silica crust over much softer sand. After rain, the surface can look and feel dry while the sand underneath is still damp, and wet sandstone can lose a lot of its strength: the water cancels the capillary tension between the grains and weakens the rock at the tips of tiny cracks. The crust forms only slowly, so a broken hold never grows back. How long to wait depends on sun, wind and humidity: after a soaking give it a day or two, longer when it's cool and damp.\n\nSend this to the friend who says \"it's basically dry\" after every shower.\n\nHow long do you wait after rain before touching sandstone?\n\nSource: Duda & Renner (2013), Geophysical Journal International. Full sources in the first comment.\n\n#fontainebleau #bouldering #climbing #sandstone #geology",
+      "caption": "MYTH OR ROCK #01 · An animated sandstone boulder drying in the sun after rain. It looks dry, so why wait? Watch what happens when someone pulls on the sloper.\n\nFontainebleau sandstone wears a thin, hard silica crust over much softer sand. After rain the surface dries first, while the sand underneath can stay damp, and wet sandstone can lose a lot of its strength: the water cancels the capillary tension between the grains and weakens the rock at the tips of tiny cracks. The crust forms only slowly, so a broken hold never grows back. How long to wait depends on sun, wind and humidity: after a soaking give it a day or two, longer when it's cool and damp.\n\nSend this to the friend who says \"it's basically dry\" after every shower.\n\nWhat's your rule after rain at your local crag?\n\nSource: Duda & Renner (2013), Geophysical Journal International. Full sources in the first comment.\n\n#fontainebleau #bouldering #climbing #sandstone #geology",
       "first_comment": "Sources: Thiry, M. & Maréchal, B. (2001): Development of tightly cemented sandstone lenses in uncemented sand: example of the Fontainebleau Sand (Oligocene) in the Paris Basin. Journal of Sedimentary Research 71(3). · Duda, M. & Renner, J. (2013): The weakening effect of water on the brittle failure strength of sandstone. Geophysical Journal International 192(3). · Gonçalves, T. D. (2012): Drying of porous materials. CHARISMA course on stone conservation, LNEC. · Access Fund (2021): How to assess sandstone after rain or snow.",
       "audio_name": "GeoCrimps – MYTH OR ROCK",
       "scheduled": "2026-10-16T17:07:00+02:00",
@@ -82,10 +84,9 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": {
-        "at": "2026-10-12T19:46:25+00:00",
-        "result": "FINISHED"
-      }
+      "probe": null,
+      "muster": "offene_frage",
+      "version": "13.10.2026: neu gebaut mit dem Muster Offene Frage (Wunsch Markus), Hook 3,3 s"
     }
   ]
 }

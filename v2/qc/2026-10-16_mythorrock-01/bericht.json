@@ -1,52 +1,55 @@
 {
  "slug": "2026-10-16_mythorrock-01",
- "dauer_s": 13.1,
+ "dauer_s": 13.8,
  "fps": 30,
- "frames": 393,
- "mp4_mb": 7.18,
- "woerter_im_bild": 33,
- "labels": 2,
- "woerter_gesamt_mit_labels": 35,
- "payoff_anteil": 0.733,
+ "frames": 414,
+ "mp4_mb": 7.53,
+ "woerter_im_bild": 28,
+ "labels": 1,
+ "woerter_gesamt_mit_labels": 30,
+ "payoff_anteil": 0.721,
  "loudnorm": {
-  "loudnorm_ziel": -13.0,
+  "loudnorm_ziel": -13.2,
   "tp_grenze": -2.5,
   "I_LUFS": -14.1,
-  "TP_dBFS": -1.4
+  "TP_dBFS": -1.7
  },
  "messung": {
   "I_LUFS": -14.1,
-  "TP_dBFS": -1.4
+  "TP_dBFS": -1.7
  },
  "toene": {
+  "dampf": [
+   "selbst erzeugt (whoosh)"
+  ],
   "kreide-tick": [
    "CC0 Kenney: tick_001.ogg",
    "CC0 Kenney: tick_002.ogg",
    "CC0 Kenney: tick_004.ogg"
   ],
-  "uebergang": [
-   "CC0 Kenney: maximize_001.ogg"
+  "lichtstreifen": [
+   "selbst erzeugt (whoosh)"
   ],
   "bohrhaken": [
    "CC0 Kenney: impactMetal_light_000.ogg",
    "CC0 Kenney: impactMetal_light_001.ogg",
    "CC0 Kenney: impactMetal_light_002.ogg"
   ],
-  "frage": [
-   "CC0 Kenney: question_001.ogg"
-  ],
   "tropfen": [
    "CC0 Kenney: drop_001.ogg",
    "CC0 Kenney: drop_004.ogg"
   ],
-  "einsickern": [
+  "abtrocknen": [
    "selbst erzeugt (fizz)"
   ],
-  "abtrocknen": [
-   "selbst erzeugt (whoosh)"
+  "zoom": [
+   "CC0 Kenney: maximize_001.ogg"
   ],
   "zug": [
    "CC0 Kenney: scratch_001.ogg"
+  ],
+  "riss": [
+   "CC0 Kenney: impactMining_000.ogg"
   ],
   "bruch": [
    "CC0 Kenney: impactMining_001.ogg"
@@ -57,11 +60,20 @@
   "aufschlag": [
    "CC0 Kenney: impactMining_002.ogg"
   ],
+  "tropfen-innen": [
+   "selbst erzeugt (drip)"
+  ],
+  "frage": [
+   "CC0 Kenney: question_002.ogg"
+  ],
   "steigerung": [
    "selbst erzeugt (riser)"
   ],
   "treffer": [
    "CC0 Kenney: impactPunch_heavy_000.ogg"
+  ],
+  "stempel": [
+   "CC0 Kenney: impactPunch_heavy_001.ogg"
   ],
   "kreide-wisch": [
    "CC0 Kenney: scratch_001.ogg",
@@ -86,15 +98,12 @@
   "mp4_unter_100_mb": true
  },
  "alle_pruefungen_ok": true,
- "probe": {
-  "at": "2026-10-12T19:46:25+00:00",
-  "result": "FINISHED"
- },
+ "fassung": "2 (13.10.2026), Muster \"Offene Frage\" statt Quiz; Hook-Frage steht 3,3 s",
  "hook_score": {
   "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
   "varianten": [
    {
-    "hook": "LOOKS DRY. SAFE TO CLIMB?",
+    "hook": "LOOKS DRY. SO WHY WAIT?",
     "punkte": [
      2,
      2,
@@ -106,44 +115,45 @@
     "gewaehlt": true
    },
    {
-    "hook": "WET SANDSTONE IS JUST SLIPPERY?",
+    "hook": "THE SUN IS OUT. WHY NOT CLIMB?",
     "punkte": [
      2,
      2,
-     1,
      2,
+     1,
      2
     ],
     "summe": 9
    },
    {
-    "hook": "RAIN WON'T HURT THIS BOULDER?",
+    "hook": "WHY DO SANDSTONE HOLDS SNAP AFTER RAIN?",
     "punkte": [
      2,
-     1,
-     2,
-     2,
-     2
-    ],
-    "summe": 9
-   },
-   {
-    "hook": "FONT AFTER RAIN: JUST WAIT FOR GRIP?",
-    "punkte": [
-     1,
      2,
      1,
      1,
      2
     ],
-    "summe": 7
+    "summe": 8
    },
    {
-    "hook": "ONE WET SESSION. ONE LESS HOLD?",
+    "hook": "WHAT'S STILL WET IN THIS BOULDER?",
     "punkte": [
      1,
-     2,
      1,
+     2,
+     2,
+     2
+    ],
+    "summe": 8,
+    "anmerkung": "verraet die Haelfte der Antwort"
+   },
+   {
+    "hook": "DRY ON TOP. WHAT'S BELOW?",
+    "punkte": [
+     2,
+     0,
+     2,
      2,
      1
     ],
@@ -153,34 +163,39 @@
  },
  "faktencheck": [
   {
-   "aussage": "Harte Kruste ueber weicherem Sand (Bild, Label CRUST/SAND)",
-   "beleg": "015/sources.md Zeile 1: Thiry & Marechal (2001)",
+   "aussage": "THE SURFACE DRIES FIRST.",
+   "beleg": "015/sources.md, Zeile vom 12.10.2026 (Goncalves 2012: Verdunstungsfront wandert ins Gestein, trockene Oberflaeche)",
    "status": "belegt"
   },
   {
-   "aussage": "DRY CRUST. WET SAND BELOW.",
-   "beleg": "015/sources.md, neue Zeile vom 12.10.2026: Goncalves (2012), Perzan/UNLV (8 News Now 2026), Access Fund",
-   "status": "neu belegt und nachgetragen"
-  },
-  {
-   "aussage": "WET SANDSTONE BREAKS EASIER.",
-   "beleg": "015/sources.md Zeile 2: Duda & Renner (2013)",
+   "aussage": "Griff bricht beim Ziehen (Bild)",
+   "beleg": "015/sources.md Zeilen 2-3: Duda & Renner (2013), nasser Sandstein verliert deutlich an Festigkeit; V1-Caption 'can shear off in a single damp session'",
    "status": "belegt"
   },
   {
-   "aussage": "IT NEVER GROWS BACK.",
-   "beleg": "015/sources.md Zeile 4: Krustenbruch irreversibel, langsame Krustenbildung",
+   "aussage": "STILL WET INSIDE.",
+   "beleg": "015/sources.md, Zeile vom 12.10.2026 (Oberflaeche trocken, Sand darunter feucht)",
    "status": "belegt"
   },
   {
-   "aussage": "FALSE. WAIT A DAY OR TWO.",
-   "beleg": "015/sources.md Kalibrierung 'a day or two' (wetterabhaengig); Caption nennt 'laenger bei kuehl-feuchtem Wetter' (Access Fund)",
+   "aussage": "MYTH (aussehen wie trocken = kletterbar)",
+   "beleg": "folgt aus den beiden Zeilen oben und der Gebietsethik (Zeile 4)",
    "status": "belegt"
+  },
+  {
+   "aussage": "WAIT A DAY OR TWO.",
+   "beleg": "015/sources.md Kalibrierung 'a day or two'; Caption ergaenzt 'laenger bei kuehl-feuchtem Wetter' (Access Fund)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Wasser tropft aus der Bruchflaeche (Bild)",
+   "beleg": "Stilisierung von 'feucht innen'; keine Mengenaussage",
+   "status": "Hinweis"
   },
   {
    "aussage": "Mechanismus nicht als Loesung des Zements darstellen",
-   "beleg": "Korrekturlauf 27.07.2026 in 015/sources.md",
-   "status": "eingehalten (Bild zeigt Wasser in den Poren, keine Aufloesung)"
+   "beleg": "Korrekturlauf 27.07.2026",
+   "status": "eingehalten"
   }
  ]
 }
