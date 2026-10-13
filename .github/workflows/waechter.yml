@@ -1,0 +1,72 @@
+name: Wächter
+
+# Gesundheitscheck der Reel-Automatik, veroeffentlicht nichts: Instagram-Token, GH_ADMIN_TOKEN, verpasste Termine,
+# Puffer der naechsten 96 h (Reel fertig, Probelauf bestanden, Video und Cover erreichbar), fehlgeschlagene Laeufe.
+# Bei Fehlern oeffnet er ein Issue mit Erwaehnung von @MLFischer (Mail); ist alles wieder in Ordnung, schliesst er es.
+# Zeiten in UTC: taeglich 05:23 (Berlin 07:23 Sommer / 06:23 Winter) und Di/Fr 18:23 nach dem Veroeffentlichungsfenster.
+# Ausser der Reihe: v2/waechter.trigger aendern. Steht dort TESTALARM, erzeugt der Lauf einen Testfehler (prueft die Mail).
+
+on:
+  schedule:
+    - cron: "23 5 * * *"
+    - cron: "23 18 * * 2,5"
+  push:
+    paths:
+      - "v2/waechter.trigger"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
+
+concurrency:
+  group: waechter
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Testalarm angefordert?
+        if: github.event_name == 'push'
+        run: |
+          if grep -q TESTALARM v2/waechter.trigger; then
+            echo "WAECHTER_TESTALARM=1" >> "$GITHUB_ENV"
+            echo "Testalarm angefordert."
+          fi
+
+      - name: Gesundheitscheck
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 v2/waechter.py
+
+      - name: Ergebnis festhalten
+        if: always()
+        run: |
+          if git status --porcelain -- v2/status | grep -q .; then
+            git config user.name "geocrimps-bot"
+            git config user.email "actions@github.com"
+            git add v2/status
+            git commit -m "Waechter: Stand [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push || echo "Push des Stands fehlgeschlagen."
+          else
+            echo "Keine Aenderung."
+          fi
+
+      - name: Absturz des Waechters melden
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "Wächter: Gesundheitscheck selbst fehlgeschlagen" \
+            --body "@MLFischer Der Lauf des Wächters ist abgebrochen: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}. Der nächste erfolgreiche Lauf schließt dieses Issue." || true
