@@ -18,6 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 import outcrop as o
 import motion as m
+import reelkit as rk
 from outcrop import C, P
 from motion import X0, W, H, FPS, seg, seilzug, sturz, griff, lerp, put
 
@@ -227,14 +228,15 @@ CRYSTALS = make_crystals(21, True) + make_crystals(22, False)
 class Reel:
     def __init__(self):
         self.fin = m.Finish()
-        self.stamp_top = m.text_sprite("HOLD ID", X0, 300, "stencil", 40, C["slate"], tracking=0.12)
+        self.meta = rk.meta_hook()                                    # Meta-Hook: wo man gelandet ist (13.10.2026)
+        self.stamp_top = m.text_sprite("HOLD ID", X0, rk.FORMAT_Y, "stencil", 40, C["slate"], tracking=0.12)
         # Szene 1: Hook = Griffform (Frame 0 = Cover)
         def bg1(im):
             o.contour_field(im, 760, 1520, n=10, r0=120, step=60, alpha=110)
             wall_front(im)
             o.route_rail(im, 0, RAIL_N)
         self.bg1 = m.background(bg1)
-        self.hook, _ = m.lines_sprite(["WHY DOES", "THIS STRIPE", "STICK OUT?"], 352)
+        self.hook, _ = m.lines_sprite(["WHY DOES", "THIS STRIPE", "STICK OUT?"], rk.HOOK_Y, size=164)   # 3 Zeilen unter dem Meta-Hook: 164 statt 176, Luft zur Felskante
         c = (640, 1520 + (1150 - 1520) * (640 - 110) / 980); n = (0.353, 0.936)
         a = (c[0] - n[0] * 175, c[1] - n[1] * 175); b = (c[0] + n[0] * 175, c[1] + n[1] * 175)
         def secline(im):
@@ -442,7 +444,7 @@ class Reel:
     def frame(self, t):
         if t < T_S2:                                               # Szene 1: Griffform + Hook
             f = m.zoomed(self.bg1, 1 + 0.035 * seilzug(seg(t, 0, T_W1)), self.sec_c[0], self.sec_c[1])
-            put(f, self.stamp_top); put(f, self.hook)
+            put(f, self.meta); put(f, self.stamp_top); put(f, self.hook)
             u = seilzug(seg(t, T_SEC, 0.42))
             if u > 0:
                 put(f, m.reveal(self.secline, u))
@@ -611,7 +613,8 @@ def main():
             Image.fromarray(r.fin(f, s)).save(os.path.join(a.qc, f"still_{float(ts):05.2f}.png"))
         return
     f0, s0 = r.frame(0.0)                                         # Cover = Frame 0
-    Image.fromarray(r.fin(f0, s0)).save(os.path.join(a.out, SLUG + ".jpg"), quality=92)
+    cover = r.fin(f0, s0)
+    Image.fromarray(cover).save(os.path.join(a.out, SLUG + ".jpg"), quality=92)
     if a.qc:                                                      # QC-Kontaktbogen
         os.makedirs(a.qc, exist_ok=True)
         ts = [0.0, 1.6, 2.9, 3.6, 3.85, 4.3, 4.9, 5.5, 6.1, 7.0, 7.9, 8.9, 9.5, 10.7, 11.6, 12.6]
@@ -634,7 +637,21 @@ def main():
     m.encode(r.frames(), n, mp4, audio_wav=norm, crf=21)
     rep = {"slug": SLUG, "dauer_s": DUR, "fps": FPS, "frames": n, "mp4_mb": round(os.path.getsize(mp4) / 1e6, 2),
            "woerter_im_bild": sum(len(s.replace("·", " ").split()) for s in ON_SCREEN), "labels": len(LABELS),
-           "payoff_anteil": round(T_S4 / DUR, 3), "loudnorm": ln, "messung": m.measure(mp4), "toene": used}
+           "payoff_anteil": round(T_S4 / DUR, 3), "loudnorm": ln, "messung": m.measure(mp4), "toene": used,
+           "ablauf": "erklaerkette", "hook_steht_s": T_W1, "meta_hook": " \u00b7 ".join(rk.META_HOOK),
+           "meta_hook_im_cover_anteil": rk.meta_hook_sichtbar(cover)}
+    rep["woerter_gesamt_mit_labels"] = rep["woerter_im_bild"] + sum(len(s.split()) for s in LABELS)
+    if a.qc:
+        marks = [(0, "Hook"), (T_SEC, "Schnitt"), (T_W1, "Welle"), (T_S2, "Zug 1"), (T_W2, "Welle"), (T_S3, "Zug 2"),
+                 (T_RISE, "Steigerung"), (T_S4, "PAYOFF"), (T_STAMP, "Stempel"), (T_SAFE, "Folge"), (T_END, "Klanglogo")]
+        rk.tonverlauf_png(mp4, os.path.join(a.qc, SLUG + "_tonverlauf.png"), marks, "GeoCrimps r002 HOLD ID #01 (Erklaerkette)")
+    checks = {"dauer_im_formatrahmen": 9.0 <= DUR <= 13.0, "meta_hook_im_cover": rep["meta_hook_im_cover_anteil"] >= 0.9,
+              "hook_frage_mind_3_2_s": T_W1 >= rk.HOOK_MIN_S - 1e-6, "payoff_65_80_prozent": 0.65 <= rep["payoff_anteil"] <= 0.80,
+              "hoechstens_40_woerter": rep["woerter_gesamt_mit_labels"] <= 40,
+              "lautheit_-14_+-0.5": abs(rep["messung"].get("I_LUFS", 0) + 14) <= 0.5,
+              "true_peak_max_-1": rep["messung"].get("TP_dBFS", 0) <= -1.0, "mp4_unter_100_mb": rep["mp4_mb"] < 100}
+    rep["pruefungen"] = checks
+    rep["alle_pruefungen_ok"] = all(checks.values())
     print(json.dumps(rep, ensure_ascii=False, indent=1))
     json.dump(rep, open(os.path.join(a.qc or a.out, SLUG + "_bericht.json"), "w"), ensure_ascii=False, indent=1)
 

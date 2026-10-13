@@ -3,7 +3,7 @@
  "dauer_s": 13.0,
  "fps": 30,
  "frames": 390,
- "mp4_mb": 7.09,
+ "mp4_mb": 7.08,
  "woerter_im_bild": 37,
  "labels": 2,
  "payoff_anteil": 0.708,
@@ -35,6 +35,22 @@
   "klatsch": "CC0 Kenney: impactGeneric_light_000.ogg",
   "flaeche": "selbst erzeugt (pad)"
  },
+ "ablauf": "erklaerkette",
+ "hook_steht_s": 3.25,
+ "meta_hook": "GEOCRIMPS · GEOLOGY OF CLIMBING",
+ "meta_hook_im_cover_anteil": 0.969,
+ "woerter_gesamt_mit_labels": 39,
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "meta_hook_im_cover": true,
+  "hook_frage_mind_3_2_s": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_40_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true
+ },
+ "alle_pruefungen_ok": true,
  "hook_score": {
   "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
   "varianten": [
@@ -130,7 +146,9 @@
    "status": "Hinweis"
   }
  ],
+ "fassung": "3 (13.10.2026), Ablauf \"erklaerkette\"; Hook-Frage 3,25 s; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING im Cover, Hook-Schrift 164 statt 176",
  "text_im_bild": [
+  "GEOCRIMPS · GEOLOGY OF CLIMBING (Meta-Hook, Markenelement)",
   "HOLD ID",
   "WHY DOES THIS STRIPE STICK OUT?",
   "HOT WATER SEALS A CRACK WITH QUARTZ.",
@@ -141,5 +159,5 @@
   "HOLD ID #01 / QUARTZ VEIN (Stempel)",
   "Test it: veins can flake off."
  ],
- "aenderung": "13.10.2026: Hook-Frage steht 1,0 s laenger (0-3,25 s), alle folgenden Zeiten +1,0 s, Dauer 13,0 s."
+ "aenderung": "13.10.2026: Hook-Frage steht 1,0 s laenger (0-3,25 s), alle folgenden Zeiten +1,0 s, Dauer 13,0 s. 13.10.2026, 12 Uhr: Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0 (Wunsch Markus), Formatlabel auf y 352, Hook ab y 404 in 164 px."
 }

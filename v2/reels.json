@@ -55,11 +55,8 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": {
-        "at": "2026-10-13T08:18:08+00:00",
-        "result": "FINISHED"
-      },
-      "version": "13.10.2026: Hook 1 s laenger, neu gerendert",
+      "probe": null,
+      "version": "13.10.2026: Hook 1 s laenger; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0 (Wunsch Markus 11:42), neu gerendert",
       "ablauf": "erklaerkette"
     },
     {
@@ -84,12 +81,9 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": {
-        "at": "2026-10-13T08:44:46+00:00",
-        "result": "FINISHED"
-      },
+      "probe": null,
       "ablauf": "offene_frage",
-      "version": "13.10.2026: neu gebaut mit dem Ablauf Offene Frage (Wunsch Markus), Hook 3,3 s, Callback 1,25 s"
+      "version": "13.10.2026: Ablauf Offene Frage, Hook 3,3 s, Callback 1,25 s; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0"
     }
   ]
 }

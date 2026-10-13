@@ -4,6 +4,8 @@
 Fassung 2 vom 13.10.2026, Ablauf "offene_frage" (statt Quiz): offene W-Frage ohne Antwortauswahl, die Hook-Frage
 steht 3,3 s; Zug 1 scheint harmlos (die Oberflaeche trocknet zuerst), Zug 2 bringt die Wendung (am Griff ziehen ->
 er bricht, innen ist der Sand nass), die Frage kehrt zurueck (Callback, steht 1,25 s), dann die Antwort.
+Fassung 3 (13.10.2026, mittags): Meta-Hook "GEOCRIMPS . GEOLOGY OF CLIMBING" in Frame 0 (reelkit.meta_hook),
+Formatlabel und Hook 52 px tiefer, Sonne und Wolke deshalb 40 px tiefer.
 Bildmittel (fuer die Abwechslungsregel): Uebergang Lichtstreifen und Zoom (keine Isolinien-Welle) | Enthuellung
 Zeitraffer und Bruch (kein Querschnitt) | Payoff Antwort gross, dann Stempel MYTH und Kreide-Wisch | Flaeche eine
 Quarte hoeher (ratio 1.335).
@@ -183,12 +185,13 @@ class Reel(rk.ReelBase):
         self.rail = rk.Rail(2)
         self.end = rk.EndSting()
         self.rails = [rk.rail_sprite(0, 2), rk.rail_sprite(1, 2), rk.rail_sprite(2, 2), rk.rail_sprite(2, 2, logo_on=True)]
-        self.label = m.text_sprite("MYTH OR ROCK", X0, 300, "stencil", 40, C["slate"], tracking=0.12)
+        self.meta = rk.meta_hook()                                    # Meta-Hook: wo man gelandet ist
+        self.label = m.text_sprite("MYTH OR ROCK", X0, rk.FORMAT_Y, "stencil", 40, C["slate"], tracking=0.12)
         outer = surface(YB_MAIN)
         # Hintergruende ohne Topo-Linie (die kommt als Sprite, weil Szene 3 gezoomt wird)
         def sky(im):
             o.contour_field(im, 820, 1700, n=9, r0=140, step=64, alpha=80)
-            d = ImageDraw.Draw(im); sx, sy, r = 968, 760, 40
+            d = ImageDraw.Draw(im); sx, sy, r = 968, 800, 40   # 40 px tiefer, Platz fuer den Meta-Hook
             for k in range(12):                                         # Sonne: Scheibe und Strahlen
                 a = 2 * math.pi * k / 12
                 d.line([P(sx + math.cos(a) * (r + 14), sy + math.sin(a) * (r + 14)), P(sx + math.cos(a) * (r + 34), sy + math.sin(a) * (r + 34))],
@@ -200,7 +203,7 @@ class Reel(rk.ReelBase):
             sky(im); ground(im, YB_MAIN); puddles(im, YB_MAIN); boulder_front(im, YB_MAIN, broken=True, wet=True)
         self.bg = m.background(bg_dry)
         self.bg_broken = m.background(bg_wet)
-        self.hook, _ = m.lines_sprite(["LOOKS DRY.", "SO WHY WAIT?"], 352)
+        self.hook, _ = m.lines_sprite(["LOOKS DRY.", "SO WHY WAIT?"], rk.HOOK_Y)
         # Zug 1: Regen -> Perlen auf der Kruste -> Abtrocknen
         rim = offset(outer, 9)
         self.crust_wet = m.sprite(lambda im: ImageDraw.Draw(im).polygon([P(*p) for p in outer + rim[::-1]], fill=o.rgb(C["water"])))
@@ -215,9 +218,9 @@ class Reel(rk.ReelBase):
         self.rain_x = [230, 350, 470, 590, 700, 810, 905]
         def cloud(im):
             d = ImageDraw.Draw(im)
-            for cx, cy, r in ((900, 770, 70), (975, 742, 62), (1040, 778, 56), (840, 792, 48), (960, 800, 58)):
+            for cx, cy, r in ((900, 810, 70), (975, 782, 62), (1040, 818, 56), (840, 832, 48), (960, 840, 58)):
                 d.ellipse([P(cx - r, cy - r * 0.72), P(cx + r, cy + r * 0.72)], fill=o.rgb("#4A545D"))
-            d.rectangle([P(800, 790), P(1090, 830)], fill=o.rgb("#4A545D"))
+            d.rectangle([P(800, 830), P(1090, 870)], fill=o.rgb("#4A545D"))
         self.cloud = m.sprite(cloud)
         self.text1, _ = m.lines_sprite(["THE SURFACE", "DRIES FIRST."], 352, role="display_xb", size=118)
         # Zug 2: Bruchstueck (aus dem trockenen Hintergrund geschnitten)
@@ -325,7 +328,7 @@ class Reel(rk.ReelBase):
     def frame(self, t):
         if t < T_HOOK + 0.25:                                        # Szene 1: Hook (Frame 0 = Cover)
             f = m.zoomed(self.world(t), 1 + 0.03 * seilzug(seg(t, 0, T_HOOK)), 640, 1000)
-            put(f, self.rails[0]); put(f, self.label); put(f, self.hook)
+            put(f, self.rails[0]); put(f, self.meta); put(f, self.label); put(f, self.hook)
             if t >= T_HOOK:
                 put(f, rk.light_sweep(seg(t, T_HOOK, 0.35)))
             return f, 41

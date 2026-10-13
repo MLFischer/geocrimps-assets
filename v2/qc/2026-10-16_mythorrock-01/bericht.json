@@ -3,7 +3,7 @@
  "dauer_s": 13.8,
  "fps": 30,
  "frames": 414,
- "mp4_mb": 7.53,
+ "mp4_mb": 7.55,
  "woerter_im_bild": 28,
  "labels": 1,
  "woerter_gesamt_mit_labels": 30,
@@ -96,8 +96,12 @@
  "weitere_fragen_stehen_s": [
   1.25
  ],
+ "meta_hook": "GEOCRIMPS · GEOLOGY OF CLIMBING",
+ "meta_hook_woerter_extra": 4,
+ "meta_hook_im_cover_anteil": 0.971,
  "pruefungen": {
   "dauer_im_formatrahmen": true,
+  "meta_hook_im_cover": true,
   "hook_frage_mind_3_2_s": true,
   "weitere_fragen_mind_1_2_s": true,
   "ablauf_wie_im_themenplan": true,
@@ -109,7 +113,6 @@
   "mp4_unter_100_mb": true
  },
  "alle_pruefungen_ok": true,
- "fassung": "2 (13.10.2026), Ablauf \"offene_frage\" statt Quiz; Hook-Frage steht 3,3 s, Callback 1,25 s",
  "hook_score": {
   "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
   "varianten": [
@@ -208,5 +211,6 @@
    "beleg": "Korrekturlauf 27.07.2026",
    "status": "eingehalten"
   }
- ]
+ ],
+ "fassung": "3 (13.10.2026), Ablauf \"offene_frage\"; Hook-Frage 3,3 s, Callback 1,25 s; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING im Cover, Sonne 40 px tiefer"
 }

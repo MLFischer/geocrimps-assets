@@ -233,6 +233,45 @@ def tonverlauf_png(mp4, out_png, marks, title):
     im.save(out_png)
 
 
+# ------------------------------------------------------------------ Meta-Hook (seit 13.10.2026)
+# Wo man gelandet ist: Kopfzeile ab Frame 0, in jedem Reel gleich, nach dem Profilnamen "GeoCrimps - Geology of Climbing".
+META_HOOK = ("GEOCRIMPS", "GEOLOGY OF CLIMBING")
+META_HOOK_Y, FORMAT_Y, HOOK_Y = 300, 352, 404      # Kopfzeile, Formatlabel, Hook-Frage (vorher Label 300, Hook 352)
+
+
+def tracked_width(s, role, size, tracking):
+    f = o.font(role, size)
+    return (sum(f.getlength(ch) for ch in s) + tracking * size * o.S * (len(s) - 1)) / o.S
+
+
+def meta_hook(y=META_HOOK_Y, x=X0, size=40, tracking=0.12, desc_color=C["magnesia"]):
+    """GEOCRIMPS (magnesia) . GEOLOGY OF CLIMBING; als Bildmarke dient das Logo oben an der Topo-Linie links daneben.
+    Steht ab Frame 0 und geht zusammen mit der Hook-Frage. Markenelement wie das Endsignet: zaehlt nicht zu den 40 Woertern."""
+    brand, desc = META_HOOK
+    w1 = tracked_width(brand, "stencil", size, tracking)
+    gap = size * 0.42
+    wd = o.text_width("·", "stencil", size)
+
+    def d(im):
+        o.text(im, x, y, brand, "stencil", size, C["magnesia"], tracking=tracking)
+        o.text(im, x + w1 + gap, y, "·", "stencil", size, C["slate"])
+        o.text(im, x + w1 + 2 * gap + wd, y, desc, "stencil", size, desc_color, tracking=tracking)
+    return m.sprite(d)
+
+
+def meta_hook_sichtbar(cover):
+    """Anteil der deckenden Meta-Hook-Pixel, die im fertigen Cover (Frame 0) so erscheinen wie gezeichnet.
+    Nahe 1 = Kopfzeile steht frei im Cover; klein = fehlt oder ist verdeckt."""
+    spr = meta_hook()
+    a = np.asarray(spr.img.getchannel("A")) > 200
+    ref = np.asarray(spr.img.convert("RGB"), dtype=np.float32)
+    reg = np.asarray(cover.convert("RGB") if hasattr(cover, "convert") else cover, dtype=np.float32)
+    reg = reg[spr.y:spr.y + spr.h, spr.x:spr.x + spr.w, :3]
+    if reg.shape[:2] != a.shape or not a.any():
+        return 0.0
+    return round(float((np.abs(reg - ref).mean(axis=2)[a] < 40).mean()), 3)
+
+
 # ------------------------------------------------------------------ Ablauf und Lesezeit (seit 13.10.2026)
 ABLAEUFE = ("quiz", "offene_frage", "erklaerkette")
 HOOK_MIN_S, FRAGE_MIN_S = 3.2, 1.2      # Hook-Frage bzw. jede weitere Frage im Bild, Beginn bis Beginn des Ausblendens
@@ -273,7 +312,9 @@ def run(ReelCls, sound_events, META):
     qc = a.qc or a.out
     os.makedirs(qc, exist_ok=True)
     f0, s0 = r.frame(0.0)                                         # Cover = Frame 0
-    Image.fromarray(r.fin(f0, s0)).save(os.path.join(a.out, slug + ".jpg"), quality=92)
+    cover = r.fin(f0, s0)
+    Image.fromarray(cover).save(os.path.join(a.out, slug + ".jpg"), quality=92)
+    meta_ok = meta_hook_sichtbar(cover)
     thumbs = []                                                   # QC-Kontaktbogen
     for t in META["qc_times"]:
         f, s = r.frame(t)
@@ -303,8 +344,11 @@ def run(ReelCls, sound_events, META):
     ab, ab_vor = plan_ablauf(slug)
     fragen = META.get("weitere_fragen", [])
     rep.update({"ablauf": META.get("ablauf"), "ablauf_im_themenplan": ab, "ablauf_slot_davor": ab_vor,
-                "hook_steht_s": META.get("hook_bis"), "weitere_fragen_stehen_s": [round(b - a, 2) for a, b in fragen]})
+                "hook_steht_s": META.get("hook_bis"), "weitere_fragen_stehen_s": [round(b - a, 2) for a, b in fragen],
+                "meta_hook": " · ".join(META_HOOK), "meta_hook_woerter_extra": sum(len(s.split()) for s in META_HOOK),
+                "meta_hook_im_cover_anteil": meta_ok})
     checks = {"dauer_im_formatrahmen": META.get("dur_range", [0, 99])[0] <= r.DUR <= META.get("dur_range", [0, 99])[1],
+              "meta_hook_im_cover": meta_ok >= 0.9,
               "hook_frage_mind_3_2_s": (META.get("hook_bis") or 0) >= HOOK_MIN_S - 1e-6,
               "weitere_fragen_mind_1_2_s": all(b - a >= FRAGE_MIN_S - 1e-6 for a, b in fragen),
               "ablauf_wie_im_themenplan": META.get("ablauf") in ABLAEUFE and META.get("ablauf") == ab,
