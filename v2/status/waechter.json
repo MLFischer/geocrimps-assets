@@ -1,0 +1,16 @@
+{
+  "fehler": [
+    "Testalarm: Claude prüft, ob dich die Meldung des Wächters per Mail erreicht. Nichts zu tun; der nächste normale Lauf schließt dieses Issue."
+  ],
+  "hinweise": [],
+  "geprueft": [
+    "Instagram-Token gültig (@geocrimps)",
+    "Instagram-Token laut Statusdatei gültig bis 11.12.2026 (noch 59 Tage)",
+    "GH_ADMIN_TOKEN gültig bis 10.01.2027 (noch 89 Tage)",
+    "Puffer: 2 Termin(e) in den nächsten 96 h fertig und erreichbar",
+    "Workflow-Läufe der letzten 26 h: 42, davon fehlgeschlagen: 0"
+  ],
+  "fingerprint": "378a3a1903a5",
+  "issue": 2,
+  "stand": "2026-10-13T11:31:57+00:00"
+}
