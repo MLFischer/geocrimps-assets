@@ -233,9 +233,29 @@ def tonverlauf_png(mp4, out_png, marks, title):
     im.save(out_png)
 
 
+# ------------------------------------------------------------------ Ablauf und Lesezeit (seit 13.10.2026)
+ABLAEUFE = ("quiz", "offene_frage", "erklaerkette")
+HOOK_MIN_S, FRAGE_MIN_S = 3.2, 1.2      # Hook-Frage bzw. jede weitere Frage im Bild, Beginn bis Beginn des Ausblendens
+
+
+def plan_ablauf(slug):
+    """(Ablauf des Slots zum Datum im Slug, Ablauf des Slots davor) aus v2/themenplan.json; (None, None), wenn nicht gefunden."""
+    try:
+        with open(os.path.join(HERE, "..", "themenplan.json"), encoding="utf-8") as fh:
+            slots = sorted(json.load(fh).get("slots", []), key=lambda s: s.get("termin", ""))
+    except (OSError, ValueError):
+        return None, None
+    for k, s in enumerate(slots):
+        if s.get("termin", "").startswith(slug[:10]):
+            return s.get("ablauf"), (slots[k - 1].get("ablauf") if k else None)
+    return None, None
+
+
 # ------------------------------------------------------------------ Hauptprogramm
 def run(ReelCls, sound_events, META):
-    """META: slug, dur, payoff_t, on_screen (Liste), labels (Liste), qc_times (16 Zeitpunkte), marks [(t, Name)], title."""
+    """META: slug, dur_range, payoff_t, on_screen (Liste), labels (Liste), qc_times (16 Zeitpunkte), marks [(t, Name)], title,
+    ablauf (quiz | offene_frage | erklaerkette, wie der Slot im Themenplan), hook_bis (Sekunde, ab der die Hook-Frage
+    ausgeblendet wird; sie steht ab Frame 0), weitere_fragen ([[Beginn, Beginn des Ausblendens], ...] je weiterer Frage im Bild)."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=os.path.join(HERE, "..", "..", "reels"))
     ap.add_argument("--qc", default=None, help="Ordner fuer QC-Dateien")
@@ -280,7 +300,15 @@ def run(ReelCls, sound_events, META):
            "woerter_gesamt_mit_labels": words + sum(len(s.split()) for s in META.get("labels", [])),
            "payoff_anteil": round(META["payoff_t"] / r.DUR, 3), "loudnorm": ln, "messung": m.measure(mp4),
            "toene": book.licenses()}
+    ab, ab_vor = plan_ablauf(slug)
+    fragen = META.get("weitere_fragen", [])
+    rep.update({"ablauf": META.get("ablauf"), "ablauf_im_themenplan": ab, "ablauf_slot_davor": ab_vor,
+                "hook_steht_s": META.get("hook_bis"), "weitere_fragen_stehen_s": [round(b - a, 2) for a, b in fragen]})
     checks = {"dauer_im_formatrahmen": META.get("dur_range", [0, 99])[0] <= r.DUR <= META.get("dur_range", [0, 99])[1],
+              "hook_frage_mind_3_2_s": (META.get("hook_bis") or 0) >= HOOK_MIN_S - 1e-6,
+              "weitere_fragen_mind_1_2_s": all(b - a >= FRAGE_MIN_S - 1e-6 for a, b in fragen),
+              "ablauf_wie_im_themenplan": META.get("ablauf") in ABLAEUFE and META.get("ablauf") == ab,
+              "ablauf_anders_als_im_slot_davor": ab is not None and ab != ab_vor,
               "payoff_65_80_prozent": 0.65 <= rep["payoff_anteil"] <= 0.80,
               "hoechstens_40_woerter": rep["woerter_gesamt_mit_labels"] <= 40,
               "lautheit_-14_+-0.5": abs(rep["messung"].get("I_LUFS", 0) + 14) <= 0.5,

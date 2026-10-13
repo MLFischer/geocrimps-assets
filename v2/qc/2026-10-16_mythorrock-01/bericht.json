@@ -11,11 +11,11 @@
  "loudnorm": {
   "loudnorm_ziel": -13.2,
   "tp_grenze": -2.5,
-  "I_LUFS": -14.1,
+  "I_LUFS": -14.2,
   "TP_dBFS": -1.7
  },
  "messung": {
-  "I_LUFS": -14.1,
+  "I_LUFS": -14.2,
   "TP_dBFS": -1.7
  },
  "toene": {
@@ -89,8 +89,19 @@
    "selbst erzeugt (pad)"
   ]
  },
+ "ablauf": "offene_frage",
+ "ablauf_im_themenplan": "offene_frage",
+ "ablauf_slot_davor": "erklaerkette",
+ "hook_steht_s": 3.3,
+ "weitere_fragen_stehen_s": [
+  1.25
+ ],
  "pruefungen": {
   "dauer_im_formatrahmen": true,
+  "hook_frage_mind_3_2_s": true,
+  "weitere_fragen_mind_1_2_s": true,
+  "ablauf_wie_im_themenplan": true,
+  "ablauf_anders_als_im_slot_davor": true,
   "payoff_65_80_prozent": true,
   "hoechstens_40_woerter": true,
   "lautheit_-14_+-0.5": true,
@@ -98,7 +109,7 @@
   "mp4_unter_100_mb": true
  },
  "alle_pruefungen_ok": true,
- "fassung": "2 (13.10.2026), Muster \"Offene Frage\" statt Quiz; Hook-Frage steht 3,3 s",
+ "fassung": "2 (13.10.2026), Ablauf \"offene_frage\" statt Quiz; Hook-Frage steht 3,3 s, Callback 1,25 s",
  "hook_score": {
   "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
   "varianten": [

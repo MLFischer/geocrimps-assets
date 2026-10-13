@@ -31,7 +31,7 @@
         "durch": "Markus (Chat: heute veroeffentlichen)"
       },
       "first_comment_posted": true,
-      "muster": "quiz"
+      "ablauf": "quiz"
     },
     {
       "id": "r002",
@@ -60,7 +60,7 @@
         "result": "FINISHED"
       },
       "version": "13.10.2026: Hook 1 s laenger, neu gerendert",
-      "muster": "erklaerkette"
+      "ablauf": "erklaerkette"
     },
     {
       "id": "r003",
@@ -84,12 +84,9 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": {
-        "at": "2026-10-13T08:30:07+00:00",
-        "result": "FINISHED"
-      },
-      "muster": "offene_frage",
-      "version": "13.10.2026: neu gebaut mit dem Muster Offene Frage (Wunsch Markus), Hook 3,3 s"
+      "probe": null,
+      "ablauf": "offene_frage",
+      "version": "13.10.2026: neu gebaut mit dem Ablauf Offene Frage (Wunsch Markus), Hook 3,3 s, Callback 1,25 s"
     }
   ]
 }

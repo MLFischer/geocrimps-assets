@@ -2,9 +2,12 @@
 """Reel 002 -- HOLD ID #01: "Why does this stripe stick out?" (Faktenbasis: Post #029, Quarzgang).
 
 Format HOLD ID: Griffform -> Querschnitt -> Entstehung in zwei Zuegen -> Stempel mit Nummer.
-Dramaturgie (Topo, ab 13.10. mit 1 s laengerem Hook): Hook mit Schnittlinie 0-3,25 s | Zug 1 im Querschnitt: Riss, heisses Wasser, Quarz waechst
-von den Waenden nach innen 2,45-5,35 s | Zug 2: viel spaeter wittert das Gestein drumherum zurueck 5,55-8,2 s |
-Payoff 8,2 s (68 %) | Stempel 9,35 s | Folge fuers Klettern 10,0 s | Endsignet 11,2-12,0 s.
+Ablauf "erklaerkette". Dramaturgie (Topo, ab 13.10. mit 1 s laengerem Hook, HOOK_EXTRA): Hook mit Schnittlinie 0-3,25 s |
+Zug 1 im Querschnitt: Riss, heisses Wasser, Quarz waechst von den Waenden nach innen 3,45-6,35 s | Zug 2: viel spaeter
+wittert das Gestein drumherum zurueck 6,55-9,2 s | Payoff 9,2 s (71 %) | Stempel 10,35 s | Folge fuers Klettern 11,0 s |
+Endsignet 12,2-13,0 s.
+Bildmittel: Uebergang Schnittlinie und Isolinien-Welle | Enthuellung Querschnitt, Zeitraffer der Verwitterung |
+Payoff Antwort gross, Kreide-Wisch, Stempel HOLD ID | Flaeche im Grundton.
 Aufruf:  python3 r002_holdid_029.py --out ../../../reels --qc <Ordner fuer QC>
 """
 import argparse, json, math, os, random, sys

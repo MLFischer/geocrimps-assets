@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Reel 003 -- MYTH OR ROCK #01: "Looks dry. So why wait?" (Faktenbasis: Post #015, Font nach Regen).
 
-Fassung 2 vom 13.10.2026, Muster "Offene Frage" (statt Quiz): offene W-Frage ohne Antwortauswahl, die Hook-Frage
+Fassung 2 vom 13.10.2026, Ablauf "offene_frage" (statt Quiz): offene W-Frage ohne Antwortauswahl, die Hook-Frage
 steht 3,3 s; Zug 1 scheint harmlos (die Oberflaeche trocknet zuerst), Zug 2 bringt die Wendung (am Griff ziehen ->
-er bricht, innen ist der Sand nass), die Frage kehrt kurz zurueck (Callback), dann die Antwort.
-Andere Bildmittel als r001/r002: Lichtstreifen statt Isolinien-Welle, Zeitraffer statt Querschnitt, Zoom auf den
-Griff, der Bruch selbst zeigt das Innere; Flaeche eine Quarte hoeher.
-Dramaturgie (Topo): Hook 0-3,3 s | Zug 1 Regen und Abtrocknen 3,55-6,55 s | Zug 2 Zoom, Ziehen, Bruch 6,8-9,35 s |
-Callback 9,35 s | Payoff 9,95 s (72 %) | Folge: Urteil MYTH, warten 11,05-13,0 s | Endsignet 13,0-13,8 s.
+er bricht, innen ist der Sand nass), die Frage kehrt zurueck (Callback, steht 1,25 s), dann die Antwort.
+Bildmittel (fuer die Abwechslungsregel): Uebergang Lichtstreifen und Zoom (keine Isolinien-Welle) | Enthuellung
+Zeitraffer und Bruch (kein Querschnitt) | Payoff Antwort gross, dann Stempel MYTH und Kreide-Wisch | Flaeche eine
+Quarte hoeher (ratio 1.335).
+Dramaturgie (Topo): Hook 0-3,3 s | Zug 1 Regen und Abtrocknen 3,55-6,55 s | Zug 2 Zoom, Ziehen, Bruch 6,8-8,7 s |
+Callback 8,7-9,95 s | Payoff 9,95 s (72 %) | Folge: Urteil MYTH, warten 11,05-13,0 s | Endsignet 13,0-13,8 s.
 Aufruf:  python3 r003_mythorrock_015.py --out ../../../reels --qc <Ordner>   (--stills 0,4.8 fuer Einzelbilder)
 """
 import math, os, random, sys
@@ -23,15 +24,6 @@ from outcrop import C, P
 from motion import X0, W, H, seg, seilzug, sturz, griff, lerp, put
 
 DUR = 13.8
-META = dict(
-    slug="2026-10-16_mythorrock-01", dur_range=[11, 16], payoff_t=9.95, title="GeoCrimps r003 MYTH OR ROCK #01 (Offene Frage)",
-    on_screen=["MYTH OR ROCK", "LOOKS DRY. SO WHY WAIT?", "THE SURFACE DRIES FIRST.", "BUT PULL ON IT\u2026",
-               "SO WHY WAIT?", "STILL WET INSIDE.", "MYTH", "WAIT A DAY OR TWO."],
-    labels=["WET SAND"],
-    qc_times=[0.0, 1.6, 3.0, 3.45, 3.9, 4.4, 5.3, 6.2, 6.9, 7.3, 7.95, 8.4, 9.5, 10.3, 11.8, 13.4],
-    marks=[(0, "Hook"), (3.30, "Lichtstreifen"), (3.55, "Zug 1"), (4.0, "Regen"), (4.95, "trocknet"), (6.55, "Zoom"),
-           (6.8, "Zug 2"), (7.1, "Ziehen"), (8.1, "Bruch"), (9.35, "Callback"), (9.8, "Stille"), (9.95, "PAYOFF"),
-           (11.05, "Zoom zurueck"), (11.25, "Stempel"), (11.55, "Wisch"), (13.0, "Klanglogo")])
 
 # ------------------------------------------------------------------ Zeitplan
 T_HOOK = 3.30                      # Hook-Frage steht 3,3 s (Lesezeit), dann Lichtstreifen
@@ -44,13 +36,24 @@ ZOOM, ZC = 1.22, (880, 1040)
 T_S3 = 6.80                        # Zug 2
 T_PULL, T_JIG, T_CRACK, T_SNAP = 7.10, 7.45, 7.85, 8.10
 T_DRIPS = (8.45, 8.85, 9.25)
-T_LAB = 8.55
-T_CALL = 9.35                      # Callback: die Frage kehrt zurueck
+T_LAB = 8.40
+T_CALL = 8.70                      # Callback: die Frage kehrt zurueck und steht bis zum Payoff (1,25 s Lesezeit)
 T_RISE = 9.05
 T_S4 = 9.95                        # Payoff
 T_S5 = 11.05                       # Zoom zurueck, Urteil und Folge
 T_STAMP, T_SWIPE, T_OR = 11.25, 11.55, 11.90
 T_END = 13.00
+
+META = dict(
+    slug="2026-10-16_mythorrock-01", dur_range=[11, 16], payoff_t=T_S4, title="GeoCrimps r003 MYTH OR ROCK #01 (Offene Frage)",
+    ablauf="offene_frage", hook_bis=T_HOOK, weitere_fragen=[[T_CALL, T_S4]],
+    on_screen=["MYTH OR ROCK", "LOOKS DRY. SO WHY WAIT?", "THE SURFACE DRIES FIRST.", "BUT PULL ON IT…",
+               "SO WHY WAIT?", "STILL WET INSIDE.", "MYTH", "WAIT A DAY OR TWO."],
+    labels=["WET SAND"],
+    qc_times=[0.0, 1.6, 3.0, 3.45, 3.9, 4.4, 5.3, 6.2, 6.9, 7.3, 7.95, 8.5, 9.3, 10.3, 11.8, 13.4],
+    marks=[(0, "Hook"), (T_HOOK, "Lichtstreifen"), (T_S2, "Zug 1"), (4.0, "Regen"), (T_DRY, "trocknet"), (T_Z0, "Zoom"),
+           (T_S3, "Zug 2"), (T_PULL, "Ziehen"), (T_SNAP, "Bruch"), (T_CALL, "Callback"), (T_S4 - 0.15, "Stille"),
+           (T_S4, "PAYOFF"), (T_S5, "Zoom zurueck"), (T_STAMP, "Stempel"), (T_SWIPE, "Wisch"), (T_END, "Klanglogo")])
 
 # ------------------------------------------------------------------ Block (Font-Sloper) und Farben
 XL, XR, HB = 120, 1030, 520        # Block: linke/rechte Fusskante, Hoehe

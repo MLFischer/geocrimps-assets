@@ -1,9 +1,10 @@
 {
-  "_hinweis": "Themenplan V2, Stand 12.10.2026. Dienstag 18:07 = Geschichte (WHODUNIT, REWIND, SCALE JUMP, 15-25 s), Freitag 17:07 = Kurzformat (HOLD ID, MYTH OR ROCK, 8-15 s), Berliner Zeit. Ab 25.10.2026 Winterzeit (+01:00). Die geplante Produktion nimmt den fruehesten Termin mit reel = null, der mindestens 20 Stunden in der Zukunft liegt, und traegt danach die Reel-ID hier ein. Rotation: WHODUNIT+HOLD ID / REWIND+MYTH OR ROCK / SCALE JUMP+HOLD ID / WHODUNIT+MYTH OR ROCK.",
+  "_hinweis": "Themenplan V2, Stand 13.10.2026. Dienstag 18:07 = Geschichte (WHODUNIT, REWIND, SCALE JUMP), Freitag 17:07 = Kurzformat (HOLD ID, MYTH OR ROCK), Berliner Zeit; Laengen je Format in v2/PRODUKTION.md, Abschnitt 4. Ab 25.10.2026 Winterzeit (+01:00). Die geplante Produktion nimmt den fruehesten Termin mit reel = null, der mindestens 20 Stunden in der Zukunft liegt, und traegt danach die Reel-ID hier ein. Rotation: WHODUNIT+HOLD ID / REWIND+MYTH OR ROCK / SCALE JUMP+HOLD ID / WHODUNIT+MYTH OR ROCK. Ablauf je Slot (seit 13.10.2026): quiz, offene_frage oder erklaerkette, im Wechsel, nie zweimal hintereinander derselbe; Beschreibung in v2/PRODUKTION.md, Abschnitt 5. Hook-Fragen stehen mindestens 3,2 s, jede weitere Frage im Bild mindestens 1,2 s.",
   "slots": [
     {
       "termin": "2026-10-12T20:11:00+02:00",
       "format": "WHODUNIT",
+      "ablauf": "quiz",
       "post": "#008",
       "thema": "Loesungstaschen im Kalk",
       "hook": "NOBODY DRILLED THESE HOLES.",
@@ -13,6 +14,7 @@
     {
       "termin": "2026-10-13T18:07:00+02:00",
       "format": "HOLD ID",
+      "ablauf": "erklaerkette",
       "post": "#029",
       "thema": "Quarzgang als Leiste",
       "hook": "WHY DOES THIS STRIPE STICK OUT?",
@@ -22,15 +24,17 @@
     {
       "termin": "2026-10-16T17:07:00+02:00",
       "format": "MYTH OR ROCK",
+      "ablauf": "offene_frage",
       "post": "#015",
       "thema": "Font nach Regen",
-      "hook": "LOOKS DRY. SAFE TO CLIMB?",
+      "hook": "LOOKS DRY. SO WHY WAIT?",
       "vor_produktion": "",
       "reel": "r003"
     },
     {
       "termin": "2026-10-20T18:07:00+02:00",
       "format": "REWIND",
+      "ablauf": "quiz",
       "post": "#018",
       "thema": "Zugspitze war ein Riff",
       "hook": "REWIND THIS SUMMIT.",
@@ -40,15 +44,17 @@
     {
       "termin": "2026-10-23T17:07:00+02:00",
       "format": "HOLD ID",
+      "ablauf": "offene_frage",
       "post": "#012",
       "thema": "Sinter waechst",
-      "hook": "THIS ROCK GROWS.",
+      "hook": "THIS ROCK GROWS. HOW?",
       "vor_produktion": "",
       "reel": null
     },
     {
       "termin": "2026-10-27T18:07:00+01:00",
       "format": "SCALE JUMP",
+      "ablauf": "erklaerkette",
       "post": "#059",
       "thema": "Kreide ist Plankton (unveroeffentlicht)",
       "hook": "ZOOM INTO A CHALK CLIFF.",
@@ -58,6 +64,7 @@
     {
       "termin": "2026-10-30T17:07:00+01:00",
       "format": "MYTH OR ROCK",
+      "ablauf": "quiz",
       "post": "#039",
       "thema": "Frankenjura ist Dolomit",
       "hook": "FRANKENJURA IS LIMESTONE?",
@@ -67,6 +74,7 @@
     {
       "termin": "2026-11-03T18:07:00+01:00",
       "format": "WHODUNIT",
+      "ablauf": "offene_frage",
       "post": "#061",
       "thema": "Schwarze Partikel sind Schuhgummi (unveroeffentlicht)",
       "hook": "WHAT ARE THESE BLACK SPECKS?",
@@ -76,6 +84,7 @@
     {
       "termin": "2026-11-06T17:07:00+01:00",
       "format": "HOLD ID",
+      "ablauf": "erklaerkette",
       "post": "#026",
       "thema": "Tafoni",
       "hook": "WHO HOLLOWED OUT THIS BOULDER?",
@@ -85,6 +94,7 @@
     {
       "termin": "2026-11-10T18:07:00+01:00",
       "format": "WHODUNIT",
+      "ablauf": "quiz",
       "post": "#057",
       "thema": "Gradierte Schichtung (unveroeffentlicht)",
       "hook": "WHICH WAY WAS UP?",
@@ -94,15 +104,17 @@
     {
       "termin": "2026-11-13T17:07:00+01:00",
       "format": "MYTH OR ROCK",
+      "ablauf": "offene_frage",
       "post": "#031",
       "thema": "Gletscherschliff ist eine Schicht",
-      "hook": "GLACIER POLISH IS JUST WORN ROCK?",
+      "hook": "WHAT MAKES THIS ROCK SHINE?",
       "vor_produktion": "keine Reibungsaussage",
       "reel": null
     },
     {
       "termin": "2026-11-17T18:07:00+01:00",
       "format": "REWIND",
+      "ablauf": "erklaerkette",
       "post": "#051",
       "thema": "Gritstone kommt aus einem Hochland (unveroeffentlicht)",
       "hook": "REWIND A GRITSTONE EDGE.",
@@ -110,5 +122,5 @@
       "reel": null
     }
   ],
-  "danach": "Weitere Termine im selben Rhythmus anlegen und Themen aus v2/faktenbasis/Themenbibliothek.md nach Reel-Potenzial-Score waehlen (je 0-2: sichtbare Verwandlung, Kletterbezug, Hook-Luecke, Formatpassung, Beleglage). #053 und #054 erst nach Korrektur ihrer Befunde. #047 (Duenen) ist als Thema moeglich, aber ohne Fischgraetenschichtung im Bild (Befund des V1-Titelbilds, wird dort nicht korrigiert)."
+  "danach": "Weitere Termine im selben Rhythmus anlegen, jeweils mit \"ablauf\" (quiz, offene_frage, erklaerkette; nie derselbe wie im Slot davor), und Themen aus v2/faktenbasis/Themenbibliothek.md nach Reel-Potenzial-Score waehlen (je 0-2: sichtbare Verwandlung, Kletterbezug, Hook-Luecke, Formatpassung, Beleglage). #053 und #054 erst nach Korrektur ihrer Befunde. #047 (Duenen) ist als Thema moeglich, aber ohne Fischgraetenschichtung im Bild (Befund des V1-Titelbilds, wird dort nicht korrigiert)."
 }
