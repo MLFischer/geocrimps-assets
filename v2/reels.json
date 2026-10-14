@@ -100,7 +100,10 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-14T16:28:13+00:00",
+        "result": "FINISHED"
+      },
       "ablauf": "offene_frage",
       "version": "14.10.2026: Fassung 4 mit Hook 1 (Kletterer, Sandstein-Aufklappen) + Hook 2 (IT LOOKS DRY. WHY NOT CLIMB?), Sturz aufs Pad, Puls 108 BPM"
     }
