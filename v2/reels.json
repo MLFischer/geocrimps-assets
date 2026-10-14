@@ -46,16 +46,16 @@
       "first_comment": "Sources: Bons, P. D. (2000): The formation of veins and their microstructures. Journal of the Virtual Explorer 2, doi:10.3809/jvirtex.2000.00007. · Okamoto, A. & Vinis, E. (2025): Oscillations in fluid pressure caused by silica precipitation in a fracture. Nature Communications 16. · Späth et al. (2022): Incomplete crack sealing causes localization of fracturing in hydrothermal quartz veins. Geophysical Research Letters. · Goldich, S. S. (1938): A study in rock-weathering. Journal of Geology 46.",
       "audio_name": "GeoCrimps – HOLD ID",
       "scheduled": "2026-10-14T18:07:00+02:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "durch": "Markus (Chat 13.10.2026, 19:20: 'überarbeite auch den heutigen reel und poste ihn morgen neu')",
         "am": "2026-10-13",
         "regel": "Vorschau an Markus am 14.10.; stilles OK, Stopp per hold oder Nachricht"
       },
       "hold": false,
-      "media_id": null,
-      "permalink": null,
-      "published_at": null,
+      "media_id": "17914916715530861",
+      "permalink": "https://www.instagram.com/reel/DeeyOZUD6DY/",
+      "published_at": "2026-10-14T16:13:03+0000",
       "probe": {
         "at": "2026-10-14T08:58:47+00:00",
         "result": "FINISHED"
@@ -75,7 +75,8 @@
           "grund": "ersetzt durch Fassung 4 (Hook 1 + Hook 2), Neu-Post am 14.10.2026 auf Wunsch von Markus (Chat 13.10.2026, 19:20)",
           "hinweis": "Die API kann Beitraege nicht loeschen: Markus archiviert oder loescht den alten Post in der App."
         }
-      ]
+      ],
+      "first_comment_posted": true
     },
     {
       "id": "r003",
