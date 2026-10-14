@@ -284,6 +284,7 @@ def plan_ablauf(slug):
             slots = sorted(json.load(fh).get("slots", []), key=lambda s: s.get("termin", ""))
     except (OSError, ValueError):
         return None, None
+    slots = [s for s in slots if not s.get("ersetzt_durch") or s.get("termin", "").startswith(slug[:10])]   # ersetzte Reels zaehlen nicht
     for k, s in enumerate(slots):
         if s.get("termin", "").startswith(slug[:10]):
             return s.get("ablauf"), (slots[k - 1].get("ablauf") if k else None)
@@ -294,7 +295,9 @@ def plan_ablauf(slug):
 def run(ReelCls, sound_events, META):
     """META: slug, dur_range, payoff_t, on_screen (Liste), labels (Liste), qc_times (16 Zeitpunkte), marks [(t, Name)], title,
     ablauf (quiz | offene_frage | erklaerkette, wie der Slot im Themenplan), hook_bis (Sekunde, ab der die Hook-Frage
-    ausgeblendet wird; sie steht ab Frame 0), weitere_fragen ([[Beginn, Beginn des Ausblendens], ...] je weiterer Frage im Bild)."""
+    ausgeblendet wird), weitere_fragen ([[Beginn, Beginn des Ausblendens], ...] je weiterer Frage im Bild).
+    Seit 14.10.2026 (Hook 1 + Hook 2): hook1 (True), hook_von (Beginn der Frage = Ende von Hook 1), cover_t (Standbild
+    aus Hook 2 fuer das Cover). Ohne hook1 gilt das alte Schema: Frage ab Frame 0, Cover = Frame 0."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=os.path.join(HERE, "..", "..", "reels"))
     ap.add_argument("--qc", default=None, help="Ordner fuer QC-Dateien")
@@ -311,10 +314,14 @@ def run(ReelCls, sound_events, META):
         return
     qc = a.qc or a.out
     os.makedirs(qc, exist_ok=True)
-    f0, s0 = r.frame(0.0)                                         # Cover = Frame 0
+    hook1 = bool(META.get("hook1"))
+    cover_t = META.get("cover_t", 0.0) if hook1 else 0.0
+    f0, s0 = r.frame(cover_t)                                     # Cover: Standbild aus Hook 2 (alt: Frame 0)
     cover = r.fin(f0, s0)
     Image.fromarray(cover).save(os.path.join(a.out, slug + ".jpg"), quality=92)
     meta_ok = meta_hook_sichtbar(cover)
+    fa, sa = r.frame(0.0); fb, sb = r.frame(0.2)                  # Bewegung ab Start: Bild 0,0 s gegen 0,2 s
+    bewegung = round(float(np.abs(r.fin(fa, sa).astype(np.float32) - r.fin(fb, sb).astype(np.float32)).mean()), 2)
     thumbs = []                                                   # QC-Kontaktbogen
     for t in META["qc_times"]:
         f, s = r.frame(t)
@@ -329,12 +336,17 @@ def run(ReelCls, sound_events, META):
     book = SoundBook()                                            # Ton
     sound_events(book)
     tmp = os.path.join(qc, slug + "_mix.wav"); norm = os.path.join(qc, slug + "_norm.wav")
-    m.write_wav(tmp, m.mix(book.ev, r.DUR))
+    mixed = m.limit(m.mix(book.ev, r.DUR))                      # Spitzen begrenzen, sonst verfehlt -14 LUFS das Ziel
+    pk = float(np.max(np.abs(mixed)))
+    if pk > 0:                                                    # immer auf 0,89 Spitze: nie uebersteuern, und loudnorm
+        mixed *= 0.89 / pk                                        # (linear) trifft -14 LUFS nur bei gleichem Eingangspegel
+    m.write_wav(tmp, mixed)
     ln = m.master(tmp, norm)
     mp4 = os.path.join(a.out, slug + ".mp4")                      # Video
     n = int(round(r.DUR * FPS))
     m.encode(r.frames(), n, mp4, audio_wav=norm, crf=21)
     tonverlauf_png(mp4, os.path.join(qc, slug + "_tonverlauf.png"), META.get("marks", []), META.get("title", slug))
+    ton_start = anfangspegel(mp4)
     words = sum(len(s.replace("·", " ").split()) for s in META["on_screen"])
     rep = {"slug": slug, "dauer_s": r.DUR, "fps": FPS, "frames": n, "mp4_mb": round(os.path.getsize(mp4) / 1e6, 2),
            "woerter_im_bild": words, "labels": len(META.get("labels", [])),
@@ -346,10 +358,14 @@ def run(ReelCls, sound_events, META):
     rep.update({"ablauf": META.get("ablauf"), "ablauf_im_themenplan": ab, "ablauf_slot_davor": ab_vor,
                 "hook_steht_s": META.get("hook_bis"), "weitere_fragen_stehen_s": [round(b - a, 2) for a, b in fragen],
                 "meta_hook": " · ".join(META_HOOK), "meta_hook_woerter_extra": sum(len(s.split()) for s in META_HOOK),
-                "meta_hook_im_cover_anteil": meta_ok})
+                "meta_hook_im_cover_anteil": meta_ok, "hook1": hook1, "cover_t": cover_t,
+                "hook2_frage_steht_s": round((META.get("hook_bis") or 0) - (META.get("hook_von") or 0), 2) if hook1 else None,
+                "bewegung_0_bis_0_2_s": bewegung, "ton_erste_0_25_s_dbfs": ton_start, "handy_lautheit": handy_lautheit(mp4)})
     checks = {"dauer_im_formatrahmen": META.get("dur_range", [0, 99])[0] <= r.DUR <= META.get("dur_range", [0, 99])[1],
               "meta_hook_im_cover": meta_ok >= 0.9,
-              "hook_frage_mind_3_2_s": (META.get("hook_bis") or 0) >= HOOK_MIN_S - 1e-6,
+              "hook_frage_mind_3_2_s": ((META.get("hook_bis") or 0) - (META.get("hook_von") or 0 if hook1 else 0)) >= HOOK_MIN_S - 1e-6,
+              "bewegung_ab_start": bewegung >= 1.5,
+              "ton_ab_start": ton_start is not None and ton_start >= -40.0,
               "weitere_fragen_mind_1_2_s": all(b - a >= FRAGE_MIN_S - 1e-6 for a, b in fragen),
               "ablauf_wie_im_themenplan": META.get("ablauf") in ABLAEUFE and META.get("ablauf") == ab,
               "ablauf_anders_als_im_slot_davor": ab is not None and ab != ab_vor,
@@ -358,7 +374,28 @@ def run(ReelCls, sound_events, META):
               "lautheit_-14_+-0.5": abs(rep["messung"].get("I_LUFS", 0) + 14) <= 0.5,
               "true_peak_max_-1": rep["messung"].get("TP_dBFS", 0) <= -1.0,
               "mp4_unter_100_mb": rep["mp4_mb"] < 100}
+    if hook1:
+        checks["hook1_klettern_geologie_1_2_bis_2_s"] = 1.2 <= (META.get("hook_von") or 0) <= 2.0
     rep["pruefungen"] = checks
     rep["alle_pruefungen_ok"] = all(checks.values())
     print(json.dumps(rep, ensure_ascii=False, indent=1))
     json.dump(rep, open(os.path.join(qc, slug + "_bericht.json"), "w"), ensure_ascii=False, indent=1)
+
+
+def anfangspegel(mp4, dur=0.25):
+    """RMS (dBFS) der ersten dur Sekunden im fertigen MP4: Ton muss ab Start da sein."""
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", mp4, "-t", str(dur), "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"],
+                         capture_output=True, check=True).stdout
+    a = np.frombuffer(raw, np.float32)
+    return round(float(20 * np.log10(np.sqrt(np.mean(a ** 2)) + 1e-12)), 1) if len(a) else None
+
+
+def handy_lautheit(mp4):
+    """Lautheit (LUFS) nach einem Handy-Lautsprecher-Filter (Hochpass 300 Hz, Tiefpass 8 kHz): Was bleibt ohne Bass?"""
+    p = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", mp4, "-af", "highpass=f=300:poles=2,highpass=f=300:poles=2,lowpass=f=8000,ebur128",
+                        "-f", "null", "-"], capture_output=True, text=True)
+    txt = p.stderr[p.stderr.rfind("Summary:"):]
+    for line in txt.splitlines():
+        if line.strip().startswith("I:"):
+            return float(line.split()[1])
+    return None

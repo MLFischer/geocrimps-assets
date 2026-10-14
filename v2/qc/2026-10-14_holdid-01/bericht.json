@@ -1,0 +1,275 @@
+{
+ "slug": "2026-10-14_holdid-01",
+ "dauer_s": 14.8,
+ "fps": 30,
+ "frames": 444,
+ "mp4_mb": 8.35,
+ "woerter_im_bild": 38,
+ "labels": 2,
+ "woerter_gesamt_mit_labels": 40,
+ "payoff_anteil": 0.743,
+ "loudnorm": {
+  "loudnorm_ziel": -10.6,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.3,
+  "TP_dBFS": -1.1
+ },
+ "messung": {
+  "I_LUFS": -14.3,
+  "TP_dBFS": -1.1
+ },
+ "toene": {
+  "hook1-start": [
+   "selbst erzeugt (sub)"
+  ],
+  "hook1-griff": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "hook1-kreide": [
+   "CC0 Kenney: impactGeneric_light_000.ogg",
+   "selbst erzeugt (clap)"
+  ],
+  "hook1-einschlag": [
+   "CC0 Kenney: impactPunch_heavy_000.ogg",
+   "selbst erzeugt (sub)"
+  ],
+  "hook1-fels": [
+   "CC0 Kenney: impactMining_000.ogg",
+   "selbst erzeugt (crack)"
+  ],
+  "hook1-braam": [
+   "selbst erzeugt (braam)"
+  ],
+  "hook1-kristall": [
+   "selbst erzeugt (shimmer)"
+  ],
+  "hook1-lupe": [
+   "selbst erzeugt (scan)"
+  ],
+  "hook1-uebergang": [
+   "selbst erzeugt (swell)",
+   "selbst erzeugt (whoosh)"
+  ],
+  "kreide-tick": [
+   "CC0 Kenney: tick_001.ogg"
+  ],
+  "schnittlinie": [
+   "CC0 Kenney: scratch_002.ogg"
+  ],
+  "uebergang": [
+   "CC0 Kenney: maximize_001.ogg",
+   "selbst erzeugt (swell)"
+  ],
+  "bohrhaken": [
+   "CC0 Kenney: impactMetal_light_000.ogg"
+  ],
+  "riss": [
+   "CC0 Kenney: impactMining_000.ogg"
+  ],
+  "heisses-wasser": [
+   "selbst erzeugt (fizz)"
+  ],
+  "kristall": [
+   "selbst erzeugt (tone)"
+  ],
+  "zeit-grollen": [
+   "selbst erzeugt (rumble)"
+  ],
+  "abbroeckeln": [
+   "CC0 Kenney: impactMining_001.ogg"
+  ],
+  "steigerung": [
+   "selbst erzeugt (riser)"
+  ],
+  "treffer": [
+   "CC0 Kenney: impactPunch_heavy_000.ogg"
+  ],
+  "kreide-wisch": [
+   "CC0 Kenney: scratch_001.ogg"
+  ],
+  "stempel": [
+   "CC0 Kenney: impactPunch_heavy_001.ogg"
+  ],
+  "klanglogo": [
+   "CC0 Kenney: pluck_001.ogg (drei Tonhoehen)"
+  ],
+  "klatsch": [
+   "CC0 Kenney: impactGeneric_light_000.ogg"
+  ],
+  "herzschlag": [
+   "selbst erzeugt (kick)"
+  ],
+  "uhr": [
+   "selbst erzeugt (tick2)"
+  ],
+  "puls": [
+   "selbst erzeugt (Kick, Hi-Hat, Bass)"
+  ],
+  "payoff": [
+   "selbst erzeugt (braam)",
+   "selbst erzeugt (sub)"
+  ],
+  "kreide": [
+   "selbst erzeugt (clap)"
+  ],
+  "flaeche": [
+   "selbst erzeugt (pad)"
+  ]
+ },
+ "ablauf": "erklaerkette",
+ "ablauf_im_themenplan": "erklaerkette",
+ "ablauf_slot_davor": "quiz",
+ "hook_steht_s": 5.05,
+ "weitere_fragen_stehen_s": [],
+ "meta_hook": "GEOCRIMPS · GEOLOGY OF CLIMBING",
+ "meta_hook_woerter_extra": 4,
+ "meta_hook_im_cover_anteil": 0.969,
+ "hook1": {
+  "text": "CLIMBING × GEOLOGY (Markenelement, zaehlt nicht zu den 40 Woertern)",
+  "bild": "Kletterer haengt am Quarzgang, greift aus dem Chalkbag nach (0,38 s, Kreidewolke); Lupe 10x in den Gang (0,5 s)",
+  "ton": "Bass-Anschlag ab 0,0 s, Kreide-Klatscher, Einschlag + Braam + Gesteinsknacken bei GEOLOGY, Swell in die Frage"
+ },
+ "cover_t": 2.6,
+ "hook2_frage_steht_s": 3.3,
+ "bewegung_0_bis_0_2_s": 6.4,
+ "ton_erste_0_25_s_dbfs": -6.0,
+ "handy_lautheit": -19.4,
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "meta_hook_im_cover": true,
+  "hook_frage_mind_3_2_s": true,
+  "bewegung_ab_start": true,
+  "ton_ab_start": true,
+  "weitere_fragen_mind_1_2_s": true,
+  "ablauf_wie_im_themenplan": true,
+  "ablauf_anders_als_im_slot_davor": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_40_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true,
+  "hook1_klettern_geologie_1_2_bis_2_s": true
+ },
+ "alle_pruefungen_ok": true,
+ "hook_score": {
+  "kriterien": "Luecke, Kletterbezug, Bildbarkeit im Hook-2-Bild, Kuerze, Deckung durch den Payoff (je 0-2)",
+  "varianten": [
+   {
+    "hook": "WHY IS THIS WHITE STRIPE A HOLD?",
+    "punkte": [
+     2,
+     2,
+     2,
+     1,
+     2
+    ],
+    "summe": 9,
+    "gewaehlt": true,
+    "anmerkung": "nennt Gegenstand (Streifen) und Kletterbezug (Griff); der Kletterer haengt im Bild daran"
+   },
+   {
+    "hook": "WHY DOES THIS STRIPE STICK OUT?",
+    "punkte": [
+     2,
+     0,
+     2,
+     2,
+     2
+    ],
+    "summe": 8,
+    "anmerkung": "Fassung r002; kein Kletterbezug in der Frage"
+   },
+   {
+    "hook": "WHY DOES QUARTZ MAKE GOOD EDGES?",
+    "punkte": [
+     1,
+     2,
+     1,
+     2,
+     1
+    ],
+    "summe": 7
+   },
+   {
+    "hook": "WHO PUT THIS EDGE IN THE WALL?",
+    "punkte": [
+     2,
+     1,
+     1,
+     2,
+     1
+    ],
+    "summe": 7
+   },
+   {
+    "hook": "YOUR CRIMP IS A HEALED CRACK.",
+    "punkte": [
+     0,
+     2,
+     1,
+     2,
+     1
+    ],
+    "summe": 6,
+    "anmerkung": "verraet die Antwort"
+   }
+  ]
+ },
+ "faktencheck": [
+  {
+   "aussage": "HOT WATER SEALS A CRACK WITH QUARTZ.",
+   "beleg": "sources.md #029: Bons (2000); GCA 2010; Okamoto & Vinis (2025)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Kristalle wachsen von beiden Wänden nach innen (Bild)",
+   "beleg": "sources.md #029 Zeile 2 (Ausfällung, Wachstum von den Kluftwänden nach innen)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.",
+   "beleg": "sources.md #029 Zeile 5 (differentielle Verwitterung, Gang bleibt als Rippe stehen)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "QUARTZ LASTS LONGER.",
+   "beleg": "sources.md #029 Zeile 4 (Goldich: Quarz am stabilen Ende) und Zeile 5; gilt fuer diesen Streifen, Caption haelt den Vorbehalt fest",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Test it: veins can flake off.",
+   "beleg": "Post #029, Fun Fact + Formulierungs-Kalibrierung in sources.md (stark zerklüftete Gänge)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Gestein ohne Lithologie-Signatur gezeichnet",
+   "beleg": "bewusst neutral: Quarzgaenge kommen in vielen Gesteinen vor",
+   "status": "Hinweis"
+  },
+  {
+   "aussage": "Lupe: Quarzkristalle wachsen von beiden Gangwaenden nach innen (Bild, Hook 1)",
+   "beleg": "sources.md #029 Zeile 2",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Kletterer am Quarzgang (Piktogramm), Frage WHY IS THIS WHITE STRIPE A HOLD?",
+   "beleg": "Frage, keine Behauptung; Caption haelt fest, dass nicht jeder Gang vorsteht",
+   "status": "Hinweis"
+  }
+ ],
+ "text_im_bild": [
+  "GEOCRIMPS (Hook 1, Marke)",
+  "CLIMBING × GEOLOGY (Hook 1, Marke)",
+  "GEOCRIMPS · GEOLOGY OF CLIMBING (Meta-Hook, Marke)",
+  "HOLD ID",
+  "WHY IS THIS WHITE STRIPE A HOLD?",
+  "HOT WATER SEALS A CRACK WITH QUARTZ.",
+  "QUARTZ (Label)",
+  "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.",
+  "EDGE (Label)",
+  "QUARTZ LASTS LONGER.",
+  "HOLD ID #01 / QUARTZ VEIN (Stempel)",
+  "Test it: veins can flake off."
+ ],
+ "fassung": "Neufassung von r002 (14.10.2026): Hook 1 + Hook 2, Kino-Ton, Puls 112 BPM; Szenen von r002 um 1,8 s verschoben"
+}

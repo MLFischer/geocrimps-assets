@@ -64,6 +64,34 @@
       "first_comment_posted": true
     },
     {
+      "id": "r004",
+      "slug": "2026-10-14_holdid-01",
+      "format": "HOLD ID",
+      "nr": 1,
+      "post_ref": "#029",
+      "thema": "Quarzgang als Leiste (Neufassung von r002)",
+      "video": "reels/2026-10-14_holdid-01.mp4",
+      "cover": "reels/2026-10-14_holdid-01.jpg",
+      "caption": "HOLD ID #01 · Why is this white stripe a hold? An animated climber on a quartz vein, a look inside the rock, and why the vein sticks out as an edge.\n\nIt started as a crack. Hot water moving through the crust carried dissolved silica; when it cooled or the pressure dropped, quartz crystallised on the crack walls and grew inward until the crack was sealed. Much later, at the surface, the vein can outlast the rock around it: quartz is one of the minerals most resistant to chemical weathering. Not every vein sticks out, and a fractured one can come off as a plate, so test it like any other hold.\n\nSend this to the friend who always goes straight for the white edge.\n\nWhat's the most obvious vein-hold at your local crag?\n\nSource: Bons (2000), Journal of the Virtual Explorer. Full sources in the first comment.\n\n#climbing #bouldering #geology #quartz",
+      "first_comment": "Sources: Bons, P. D. (2000): The formation of veins and their microstructures. Journal of the Virtual Explorer 2, doi:10.3809/jvirtex.2000.00007. · Okamoto, A. & Vinis, E. (2025): Oscillations in fluid pressure caused by silica precipitation in a fracture. Nature Communications 16. · Späth et al. (2022): Incomplete crack sealing causes localization of fracturing in hydrothermal quartz veins. Geophysical Research Letters. · Goldich, S. S. (1938): A study in rock-weathering. Journal of Geology 46.",
+      "audio_name": "GeoCrimps – HOLD ID",
+      "scheduled": "2026-10-14T19:07:00+02:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung (Testphase); Neufassung auf Wunsch von Markus am 14.10.2026 ('poste es heute mit neuem ton und hook 1 und hook 2')",
+        "am": "2026-10-14"
+      },
+      "hold": false,
+      "media_id": null,
+      "permalink": null,
+      "published_at": null,
+      "probe": null,
+      "version": "14.10.2026: Neufassung mit Hook 1 (Kletterer am Quarzgang, CLIMBING x GEOLOGY, Lupe) + Hook 2 (WHY IS THIS WHITE STRIPE A HOLD?), Kino-Ton und Puls",
+      "ablauf": "erklaerkette",
+      "ersetzt": "r002",
+      "ersetzt_media_id": "17972556726169029"
+    },
+    {
       "id": "r003",
       "slug": "2026-10-16_mythorrock-01",
       "format": "MYTH OR ROCK",

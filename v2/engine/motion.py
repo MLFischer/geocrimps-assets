@@ -261,7 +261,157 @@ def synth(kind, seed=0, dur=None, freq=None):
             i = rng.integers(0, n - 400); x[i:i + 400] += rng.normal(0, 1, 400) * np.exp(-np.arange(400) / 60) * rng.uniform(0.1, 0.4)
         t = np.linspace(0, 1, n); x *= np.sin(np.pi * t)
         return _stereo(np.diff(np.concatenate([[0], x])) * 0.6, 0.0)
+    if kind in KINO:                        # Kino-Set (seit 14.10.2026), siehe unten
+        return KINO[kind](rng, dur, freq)
     raise ValueError(kind)
+
+
+# ------------------------------------------------------------------ Kino-Set (14.10.2026): Bass, Braam, Beat, Swell
+# Alles selbst erzeugt (Sinus, Saegezahn, Rauschen, Filter) und damit lizenzfrei. Pegel relativ; die Mischung
+# wird ohnehin auf -14 LUFS normiert. Filter: scipy.signal (Butterworth, zweite Ordnung).
+from scipy import signal as _sig
+
+
+def _bw(x, f, kind="low", order=2):
+    sos = _sig.butter(order, f, btype=kind, fs=SR, output="sos")
+    return _sig.sosfilt(sos, x).astype(np.float32)
+
+def _saw(ph):
+    return 2.0 * (ph - np.floor(ph + 0.5))
+
+def _k_sub(rng, dur, freq):
+    """Tiefer Einschlag: Sinus faellt in 50 ms von ~130 auf ~38 Hz, Saettigung, kurzer Klick."""
+    n = int(SR * (dur or 1.3)); t = np.arange(n) / SR
+    f = (freq or 38.0) + 95 * np.exp(-t / 0.05)
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.5)
+    x = np.tanh(2.4 * x) / np.tanh(2.4)
+    click = np.diff(np.concatenate([[0], rng.normal(0, 1, n) * np.exp(-t / 0.003)])) * 0.25
+    # Handy-Lautsprecher geben unter ~200 Hz kaum etwas wieder: hoerbarer Koerper (220->90 Hz) und Anschlag (bis 3 kHz)
+    fb = 90 + 130 * np.exp(-t / 0.03)
+    body = np.sin(2 * np.pi * np.cumsum(fb) / SR) * np.exp(-t / 0.09)
+    hit = _bw(rng.normal(0, 1, n), 3000) * np.exp(-t / 0.018)
+    x = (0.75 * x + 0.55 * np.tanh(1.8 * body) + 0.35 * hit + click) * np.minimum(1, t / 0.002) * np.minimum(1, (t[-1] - t) / 0.05)
+    return _stereo(x * 0.75)
+
+def _k_braam(rng, dur, freq):
+    """Kino-Blech: verstimmte Saegezaehne (Grundton, Quinte, Oktaven), Filter oeffnet kurz und schliesst."""
+    n = int(SR * (dur or 1.4)); t = np.arange(n) / SR; f0 = freq or 110.0
+    x = np.zeros(n)
+    for mul, w in ((1.0, 1.0), (1.007, 0.8), (0.993, 0.8), (1.5, 0.4), (2.0, 0.55), (3.0, 0.2), (4.0, 0.12)):
+        x += w * _saw(f0 * mul * t + rng.uniform(0, 1))
+    x += 0.9 * np.sin(2 * np.pi * f0 / 2 * t)                              # Fundament eine Oktave tiefer
+    bright, dark = _bw(x, 3200), _bw(x, 420)
+    eb = np.exp(-t / 0.45)
+    y = bright * eb + dark * (1 - eb)
+    y *= np.minimum(1, t / 0.025) * (0.25 + 0.75 * np.exp(-t / 0.8)) * np.minimum(1, (t[-1] - t) / 0.25)
+    y = np.tanh(1.6 * y / (np.max(np.abs(y)) + 1e-9))
+    l = _bw(y + 0.02 * rng.normal(0, 1, n), 9000); r = np.roll(l, int(SR * 0.012))       # leichte Breite
+    return np.stack([l, r], axis=1).astype(np.float32) * 0.6
+
+def _k_kick(rng, dur, freq):
+    n = int(SR * 0.32); t = np.arange(n) / SR
+    f = 46 + 115 * np.exp(-t / 0.032)
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / 0.15)
+    x = np.tanh(1.6 * x) + np.diff(np.concatenate([[0], rng.normal(0, 1, n) * np.exp(-t / 0.002)])) * 0.15
+    x += 0.6 * _bw(_bw(rng.normal(0, 1, n), 1200, "high"), 5000) * np.exp(-t / 0.006)   # Anschlag, auch auf dem Handy hoerbar
+    x += 0.45 * np.sin(2 * np.pi * 185 * t) * np.exp(-t / 0.05)
+    return _stereo(x * 0.75)
+
+def _k_hat(rng, dur, freq):
+    n = int(SR * (dur or 0.07)); t = np.arange(n) / SR
+    x = _bw(rng.normal(0, 1, n), 7500, "high") * np.exp(-t / 0.018)
+    return _stereo(x * 0.5, rng.uniform(-0.25, 0.25))
+
+def _k_swell(rng, dur, freq):
+    """Rueckwaerts anschwellendes Rauschen (wie ein rueckwaerts gespieltes Becken), endet hart."""
+    n = int(SR * (dur or 0.8)); t = np.arange(n) / SR; u = t / t[-1]
+    noise = rng.normal(0, 1, n)
+    x = _bw(noise, 900, "high") * (1 - u) * 0.4 + _bw(noise, 3500, "high") * u
+    x *= u ** 2.6 * np.minimum(1, (t[-1] - t) / 0.006)
+    return _stereo(x * 0.6)
+
+def _k_scan(rng, dur, freq):
+    """Abtasten: gleitender Ton mit schnellem Tremolo plus feines Rauschen (Blick ins Gestein)."""
+    n = int(SR * (dur or 0.9)); t = np.arange(n) / SR; u = t / t[-1]
+    f = 420 * 2 ** (u * 2.3)
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * (0.55 + 0.45 * np.sign(np.sin(2 * np.pi * 26 * t)))
+    x = x * 0.5 + _bw(rng.normal(0, 1, n), 2500, "high") * 0.25
+    x *= np.sin(np.pi * u) ** 0.6
+    return _stereo(x * 0.45)
+
+def _k_shimmer(rng, dur, freq):
+    """Kristall: hohe, leicht verstimmte Teiltoene mit langem Ausklang, breit verteilt."""
+    n = int(SR * (dur or 1.3)); t = np.arange(n) / SR
+    l = np.zeros(n); r = np.zeros(n)
+    for k in range(7):
+        f = (freq or 1760.0) * rng.choice([1, 1.5, 2, 2.5, 3, 4]) * rng.uniform(0.995, 1.005)
+        ph = rng.uniform(0, 6); dec = rng.uniform(0.35, 1.0); pan = rng.uniform(-0.8, 0.8)
+        s = np.sin(2 * np.pi * f * t + ph) * np.exp(-t / dec) * np.minimum(1, t / rng.uniform(0.002, 0.03))
+        l += s * math.cos((pan + 1) * math.pi / 4); r += s * math.sin((pan + 1) * math.pi / 4)
+    return (np.stack([l, r], axis=1) / 7 * 0.9).astype(np.float32)
+
+def _k_tick(rng, dur, freq):
+    """Uhr-Tick fuer Rate-Pausen."""
+    n = int(SR * 0.06); t = np.arange(n) / SR
+    x = np.sin(2 * np.pi * (freq or 2600) * t) * np.exp(-t / 0.004) + 0.6 * np.sin(2 * np.pi * 1180 * t) * np.exp(-t / 0.012)
+    return _stereo(x * 0.5)
+
+def _k_crack(rng, dur, freq):
+    """Gesteinsknacken: mehrere sehr kurze Rauschimpulse in schneller Folge, tiefpassig."""
+    n = int(SR * (dur or 0.35)); x = np.zeros(n)
+    k = 0
+    while k < n - 600:
+        L = int(SR * rng.uniform(0.004, 0.012))
+        x[k:k + L] += rng.normal(0, 1, L) * np.exp(-np.arange(L) / (L / 4)) * rng.uniform(0.4, 1.0)
+        k += int(SR * rng.uniform(0.008, 0.045))
+    x = _bw(x, 4200) + 0.3 * _bw(x, 180)
+    x *= np.exp(-np.arange(n) / SR / 0.12)
+    return _stereo(x * 0.9)
+
+KINO = {"sub": _k_sub, "braam": _k_braam, "kick": _k_kick, "hat": _k_hat, "swell": _k_swell,
+        "scan": _k_scan, "shimmer": _k_shimmer, "tick2": _k_tick, "crack": _k_crack}
+
+
+def beat(t0, t1, bpm=118.0, root=55.0, build_from=None, seed=3):
+    """Puls unter dem Erzaehlteil: Kick auf jedem Schlag, Hi-Hat auf den Zwischenschlaegen, ab build_from zusaetzlich
+    Sechzehntel und ein Bass-Ton auf jedem Schlag (Steigerung). Rueckgabe: Liste (zeit, samples, gain_db) fuer mix()."""
+    rng = np.random.default_rng(seed); ev = []
+    beat_s = 60.0 / bpm; k = 0
+    kick = KINO["kick"](rng, None, None)
+    while t0 + k * beat_s < t1 - 0.05:
+        t = t0 + k * beat_s
+        build = build_from is not None and t >= build_from
+        ev.append((t, kick, -4.0 if build else -7.0))
+        ev.append((t + beat_s / 2, KINO["hat"](rng, None, None), -10.0 if build else -13.0))
+        if build:
+            for q in (0.25, 0.75):
+                ev.append((t + beat_s * q, KINO["hat"](rng, 0.04, None), -16.0))
+            nb = int(SR * beat_s * 0.9); tt = np.arange(nb) / SR
+            bass = np.tanh(1.5 * np.sin(2 * np.pi * root * tt)) * np.exp(-tt / 0.22) * np.minimum(1, tt / 0.004)
+            ev.append((t, _stereo(bass * 0.7), -9.0))
+        k += 1
+    return ev
+
+def limit(x, crest_db=11.0, release_s=0.08, look_s=0.003):
+    """Spitzenbegrenzer (14.10.2026): Spitzen hoechstens crest_db ueber dem Effektivpegel der lauten Abschnitte.
+    Ohne ihn scheitert -14 LUFS bei <= -1 dBTP an den Bass-Einschlaegen des Kino-Sets (gemessen r004: -14,7 LUFS).
+    Sofortiger Angriff mit kurzer Vorausschau, exponentielles Loslassen; beide Kanaele gemeinsam (kein Stereo-Wandern)."""
+    from scipy.ndimage import maximum_filter1d
+    a = np.max(np.abs(x), axis=1)
+    win = int(SR * 0.4)
+    rms = np.sqrt(np.convolve(a ** 2, np.ones(win) / win, mode="same"))
+    ref = np.percentile(rms[rms > 1e-4], 90) if np.any(rms > 1e-4) else 1e-4
+    thr = ref * 10 ** (crest_db / 20)
+    L = max(1, int(SR * look_s))
+    pk = maximum_filter1d(a, size=2 * L + 1)
+    g = np.minimum(1.0, thr / np.maximum(pk, 1e-9)).astype(np.float64)
+    rel = 1 - math.exp(-1.0 / (SR * release_s))
+    out = np.empty_like(g); cur = 1.0
+    for i in range(len(g)):                       # Loslassen glaetten (Angriff sofort)
+        gi = g[i]
+        cur = gi if gi < cur else cur + (gi - cur) * rel
+        out[i] = cur
+    return (x * out[:, None]).astype(np.float32)
 
 def pitch(smp, ratio):
     """Tonhoehe per Neuabtastung aendern (Dauer aendert sich mit)."""

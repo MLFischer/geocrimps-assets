@@ -19,7 +19,19 @@
       "thema": "Quarzgang als Leiste",
       "hook": "WHY DOES THIS STRIPE STICK OUT?",
       "vor_produktion": "",
-      "reel": "r002"
+      "reel": "r002",
+      "ersetzt_durch": "2026-10-14"
+    },
+    {
+      "termin": "2026-10-14T19:07:00+02:00",
+      "format": "HOLD ID",
+      "ablauf": "erklaerkette",
+      "post": "#029",
+      "thema": "Quarzgang als Leiste (Neufassung)",
+      "hook": "WHY IS THIS WHITE STRIPE A HOLD?",
+      "vor_produktion": null,
+      "reel": "r004",
+      "hinweis": "Neufassung von r002 mit Hook 1 (CLIMBING x GEOLOGY) + Hook 2 und neuem Ton; Wunsch Markus 14.10.2026 ('poste es heute'). Zusatztermin ausserhalb Di/Fr."
     },
     {
       "termin": "2026-10-16T17:07:00+02:00",
