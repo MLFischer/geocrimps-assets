@@ -1,49 +1,131 @@
 {
  "slug": "2026-10-13_holdid-01",
- "dauer_s": 13.0,
+ "dauer_s": 14.5,
  "fps": 30,
- "frames": 390,
- "mp4_mb": 7.08,
+ "frames": 435,
+ "mp4_mb": 8.47,
  "woerter_im_bild": 37,
  "labels": 2,
- "payoff_anteil": 0.708,
+ "woerter_gesamt_mit_labels": 39,
+ "payoff_anteil": 0.738,
  "loudnorm": {
-  "loudnorm_ziel": -13.4,
-  "tp_grenze": -2.5,
-  "I_LUFS": -14.1,
-  "TP_dBFS": -1.7
+  "loudnorm_ziel": -11.6,
+  "tp_grenze": -3.0,
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.2
  },
  "messung": {
-  "I_LUFS": -14.1,
-  "TP_dBFS": -1.7
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.2
  },
  "toene": {
-  "kreide-tick": "CC0 Kenney: tick_001.ogg",
-  "schnittlinie": "CC0 Kenney: scratch_002.ogg",
-  "uebergang": "CC0 Kenney: maximize_001.ogg",
-  "bohrhaken": "CC0 Kenney: impactMetal_light_000.ogg",
-  "riss": "CC0 Kenney: impactMining_000.ogg",
-  "heisses-wasser": "selbst erzeugt (fizz)",
-  "kristall": "selbst erzeugt (tone)",
-  "zeit-grollen": "selbst erzeugt (rumble)",
-  "abbroeckeln": "CC0 Kenney: impactMining_001.ogg",
-  "steigerung": "selbst erzeugt (riser)",
-  "treffer": "CC0 Kenney: impactPunch_heavy_000.ogg",
-  "kreide-wisch": "CC0 Kenney: scratch_001.ogg",
-  "stempel": "CC0 Kenney: impactPunch_heavy_001.ogg",
-  "klanglogo": "CC0 Kenney: pluck_001.ogg (drei Tonhoehen)",
-  "klatsch": "CC0 Kenney: impactGeneric_light_000.ogg",
-  "flaeche": "selbst erzeugt (pad)"
+  "hook1-anschwellen": [
+   "selbst erzeugt (klang.reverse)"
+  ],
+  "hook1-griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "hook1-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "hook1-braam": [
+   "selbst erzeugt (klang.braam)"
+  ],
+  "hook1-gestein": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "hook1-uebergang": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "kreide-tick": [
+   "CC0 Kenney: tick_002.ogg",
+   "CC0 Kenney: tick_004.ogg"
+  ],
+  "schnittlinie": [
+   "CC0 Kenney: scratch_002.ogg"
+  ],
+  "uebergang": [
+   "CC0 Kenney: maximize_001.ogg"
+  ],
+  "bohrhaken": [
+   "CC0 Kenney: impactMetal_light_000.ogg",
+   "CC0 Kenney: impactMetal_light_001.ogg",
+   "CC0 Kenney: impactMetal_light_002.ogg"
+  ],
+  "riss": [
+   "CC0 Kenney: impactMining_000.ogg"
+  ],
+  "heisses-wasser": [
+   "selbst erzeugt (fizz)"
+  ],
+  "kristall": [
+   "selbst erzeugt (tone)"
+  ],
+  "zeit-grollen": [
+   "selbst erzeugt (rumble)"
+  ],
+  "abbroeckeln": [
+   "CC0 Kenney: impactMining_001.ogg",
+   "CC0 Kenney: impactMining_002.ogg"
+  ],
+  "steigerung": [
+   "selbst erzeugt (riser)"
+  ],
+  "payoff-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "treffer": [
+   "CC0 Kenney: impactPunch_heavy_000.ogg"
+  ],
+  "kreide-wisch": [
+   "CC0 Kenney: scratch_001.ogg",
+   "CC0 Kenney: scratch_002.ogg"
+  ],
+  "stempel": [
+   "CC0 Kenney: impactPunch_heavy_001.ogg"
+  ],
+  "abklopfen": [
+   "selbst erzeugt (klang.thud)"
+  ],
+  "puls": [
+   "selbst erzeugt (klang.hat)",
+   "selbst erzeugt (klang.kick)"
+  ],
+  "klanglogo": [
+   "CC0 Kenney: pluck_001.ogg"
+  ],
+  "klatsch": [
+   "CC0 Kenney: impactGeneric_light_000.ogg"
+  ],
+  "flaeche": [
+   "selbst erzeugt (pad)"
+  ]
  },
  "ablauf": "erklaerkette",
+ "ablauf_im_themenplan": "erklaerkette",
+ "ablauf_slot_davor": "quiz",
+ "hook1": "CLIMBING / × GEOLOGY",
+ "hook1_bis_s": 1.22,
+ "hook1_in_frame0_anteil": 0.937,
+ "hook1_woerter_extra": 2,
+ "hook_ab_s": 1.5,
+ "hook_bis_s": 4.75,
  "hook_steht_s": 3.25,
- "meta_hook": "GEOCRIMPS · GEOLOGY OF CLIMBING",
- "meta_hook_im_cover_anteil": 0.969,
- "woerter_gesamt_mit_labels": 39,
+ "weitere_fragen_stehen_s": [],
+ "cover_t": 2.35,
+ "meta_hook": "GEOCRIMPS · CLIMBING × GEOLOGY",
+ "meta_hook_woerter_extra": 3,
+ "meta_hook_im_cover_anteil": 0.966,
  "pruefungen": {
   "dauer_im_formatrahmen": true,
+  "hook1_klettern_geologie_in_frame_0": true,
+  "hook1_dauer_1_0_bis_1_6_s": true,
+  "hook2_nach_hook1": true,
   "meta_hook_im_cover": true,
   "hook_frage_mind_3_2_s": true,
+  "weitere_fragen_mind_1_2_s": true,
+  "ablauf_wie_im_themenplan": true,
+  "ablauf_anders_als_im_slot_davor": true,
   "payoff_65_80_prozent": true,
   "hoechstens_40_woerter": true,
   "lautheit_-14_+-0.5": true,
@@ -52,8 +134,21 @@
  },
  "alle_pruefungen_ok": true,
  "hook_score": {
-  "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
+  "kriterien": "Klarheit (Gegenstand in Wort und Bild), Kletterbezug in Text und Bild, Luecke, Kuerze, Deckung durch den Payoff (je 0-2); Hook-Score seit 14.10.2026",
   "varianten": [
+   {
+    "hook": "WHY DOES THIS EDGE STICK OUT?",
+    "punkte": [
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "summe": 10,
+    "gewaehlt": true,
+    "anmerkung": "Kletterer haengt an genau dieser Leiste; EDGE ist Kletterwort"
+   },
    {
     "hook": "WHY DOES THIS STRIPE STICK OUT?",
     "punkte": [
@@ -64,7 +159,7 @@
      2
     ],
     "summe": 9,
-    "gewaehlt": true
+    "anmerkung": "Fassung 3 (Post vom 13.10.)"
    },
    {
     "hook": "WHY IS THIS CRIMP WHITE?",
@@ -76,19 +171,7 @@
      1
     ],
     "summe": 9,
-    "anmerkung": "Payoff erklaert das Vorstehen, nicht die Farbe; Testvariante, falls Trial Reels per API gehen"
-   },
-   {
-    "hook": "HOT WATER BUILT THIS HOLD.",
-    "punkte": [
-     1,
-     2,
-     2,
-     2,
-     1
-    ],
-    "summe": 8,
-    "anmerkung": "verraet den ersten Zug"
+    "anmerkung": "Payoff erklaert das Vorstehen, nicht die Farbe"
    },
    {
     "hook": "THIS EDGE WAS ONCE A CRACK.",
@@ -102,15 +185,16 @@
     "summe": 7
    },
    {
-    "hook": "THE ROCK SHRANK. THE STRIPE DIDN'T.",
+    "hook": "HOT WATER BUILT THIS HOLD.",
     "punkte": [
      1,
-     0,
+     2,
      1,
      2,
-     2
+     1
     ],
-    "summe": 6
+    "summe": 7,
+    "anmerkung": "verraet den ersten Zug"
    }
   ]
  },
@@ -141,16 +225,27 @@
    "status": "belegt"
   },
   {
-   "aussage": "Gestein ohne Lithologie-Signatur gezeichnet",
-   "beleg": "bewusst neutral: Quarzgaenge kommen in vielen Gesteinen vor",
-   "status": "Hinweis"
+   "aussage": "Hook 1: Wand als Sandstein (Signatur Punkte) mit flach liegenden Schichten und Kluefte, der Gang durchschlaegt die Schichten (Bild)",
+   "beleg": "Post #029, Foto: Quarzgaenge in Sandstein (Thunderhead Sandstone, Wikimedia Commons, James St. John, CC BY 2.0); Schichtlage schematisch",
+   "status": "belegt (schematisch)"
+  },
+  {
+   "aussage": "Kletterer haelt sich am Gang wie an einer Leiste (Bild)",
+   "beleg": "Post #029: 'Quartz veins are free crimps'",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Kletterer klopft den Gang ab ('Test it')",
+   "beleg": "Post #029, Fun Fact + Formulierungs-Kalibrierung in sources.md (stark zerklueftete Gaenge)",
+   "status": "belegt"
   }
  ],
- "fassung": "3 (13.10.2026), Ablauf \"erklaerkette\"; Hook-Frage 3,25 s; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING im Cover, Hook-Schrift 164 statt 176",
+ "fassung": "4 (14.10.2026), Ablauf \"erklaerkette\"; Hook 1 CLIMBING x GEOLOGY 0-1,22 s, Hook 2 ab 1,5 s fuer 3,25 s; Cover bei 2,35 s",
  "text_im_bild": [
-  "GEOCRIMPS · GEOLOGY OF CLIMBING (Meta-Hook, Markenelement)",
+  "GEOCRIMPS (Marke) + CLIMBING / × GEOLOGY (Hook 1, Markenelement)",
+  "GEOCRIMPS · CLIMBING × GEOLOGY (Kopfzeile, Markenelement)",
   "HOLD ID",
-  "WHY DOES THIS STRIPE STICK OUT?",
+  "WHY DOES THIS EDGE STICK OUT?",
   "HOT WATER SEALS A CRACK WITH QUARTZ.",
   "QUARTZ (Label)",
   "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.",
@@ -159,5 +254,7 @@
   "HOLD ID #01 / QUARTZ VEIN (Stempel)",
   "Test it: veins can flake off."
  ],
- "aenderung": "13.10.2026: Hook-Frage steht 1,0 s laenger (0-3,25 s), alle folgenden Zeiten +1,0 s, Dauer 13,0 s. 13.10.2026, 12 Uhr: Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0 (Wunsch Markus), Formatlabel auf y 352, Hook ab y 404 in 164 px."
+ "aenderung": "14.10.2026 (Fassung 4, Neu-Post, ersetzt den Post vom 13.10.; Wunsch Markus 13.10., 19:20): Hook 1 0-1,22 s (GEOCRIMPS + CLIMBING ab Frame 0, Kletterer greift den Quarzgang mit Kreidewolke, '× GEOLOGY' schlaegt ein, die Wand klappt in Sandstein-Signatur mit Schichten und Kluefte auf), Uebergang in die Kopfzeile GEOCRIMPS · CLIMBING × GEOLOGY; Hook 2 ab 1,5 s 'WHY DOES THIS EDGE STICK OUT?' (vorher STRIPE), 3,25 s; alle Folgezeiten +1,5 s, Dauer 14,5 s; Folge: Kletterer klopft den Gang ab; Ton: Hook-1-Signatur aus dem eigenen Klangset (Rueckwaerts-Anschwellen, Kreide-Klatsch, Einschlag, Braam, Knacken), Puls 116 bpm von Hook 2 bis zur Steigerung, Einschlag im Payoff. Fassung 3 liegt unter fassung3/.",
+ "ton_gehoert": false,
+ "ton_hinweis": "Ton gemessen (Lautheit, Spitze, Tonverlauf), nicht angehoert"
 }

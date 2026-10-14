@@ -42,26 +42,37 @@
       "thema": "Quarzgang als Leiste",
       "video": "reels/2026-10-13_holdid-01.mp4",
       "cover": "reels/2026-10-13_holdid-01.jpg",
-      "caption": "HOLD ID #01 · An animated pale stripe on a rock wall, cut open to show how it formed and why it sticks out as an edge.\n\nIt started as a crack. Hot water moving through the crust carried dissolved silica; when it cooled or the pressure dropped, quartz crystallised on the crack walls and grew inward until the crack was sealed. Much later, at the surface, the vein can outlast the rock around it: quartz is one of the minerals most resistant to chemical weathering. Not every vein sticks out, and a fractured one can come off as a plate, so test it like any other hold.\n\nSend this to the friend who always goes straight for the white edge.\n\nWhat's the most obvious vein-hold at your local crag?\n\nSource: Bons (2000), Journal of the Virtual Explorer. Full sources in the first comment.\n\n#climbing #bouldering #geology #quartz",
+      "caption": "HOLD ID #01 · An animated climber hangs on a pale stripe in a rock wall, then we cut the rock open to show how the stripe formed and why it sticks out as an edge.\n\nIt started as a crack. Hot water moving through the crust carried dissolved silica; when it cooled or the pressure dropped, quartz crystallised on the crack walls and grew inward until the crack was sealed. Much later, at the surface, the vein can outlast the rock around it: quartz is one of the minerals most resistant to chemical weathering. Not every vein sticks out, and a fractured one can come off as a plate, so test it like any other hold.\n\nSend this to the friend who always goes straight for the white edge.\n\nWhat's the most obvious vein-hold at your local crag?\n\nSource: Bons (2000), Journal of the Virtual Explorer. Full sources in the first comment.\n\n#climbing #bouldering #geology #quartz",
       "first_comment": "Sources: Bons, P. D. (2000): The formation of veins and their microstructures. Journal of the Virtual Explorer 2, doi:10.3809/jvirtex.2000.00007. · Okamoto, A. & Vinis, E. (2025): Oscillations in fluid pressure caused by silica precipitation in a fracture. Nature Communications 16. · Späth et al. (2022): Incomplete crack sealing causes localization of fracturing in hydrothermal quartz veins. Geophysical Research Letters. · Goldich, S. S. (1938): A study in rock-weathering. Journal of Geology 46.",
       "audio_name": "GeoCrimps – HOLD ID",
-      "scheduled": "2026-10-13T18:07:00+02:00",
-      "status": "published",
+      "scheduled": "2026-10-14T18:07:00+02:00",
+      "status": "ready",
       "freigabe": {
-        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
-        "am": "2026-10-12"
+        "durch": "Markus (Chat 13.10.2026, 19:20: 'überarbeite auch den heutigen reel und poste ihn morgen neu')",
+        "am": "2026-10-13",
+        "regel": "Vorschau an Markus am 14.10.; stilles OK, Stopp per hold oder Nachricht"
       },
       "hold": false,
-      "media_id": "17972556726169029",
-      "permalink": "https://www.instagram.com/reel/DecRmY-FAvt/",
-      "published_at": "2026-10-13T16:49:32+0000",
-      "probe": {
-        "at": "2026-10-13T10:06:08+00:00",
-        "result": "FINISHED"
-      },
-      "version": "13.10.2026: Hook 1 s laenger; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0 (Wunsch Markus 11:42), neu gerendert",
+      "media_id": null,
+      "permalink": null,
+      "published_at": null,
+      "probe": null,
+      "version": "14.10.2026: Fassung 4 – Hook 1 CLIMBING × GEOLOGY mit Kletterer und aufklappender Geologie, Hook 2 WHY DOES THIS EDGE STICK OUT?, eigenes Klangset mit Puls; Neu-Post, ersetzt den Post vom 13.10.",
       "ablauf": "erklaerkette",
-      "first_comment_posted": true
+      "ersetzt": [
+        {
+          "media_id": "17972556726169029",
+          "permalink": "https://www.instagram.com/reel/DecRmY-FAvt/",
+          "published_at": "2026-10-13T16:49:32+0000",
+          "first_comment_posted": true,
+          "fassung": "3",
+          "dauer_s": 13.0,
+          "video_commit": "62a6214",
+          "version": "13.10.2026: Hook 1 s laenger; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0 (Wunsch Markus 11:42), neu gerendert",
+          "grund": "ersetzt durch Fassung 4 (Hook 1 + Hook 2), Neu-Post am 14.10.2026 auf Wunsch von Markus (Chat 13.10.2026, 19:20)",
+          "hinweis": "Die API kann Beitraege nicht loeschen: Markus archiviert oder loescht den alten Post in der App."
+        }
+      ]
     },
     {
       "id": "r003",

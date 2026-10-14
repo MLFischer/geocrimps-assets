@@ -74,9 +74,13 @@ def marker(item):
     return f"{item['format']} #{item['nr']:02d}"
 
 def already_published(item):
-    """Schutz vor Doppelposts: steht ein Post mit derselben Serienmarke schon im Konto?"""
+    """Schutz vor Doppelposts: steht ein Post mit derselben Serienmarke schon im Konto?
+    Posts, die dieses Reel ersetzt (item["ersetzt"], Neu-Post einer neuen Fassung), zaehlen nicht."""
+    replaced = {str(x.get("media_id")) for x in item.get("ersetzt") or [] if x.get("media_id")}
     res = api("GET", f"{UID}/media", fields="id,caption,timestamp,permalink,media_type", limit=10)
     for m in res.get("data", []):
+        if str(m.get("id")) in replaced:
+            continue
         if marker(item) in (m.get("caption") or ""):
             return m
     return None

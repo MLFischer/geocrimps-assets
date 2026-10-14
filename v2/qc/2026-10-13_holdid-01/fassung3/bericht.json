@@ -1,0 +1,163 @@
+{
+ "slug": "2026-10-13_holdid-01",
+ "dauer_s": 13.0,
+ "fps": 30,
+ "frames": 390,
+ "mp4_mb": 7.08,
+ "woerter_im_bild": 37,
+ "labels": 2,
+ "payoff_anteil": 0.708,
+ "loudnorm": {
+  "loudnorm_ziel": -13.4,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.1,
+  "TP_dBFS": -1.7
+ },
+ "messung": {
+  "I_LUFS": -14.1,
+  "TP_dBFS": -1.7
+ },
+ "toene": {
+  "kreide-tick": "CC0 Kenney: tick_001.ogg",
+  "schnittlinie": "CC0 Kenney: scratch_002.ogg",
+  "uebergang": "CC0 Kenney: maximize_001.ogg",
+  "bohrhaken": "CC0 Kenney: impactMetal_light_000.ogg",
+  "riss": "CC0 Kenney: impactMining_000.ogg",
+  "heisses-wasser": "selbst erzeugt (fizz)",
+  "kristall": "selbst erzeugt (tone)",
+  "zeit-grollen": "selbst erzeugt (rumble)",
+  "abbroeckeln": "CC0 Kenney: impactMining_001.ogg",
+  "steigerung": "selbst erzeugt (riser)",
+  "treffer": "CC0 Kenney: impactPunch_heavy_000.ogg",
+  "kreide-wisch": "CC0 Kenney: scratch_001.ogg",
+  "stempel": "CC0 Kenney: impactPunch_heavy_001.ogg",
+  "klanglogo": "CC0 Kenney: pluck_001.ogg (drei Tonhoehen)",
+  "klatsch": "CC0 Kenney: impactGeneric_light_000.ogg",
+  "flaeche": "selbst erzeugt (pad)"
+ },
+ "ablauf": "erklaerkette",
+ "hook_steht_s": 3.25,
+ "meta_hook": "GEOCRIMPS · GEOLOGY OF CLIMBING",
+ "meta_hook_im_cover_anteil": 0.969,
+ "woerter_gesamt_mit_labels": 39,
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "meta_hook_im_cover": true,
+  "hook_frage_mind_3_2_s": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_40_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true
+ },
+ "alle_pruefungen_ok": true,
+ "hook_score": {
+  "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
+  "varianten": [
+   {
+    "hook": "WHY DOES THIS STRIPE STICK OUT?",
+    "punkte": [
+     2,
+     1,
+     2,
+     2,
+     2
+    ],
+    "summe": 9,
+    "gewaehlt": true
+   },
+   {
+    "hook": "WHY IS THIS CRIMP WHITE?",
+    "punkte": [
+     2,
+     2,
+     2,
+     2,
+     1
+    ],
+    "summe": 9,
+    "anmerkung": "Payoff erklaert das Vorstehen, nicht die Farbe; Testvariante, falls Trial Reels per API gehen"
+   },
+   {
+    "hook": "HOT WATER BUILT THIS HOLD.",
+    "punkte": [
+     1,
+     2,
+     2,
+     2,
+     1
+    ],
+    "summe": 8,
+    "anmerkung": "verraet den ersten Zug"
+   },
+   {
+    "hook": "THIS EDGE WAS ONCE A CRACK.",
+    "punkte": [
+     1,
+     2,
+     1,
+     2,
+     1
+    ],
+    "summe": 7
+   },
+   {
+    "hook": "THE ROCK SHRANK. THE STRIPE DIDN'T.",
+    "punkte": [
+     1,
+     0,
+     1,
+     2,
+     2
+    ],
+    "summe": 6
+   }
+  ]
+ },
+ "faktencheck": [
+  {
+   "aussage": "HOT WATER SEALS A CRACK WITH QUARTZ.",
+   "beleg": "sources.md #029: Bons (2000); GCA 2010; Okamoto & Vinis (2025)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Kristalle wachsen von beiden Wänden nach innen (Bild)",
+   "beleg": "sources.md #029 Zeile 2 (Ausfällung, Wachstum von den Kluftwänden nach innen)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.",
+   "beleg": "sources.md #029 Zeile 5 (differentielle Verwitterung, Gang bleibt als Rippe stehen)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "QUARTZ LASTS LONGER.",
+   "beleg": "sources.md #029 Zeile 4 (Goldich: Quarz am stabilen Ende) und Zeile 5; gilt fuer diesen Streifen, Caption haelt den Vorbehalt fest",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Test it: veins can flake off.",
+   "beleg": "Post #029, Fun Fact + Formulierungs-Kalibrierung in sources.md (stark zerklüftete Gänge)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Gestein ohne Lithologie-Signatur gezeichnet",
+   "beleg": "bewusst neutral: Quarzgaenge kommen in vielen Gesteinen vor",
+   "status": "Hinweis"
+  }
+ ],
+ "fassung": "3 (13.10.2026), Ablauf \"erklaerkette\"; Hook-Frage 3,25 s; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING im Cover, Hook-Schrift 164 statt 176",
+ "text_im_bild": [
+  "GEOCRIMPS · GEOLOGY OF CLIMBING (Meta-Hook, Markenelement)",
+  "HOLD ID",
+  "WHY DOES THIS STRIPE STICK OUT?",
+  "HOT WATER SEALS A CRACK WITH QUARTZ.",
+  "QUARTZ (Label)",
+  "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.",
+  "EDGE (Label)",
+  "QUARTZ LASTS LONGER.",
+  "HOLD ID #01 / QUARTZ VEIN (Stempel)",
+  "Test it: veins can flake off."
+ ],
+ "aenderung": "13.10.2026: Hook-Frage steht 1,0 s laenger (0-3,25 s), alle folgenden Zeiten +1,0 s, Dauer 13,0 s. 13.10.2026, 12 Uhr: Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING in Frame 0 (Wunsch Markus), Formatlabel auf y 352, Hook ab y 404 in 164 px."
+}

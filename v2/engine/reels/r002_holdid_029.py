@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
-"""Reel 002 -- HOLD ID #01: "Why does this stripe stick out?" (Faktenbasis: Post #029, Quarzgang).
+"""Reel 002 -- HOLD ID #01: "Why does this edge stick out?" (Faktenbasis: Post #029, Quarzgang).
 
-Format HOLD ID: Griffform -> Querschnitt -> Entstehung in zwei Zuegen -> Stempel mit Nummer.
-Ablauf "erklaerkette". Dramaturgie (Topo, ab 13.10. mit 1 s laengerem Hook, HOOK_EXTRA): Hook mit Schnittlinie 0-3,25 s |
-Zug 1 im Querschnitt: Riss, heisses Wasser, Quarz waechst von den Waenden nach innen 3,45-6,35 s | Zug 2: viel spaeter
-wittert das Gestein drumherum zurueck 6,55-9,2 s | Payoff 9,2 s (71 %) | Stempel 10,35 s | Folge fuers Klettern 11,0 s |
-Endsignet 12,2-13,0 s.
+Format HOLD ID: Griffform -> Querschnitt -> Entstehung in zwei Zuegen -> Stempel mit Nummer. Ablauf "erklaerkette".
+Fassung 4 vom 14.10.2026 (Neu-Post am 14.10., ersetzt den Post vom 13.10.): Markus 13.10.: "hook 1 (klettern und
+geologie) und dann hook 2 (eigentliches reel thema)". Hook 1 0-1,3 s: GEOCRIMPS + CLIMBING ab Frame 0, ein Kletterer
+greift den Quarzgang (Kreidewolke), "× GEOLOGY" schlaegt ein und die Wand klappt in ihre Geologie auf (Sandstein-
+Signatur, Gang und Kluefte). Hook 2 1,5-4,75 s: "WHY DOES THIS EDGE STICK OUT?" (vorher "THIS STRIPE"), der Kletterer
+haengt am Gang. Alle folgenden Zeiten 1,5 s spaeter als in Fassung 3. Folge fuers Klettern: der Kletterer klopft den
+Gang ab ("Test it"). Ton: Hook-1-Signatur aus dem eigenen Klangset, Puls von Hook 2 bis zur Steigerung.
+Dramaturgie (Topo): Hook 1 0-1,3 s | Hook 2 1,5-4,75 s (Schnittlinie ab 3,9 s) | Zug 1 im Querschnitt: Riss, heisses
+Wasser, Quarz waechst 4,95-7,85 s | Zug 2: viel spaeter wittert das Gestein zurueck 8,05-10,7 s | Payoff 10,7 s (74 %) |
+Stempel 11,85 s | Folge fuers Klettern 12,5 s | Endsignet 13,7-14,5 s.
 Bildmittel: Uebergang Schnittlinie und Isolinien-Welle | Enthuellung Querschnitt, Zeitraffer der Verwitterung |
-Payoff Antwort gross, Kreide-Wisch, Stempel HOLD ID | Flaeche im Grundton.
-Aufruf:  python3 r002_holdid_029.py --out ../../../reels --qc <Ordner fuer QC>
+Payoff Antwort gross, Kreide-Wisch, Stempel HOLD ID | Flaeche im Grundton, Braam in A.
+Aufruf:  python3 r002_holdid_029.py --out ../../../reels --qc <Ordner>   (--stills 0,0.5 fuer Einzelbilder)
 """
-import argparse, json, math, os, random, sys
+import math, os, random, sys
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageChops
 
@@ -19,38 +24,49 @@ sys.path.insert(0, os.path.dirname(HERE))
 import outcrop as o
 import motion as m
 import reelkit as rk
+import kletter as kl
 from outcrop import C, P
 from motion import X0, W, H, FPS, seg, seilzug, sturz, griff, lerp, put
-
-DUR = 13.0
-SLUG = "2026-10-13_holdid-01"
-ON_SCREEN = ["HOLD ID", "WHY DOES THIS STRIPE STICK OUT?", "HOT WATER SEALS A CRACK WITH QUARTZ.",
-             "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.", "QUARTZ LASTS LONGER.",
-             "HOLD ID #01", "QUARTZ VEIN", "Test it: veins can flake off."]
-LABELS = ["QUARTZ", "EDGE"]
 
 # Quarz (milchig, etwas waermer als Magnesia, damit Kreide-Ticks und Gang auseinanderzuhalten sind)
 QZ, QZ_EDGE, QZ_SIDE = "#DAD5CA", "#A9A395", "#7D786E"
 QZ_PATCH = ["#E4DFD5", "#D1CBBF", "#DEDACF", "#CBC5B9", "#E8E4DB"]
 
 # ------------------------------------------------------------------ Zeitplan
-# 13.10.2026: Hook-Frage steht 1,0 s laenger (Markus: "die Frage braucht eine Sekunde laenger zum Lesen").
-HOOK_EXTRA = 1.0
-T_SEC = 2.40                     # Schnittlinie quer zum Gang (im letzten Drittel des Hooks)
-T_W1, T_S2 = 2.25 + HOOK_EXTRA, 2.45 + HOOK_EXTRA          # Welle -> Querschnitt (Zug 1)
-T_CRACK, T_OPEN = 2.70 + HOOK_EXTRA, 2.95 + HOOK_EXTRA     # Riss zeichnet sich, Riss oeffnet sich
-T_FLOW = (3.00 + HOOK_EXTRA, 4.45 + HOOK_EXTRA)            # heisses Wasser stroemt
-T_GROW0, T_GROW1 = 3.45 + HOOK_EXTRA, 4.75 + HOOK_EXTRA    # Quarz waechst von beiden Waenden nach innen
-T_LAB = 4.85 + HOOK_EXTRA
-T_W2, T_S3 = 5.35 + HOOK_EXTRA, 5.55 + HOOK_EXTRA          # Welle -> viel spaeter (Zug 2)
-T_E0, T_E1 = 5.80 + HOOK_EXTRA, 7.95 + HOOK_EXTRA          # Gestein wittert zurueck, Gang bleibt stehen
-T_EDGE = 7.55 + HOOK_EXTRA                                 # Label EDGE am vorstehenden Gang
-T_RISE = 7.25 + HOOK_EXTRA
-T_S4 = 8.20 + HOOK_EXTRA                                   # Payoff
-T_SWIPE = 8.75 + HOOK_EXTRA
-T_STAMP = 9.35 + HOOK_EXTRA
-T_SAFE = 10.00 + HOOK_EXTRA
-T_END = 11.20 + HOOK_EXTRA
+HOOK_EXTRA = 1.0                 # 13.10.2026: Hook-Frage steht 1,0 s laenger
+H1 = 1.50                        # 14.10.2026: Hook 1 davor, alles ab Hook 2 1,5 s spaeter
+T_GRAB, T_GEO, T_OUT = 0.32, 0.58, 1.22                     # Hook 1: Griff, "× GEOLOGY", Uebergang in die Kopfzeile
+T_Q = 1.50                                                  # Hook 2: Formatlabel und Themenfrage fahren ein
+T_SEC = 2.40 + H1                                           # Schnittlinie quer zum Gang (im letzten Drittel von Hook 2)
+T_W1, T_S2 = 2.25 + HOOK_EXTRA + H1, 2.45 + HOOK_EXTRA + H1  # Welle -> Querschnitt (Zug 1)
+T_CRACK, T_OPEN = 2.70 + HOOK_EXTRA + H1, 2.95 + HOOK_EXTRA + H1
+T_FLOW = (3.00 + HOOK_EXTRA + H1, 4.45 + HOOK_EXTRA + H1)
+T_GROW0, T_GROW1 = 3.45 + HOOK_EXTRA + H1, 4.75 + HOOK_EXTRA + H1
+T_LAB = 4.85 + HOOK_EXTRA + H1
+T_W2, T_S3 = 5.35 + HOOK_EXTRA + H1, 5.55 + HOOK_EXTRA + H1
+T_E0, T_E1 = 5.80 + HOOK_EXTRA + H1, 7.95 + HOOK_EXTRA + H1
+T_EDGE = 7.55 + HOOK_EXTRA + H1
+T_RISE = 7.25 + HOOK_EXTRA + H1
+T_S4 = 8.20 + HOOK_EXTRA + H1                               # Payoff
+T_SWIPE = 8.75 + HOOK_EXTRA + H1
+T_STAMP = 9.35 + HOOK_EXTRA + H1
+T_SAFE = 10.00 + HOOK_EXTRA + H1
+T_KNOCK = (T_SAFE + 0.25, T_SAFE + 0.55)                    # Kletterer klopft den Gang ab
+T_END = 11.20 + HOOK_EXTRA + H1
+DUR = T_END + 0.8
+
+META = dict(
+    slug="2026-10-13_holdid-01", dur_range=[10.5, 14.5], payoff_t=T_S4,
+    title="GeoCrimps r002 HOLD ID #01 (Erklaerkette), Fassung 4", ablauf="erklaerkette",
+    hook1_bis=T_OUT, hook_ab=T_Q, hook_bis=T_W1, weitere_fragen=[], cover_t=T_Q + 0.85,
+    on_screen=["HOLD ID", "WHY DOES THIS EDGE STICK OUT?", "HOT WATER SEALS A CRACK WITH QUARTZ.",
+               "MUCH LATER, THE ROCK AROUND IT WEARS AWAY.", "QUARTZ LASTS LONGER.",
+               "HOLD ID #01", "QUARTZ VEIN", "Test it: veins can flake off."],
+    labels=["QUARTZ", "EDGE"],
+    qc_times=[0.0, 0.36, 0.75, 1.15, 1.45, 2.35, 4.2, 5.1, 5.6, 6.6, 7.6, 9.0, 10.5, 10.9, 12.0, 12.85],
+    marks=[(0, "Hook 1"), (T_GRAB, "Griff"), (T_GEO, "x GEOLOGY"), (T_Q, "Hook 2"), (T_SEC, "Schnitt"), (T_W1, "Welle"),
+           (T_S2, "Zug 1"), (T_W2, "Welle"), (T_S3, "Zug 2"), (T_RISE, "Steigerung"), (T_S4, "PAYOFF"),
+           (T_STAMP, "Stempel"), (T_SAFE, "Folge"), (T_END, "Klanglogo")])
 
 RAIL_N = 2
 RAIL_Y = [1300 - (1300 - 330 - 60) / RAIL_N * (i + 0.5) for i in range(RAIL_N)]
@@ -59,6 +75,12 @@ RAIL_Y = [1300 - (1300 - 330 - 60) / RAIL_N * (i + 0.5) for i in range(RAIL_N)]
 VEIN_P0, VEIN_P1, VEIN_HALF = (110, 1520), (1090, 1150), 25
 Y_V, HALF_S = 1180, 34           # Querschnitt: Ganglage und halbe Dicke
 SEC_TOP = 880                    # Querschnitt: Oberkante (weich ausgeblendet bis +80)
+WALL_TOP = 930
+
+
+def vein_top(x):
+    """Oberkante (Leiste) des Quarzgangs in der Wandansicht."""
+    return VEIN_P0[1] + (VEIN_P1[1] - VEIN_P0[1]) * (x - VEIN_P0[0]) / (VEIN_P1[0] - VEIN_P0[0]) - VEIN_HALF
 
 
 def jit(x):
@@ -140,11 +162,16 @@ def vein_front(im, wall_mask, seed=5):
     d.line([P(*p) for p in up], fill=o.rgb(C["magnesia"]), width=int(3 * o.S))
     lay.putalpha(ImageChops.multiply(lay.getchannel("A"), wall_mask)); im.alpha_composite(lay)
 
-def wall_front(im, top=930, seed=3, ticks=True):
-    poly = o.ragged(110, top, 1090, 1960, seed=seed, amp=16, n=18, top_only=True)
+JOINTS = ([(260, 1060), (300, 1190), (282, 1330)], [(905, WALL_TOP + 40), (880, 1060), (930, 1150)])   # Kluefte
+
+def wall_poly(seed=3):
+    return o.ragged(110, WALL_TOP, 1090, 1960, seed=seed, amp=16, n=18, top_only=True)
+
+def wall_front(im, seed=3, ticks=True):
+    poly = wall_poly(seed)
     mask = rock_fill(im, poly, seed)
     d = ImageDraw.Draw(im)
-    for pts in ([(260, 1060), (300, 1190), (282, 1330)], [(905, top + 40), (880, 1060), (930, 1150)]):   # Kluefte
+    for pts in JOINTS:
         d.line([P(x, y) for x, y in pts], fill=o.rgb(C["obsidian"], 210), width=int(3 * o.S), joint="curve")
     vein_front(im, mask)
     d.line([P(x, y) for x, y in poly[:19]], fill=o.rgb(C["magnesia"]), width=int(4 * o.S), joint="curve")
@@ -225,18 +252,60 @@ def crystal_poly(c, a, L):
 
 CRYSTALS = make_crystals(21, True) + make_crystals(22, False)
 
-class Reel:
+
+# ------------------------------------------------------------------ Kletterer (Rueckenansicht an der Wand)
+BACK = dict(sw=22, hw=13, eb=(-1, 1), kb=(1, -1))
+GRIP_L, GRIP_R = (770, vein_top(770) + 9), (895, vein_top(895) + 9)
+POSE_HANG = dict(BACK, hip=(838, 1430), lean=8, lh=GRIP_L, rh=GRIP_R, lf=(772, 1562), rf=(906, 1546))
+POSE_REACH = dict(BACK, hip=(826, 1452), lean=-3, lh=GRIP_L, rh=(936, 1318), lf=(772, 1562), rf=(906, 1546))
+POSE_PULL = dict(POSE_HANG, hip=(842, 1414), lean=9)          # Schwung am Ende des Zugs
+
+
+def climber_pose(t):
+    """Hook 1: Zug zum Gang (Frame 0 schon in Bewegung), Griff bei T_GRAB, kurzes Nachfedern; danach leichtes Pendeln."""
+    if t < T_GRAB:
+        return kl.lerp_pose(POSE_REACH, POSE_PULL, seilzug(seg(t, 0.0, T_GRAB)))
+    u = seg(t, T_GRAB, 0.28)
+    p = kl.lerp_pose(POSE_PULL, POSE_HANG, 0.5 - 0.5 * math.cos(math.pi * u))
+    if u >= 1:
+        w = math.sin(2 * math.pi * (t - T_GRAB - 0.28) / 2.6)
+        p = dict(p, hip=(p["hip"][0] + 5 * w, p["hip"][1] + 1.5 * abs(w)), lean=p["lean"] + 2.0 * w)
+    return p
+
+
+def climber_pose_end(t):
+    """Folge fuers Klettern: am Gang haengen, bei "Test it" zweimal mit der rechten Hand auf die Leiste klopfen."""
+    p = dict(POSE_HANG)
+    for tk in T_KNOCK:
+        v = seg(t, tk - 0.14, 0.28)
+        if 0 < v < 1:
+            lift = math.sin(math.pi * v)
+            p = dict(p, rh=(GRIP_R[0] + 10 * lift, GRIP_R[1] - 34 * lift), hip=(p["hip"][0] - 4 * lift, p["hip"][1] + 4 * lift))
+    return p
+
+
+class Reel(rk.ReelBase):
+    DUR = DUR
+
     def __init__(self):
-        self.fin = m.Finish()
-        self.meta = rk.meta_hook()                                    # Meta-Hook: wo man gelandet ist (13.10.2026)
+        super().__init__()
+        self.hook1 = rk.Hook1(t_grab=T_GRAB, t_geo=T_GEO, t_out=T_OUT)
         self.stamp_top = m.text_sprite("HOLD ID", X0, rk.FORMAT_Y, "stencil", 40, C["slate"], tracking=0.12)
-        # Szene 1: Hook = Griffform (Frame 0 = Cover)
+        self.climber = kl.Climber(scale=1.0, width=18.0, torso_w=36.0)
+        # Szene 1: Hook 1 + Hook 2 an der Wand
         def bg1(im):
             o.contour_field(im, 760, 1520, n=10, r0=120, step=60, alpha=110)
             wall_front(im)
             o.route_rail(im, 0, RAIL_N)
         self.bg1 = m.background(bg1)
-        self.hook, _ = m.lines_sprite(["WHY DOES", "THIS STRIPE", "STICK OUT?"], rk.HOOK_Y, size=164)   # 3 Zeilen unter dem Meta-Hook: 164 statt 176, Luft zur Felskante
+        up, lo, _ = vein_geom(VEIN_P0, VEIN_P1, VEIN_HALF, 5)
+        # Geologie der Wand (Hook 1): Sandstein (Signatur Punkte, wie im Foto von Post #029), flach liegende Schichten,
+        # Kluefte; der Gang durchschlaegt die Schichten (keine Signatur im Gang, Gangraender hell)
+        beds = [[(x, y0 - 0.05 * (x - 110) + 5 * math.sin(x / 95 + k)) for x in range(100, 1101, 20)]
+                for k, y0 in enumerate(range(1010, 1960, 88))]
+        self.geo = kl.GeoReveal(wall_poly(), "sandstone", GRIP_R[0], GRIP_R[1], pat_alpha=95,
+                                beds=beds + [list(j) for j in JOINTS], contacts=[up, lo], holes=[up + lo[::-1]], seed=8)
+        self.hook, _ = m.lines_sprite(["WHY DOES", "THIS EDGE", "STICK OUT?"], rk.HOOK_Y, size=164)
         c = (640, 1520 + (1150 - 1520) * (640 - 110) / 980); n = (0.353, 0.936)
         a = (c[0] - n[0] * 175, c[1] - n[1] * 175); b = (c[0] + n[0] * 175, c[1] + n[1] * 175)
         def secline(im):
@@ -265,7 +334,7 @@ class Reel:
         self.lab = m.text_sprite("QUARTZ", 520, 1242, "mono", 30, C["magnesia"], tracking=0.1)
         self.lab_edge = m.text_sprite("EDGE", 812, 1098, "mono", 30, C["magnesia"], tracking=0.1)
         # Szene 3: viel spaeter, Gestein wittert zurueck (kuehl)
-        self.rock3 = m.background(lambda im: section_rock(im))                  # Fels + Obsidian, ohne Toenung
+        self.rock3 = m.background(lambda im: section_rock(im))
         self.air3 = m.background(lambda im: o.route_rail(im, RAIL_N, RAIL_N))
         band_full = Image.new("RGBA", (W, H), (0, 0, 0, 0)); band_full.alpha_composite(self.band.img, (self.band.x, self.band.y))
         self.band_full = band_full
@@ -295,20 +364,14 @@ class Reel:
         self.swipe_box = (X0 - 8, y5 + 16, X0 + sw + 14, y5 + 16 + sz2)
         self.safe = m.text_sprite("Test it: veins can flake off.", X0, y5 + sz2 + 62, "text_b", 50, C["magnesia"])
         self.stamp = self.make_stamp(716, 1072, -6)
-        # Szene 5: Endsignet
-        self.bg6 = m.background(lambda im: None)
-        lock = Image.open(os.path.join(os.path.dirname(HERE), "assets", "lockup_stacked_dark.png")).convert("RGBA")
-        lw = 760; lh = int(lock.height * lw / lock.width)
-        self.lockup = m.Sprite(lock.resize((lw, lh), Image.LANCZOS), (W - lw) // 2, 640)
-        self.mark_c = (self.lockup.x + 505 * lw / 1000, self.lockup.y + 280 * lw / 1000)
+        self.end = rk.EndSting()
         self.bolts = [bolt_sprite(i) for i in range(RAIL_N)]
         self.top_logo = m.sprite(lambda im: o.logo_mark(im, o.RAIL_X, 330, 0.26, C["magnesia"], width=7))
         def glow(im):                                              # Gang leuchtet im Payoff kurz auf
-            up, lo, _ = vein_geom(VEIN_P0, VEIN_P1, VEIN_HALF, 5)
             lay = Image.new("RGBA", im.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
             d.line([P(*p) for p in up + lo[::-1] + [up[0]]], fill=o.rgb(C["magnesia"]), width=int(6 * o.S), joint="curve")
             wm = Image.new("L", im.size, 0)
-            ImageDraw.Draw(wm).polygon([P(x, y) for x, y in o.ragged(110, 930, 1090, 1960, seed=3, amp=16, n=18, top_only=True)], fill=255)
+            ImageDraw.Draw(wm).polygon([P(x, y) for x, y in wall_poly()], fill=255)
             lay.putalpha(ImageChops.multiply(lay.getchannel("A"), wm)); im.alpha_composite(lay)
         self.glow = m.sprite(glow)
 
@@ -352,13 +415,6 @@ class Reel:
                     rr = r * (1 + sum(am * math.cos(k * th + ph + i * 0.13) for k, am, ph in harm))
                     pts.append(P(cx + rr * math.cos(th), cy + rr * 0.8 * math.sin(th)))
                 dr.line(pts, fill=o.rgb(C["magnesia"], a), width=int(3 * o.S))
-        return m.sprite(d)
-
-    def contract(self, u):
-        cx, cy = self.mark_c
-        def d(im):
-            o.contour_field(im, cx, cy, n=9, r0=lerp(420, 60, u), step=lerp(70, 12, u), color=C["slate"],
-                            alpha=int(lerp(230, 110, u)), width=2.6, seed=4, squash=0.86)
         return m.sprite(d)
 
     def bolt_pop(self, f, t, i, t0):
@@ -441,10 +497,25 @@ class Reel:
         return F, V
 
     # -------------------------------------------------------------- Frames
+    def scene1_world(self, t):
+        """Wand mit Kletterer, Kreidewolke und (Hook 1) aufgeklappter Geologie, vor dem leichten Push-in."""
+        f = self.bg1.copy()
+        u = seilzug(seg(t, T_GEO, 0.5))
+        if u > 0 and t < T_OUT + 0.4:
+            self.geo.put(f, u, fade=1 - seg(t, T_OUT, 0.4))
+        put(f, self.climber.sprite(climber_pose(t)))
+        kl.chalk_puff(f, t, T_GRAB, GRIP_R[0], GRIP_R[1] - 4, seed=11)
+        return f
+
     def frame(self, t):
-        if t < T_S2:                                               # Szene 1: Griffform + Hook
-            f = m.zoomed(self.bg1, 1 + 0.035 * seilzug(seg(t, 0, T_W1)), self.sec_c[0], self.sec_c[1])
-            put(f, self.meta); put(f, self.stamp_top); put(f, self.hook)
+        if t < T_S2:                                               # Szene 1: Hook 1 + Hook 2 an der Wand
+            f = m.zoomed(self.scene1_world(t), 1 + 0.035 * seilzug(seg(t, 0, T_W1)), self.sec_c[0], self.sec_c[1])
+            self.hook1.draw(f, t, hook_bis=T_W1)
+            u = seilzug(seg(t, T_Q, 0.35))
+            if u > 0:
+                fade = 1 - seg(t, T_W1, 0.12)
+                put(f, self.stamp_top, dx=lerp(-30, 0, u), op=u * fade)
+                put(f, self.hook, dx=lerp(-40, 0, u), op=u * fade)
             u = seilzug(seg(t, T_SEC, 0.42))
             if u > 0:
                 put(f, m.reveal(self.secline, u))
@@ -485,6 +556,9 @@ class Reel:
             v = seg(t, T_S4 + 0.05, 0.9)
             if 0 < v < 1:
                 put(f, self.glow, op=math.sin(math.pi * v) ** 0.7)
+            put(f, self.climber.sprite(climber_pose_end(t)), op=seilzug(seg(t, T_S4, 0.25)))
+            for k, tk in enumerate(T_KNOCK):
+                kl.chalk_puff(f, t, tk, GRIP_R[0], GRIP_R[1] - 4, seed=31 + k, size=0.6)
             u = seg(t, T_S4, 0.3)
             if 0 < u < 1:
                 put(f, self.top_logo, scale=lerp(1.9, 1.0, griff(u)))
@@ -497,38 +571,16 @@ class Reel:
                 sh = (1 - seg(t, T_STAMP + 0.2, 0.12)) * 3 if t >= T_STAMP + 0.2 else 0
                 put(f, self.stamp, dx=sh * math.sin(t * 90), op=min(1, u * 3), scale=lerp(1.65, 1.0, griff(u)) if u < 1 else 1.0)
             u = seilzug(seg(t, T_SAFE, 0.3)); put(f, self.safe, dx=lerp(-30, 0, u), op=u)
-            dr = ImageDraw.Draw(f)
-            for t0, box, seed in ((T_SWIPE + 0.1, self.swipe_box, 77),
-                                  (T_STAMP + 0.18, (self.stamp.x + 20, self.stamp.y + 20, self.stamp.x + self.stamp.w - 20,
-                                                    self.stamp.y + self.stamp.h - 20), 78)):
-                v = seg(t, t0, 0.6)                                 # Kreidestaub beim Treffer
-                if 0 < v < 1:
-                    rnd = random.Random(seed); x0, y0, x1, y1 = box
-                    for _ in range(40):
-                        px = rnd.uniform(x0, x1); py = rnd.uniform(y0, y1); ang = rnd.uniform(0, 6.28); sp = rnd.uniform(30, 120)
-                        qx = px + math.cos(ang) * sp * seilzug(v); qy = py + math.sin(ang) * sp * seilzug(v) + 40 * v * v
-                        r = rnd.uniform(1.5, 3.5)
-                        dr.ellipse([qx - r, qy - r, qx + r, qy + r], fill=o.rgb(C["magnesia"], int(200 * (1 - v))))
+            rk.dust(f, t, T_SWIPE + 0.1, self.swipe_box, seed=77)
+            rk.dust(f, t, T_STAMP + 0.18, (self.stamp.x + 20, self.stamp.y + 20, self.stamp.x + self.stamp.w - 20,
+                                           self.stamp.y + self.stamp.h - 20), seed=78)
             return f, 24
-        f = self.bg6.copy()                                        # Szene 5: Endsignet
-        u = seilzug(seg(t, T_END, 0.45))
-        put(f, self.contract(u), op=1 - seg(t, T_END + 0.35, 0.15))
-        put(f, self.lockup, op=seg(t, T_END + 0.3, 0.2))
-        return f, 25
-
-    def frames(self, draft=False):
-        n = int(round(DUR * FPS))
-        for i in range(n):
-            t = i / FPS
-            if draft and i % 3:
-                continue
-            f, seed = self.frame(t)
-            yield self.fin(f, seed)
+        return self.end.frame(t, T_END), 25
 
 
 def shimmer(f, t):
     """Aufsteigende Waerme unter dem Riss (Zug 1)."""
-    v = seg(t, 2.55 + HOOK_EXTRA, 0.4) * (1 - seg(t, 4.95 + HOOK_EXTRA, 0.35))
+    v = seg(t, 2.55 + HOOK_EXTRA + H1, 0.4) * (1 - seg(t, 4.95 + HOOK_EXTRA + H1, 0.35))
     if v <= 0:
         return
     dr = ImageDraw.Draw(f)
@@ -547,114 +599,39 @@ def clamp01(x):
 
 
 # ------------------------------------------------------------------ Ton
-SFX = os.path.join(os.path.dirname(HERE), "sfx", "kenney")
-
-def K(pack, name):
-    return os.path.join(SFX, f"kenney_{pack}", "Audio", name)
-
-def sound_events():
-    """CC0-Klaenge (Kenney) plus selbst erzeugte Flaeche, Grollen, Sprudeln, Kristall-Klang und Steigerung."""
-    ev, used = [], {}
-    def f(path, t, gain, label):
-        ev.append((t, m.load_audio(path), gain)); used.setdefault(label, "CC0 Kenney: " + os.path.basename(path))
-    def s(kind, t, gain, label, **kw):
-        ev.append((t, m.synth(kind, **kw), gain)); used.setdefault(label, f"selbst erzeugt ({kind})")
-    ticks = [K("interface-sounds", n) for n in ("tick_001.ogg", "tick_002.ogg", "tick_004.ogg")]
-    clacks = [K("impact-sounds", f"impactMetal_light_00{i}.ogg") for i in range(3)]
-    whoosh = K("interface-sounds", "maximize_001.ogg")
-    f(ticks[0], 0.35, -8.0, "kreide-tick")
-    f(K("interface-sounds", "scratch_002.ogg"), T_SEC, -12.0, "schnittlinie")
-    f(whoosh, T_W1, -7.0, "uebergang")
-    f(clacks[0], T_S2, -7.0, "bohrhaken")
-    f(K("impact-sounds", "impactMining_000.ogg"), T_CRACK, -4.0, "riss")
-    s("fizz", T_FLOW[0], -14.0, "heisses-wasser", dur=1.5, seed=3)
-    for k, (t0, fr) in enumerate(zip((4.55, 4.85, 5.15, 5.42, 5.68), (1567.98, 1760.0, 2093.0, 2349.3, 2637.0))):
-        s("tone", t0, -21.0 + k * 0.8, "kristall", dur=0.4, freq=fr)
-    f(ticks[1], T_LAB, -6.0, "kreide-tick")
-    f(whoosh, T_W2, -7.0, "uebergang")
-    f(clacks[1], T_S3, -7.0, "bohrhaken")
-    s("rumble", T_S3 + 0.05, -8.5, "zeit-grollen", dur=2.5, seed=2)
-    for t0, nm in ((7.35, "impactMining_001.ogg"), (7.95, "impactMining_002.ogg"), (8.5, "impactMining_001.ogg")):
-        f(K("impact-sounds", nm), t0, -16.0, "abbroeckeln")
-    s("riser", T_RISE, -9.0, "steigerung", dur=0.8)
-    f(K("impact-sounds", "impactPunch_heavy_000.ogg"), T_S4, -2.0, "treffer")
-    f(clacks[2], T_S4 + 0.02, -9.0, "bohrhaken")
-    f(K("interface-sounds", "scratch_001.ogg"), T_SWIPE, -5.0, "kreide-wisch")
-    f(K("interface-sounds", "scratch_002.ogg"), T_SWIPE + 0.08, -7.0, "kreide-wisch")
-    f(K("impact-sounds", "impactPunch_heavy_001.ogg"), T_STAMP + 0.16, -5.0, "stempel")
-    f(ticks[2], T_SAFE, -8.0, "kreide-tick")
-    pl = m.load_audio(K("interface-sounds", "pluck_001.ogg"))
-    for k, r in enumerate((1.0, 1.26, 1.5)):                    # Klanglogo: drei steigende Toene
-        ev.append((T_END + 0.12 * k, m.pitch(pl, r), -3.0))
-    used["klanglogo"] = "CC0 Kenney: pluck_001.ogg (drei Tonhoehen)"
-    f(K("impact-sounds", "impactGeneric_light_000.ogg"), T_END + 0.45, -5.0, "klatsch")
-    for t0, t1, g in ((0.0, T_S4 - 0.15, -9.0), (T_S4, T_END, -11.0)):  # Flaeche, vor dem Payoff kurz Stille
-        pad = m.synth("pad", dur=t1 - t0, seed=int(t0) + 2)
-        rel = [(t - t0, smp, gg) for t, smp, gg in ev if t0 <= t < t1]
-        ev.append((t0, m.duck(pad, rel, depth_db=-6.0), g))
-    used["flaeche"] = "selbst erzeugt (pad)"
-    return ev, used
-
-
-# ------------------------------------------------------------------ Hauptprogramm
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default=os.path.join(HERE, "..", "..", "..", "reels"))
-    ap.add_argument("--qc", default=None, help="Ordner fuer QC-Bilder")
-    ap.add_argument("--draft", action="store_true")
-    ap.add_argument("--stills", default=None, help="Kommagetrennte Zeitpunkte: nur Einzelbilder in --qc schreiben")
-    a = ap.parse_args()
-    os.makedirs(a.out, exist_ok=True)
-    r = Reel()
-    if a.stills:
-        os.makedirs(a.qc, exist_ok=True)
-        for ts in a.stills.split(","):
-            f, s = r.frame(float(ts))
-            Image.fromarray(r.fin(f, s)).save(os.path.join(a.qc, f"still_{float(ts):05.2f}.png"))
-        return
-    f0, s0 = r.frame(0.0)                                         # Cover = Frame 0
-    cover = r.fin(f0, s0)
-    Image.fromarray(cover).save(os.path.join(a.out, SLUG + ".jpg"), quality=92)
-    if a.qc:                                                      # QC-Kontaktbogen
-        os.makedirs(a.qc, exist_ok=True)
-        ts = [0.0, 1.6, 2.9, 3.6, 3.85, 4.3, 4.9, 5.5, 6.1, 7.0, 7.9, 8.9, 9.5, 10.7, 11.6, 12.6]
-        thumbs = []
-        for t in ts:
-            f, s = r.frame(t)
-            im = Image.fromarray(r.fin(f, s)).resize((270, 480), Image.LANCZOS)
-            ImageDraw.Draw(im).text((8, 8), f"{t:.2f}s", fill=(255, 120, 60))
-            thumbs.append(im)
-        sheet = Image.new("RGB", (270 * 8, 480 * 2), (0, 0, 0))
-        for k, im in enumerate(thumbs):
-            sheet.paste(im, ((k % 8) * 270, (k // 8) * 480))
-        sheet.save(os.path.join(a.qc, SLUG + "_kontaktbogen.png"))
-    ev, used = sound_events()                                     # Ton
-    tmp = os.path.join(a.qc or a.out, SLUG + "_mix.wav"); norm = os.path.join(a.qc or a.out, SLUG + "_norm.wav")
-    m.write_wav(tmp, m.mix(ev, DUR))
-    ln = m.master(tmp, norm)              # -14 LUFS / <= -1 dBTP im fertigen AAC (mit Probe-Encodes)
-    mp4 = os.path.join(a.out, SLUG + ".mp4")                      # Video
-    n = int(round(DUR * FPS))
-    m.encode(r.frames(), n, mp4, audio_wav=norm, crf=21)
-    rep = {"slug": SLUG, "dauer_s": DUR, "fps": FPS, "frames": n, "mp4_mb": round(os.path.getsize(mp4) / 1e6, 2),
-           "woerter_im_bild": sum(len(s.replace("·", " ").split()) for s in ON_SCREEN), "labels": len(LABELS),
-           "payoff_anteil": round(T_S4 / DUR, 3), "loudnorm": ln, "messung": m.measure(mp4), "toene": used,
-           "ablauf": "erklaerkette", "hook_steht_s": T_W1, "meta_hook": " \u00b7 ".join(rk.META_HOOK),
-           "meta_hook_im_cover_anteil": rk.meta_hook_sichtbar(cover)}
-    rep["woerter_gesamt_mit_labels"] = rep["woerter_im_bild"] + sum(len(s.split()) for s in LABELS)
-    if a.qc:
-        marks = [(0, "Hook"), (T_SEC, "Schnitt"), (T_W1, "Welle"), (T_S2, "Zug 1"), (T_W2, "Welle"), (T_S3, "Zug 2"),
-                 (T_RISE, "Steigerung"), (T_S4, "PAYOFF"), (T_STAMP, "Stempel"), (T_SAFE, "Folge"), (T_END, "Klanglogo")]
-        rk.tonverlauf_png(mp4, os.path.join(a.qc, SLUG + "_tonverlauf.png"), marks, "GeoCrimps r002 HOLD ID #01 (Erklaerkette)")
-    checks = {"dauer_im_formatrahmen": 9.0 <= DUR <= 13.0, "meta_hook_im_cover": rep["meta_hook_im_cover_anteil"] >= 0.9,
-              "hook_frage_mind_3_2_s": T_W1 >= rk.HOOK_MIN_S - 1e-6, "payoff_65_80_prozent": 0.65 <= rep["payoff_anteil"] <= 0.80,
-              "hoechstens_40_woerter": rep["woerter_gesamt_mit_labels"] <= 40,
-              "lautheit_-14_+-0.5": abs(rep["messung"].get("I_LUFS", 0) + 14) <= 0.5,
-              "true_peak_max_-1": rep["messung"].get("TP_dBFS", 0) <= -1.0, "mp4_unter_100_mb": rep["mp4_mb"] < 100}
-    rep["pruefungen"] = checks
-    rep["alle_pruefungen_ok"] = all(checks.values())
-    print(json.dumps(rep, ensure_ascii=False, indent=1))
-    json.dump(rep, open(os.path.join(a.qc or a.out, SLUG + "_bericht.json"), "w"), ensure_ascii=False, indent=1)
+def sound_events(b):
+    """Hook 1 aus dem eigenen Klangset, Puls in Hook 2 und den Zuegen, sonst wie Fassung 3 (Kenney CC0 + selbst erzeugt)."""
+    h1 = rk.Hook1(t_grab=T_GRAB, t_geo=T_GEO, t_out=T_OUT)
+    b.hook1(h1, root=55.0)
+    b.kenney("interface-sounds", "tick_002.ogg", T_Q + 0.05, -10.0, "kreide-tick")
+    b.kenney("interface-sounds", "scratch_002.ogg", T_SEC, -12.0, "schnittlinie")
+    b.kenney("interface-sounds", "maximize_001.ogg", T_W1, -7.0, "uebergang")
+    b.kenney("impact-sounds", "impactMetal_light_000.ogg", T_S2, -7.0, "bohrhaken")
+    b.kenney("impact-sounds", "impactMining_000.ogg", T_CRACK, -4.0, "riss")
+    b.synth("fizz", T_FLOW[0], -14.0, "heisses-wasser", dur=1.5, seed=3)
+    for k, fr in enumerate((1567.98, 1760.0, 2093.0, 2349.3, 2637.0)):
+        b.synth("tone", T_GROW0 + 0.1 + 0.28 * k, -21.0 + k * 0.8, "kristall", dur=0.4, freq=fr)
+    b.kenney("interface-sounds", "tick_002.ogg", T_LAB, -6.0, "kreide-tick")
+    b.kenney("interface-sounds", "maximize_001.ogg", T_W2, -7.0, "uebergang")
+    b.kenney("impact-sounds", "impactMetal_light_001.ogg", T_S3, -7.0, "bohrhaken")
+    b.synth("rumble", T_S3 + 0.05, -8.5, "zeit-grollen", dur=2.5, seed=2)
+    for t0, nm in ((T_E0 + 0.55, "impactMining_001.ogg"), (T_E0 + 1.15, "impactMining_002.ogg"), (T_E0 + 1.70, "impactMining_001.ogg")):
+        b.kenney("impact-sounds", nm, t0, -16.0, "abbroeckeln")
+    b.synth("riser", T_RISE, -9.0, "steigerung", dur=0.8)
+    b.klang("sub_hit", T_S4 - 0.01, -6.0, "payoff-einschlag", f0=80.0, f1=38.0)
+    b.kenney("impact-sounds", "impactPunch_heavy_000.ogg", T_S4, -3.0, "treffer")
+    b.kenney("impact-sounds", "impactMetal_light_002.ogg", T_S4 + 0.02, -9.0, "bohrhaken")
+    b.kenney("interface-sounds", "scratch_001.ogg", T_SWIPE, -5.0, "kreide-wisch")
+    b.kenney("interface-sounds", "scratch_002.ogg", T_SWIPE + 0.08, -7.0, "kreide-wisch")
+    b.kenney("impact-sounds", "impactPunch_heavy_001.ogg", T_STAMP + 0.16, -5.0, "stempel")
+    b.kenney("interface-sounds", "tick_004.ogg", T_SAFE, -8.0, "kreide-tick")
+    for k, tk in enumerate(T_KNOCK):
+        b.klang("thud", tk, -12.0, "abklopfen", ratio=1.6, seed=k)
+    big = [T_W1, T_S2, T_CRACK, T_W2, T_S3]
+    b.pulse(T_Q + 0.02, T_RISE - 0.05, bpm=116, gain=-16.0, hat_gain=-25.0, avoid=big)
+    b.sound_logo(T_END)
+    b.pads([(0.0, T_S4 - 0.15, -9.0), (T_S4, T_END, -11.0)])
 
 
 if __name__ == "__main__":
-    main()
+    rk.run(Reel, sound_events, META)

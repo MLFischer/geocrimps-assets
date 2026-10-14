@@ -16,6 +16,7 @@ from PIL import Image, ImageDraw
 
 import outcrop as o
 import motion as m
+import klang
 from outcrop import C, P
 from motion import W, H, FPS, SR, X0, seg, seilzug, sturz, griff, lerp, put
 
@@ -177,6 +178,7 @@ class SoundBook:
     """Sammelt Klangereignisse und protokolliert die Herkunft jedes Klangs (Lizenzregister)."""
     def __init__(self):
         self.ev, self.used = [], {}
+        self.no_duck = set()                     # Ereignisse, unter denen die Flaeche nicht duckt (Hi-Hats des Pulses)
 
     def kenney(self, pack, name, t, gain, label, ratio=None):
         path = os.path.join(SFX, f"kenney_{pack}", "Audio", name)
@@ -187,6 +189,44 @@ class SoundBook:
 
     def synth(self, kind, t, gain, label, **kw):
         self.ev.append((t, m.synth(kind, **kw), gain)); self.used.setdefault(label, set()).add(f"selbst erzeugt ({kind})")
+
+    def klang(self, kind, t, gain, label, ratio=None, **kw):
+        """Kinoklaenge aus dem eigenen Klangset (engine/klang.py): sub_hit, braam, crunch, chalk_slap, reverse, kick, hat,
+        tick, thud. Selbst erzeugt, also lizenzfrei per Konstruktion (Kaufbibliotheken verbieten die Weitergabe im Repo)."""
+        smp = klang.make(kind, **kw)
+        if ratio:
+            smp = m.pitch(smp, ratio)
+        self.ev.append((max(0.0, t), smp, gain)); self.used.setdefault(label, set()).add(f"selbst erzeugt (klang.{kind})")
+        return smp
+
+    def hook1(self, h, root=55.0):
+        """Klangsignatur von Hook 1 (h = reelkit.Hook1): Ton ab 0,0 s (Rueckwaerts-Anschwellen bis zum Zugreifen),
+        Kreide-Klatsch beim Griff, Einschlag + Braam + Knacken bei "× GEOLOGY", Luftzug beim Uebergang in die Kopfzeile.
+        root: Grundton des Braam (55 = A; je Reel variieren, z. B. 49 = G, 58.3 = B-flat)."""
+        self.klang("reverse", 0.0, -9.0, "hook1-anschwellen", dur=max(0.2, h.t_grab))
+        self.klang("chalk_slap", h.t_grab, -3.0, "hook1-griff")
+        self.klang("sub_hit", h.t_geo - 0.01, -2.0, "hook1-einschlag")
+        self.klang("braam", h.t_geo, -7.0, "hook1-braam", root=root)
+        self.klang("crunch", h.t_geo + 0.02, -6.0, "hook1-gestein")
+        self.synth("whoosh", h.t_out - 0.04, -11.0, "hook1-uebergang", dur=0.42, seed=12)
+
+    def pulse(self, t0, t1, bpm=116, gain=-15.0, hat_gain=-23.0, avoid=(), avoid_s=0.14):
+        """Puls (Kick auf dem Schlag, Hi-Hat dazwischen) von t0 bis t1. Vor pads() aufrufen: die Flaeche duckt sich unter
+        jedem Schlag (pumpt), das treibt Hook 2 und die Zuege. avoid: Zeiten grosser Treffer, dort faellt der Schlag aus."""
+        beat = 60.0 / bpm; t = t0; k = 0
+        while t < t1 - 0.05:
+            for tt, kind, g in ((t, "kick", gain), (t + beat / 2, "hat", hat_gain)):
+                if tt < t1 and all(abs(tt - a) > avoid_s for a in avoid):
+                    smp = self.klang(kind, tt, g + (1.5 if kind == "kick" and k % 4 == 0 else 0.0), "puls", seed=k)
+                    if kind == "hat":
+                        self.no_duck.add(id(smp))
+            t += beat; k += 1
+
+    def countdown(self, t0, t1, step=0.33, gain=-12.0):
+        """Rate-Pause im Quiz: Ticks im Abstand step von t0 bis t1, der letzte hoeher (aktive Pause statt Stille)."""
+        n = max(1, int((t1 - t0) / step + 1e-6))
+        for i in range(n):
+            self.klang("tick", t0 + i * step, gain + (2.0 if i == n - 1 else 0.0), "countdown", freq=1900.0 if i < n - 1 else 2540.0)
 
     def sound_logo(self, t_end):
         """Klanglogo zum Endsignet: drei steigende Toene (pluck) + Kreide-Klatsch."""
@@ -201,7 +241,7 @@ class SoundBook:
             pad = m.synth("pad", dur=(t1 - t0) * ratio + 0.05, seed=int(t0 * 10) + 2)
             if abs(ratio - 1.0) > 1e-3:
                 pad = m.pitch(pad, ratio)[: int((t1 - t0) * SR)]
-            rel = [(t - t0, smp, gg) for t, smp, gg in self.ev if t0 <= t < t1]
+            rel = [(t - t0, smp, gg) for t, smp, gg in self.ev if t0 <= t < t1 and id(smp) not in self.no_duck]
             self.ev.append((t0, m.duck(pad, rel, depth_db=depth_db), g))
         self.used.setdefault("flaeche", set()).add("selbst erzeugt (pad)")
 
@@ -233,9 +273,10 @@ def tonverlauf_png(mp4, out_png, marks, title):
     im.save(out_png)
 
 
-# ------------------------------------------------------------------ Meta-Hook (seit 13.10.2026)
-# Wo man gelandet ist: Kopfzeile ab Frame 0, in jedem Reel gleich, nach dem Profilnamen "GeoCrimps - Geology of Climbing".
-META_HOOK = ("GEOCRIMPS", "GEOLOGY OF CLIMBING")
+# ------------------------------------------------------------------ Meta-Hook / Kopfzeile (seit 13.10.2026)
+# Wo man gelandet ist: Kopfzeile, in jedem Reel gleich. Mittags noch "GEOCRIMPS · GEOLOGY OF CLIMBING" ab Frame 0;
+# seit dem Abend (Hook 1, siehe unten) "GEOCRIMPS · CLIMBING × GEOLOGY": die grossen Hook-1-Woerter schrumpfen in diese Zeile.
+META_HOOK = ("GEOCRIMPS", "CLIMBING × GEOLOGY")
 META_HOOK_Y, FORMAT_Y, HOOK_Y = 300, 352, 404      # Kopfzeile, Formatlabel, Hook-Frage (vorher Label 300, Hook 352)
 
 
@@ -259,17 +300,101 @@ def meta_hook(y=META_HOOK_Y, x=X0, size=40, tracking=0.12, desc_color=C["magnesi
     return m.sprite(d)
 
 
-def meta_hook_sichtbar(cover):
-    """Anteil der deckenden Meta-Hook-Pixel, die im fertigen Cover (Frame 0) so erscheinen wie gezeichnet.
-    Nahe 1 = Kopfzeile steht frei im Cover; klein = fehlt oder ist verdeckt."""
-    spr = meta_hook()
+def sichtbar(img, spr):
+    """Anteil der deckenden Pixel eines Sprites, die im fertigen Bild so erscheinen wie gezeichnet.
+    Nahe 1 = steht frei im Bild; klein = fehlt oder ist verdeckt."""
     a = np.asarray(spr.img.getchannel("A")) > 200
     ref = np.asarray(spr.img.convert("RGB"), dtype=np.float32)
-    reg = np.asarray(cover.convert("RGB") if hasattr(cover, "convert") else cover, dtype=np.float32)
+    reg = np.asarray(img.convert("RGB") if hasattr(img, "convert") else img, dtype=np.float32)
     reg = reg[spr.y:spr.y + spr.h, spr.x:spr.x + spr.w, :3]
     if reg.shape[:2] != a.shape or not a.any():
         return 0.0
     return round(float((np.abs(reg - ref).mean(axis=2)[a] < 40).mean()), 3)
+
+
+def meta_hook_sichtbar(cover):
+    """Kopfzeile (Meta-Hook) im Cover: Anteil wie in sichtbar()."""
+    return sichtbar(cover, meta_hook())
+
+
+# ------------------------------------------------------------------ Hook 1 "CLIMBING × GEOLOGY" (seit 13.10.2026, abends)
+# Markus 13.10.: "hook 1 (klettern und geologie) und dann hook 2 (eigentliches reel thema)". Anlass: Reel #1 verlor in
+# der ersten Sekunde ein Viertel der Zuschauer, und bei Reel #2 wurde am Anfang nicht klar, worum es geht.
+# Hook 1 (1,0-1,6 s): GEOCRIMPS klein und CLIMBING gross ab Frame 0; ein Kletterer (kletter.Climber) greift den Griff
+# des Reels (Kreidewolke, Klatschen), dann schlaegt "× GEOLOGY" ein und das Gestein klappt in seine Geologie auf
+# (kletter.GeoReveal, Einschlag + Braam). Danach schrumpfen die grossen Woerter in die Kopfzeile und Hook 2 (die
+# Themenfrage, mindestens 3,2 s) faehrt ein; der Kletterer bleibt im Bild. Die Hook-1-Woerter sind wie die Kopfzeile
+# ein Markenelement und zaehlen nicht zu den 40 Woertern.
+HOOK1_WORDS = ("CLIMBING", "× GEOLOGY")
+HOOK1_RANGE = (1.0, 1.6)            # Frame 0 bis Beginn des Uebergangs in die Kopfzeile
+HOOK1_OUT = 0.34                    # Dauer des Uebergangs
+
+
+def _offset_in_tracked(s, i, role, size, tracking):
+    f = o.font(role, size)
+    return (sum(f.getlength(ch) for ch in s[:i]) + tracking * size * o.S * i) / o.S
+
+
+class Hook1:
+    """Text und Zeitplan von Hook 1. draw(f, t) zeichnet je nach t: Marke + CLIMBING (ab Frame 0), Puls beim Zugreifen
+    (t_grab), Einschlag "× GEOLOGY" (t_geo), Uebergang in die Kopfzeile (t_out .. t_out + HOOK1_OUT), danach die
+    Kopfzeile bis hook_bis (dann blendet sie mit der Themenfrage aus). Bild (Kletterer, Aufklappen) zeichnet das Reel."""
+
+    def __init__(self, t_grab=0.38, t_geo=0.68, t_out=1.40, size=214, y=FORMAT_Y - 6):
+        self.t_grab, self.t_geo, self.t_out = t_grab, t_geo, t_out
+        self.kicker = meta_hook()
+        self.brand = m.text_sprite(META_HOOK[0], X0, META_HOOK_Y, "stencil", 40, C["magnesia"], tracking=0.12)
+        sz = min(m.fit(w, "display", size) for w in HOOK1_WORDS)
+        self.size = sz
+        y2 = y + sz * 0.9
+        self.w1 = m.text_sprite(HOOK1_WORDS[0], X0, y, "display", sz, C["magnesia"])
+        wx = o.text_width("× ", "display", sz)
+
+        def geo(im):
+            o.text(im, X0, y2, "×", "display", sz, C["slate"])
+            o.text(im, X0 + wx, y2, HOOK1_WORDS[1][2:], "display", sz, C["magnesia"])
+        self.w2 = m.sprite(geo)
+        self.bottom = y2 + sz * 0.95                                   # Unterkante der grossen Woerter
+        # Zielpositionen in der Kopfzeile (meta_hook: Marke, Punkt, Beschreibung)
+        brand, desc = META_HOOK
+        w_brand = tracked_width(brand, "stencil", 40, 0.12)
+        gap = 40 * 0.42; wd = o.text_width("·", "stencil", 40)
+        xd = X0 + w_brand + 2 * gap + wd
+        i2 = desc.index("×")
+        self.targets = []
+        for spr, sub, x_t in ((self.w1, desc[:i2 - 1], xd), (self.w2, desc[i2:], xd + _offset_in_tracked(desc, i2, "stencil", 40, 0.12))):
+            k = tracked_width(sub, "stencil", 40, 0.12) / max(1.0, spr.w)
+            self.targets.append((spr, k, x_t, self.kicker.y))
+
+    def draw(self, f, t, hook_bis=None, fade=0.12):
+        """Bis t_out + HOOK1_OUT: Hook 1 und Uebergang; danach Kopfzeile (blendet ab hook_bis aus, wenn angegeben)."""
+        t1 = self.t_out + HOOK1_OUT
+        if t >= t1:
+            op = 1.0 if hook_bis is None else 1 - seg(t, hook_bis, fade)
+            put(f, self.kicker, op=op)
+            return
+        v = seg(t, self.t_out, HOOK1_OUT)
+        if v > 0:                                                       # Uebergang: der Block schrumpft in die Kopfzeile
+            u = 0.5 - 0.5 * math.cos(math.pi * v)                       # weich an beiden Enden
+            put(f, self.brand)
+            put(f, self.kicker, op=seg(t, self.t_out + 0.5 * HOOK1_OUT, 0.5 * HOOK1_OUT))
+            fade_big = 1 - seg(t, self.t_out + 0.45 * HOOK1_OUT, 0.5 * HOOK1_OUT)
+            (s1, k1, x_t, y_t), _ = self.targets
+            ax, ay = s1.x, s1.y                                         # beide Woerter gemeinsam skalieren: kein Ueberlappen
+            for spr in (self.w1, self.w2):
+                put(f, spr, dx=(x_t - ax) * u, dy=(y_t - ay) * u, op=fade_big, scale=lerp(1.0, k1, u), anchor=(ax, ay))
+            return
+        put(f, self.brand)
+        bump = math.sin(math.pi * seg(t, self.t_grab, 0.2)) if t >= self.t_grab else 0.0
+        put(f, self.w1, scale=1 + 0.06 * bump, anchor=(self.w1.x, self.w1.y + self.w1.h / 2))
+        v = seg(t, self.t_geo, 0.22)
+        if v > 0:
+            put(f, self.w2, op=min(1.0, v * 3), scale=lerp(1.32, 1.0, griff(v)) if v < 1 else 1.0,
+                anchor=(self.w2.x, self.w2.y + self.w2.h / 2))
+
+    def frame0_anteil(self, img):
+        """Stehen GEOCRIMPS und CLIMBING frei in Frame 0? (kleinerer der beiden Anteile)"""
+        return min(sichtbar(img, self.brand), sichtbar(img, self.w1))
 
 
 # ------------------------------------------------------------------ Ablauf und Lesezeit (seit 13.10.2026)
@@ -293,8 +418,10 @@ def plan_ablauf(slug):
 # ------------------------------------------------------------------ Hauptprogramm
 def run(ReelCls, sound_events, META):
     """META: slug, dur_range, payoff_t, on_screen (Liste), labels (Liste), qc_times (16 Zeitpunkte), marks [(t, Name)], title,
-    ablauf (quiz | offene_frage | erklaerkette, wie der Slot im Themenplan), hook_bis (Sekunde, ab der die Hook-Frage
-    ausgeblendet wird; sie steht ab Frame 0), weitere_fragen ([[Beginn, Beginn des Ausblendens], ...] je weiterer Frage im Bild)."""
+    ablauf (quiz | offene_frage | erklaerkette, wie der Slot im Themenplan), hook_ab / hook_bis (Hook 2: Beginn des
+    Einblendens / des Ausblendens der Themenfrage), weitere_fragen ([[Beginn, Beginn des Ausblendens], ...] je weiterer
+    Frage im Bild), hook1_bis (Beginn des Uebergangs von Hook 1 in die Kopfzeile), cover_t (Zeitpunkt des Covers: ein
+    Bild aus Hook 2 mit Kopfzeile und Themenfrage). Das Reel stellt seine reelkit.Hook1-Instanz als self.hook1 bereit."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=os.path.join(HERE, "..", "..", "reels"))
     ap.add_argument("--qc", default=None, help="Ordner fuer QC-Dateien")
@@ -302,6 +429,7 @@ def run(ReelCls, sound_events, META):
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     slug = META["slug"]
+    stem = META.get("datei", slug)                                # Dateiname (Neufassung eines Reels: z. B. <slug>_v2)
     r = ReelCls()
     if a.stills:
         os.makedirs(a.qc, exist_ok=True)
@@ -311,9 +439,14 @@ def run(ReelCls, sound_events, META):
         return
     qc = a.qc or a.out
     os.makedirs(qc, exist_ok=True)
-    f0, s0 = r.frame(0.0)                                         # Cover = Frame 0
-    cover = r.fin(f0, s0)
-    Image.fromarray(cover).save(os.path.join(a.out, slug + ".jpg"), quality=92)
+    f0, s0 = r.frame(0.0)                                         # Frame 0: Hook 1 (GEOCRIMPS + CLIMBING)
+    frame0 = r.fin(f0, s0)
+    h1 = getattr(r, "hook1", None)
+    hook1_frame0 = h1.frame0_anteil(frame0) if h1 else 0.0
+    cover_t = float(META.get("cover_t", 0.0))                     # Cover: Bild aus Hook 2 (Kopfzeile + Themenfrage)
+    fc, sc = r.frame(cover_t)
+    cover = r.fin(fc, sc)
+    Image.fromarray(cover).save(os.path.join(a.out, stem + ".jpg"), quality=92)
     meta_ok = meta_hook_sichtbar(cover)
     thumbs = []                                                   # QC-Kontaktbogen
     for t in META["qc_times"]:
@@ -325,31 +458,39 @@ def run(ReelCls, sound_events, META):
     sheet = Image.new("RGB", (270 * 8, 480 * rows), (0, 0, 0))
     for k, im in enumerate(thumbs):
         sheet.paste(im, ((k % 8) * 270, (k // 8) * 480))
-    sheet.save(os.path.join(qc, slug + "_kontaktbogen.png"))
+    sheet.save(os.path.join(qc, stem + "_kontaktbogen.png"))
     book = SoundBook()                                            # Ton
     sound_events(book)
-    tmp = os.path.join(qc, slug + "_mix.wav"); norm = os.path.join(qc, slug + "_norm.wav")
+    tmp = os.path.join(qc, stem + "_mix.wav"); norm = os.path.join(qc, stem + "_norm.wav")
     m.write_wav(tmp, m.mix(book.ev, r.DUR))
     ln = m.master(tmp, norm)
-    mp4 = os.path.join(a.out, slug + ".mp4")                      # Video
+    mp4 = os.path.join(a.out, stem + ".mp4")                      # Video
     n = int(round(r.DUR * FPS))
     m.encode(r.frames(), n, mp4, audio_wav=norm, crf=21)
-    tonverlauf_png(mp4, os.path.join(qc, slug + "_tonverlauf.png"), META.get("marks", []), META.get("title", slug))
+    tonverlauf_png(mp4, os.path.join(qc, stem + "_tonverlauf.png"), META.get("marks", []), META.get("title", slug))
     words = sum(len(s.replace("·", " ").split()) for s in META["on_screen"])
-    rep = {"slug": slug, "dauer_s": r.DUR, "fps": FPS, "frames": n, "mp4_mb": round(os.path.getsize(mp4) / 1e6, 2),
+    rep = {"slug": slug, "datei": stem, "dauer_s": r.DUR, "fps": FPS, "frames": n, "mp4_mb": round(os.path.getsize(mp4) / 1e6, 2),
            "woerter_im_bild": words, "labels": len(META.get("labels", [])),
            "woerter_gesamt_mit_labels": words + sum(len(s.split()) for s in META.get("labels", [])),
            "payoff_anteil": round(META["payoff_t"] / r.DUR, 3), "loudnorm": ln, "messung": m.measure(mp4),
            "toene": book.licenses()}
     ab, ab_vor = plan_ablauf(slug)
     fragen = META.get("weitere_fragen", [])
+    hook_s = round((META.get("hook_bis") or 0) - (META.get("hook_ab") or 0), 2)
+    h1_bis = META.get("hook1_bis")
     rep.update({"ablauf": META.get("ablauf"), "ablauf_im_themenplan": ab, "ablauf_slot_davor": ab_vor,
-                "hook_steht_s": META.get("hook_bis"), "weitere_fragen_stehen_s": [round(b - a, 2) for a, b in fragen],
-                "meta_hook": " · ".join(META_HOOK), "meta_hook_woerter_extra": sum(len(s.split()) for s in META_HOOK),
+                "hook1": " / ".join(HOOK1_WORDS), "hook1_bis_s": h1_bis, "hook1_in_frame0_anteil": hook1_frame0,
+                "hook1_woerter_extra": sum(len(s.replace("×", " ").split()) for s in HOOK1_WORDS),
+                "hook_ab_s": META.get("hook_ab"), "hook_bis_s": META.get("hook_bis"), "hook_steht_s": hook_s,
+                "weitere_fragen_stehen_s": [round(b - a, 2) for a, b in fragen], "cover_t": cover_t,
+                "meta_hook": " · ".join(META_HOOK), "meta_hook_woerter_extra": sum(len(s.replace("×", " ").split()) for s in META_HOOK),
                 "meta_hook_im_cover_anteil": meta_ok})
     checks = {"dauer_im_formatrahmen": META.get("dur_range", [0, 99])[0] <= r.DUR <= META.get("dur_range", [0, 99])[1],
+              "hook1_klettern_geologie_in_frame_0": hook1_frame0 >= 0.9,
+              "hook1_dauer_1_0_bis_1_6_s": h1_bis is not None and HOOK1_RANGE[0] <= h1_bis <= HOOK1_RANGE[1],
+              "hook2_nach_hook1": h1_bis is not None and (META.get("hook_ab") or 0) >= h1_bis,
               "meta_hook_im_cover": meta_ok >= 0.9,
-              "hook_frage_mind_3_2_s": (META.get("hook_bis") or 0) >= HOOK_MIN_S - 1e-6,
+              "hook_frage_mind_3_2_s": hook_s >= HOOK_MIN_S - 1e-6,
               "weitere_fragen_mind_1_2_s": all(b - a >= FRAGE_MIN_S - 1e-6 for a, b in fragen),
               "ablauf_wie_im_themenplan": META.get("ablauf") in ABLAEUFE and META.get("ablauf") == ab,
               "ablauf_anders_als_im_slot_davor": ab is not None and ab != ab_vor,
@@ -361,4 +502,4 @@ def run(ReelCls, sound_events, META):
     rep["pruefungen"] = checks
     rep["alle_pruefungen_ok"] = all(checks.values())
     print(json.dumps(rep, ensure_ascii=False, indent=1))
-    json.dump(rep, open(os.path.join(qc, slug + "_bericht.json"), "w"), ensure_ascii=False, indent=1)
+    json.dump(rep, open(os.path.join(qc, stem + "_bericht.json"), "w"), ensure_ascii=False, indent=1)

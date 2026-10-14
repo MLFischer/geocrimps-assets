@@ -89,12 +89,18 @@ def main():
         print("FEHLER: Konto nicht lesbar: " + fehlertext(acc)); sys.exit(1)
     q = load_json("v2/reels.json", {"reels": []})
     rows, notes = [], []
+    posts = []                                    # (Eintrag, Name im Bericht, Dauer oder None) je Post im Konto
     for r in q.get("reels", []):
-        if r.get("status") != "published" or not r.get("media_id"):
-            continue
+        for k, old in enumerate(r.get("ersetzt") or []):   # ersetzte Fassungen (Neu-Post) weiter auswerten
+            if old.get("media_id"):
+                posts.append((dict(r, **old, status="published"), f"{r['id']} (Fassung {old.get('fassung', k + 1)}, ersetzt)",
+                              old.get("dauer_s")))
+        if r.get("status") == "published" and r.get("media_id"):
+            posts.append((r, r["id"], None))
+    for r, name, dauer_alt in posts:
         vals, missing = insights(ig, r["media_id"])
         rep = load_json(f"v2/qc/{r['slug']}/bericht.json", {}) or {}
-        dauer = rep.get("dauer_s")
+        dauer = dauer_alt or rep.get("dauer_s")
         reach = vals.get("reach")
         avg_ms = vals.get("ig_reels_avg_watch_time")
         avg_s = round(avg_ms / 1000, 2) if isinstance(avg_ms, (int, float)) else None
@@ -105,7 +111,8 @@ def main():
             return round(100 * x / reach, 2) if isinstance(x, (int, float)) and reach else None
         pub = parse_ts(r.get("published_at"))
         days = round((now - pub).total_seconds() / 86400, 1) if pub else None
-        row = {"datum": now.date().isoformat(), "reel": r["id"], "slug": r["slug"], "format": f"{r['format']} #{r['nr']:02d}",
+        fmt = f"{r['format']} #{r['nr']:02d}" + (" (alte Fassung)" if name != r["id"] else "")
+        row = {"datum": now.date().isoformat(), "reel": name, "slug": r["slug"], "format": fmt,
                "ablauf": r.get("ablauf", ""), "tage_online": days, "views": vals.get("views"), "reach": reach,
                "skip_rate_prozent": round(skip, 1) if isinstance(skip, (int, float)) else None, "avg_watch_s": avg_s,
                "dauer_s": dauer, "wiedergabequote": round(100 * avg_s / dauer, 1) if avg_s and dauer else None,
@@ -115,7 +122,7 @@ def main():
                "permalink": r.get("permalink"), "fehlend": missing}
         rows.append(row)
         if missing:
-            notes.append(f"{r['id']}: nicht verfügbar: {', '.join(missing)}")
+            notes.append(f"{name}: nicht verfügbar: {', '.join(missing)}")
 
     os.makedirs(OUTDIR, exist_ok=True)
     prev = None
