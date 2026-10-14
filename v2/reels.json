@@ -56,7 +56,10 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-14T08:58:47+00:00",
+        "result": "FINISHED"
+      },
       "version": "14.10.2026: Fassung 4 – Hook 1 CLIMBING × GEOLOGY mit Kletterer und aufklappender Geologie, Hook 2 WHY DOES THIS EDGE STICK OUT?, eigenes Klangset mit Puls; Neu-Post, ersetzt den Post vom 13.10.",
       "ablauf": "erklaerkette",
       "ersetzt": [
