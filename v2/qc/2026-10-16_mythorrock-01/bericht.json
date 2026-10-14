@@ -1,34 +1,51 @@
 {
  "slug": "2026-10-16_mythorrock-01",
- "dauer_s": 13.8,
+ "datei": "2026-10-16_mythorrock-01",
+ "dauer_s": 15.3,
  "fps": 30,
- "frames": 414,
- "mp4_mb": 7.55,
- "woerter_im_bild": 28,
+ "frames": 459,
+ "mp4_mb": 8.94,
+ "woerter_im_bild": 29,
  "labels": 1,
- "woerter_gesamt_mit_labels": 30,
- "payoff_anteil": 0.721,
+ "woerter_gesamt_mit_labels": 31,
+ "payoff_anteil": 0.748,
  "loudnorm": {
-  "loudnorm_ziel": -13.2,
-  "tp_grenze": -2.5,
+  "loudnorm_ziel": -11.1,
+  "tp_grenze": -3.5,
   "I_LUFS": -14.2,
-  "TP_dBFS": -1.7
+  "TP_dBFS": -1.4
  },
  "messung": {
   "I_LUFS": -14.2,
-  "TP_dBFS": -1.7
+  "TP_dBFS": -1.4
  },
  "toene": {
+  "hook1-anschwellen": [
+   "selbst erzeugt (klang.reverse)"
+  ],
+  "hook1-griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "hook1-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "hook1-braam": [
+   "selbst erzeugt (klang.braam)"
+  ],
+  "hook1-gestein": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "hook1-uebergang": [
+   "selbst erzeugt (whoosh)"
+  ],
   "dampf": [
    "selbst erzeugt (whoosh)"
   ],
-  "kreide-tick": [
-   "CC0 Kenney: tick_001.ogg",
-   "CC0 Kenney: tick_002.ogg",
-   "CC0 Kenney: tick_004.ogg"
-  ],
   "lichtstreifen": [
    "selbst erzeugt (whoosh)"
+  ],
+  "absprung": [
+   "selbst erzeugt (klang.thud)"
   ],
   "bohrhaken": [
    "CC0 Kenney: impactMetal_light_000.ogg",
@@ -45,6 +62,9 @@
   "zoom": [
    "CC0 Kenney: maximize_001.ogg"
   ],
+  "griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
   "zug": [
    "CC0 Kenney: scratch_001.ogg"
   ],
@@ -52,22 +72,33 @@
    "CC0 Kenney: impactMining_000.ogg"
   ],
   "bruch": [
-   "CC0 Kenney: impactMining_001.ogg"
+   "CC0 Kenney: impactMining_001.ogg",
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "bruch-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
   ],
   "fallen": [
    "selbst erzeugt (whoosh)"
   ],
-  "aufschlag": [
-   "CC0 Kenney: impactMining_002.ogg"
+  "aufprall-pad": [
+   "selbst erzeugt (klang.thud)"
   ],
   "tropfen-innen": [
    "selbst erzeugt (drip)"
+  ],
+  "kreide-tick": [
+   "CC0 Kenney: tick_002.ogg",
+   "CC0 Kenney: tick_004.ogg"
   ],
   "frage": [
    "CC0 Kenney: question_002.ogg"
   ],
   "steigerung": [
    "selbst erzeugt (riser)"
+  ],
+  "payoff-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
   ],
   "treffer": [
    "CC0 Kenney: impactPunch_heavy_000.ogg"
@@ -78,6 +109,10 @@
   "kreide-wisch": [
    "CC0 Kenney: scratch_001.ogg",
    "CC0 Kenney: scratch_002.ogg"
+  ],
+  "puls": [
+   "selbst erzeugt (klang.hat)",
+   "selbst erzeugt (klang.kick)"
   ],
   "klanglogo": [
    "CC0 Kenney: pluck_001.ogg"
@@ -92,15 +127,25 @@
  "ablauf": "offene_frage",
  "ablauf_im_themenplan": "offene_frage",
  "ablauf_slot_davor": "erklaerkette",
+ "hook1": "CLIMBING / × GEOLOGY",
+ "hook1_bis_s": 1.22,
+ "hook1_in_frame0_anteil": 0.941,
+ "hook1_woerter_extra": 2,
+ "hook_ab_s": 1.5,
+ "hook_bis_s": 4.8,
  "hook_steht_s": 3.3,
  "weitere_fragen_stehen_s": [
   1.25
  ],
- "meta_hook": "GEOCRIMPS · GEOLOGY OF CLIMBING",
- "meta_hook_woerter_extra": 4,
- "meta_hook_im_cover_anteil": 0.971,
+ "cover_t": 2.35,
+ "meta_hook": "GEOCRIMPS · CLIMBING × GEOLOGY",
+ "meta_hook_woerter_extra": 3,
+ "meta_hook_im_cover_anteil": 0.968,
  "pruefungen": {
   "dauer_im_formatrahmen": true,
+  "hook1_klettern_geologie_in_frame_0": true,
+  "hook1_dauer_1_0_bis_1_6_s": true,
+  "hook2_nach_hook1": true,
   "meta_hook_im_cover": true,
   "hook_frage_mind_3_2_s": true,
   "weitere_fragen_mind_1_2_s": true,
@@ -114,10 +159,10 @@
  },
  "alle_pruefungen_ok": true,
  "hook_score": {
-  "kriterien": "Luecke, Kletterbezug, Bildbarkeit in Frame 0, Kuerze, Deckung durch den Payoff (je 0-2)",
+  "kriterien": "Luecke, Kletterbezug, Bildbarkeit im Hook-2-Bild, Kuerze, Deckung durch den Payoff (je 0-2)",
   "varianten": [
    {
-    "hook": "LOOKS DRY. SO WHY WAIT?",
+    "hook": "IT LOOKS DRY. WHY NOT CLIMB?",
     "punkte": [
      2,
      2,
@@ -126,10 +171,23 @@
      2
     ],
     "summe": 10,
-    "gewaehlt": true
+    "gewaehlt": true,
+    "anmerkung": "offene W-Frage mit Kletterbezug; der Kletterer haengt im Bild am trockenen Block"
    },
    {
-    "hook": "THE SUN IS OUT. WHY NOT CLIMB?",
+    "hook": "LOOKS DRY. SO WHY WAIT?",
+    "punkte": [
+     2,
+     1,
+     2,
+     2,
+     2
+    ],
+    "summe": 9,
+    "anmerkung": "Fassung 3"
+   },
+   {
+    "hook": "THE ROCK LOOKS DRY. WHY NOT CLIMB?",
     "punkte": [
      2,
      2,
@@ -137,41 +195,31 @@
      1,
      2
     ],
-    "summe": 9
+    "summe": 9,
+    "anmerkung": "7 Woerter"
    },
    {
-    "hook": "WHY DO SANDSTONE HOLDS SNAP AFTER RAIN?",
+    "hook": "WHY WAIT IF THE ROCK LOOKS DRY?",
     "punkte": [
      2,
-     2,
      1,
+     2,
      1,
      2
     ],
     "summe": 8
    },
    {
-    "hook": "WHAT'S STILL WET IN THIS BOULDER?",
+    "hook": "DRY AFTER RAIN? WAIT A DAY.",
     "punkte": [
-     1,
-     1,
-     2,
-     2,
-     2
-    ],
-    "summe": 8,
-    "anmerkung": "verraet die Haelfte der Antwort"
-   },
-   {
-    "hook": "DRY ON TOP. WHAT'S BELOW?",
-    "punkte": [
-     2,
      0,
+     2,
      2,
      2,
      1
     ],
-    "summe": 7
+    "summe": 7,
+    "anmerkung": "verraet die Antwort"
    }
   ]
  },
@@ -210,7 +258,17 @@
    "aussage": "Mechanismus nicht als Loesung des Zements darstellen",
    "beleg": "Korrekturlauf 27.07.2026",
    "status": "eingehalten"
+  },
+  {
+   "aussage": "Block als Sandstein (Signatur und Schichten beim Aufklappen in Hook 1)",
+   "beleg": "sources.md #015: Fontainebleau-Sandstein",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Kletterer zieht am Sloper, der Griff bricht, Sturz aufs Pad (Bild, Zug 2)",
+   "beleg": "Bild fuer 'nasser Sandstein verliert Festigkeit' (sources.md #015); Caption: nasser Sandstein kann viel Festigkeit verlieren, ein Griff waechst nicht nach",
+   "status": "Hinweis: Veranschaulichung, nicht jeder Griff bricht"
   }
  ],
- "fassung": "3 (13.10.2026), Ablauf \"offene_frage\"; Hook-Frage 3,3 s, Callback 1,25 s; Meta-Hook GEOCRIMPS · GEOLOGY OF CLIMBING im Cover, Sonne 40 px tiefer"
+ "fassung": "4 (14.10.2026), Ablauf \"offene_frage\"; Hook 1 CLIMBING x GEOLOGY 0-1,22 s, Hook 2 ab 1,5 s fuer 3,3 s; Cover bei 2,35 s"
 }

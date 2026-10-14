@@ -6,6 +6,13 @@ steht 3,3 s; Zug 1 scheint harmlos (die Oberflaeche trocknet zuerst), Zug 2 brin
 er bricht, innen ist der Sand nass), die Frage kehrt zurueck (Callback, steht 1,25 s), dann die Antwort.
 Fassung 3 (13.10.2026, mittags): Meta-Hook "GEOCRIMPS . GEOLOGY OF CLIMBING" in Frame 0 (reelkit.meta_hook),
 Formatlabel und Hook 52 px tiefer, Sonne und Wolke deshalb 40 px tiefer.
+Fassung 4 (14.10.2026, Markus 13.10.: "hook 1 (klettern und geologie) und dann hook 2 (eigentliches reel thema)"):
+Hook 1 0-1,22 s: GEOCRIMPS + CLIMBING ab Frame 0, ein Kletterer startet vom Crashpad und klatscht an den Sloper
+(Kreidewolke), "x GEOLOGY" schlaegt ein und der Block klappt in seinen Sandstein auf (Fontainebleau ist Sandstein).
+Hook 2 ab 1,5 s: "IT LOOKS DRY. WHY NOT CLIMB?" (vorher "LOOKS DRY. SO WHY WAIT?"), der Kletterer haengt am Block.
+Zug 1: er wartet auf dem Pad, waehrend der Block abtrocknet. Zug 2: er zieht am Sloper, der bricht, er faellt aufs Pad
+(statt Pfeil). Callback "WHY NOT CLIMB?". Alle Zeiten ab Hook 2 1,5 s spaeter als in Fassung 3. Ton: Hook-1-Signatur
+in G, Puls 108 BPM von Hook 2 bis zur Steigerung, Einschlag beim Bruch, Aufprall aufs Pad.
 Bildmittel (fuer die Abwechslungsregel): Uebergang Lichtstreifen und Zoom (keine Isolinien-Welle) | Enthuellung
 Zeitraffer und Bruch (kein Querschnitt) | Payoff Antwort gross, dann Stempel MYTH und Kreide-Wisch | Flaeche eine
 Quarte hoeher (ratio 1.335).
@@ -22,40 +29,45 @@ sys.path.insert(0, os.path.dirname(HERE))
 import outcrop as o
 import motion as m
 import reelkit as rk
+import kletter as kl
 from outcrop import C, P
 from motion import X0, W, H, seg, seilzug, sturz, griff, lerp, put
 
-DUR = 13.8
-
 # ------------------------------------------------------------------ Zeitplan
-T_HOOK = 3.30                      # Hook-Frage steht 3,3 s (Lesezeit), dann Lichtstreifen
-T_S2 = 3.55                        # Zug 1: Regen, dann trocknet die Oberflaeche
-T_RAIN = [3.62 + 0.08 * k for k in range(7)]
+H1 = 1.50                          # 14.10.2026: Hook 1 davor, alles ab Hook 2 1,5 s spaeter
+T_GRAB, T_GEO, T_OUT = 0.32, 0.58, 1.22                       # Hook 1: Griff, "x GEOLOGY", Uebergang in die Kopfzeile
+T_Q = 1.50                                                    # Hook 2: Formatlabel und Themenfrage fahren ein
+T_HOOK = 3.30 + H1                 # Hook-2-Frage steht 3,3 s (Lesezeit), dann Lichtstreifen
+T_S2 = 3.55 + H1                   # Zug 1: Regen, dann trocknet die Oberflaeche
+T_RAIN = [3.62 + H1 + 0.08 * k for k in range(7)]
 FALL = 0.40
-T_DRY = 4.95                       # Abtrocknen bis ca. 6,25
-T_Z0, T_Z1 = 6.55, 7.05            # Zoom auf die Schulter
+T_DRY = 4.95 + H1                  # Abtrocknen
+T_Z0, T_Z1 = 6.55 + H1, 7.05 + H1  # Zoom auf die Schulter
 ZOOM, ZC = 1.22, (880, 1040)
-T_S3 = 6.80                        # Zug 2
-T_PULL, T_JIG, T_CRACK, T_SNAP = 7.10, 7.45, 7.85, 8.10
-T_DRIPS = (8.45, 8.85, 9.25)
-T_LAB = 8.40
-T_CALL = 8.70                      # Callback: die Frage kehrt zurueck und steht bis zum Payoff (1,25 s Lesezeit)
-T_RISE = 9.05
-T_S4 = 9.95                        # Payoff
-T_S5 = 11.05                       # Zoom zurueck, Urteil und Folge
-T_STAMP, T_SWIPE, T_OR = 11.25, 11.55, 11.90
-T_END = 13.00
+T_S3 = 6.80 + H1                   # Zug 2
+T_PULL, T_JIG, T_CRACK, T_SNAP = 7.10 + H1, 7.45 + H1, 7.85 + H1, 8.10 + H1
+T_LAND = T_SNAP + 0.40             # Kletterer landet auf dem Pad
+T_DRIPS = (8.45 + H1, 8.85 + H1, 9.25 + H1)
+T_LAB = 8.40 + H1
+T_CALL = 8.70 + H1                 # Callback: die Frage kehrt zurueck und steht bis zum Payoff (1,25 s Lesezeit)
+T_RISE = 9.05 + H1
+T_S4 = 9.95 + H1                   # Payoff
+T_S5 = 11.05 + H1                  # Zoom zurueck, Urteil und Folge
+T_STAMP, T_SWIPE, T_OR = 11.25 + H1, 11.55 + H1, 11.90 + H1
+T_END = 13.00 + H1
+DUR = T_END + 0.8
 
 META = dict(
-    slug="2026-10-16_mythorrock-01", dur_range=[11, 16], payoff_t=T_S4, title="GeoCrimps r003 MYTH OR ROCK #01 (Offene Frage)",
-    ablauf="offene_frage", hook_bis=T_HOOK, weitere_fragen=[[T_CALL, T_S4]],
-    on_screen=["MYTH OR ROCK", "LOOKS DRY. SO WHY WAIT?", "THE SURFACE DRIES FIRST.", "BUT PULL ON IT…",
-               "SO WHY WAIT?", "STILL WET INSIDE.", "MYTH", "WAIT A DAY OR TWO."],
+    slug="2026-10-16_mythorrock-01", dur_range=[12.5, 17.5], payoff_t=T_S4,
+    title="GeoCrimps r003 MYTH OR ROCK #01 (Offene Frage), Fassung 4", ablauf="offene_frage",
+    hook1_bis=T_OUT, hook_ab=T_Q, hook_bis=T_HOOK, weitere_fragen=[[T_CALL, T_S4]], cover_t=T_Q + 0.85,
+    on_screen=["MYTH OR ROCK", "IT LOOKS DRY. WHY NOT CLIMB?", "THE SURFACE DRIES FIRST.", "BUT PULL ON IT…",
+               "WHY NOT CLIMB?", "STILL WET INSIDE.", "MYTH", "WAIT A DAY OR TWO."],
     labels=["WET SAND"],
-    qc_times=[0.0, 1.6, 3.0, 3.45, 3.9, 4.4, 5.3, 6.2, 6.9, 7.3, 7.95, 8.5, 9.3, 10.3, 11.8, 13.4],
-    marks=[(0, "Hook"), (T_HOOK, "Lichtstreifen"), (T_S2, "Zug 1"), (4.0, "Regen"), (T_DRY, "trocknet"), (T_Z0, "Zoom"),
-           (T_S3, "Zug 2"), (T_PULL, "Ziehen"), (T_SNAP, "Bruch"), (T_CALL, "Callback"), (T_S4 - 0.15, "Stille"),
-           (T_S4, "PAYOFF"), (T_S5, "Zoom zurueck"), (T_STAMP, "Stempel"), (T_SWIPE, "Wisch"), (T_END, "Klanglogo")])
+    qc_times=[0.0, 0.32, 0.6, 1.0, 1.4, 2.35, 4.4, 5.0, 5.4, 6.8, 8.3, 9.0, 9.75, 10.4, 11.8, 13.3],
+    marks=[(0, "Hook 1"), (T_GRAB, "Griff"), (T_GEO, "x GEOLOGY"), (T_Q, "Hook 2"), (T_HOOK, "Lichtstreifen"),
+           (T_S2, "Zug 1"), (T_DRY, "trocknet"), (T_Z0, "Zoom"), (T_S3, "Zug 2"), (T_PULL, "Ziehen"), (T_SNAP, "Bruch"),
+           (T_CALL, "Callback"), (T_S4, "PAYOFF"), (T_S5, "Zoom zurueck"), (T_STAMP, "Stempel"), (T_END, "Klanglogo")])
 
 # ------------------------------------------------------------------ Block (Font-Sloper) und Farben
 XL, XR, HB = 120, 1030, 520        # Block: linke/rechte Fusskante, Hoehe
@@ -177,6 +189,54 @@ def _scar(im, yb, front, wet=False):
 
 
 
+# ------------------------------------------------------------------ Kletterer, Crashpad, Geologie (Fassung 4)
+BACK = dict(sw=22, hw=13, eb=(-1, 1), kb=(1, -1))       # Rueckenansicht: Ellbogen und Knie nach aussen
+PAD = (515, 845, YB_MAIN + 36)                           # Crashpad: x0, x1, Unterkante (vor dem Block)
+PAD_TOP = PAD[2] - 40
+SLOPER = (902, top_y(902, YB_MAIN) + 12)                 # rechte Hand: der Sloper auf der Schulter (bricht in Zug 2)
+FACE = (724, 1150)                                       # linke Hand: Seitgriff in der Wand
+POSE_START = dict(BACK, hip=(780, 1292), lean=-4, lh=FACE, rh=(866, 1110), lf=(728, PAD_TOP - 3), rf=(832, PAD_TOP - 3))
+POSE_GRAB = dict(BACK, hip=(806, 1228), lean=6, lh=FACE, rh=SLOPER, lf=(744, 1346), rf=(856, 1328))
+POSE_SWING = dict(POSE_GRAB, hip=(812, 1218), lean=9)    # Schwung beim Zugreifen
+POSE_PULL = dict(POSE_GRAB, hip=(818, 1226), lean=-10, lf=(740, 1352), rf=(846, 1342))   # lehnt sich zurueck, Arm gestreckt
+POSE_STAND = dict(BACK, hip=(700, PAD_TOP - 168), lean=0, lh=(676, PAD_TOP - 128), rh=(724, PAD_TOP - 128),
+                  lf=(680, PAD_TOP - 2), rf=(720, PAD_TOP - 2))   # wartet auf dem Pad
+POSE_DOWN = dict(BACK, hip=(690, PAD_TOP - 26), lean=-28, lh=(612, PAD_TOP - 4), rh=(812, PAD_TOP - 150),
+                 lf=(770, PAD_TOP - 4), rf=(812, PAD_TOP - 22))   # nach dem Sturz: sitzt auf dem Pad, Arm noch oben
+POSE_SIT = dict(POSE_DOWN, rh=(760, PAD_TOP - 60), lean=-22)
+
+
+def climber_pose(t):
+    """Hook 1: vom Pad an den Block (Frame 0 schon in Bewegung), Griff bei T_GRAB; haengt in Hook 2; springt beim
+    Lichtstreifen ab und wartet auf dem Pad; steigt zum Zoom wieder ein, zieht, der Sloper bricht, er faellt aufs Pad."""
+    if t < T_GRAB:
+        return kl.lerp_pose(POSE_START, POSE_SWING, seilzug(seg(t, 0.0, T_GRAB)))
+    if t < T_HOOK:
+        u = seg(t, T_GRAB, 0.3)
+        p = kl.lerp_pose(POSE_SWING, POSE_GRAB, 0.5 - 0.5 * math.cos(math.pi * u))
+        if u >= 1:
+            w = math.sin(2 * math.pi * (t - T_GRAB - 0.3) / 2.4)
+            p = dict(p, hip=(p["hip"][0] + 4 * w, p["hip"][1] + 1.5 * abs(w)), lean=p["lean"] + 1.5 * w)
+        return p
+    if t < T_Z0:
+        u = seg(t, T_HOOK, 0.42)                                  # Absprung aufs Pad (unter dem Lichtstreifen)
+        return kl.lerp_pose(POSE_GRAB, POSE_STAND, sturz(u))
+    if t < T_PULL:
+        return kl.lerp_pose(POSE_STAND, POSE_GRAB, seilzug(seg(t, T_Z0, T_PULL - 0.05 - T_Z0)))
+    if t < T_SNAP:
+        p = kl.lerp_pose(POSE_GRAB, POSE_PULL, seilzug(seg(t, T_PULL, T_SNAP - T_PULL)))
+        if t >= T_JIG:
+            j = 2.5 * math.sin(t * 70)
+            p = dict(p, hip=(p["hip"][0] + j, p["hip"][1]))
+        return p
+    if t < T_LAND:
+        u = seg(t, T_SNAP, T_LAND - T_SNAP)
+        p = kl.lerp_pose(POSE_PULL, POSE_DOWN, u * u)              # faellt (beschleunigt)
+        return dict(p, rh=(SLOPER[0] + 40 * u, SLOPER[1] + 60 * u)) if u < 0.35 else p
+    u = seg(t, T_LAND, 0.5)
+    return kl.lerp_pose(POSE_DOWN, POSE_SIT, seilzug(u))
+
+
 class Reel(rk.ReelBase):
     DUR = DUR
 
@@ -185,7 +245,8 @@ class Reel(rk.ReelBase):
         self.rail = rk.Rail(2)
         self.end = rk.EndSting()
         self.rails = [rk.rail_sprite(0, 2), rk.rail_sprite(1, 2), rk.rail_sprite(2, 2), rk.rail_sprite(2, 2, logo_on=True)]
-        self.meta = rk.meta_hook()                                    # Meta-Hook: wo man gelandet ist
+        self.hook1 = rk.Hook1(t_grab=T_GRAB, t_geo=T_GEO, t_out=T_OUT)
+        self.climber = kl.Climber(scale=1.0, width=18.0, torso_w=36.0)
         self.label = m.text_sprite("MYTH OR ROCK", X0, rk.FORMAT_Y, "stencil", 40, C["slate"], tracking=0.12)
         outer = surface(YB_MAIN)
         # Hintergruende ohne Topo-Linie (die kommt als Sprite, weil Szene 3 gezoomt wird)
@@ -198,12 +259,17 @@ class Reel(rk.ReelBase):
                        fill=o.rgb(C["magnesia"], 170), width=int(4 * o.S))
             d.ellipse([P(sx - r, sy - r), P(sx + r, sy + r)], fill=o.rgb(C["magnesia"], 235))
         def bg_dry(im):
-            sky(im); ground(im, YB_MAIN); puddles(im, YB_MAIN); boulder_front(im, YB_MAIN)
+            sky(im); ground(im, YB_MAIN); puddles(im, YB_MAIN); boulder_front(im, YB_MAIN); kl.crash_pad(im, *PAD)
         def bg_wet(im):
             sky(im); ground(im, YB_MAIN); puddles(im, YB_MAIN); boulder_front(im, YB_MAIN, broken=True, wet=True)
+            kl.crash_pad(im, *PAD)
         self.bg = m.background(bg_dry)
         self.bg_broken = m.background(bg_wet)
-        self.hook, _ = m.lines_sprite(["LOOKS DRY.", "SO WHY WAIT?"], rk.HOOK_Y)
+        self.hook, _ = m.lines_sprite(["IT LOOKS DRY.", "WHY NOT", "CLIMB?"], rk.HOOK_Y, size=164)
+        # Geologie des Blocks (Hook 1): Sandstein (Fontainebleau), flach liegende Schichten, radial vom Sloper aufgedeckt
+        beds = [[(x, y0 + 6 * math.sin(x / 110 + k)) for x in range(XL, XR + 1, 20)] for k, y0 in enumerate(range(1000, 1420, 78))]
+        self.geo = kl.GeoReveal(surface(YB_MAIN) + [(XR, YB_MAIN), (XL, YB_MAIN)], "sandstone", SLOPER[0], SLOPER[1],
+                                pat_alpha=95, beds=beds, seed=8)
         # Zug 1: Regen -> Perlen auf der Kruste -> Abtrocknen
         rim = offset(outer, 9)
         self.crust_wet = m.sprite(lambda im: ImageDraw.Draw(im).polygon([P(*p) for p in outer + rim[::-1]], fill=o.rgb(C["water"])))
@@ -237,7 +303,7 @@ class Reel(rk.ReelBase):
         self.lab_tick = m.sprite(lambda im: ImageDraw.Draw(im).line([P(mid[0] - 92, mid[1] + 56), P(mid[0] - 12, mid[1] + 18)],
                                                                      fill=o.rgb(C["magnesia"]), width=int(3 * o.S)))
         self.drip_src = [inner[int(len(inner) * f)] for f in (0.55, 0.75, 0.9)]
-        self.call, _ = m.lines_sprite(["SO WHY WAIT?"], 352, role="display_xb", size=96, fill=C["slate"])
+        self.call, _ = m.lines_sprite(["WHY NOT CLIMB?"], 352, role="display_xb", size=96, fill=C["slate"])
         # Payoff
         self.answer, ya = m.lines_sprite(["STILL WET", "INSIDE."], 352, size=200)
         # Folge: Urteil und Warten
@@ -322,13 +388,26 @@ class Reel(rk.ReelBase):
                 yl = top_y(x, YB_MAIN) - 12 - 80 * ph
                 pts = [(x + 6 * math.sin(yy / 9 + k), yy) for yy in range(int(yl), int(yl) - 34, -3)]
                 dr.line(pts, fill=o.rgb(C["slate"], int(150 * math.sin(math.pi * ph))), width=3)
+        u = seilzug(seg(t, T_GEO, 0.5))                              # Hook 1: Block klappt in seinen Sandstein auf
+        if u > 0 and t < T_OUT + 0.4:
+            self.geo.put(f, u, fade=1 - seg(t, T_OUT, 0.4))
+        put(f, self.climber.sprite(climber_pose(t)))
+        kl.chalk_puff(f, t, T_GRAB, SLOPER[0], SLOPER[1] - 4, seed=11)
+        kl.chalk_puff(f, t, T_PULL - 0.05, SLOPER[0], SLOPER[1] - 4, seed=12, size=0.6)
+        kl.chalk_puff(f, t, T_LAND, 690, PAD_TOP - 6, seed=13, size=0.9)        # Kreidestaub vom Pad beim Aufprall
         return f
 
     # -------------------------------------------------------------- Frames
     def frame(self, t):
         if t < T_HOOK + 0.25:                                        # Szene 1: Hook (Frame 0 = Cover)
             f = m.zoomed(self.world(t), 1 + 0.03 * seilzug(seg(t, 0, T_HOOK)), 640, 1000)
-            put(f, self.rails[0]); put(f, self.meta); put(f, self.label); put(f, self.hook)
+            put(f, self.rails[0])
+            self.hook1.draw(f, t, hook_bis=T_HOOK)
+            u = seilzug(seg(t, T_Q, 0.35))
+            if u > 0:
+                fade = 1 - seg(t, T_HOOK, 0.12)
+                put(f, self.label, dx=lerp(-30, 0, u), op=u * fade)
+                put(f, self.hook, dx=lerp(-40, 0, u), op=u * fade)
             if t >= T_HOOK:
                 put(f, rk.light_sweep(seg(t, T_HOOK, 0.35)))
             return f, 41
@@ -344,19 +423,6 @@ class Reel(rk.ReelBase):
             put(f, self.rails[3] if t >= T_S4 else self.rails[2])    # Szene 3: Zug 2, Callback, Payoff
             self.rail.pop(f, t, 1, T_S3)
             u = seilzug(seg(t, T_S3 + 0.05, 0.35)); put(f, self.text2, dx=lerp(-40, 0, u), op=u * (1 - seg(t, T_CALL - 0.15, 0.15)))
-            u = seilzug(seg(t, T_PULL, 0.35))                       # Zug am Sloper (Pfeil, in Bildkoordinaten)
-            if u > 0 and t < T_SNAP + 0.3:
-                x0, y0, x1, y1 = self.pull
-                tx = lambda x: ZC[0] + (x - ZC[0]) * z; ty = lambda y: ZC[1] + (y - ZC[1]) * z
-                xs, ys, xe, ye = tx(x0), ty(y0), tx(lerp(x0, x1, u)), ty(lerp(y0, y1, u))
-                a = 1 - seg(t, T_SNAP, 0.3)
-                def draw(d, X, Y, xs=xs, ys=ys, xe=xe, ye=ye, a=a):
-                    col = o.rgb(C["magnesia"], int(255 * a))
-                    d.line([(X(xs), Y(ys)), (X(xe), Y(ye))], fill=col, width=int(7 * o.S))
-                    ang = math.atan2(ye - ys, xe - xs)
-                    for sgn in (-1, 1):
-                        d.line([(X(xe), Y(ye)), (X(xe - 30 * math.cos(ang + sgn * 0.5)), Y(ye - 30 * math.sin(ang + sgn * 0.5)))], fill=col, width=int(7 * o.S))
-                put(f, rk.region(min(xs, xe) - 50, min(ys, ye) - 50, max(xs, xe) + 50, max(ys, ye) + 50, draw))
             u = seg(t, T_LAB, 0.3)
             if u > 0:
                 tx = lambda x: ZC[0] + (x - ZC[0]) * z; ty = lambda y: ZC[1] + (y - ZC[1]) * z
@@ -387,35 +453,44 @@ class Reel(rk.ReelBase):
 
 # ------------------------------------------------------------------ Ton (Flaeche eine Quarte hoeher als r001/r002)
 def sound_events(b):
-    b.synth("whoosh", 0.6, -18.0, "dampf", dur=1.4, seed=3)
-    b.kenney("interface-sounds", "tick_001.ogg", 0.45, -9.0, "kreide-tick")
+    """Hook 1 aus dem eigenen Klangset (Grundton G), Puls 108 BPM von Hook 2 bis zur Steigerung, Szenenklaenge wie
+    Fassung 3 (Kenney CC0 + selbst erzeugt), beim Bruch Einschlag und Gesteinsknacken, Aufprall aufs Pad."""
+    h1 = rk.Hook1(t_grab=T_GRAB, t_geo=T_GEO, t_out=T_OUT)
+    b.hook1(h1, root=49.0)
+    b.synth("whoosh", T_Q + 0.6, -18.0, "dampf", dur=1.4, seed=3)
     b.synth("whoosh", T_HOOK, -9.0, "lichtstreifen", dur=0.5, seed=4)
+    b.klang("thud", T_HOOK + 0.42, -11.0, "absprung", seed=1)
     b.kenney("impact-sounds", "impactMetal_light_000.ogg", T_S2, -7.0, "bohrhaken")
     for k, t0 in enumerate(T_RAIN):
         b.kenney("interface-sounds", ("drop_001.ogg", "drop_004.ogg")[k % 2], t0 + FALL, -6.0 - (k % 3), "tropfen")
     b.synth("fizz", T_DRY, -17.0, "abtrocknen", dur=1.3, seed=5)
     b.kenney("interface-sounds", "maximize_001.ogg", T_Z0, -8.0, "zoom")
     b.kenney("impact-sounds", "impactMetal_light_001.ogg", T_S3, -7.0, "bohrhaken")
+    b.klang("chalk_slap", T_PULL - 0.05, -8.0, "griff", seed=2)
     b.kenney("interface-sounds", "scratch_001.ogg", T_PULL, -11.0, "zug")
     b.kenney("impact-sounds", "impactMining_000.ogg", T_CRACK, -5.0, "riss")
-    b.kenney("impact-sounds", "impactMining_001.ogg", T_SNAP, -3.0, "bruch")
-    b.synth("whoosh", T_SNAP + 0.05, -14.0, "fallen", dur=0.5, seed=9)
-    b.kenney("impact-sounds", "impactMining_002.ogg", T_SNAP + 0.65, -10.0, "aufschlag")
+    b.klang("crunch", T_SNAP, -4.0, "bruch", seed=3)
+    b.klang("sub_hit", T_SNAP - 0.01, -7.0, "bruch-einschlag", f0=85.0, f1=36.0)
+    b.kenney("impact-sounds", "impactMining_001.ogg", T_SNAP, -5.0, "bruch")
+    b.synth("whoosh", T_SNAP + 0.05, -14.0, "fallen", dur=0.4, seed=9)
+    b.klang("thud", T_LAND, -4.0, "aufprall-pad", seed=4)
     for k, t0 in enumerate(T_DRIPS):
         b.synth("drip", t0 + 0.5, -9.0 - k, "tropfen-innen", seed=11 + k)
     b.kenney("interface-sounds", "tick_002.ogg", T_LAB, -8.0, "kreide-tick")
     b.kenney("interface-sounds", "question_002.ogg", T_CALL, -9.0, "frage")
     b.synth("riser", T_RISE, -9.0, "steigerung", dur=0.75)
-    b.kenney("impact-sounds", "impactPunch_heavy_000.ogg", T_S4, -2.0, "treffer")
+    b.klang("sub_hit", T_S4 - 0.01, -6.0, "payoff-einschlag", f0=78.0, f1=36.0)
+    b.kenney("impact-sounds", "impactPunch_heavy_000.ogg", T_S4, -3.0, "treffer")
     b.kenney("impact-sounds", "impactMetal_light_002.ogg", T_S4 + 0.02, -9.0, "bohrhaken")
     b.kenney("interface-sounds", "maximize_001.ogg", T_S5, -10.0, "zoom")
     b.kenney("impact-sounds", "impactPunch_heavy_001.ogg", T_STAMP + 0.16, -5.0, "stempel")
     b.kenney("interface-sounds", "scratch_001.ogg", T_SWIPE, -5.0, "kreide-wisch")
     b.kenney("interface-sounds", "scratch_002.ogg", T_SWIPE + 0.08, -7.0, "kreide-wisch")
     b.kenney("interface-sounds", "tick_004.ogg", T_OR, -8.0, "kreide-tick")
+    big = [T_HOOK, T_S2, T_Z0, T_S3, T_CRACK, T_SNAP, T_LAND]
+    b.pulse(T_Q + 0.02, T_RISE - 0.05, bpm=108, gain=-16.0, hat_gain=-25.0, avoid=big)
     b.sound_logo(T_END)
-    b.pads([(0.0, 9.80, -9.0), (T_S4, T_END, -11.0)], ratio=1.335)
-
+    b.pads([(0.0, T_S4 - 0.15, -9.0), (T_S4, T_END, -11.0)], ratio=1.335)
 
 if __name__ == "__main__":
     rk.run(Reel, sound_events, META)
