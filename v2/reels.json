@@ -100,7 +100,10 @@
       "media_id": null,
       "permalink": null,
       "published_at": null,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-15T08:04:40+00:00",
+        "result": "FINISHED"
+      },
       "ablauf": "offene_frage",
       "version": "15.10.2026: Fassung 5 – klarere Frage SANDSTONE AFTER RAIN: WHEN CAN YOU CLIMB AGAIN?, Callback ONCE IT LOOKS DRY?, Lesezeit-Regel (Aufloesung und Fazit laenger, Bewegung in den Pausen), 19,75 s; Hook 1 + Hook 2 wie Fassung 4"
     }
