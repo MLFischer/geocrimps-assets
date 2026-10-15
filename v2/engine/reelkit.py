@@ -164,12 +164,17 @@ class ReelBase:
         raise NotImplementedError
 
     def frames(self, draft=False):
+        """Alle Frames; protokolliert dabei je Frame die eingesetzten Text-Sprites (self.textlog, fuer die Lesezeit)."""
         n = int(round(self.DUR * FPS))
+        self.textlog = []
         for i in range(n):
             t = i / FPS
             if draft and i % 3:
                 continue
+            m.TEXTLOG = []
             f, s = self.frame(t)
+            self.textlog.append((t, m.TEXTLOG))
+            m.TEXTLOG = None
             yield self.fin(f, s)
 
 
@@ -348,6 +353,7 @@ class Hook1:
         self.size = sz
         y2 = y + sz * 0.9
         self.w1 = m.text_sprite(HOOK1_WORDS[0], X0, y, "display", sz, C["magnesia"])
+        self.brand.text = self.w1.text = None      # Markenintro mit fester Dauer: nicht Teil der Lesezeit-Pruefung
         wx = o.text_width("× ", "display", sz)
 
         def geo(im):
@@ -401,6 +407,49 @@ class Hook1:
 ABLAEUFE = ("quiz", "offene_frage", "erklaerkette")
 HOOK_MIN_S, FRAGE_MIN_S = 3.2, 1.2      # Hook-Frage bzw. jede weitere Frage im Bild, Beginn bis Beginn des Ausblendens
 
+# Lesezeit (seit 15.10.2026, Wunsch Markus: mehr Zeit an Momenten mit neuer Information, ohne Leerlauf).
+# Jeder Text im Bild muss je Auftritt voll sichtbar (Deckkraft >= VOLL_OP) mindestens LESE_BASIS_S + LESE_JE_WORT_S je Wort
+# stehen; Auflösung und Fazit (META "verdauen") zusaetzlich VERDAU_S. 0,3 s je Wort entspricht 200 Woertern pro Minute,
+# etwas langsamer als stilles Lesen englischer Sachtexte (Mittel 238 wpm, Brysbaert 2019), weil viele Zuschauer Englisch
+# als Zweitsprache lesen und gleichzeitig das Bild verfolgen. Startwerte, nach den Kennzahlen nachzujustieren.
+LESE_BASIS_S, LESE_JE_WORT_S, VERDAU_S, VOLL_OP = 0.6, 0.3, 0.6, 0.95
+
+
+def woerter(s):
+    return len(s.replace("…", " ").replace("·", " ").replace("×", " ").split())
+
+
+def lesezeit_noetig(text, verdauen=False):
+    return round(LESE_BASIS_S + LESE_JE_WORT_S * woerter(text) + (VERDAU_S if verdauen else 0.0), 2)
+
+
+def lesezeiten(textlog, verdauen=()):
+    """Je Text und Auftritt (zusammenhaengend sichtbar): ab wann, wie lange voll sichtbar, wie lange noetig."""
+    dt = 1.0 / FPS
+    texte = []
+    for _, log in textlog:
+        for txt, _ in log:
+            if txt not in texte:
+                texte.append(txt)
+    res = []
+    for txt in texte:
+        cur = None
+        for t, log in list(textlog) + [(None, [])]:               # Waechter-Eintrag schliesst den letzten Auftritt
+            op = max([o_ for x, o_ in log if x == txt], default=0.0)
+            if op > 0.02:
+                if cur is None:
+                    cur = {"text": txt, "ab_s": round(t, 2), "voll_s": 0.0}
+                if op >= VOLL_OP:
+                    cur["voll_s"] += dt
+            elif cur is not None:
+                cur["voll_s"] = round(cur["voll_s"], 2)
+                cur["noetig_s"] = lesezeit_noetig(txt, txt in verdauen)
+                cur["verdauen"] = txt in verdauen
+                cur["ok"] = cur["voll_s"] >= cur["noetig_s"] - 1e-6
+                res.append(cur)
+                cur = None
+    return sorted(res, key=lambda r_: r_["ab_s"])
+
 
 def plan_ablauf(slug):
     """(Ablauf des Slots zum Datum im Slug, Ablauf des Slots davor) aus v2/themenplan.json; (None, None), wenn nicht gefunden."""
@@ -421,7 +470,9 @@ def run(ReelCls, sound_events, META):
     ablauf (quiz | offene_frage | erklaerkette, wie der Slot im Themenplan), hook_ab / hook_bis (Hook 2: Beginn des
     Einblendens / des Ausblendens der Themenfrage), weitere_fragen ([[Beginn, Beginn des Ausblendens], ...] je weiterer
     Frage im Bild), hook1_bis (Beginn des Uebergangs von Hook 1 in die Kopfzeile), cover_t (Zeitpunkt des Covers: ein
-    Bild aus Hook 2 mit Kopfzeile und Themenfrage). Das Reel stellt seine reelkit.Hook1-Instanz als self.hook1 bereit."""
+    Bild aus Hook 2 mit Kopfzeile und Themenfrage), verdauen (Texte der Aufloesung und des Fazits, genau wie die Sprites sie
+    tragen; sie brauchen VERDAU_S mehr Lesezeit). Das Reel stellt seine reelkit.Hook1-Instanz als self.hook1 bereit.
+    Text im Bild nur ueber m.text_sprite / m.lines_sprite oder ein Sprite mit .text: nur so misst die Lesezeit-Pruefung ihn."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=os.path.join(HERE, "..", "..", "reels"))
     ap.add_argument("--qc", default=None, help="Ordner fuer QC-Dateien")
@@ -485,6 +536,16 @@ def run(ReelCls, sound_events, META):
                 "weitere_fragen_stehen_s": [round(b - a, 2) for a, b in fragen], "cover_t": cover_t,
                 "meta_hook": " · ".join(META_HOOK), "meta_hook_woerter_extra": sum(len(s.replace("×", " ").split()) for s in META_HOOK),
                 "meta_hook_im_cover_anteil": meta_ok})
+    verd = list(META.get("verdauen", []))                         # Lesezeit je Info (gemessen beim Rendern)
+    lz = lesezeiten(getattr(r, "textlog", []), verd)
+    gemessen = {x["text"] for x in lz}
+    soll_w = sum(woerter(s) for s in META["on_screen"]) + sum(woerter(s) for s in META.get("labels", []))
+    rep.update({"lesezeit_regel": f"voll sichtbar >= {LESE_BASIS_S} s + {LESE_JE_WORT_S} s je Wort, "
+                                  f"Aufloesung/Fazit +{VERDAU_S} s (Deckkraft >= {VOLL_OP})",
+                "lesezeiten": lz, "verdauen": verd,
+                "woerter_gemessen": sum(woerter(s) for s in gemessen), "woerter_laut_meta": soll_w})
+    for x in lz:
+        print(f"  Lesezeit {'ok ' if x['ok'] else 'ZU KURZ'} {x['ab_s']:6.2f} s  {x['voll_s']:4.2f} / {x['noetig_s']:4.2f} s  {x['text']}")
     checks = {"dauer_im_formatrahmen": META.get("dur_range", [0, 99])[0] <= r.DUR <= META.get("dur_range", [0, 99])[1],
               "hook1_klettern_geologie_in_frame_0": hook1_frame0 >= 0.9,
               "hook1_dauer_1_0_bis_1_6_s": h1_bis is not None and HOOK1_RANGE[0] <= h1_bis <= HOOK1_RANGE[1],
@@ -492,6 +553,9 @@ def run(ReelCls, sound_events, META):
               "meta_hook_im_cover": meta_ok >= 0.9,
               "hook_frage_mind_3_2_s": hook_s >= HOOK_MIN_S - 1e-6,
               "weitere_fragen_mind_1_2_s": all(b - a >= FRAGE_MIN_S - 1e-6 for a, b in fragen),
+              "lesezeit_je_info": bool(lz) and all(x["ok"] for x in lz),
+              "verdauzeit_aufloesung_und_fazit": bool(verd) and all(v in gemessen for v in verd),
+              "alle_texte_gemessen": rep["woerter_gemessen"] == soll_w,
               "ablauf_wie_im_themenplan": META.get("ablauf") in ABLAEUFE and META.get("ablauf") == ab,
               "ablauf_anders_als_im_slot_davor": ab is not None and ab != ab_vor,
               "payoff_65_80_prozent": 0.65 <= rep["payoff_anteil"] <= 0.80,

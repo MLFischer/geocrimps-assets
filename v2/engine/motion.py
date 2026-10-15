@@ -42,9 +42,15 @@ def lerp(a, b, u):
 
 
 # ------------------------------------------------------------------ sprites
+# Lesezeit-Protokoll (seit 15.10.2026): reelkit setzt TEXTLOG je Frame auf eine Liste; put() traegt dort jedes
+# Text-Sprite (Sprite.text gesetzt) mit seiner Deckkraft ein. Daraus misst reelkit, wie lange jede Info voll steht.
+TEXTLOG = None
+
+
 class Sprite:
-    def __init__(self, img, x, y):
+    def __init__(self, img, x, y, text=None):
         self.img, self.x, self.y = img, x, y
+        self.text = text            # Klartext, wenn das Sprite Text im Bild ist (fuer die Lesezeit-Pruefung)
 
     @property
     def w(self):
@@ -81,6 +87,8 @@ def put(frame, spr, dx=0.0, dy=0.0, op=1.0, scale=1.0, anchor=None):
     """Sprite mit Versatz, Deckkraft und Skalierung (um anchor bzw. Sprite-Mitte) einsetzen."""
     if spr is None or op <= 0.003:
         return
+    if TEXTLOG is not None and getattr(spr, "text", None):
+        TEXTLOG.append((spr.text, float(op)))
     img, x, y = spr.img, spr.x + dx, spr.y + dy
     if abs(scale - 1.0) > 1e-3:
         ax, ay = anchor if anchor else (spr.x + spr.w / 2, spr.y + spr.h / 2)
@@ -137,10 +145,16 @@ def lines_sprite(rows, y, role="display", size=176, lh=0.93, fill=C["magnesia"],
         for r in rows:
             o.text(im, x, yy, r, role, sz, fill)
             yy += sz * lh
-    return sprite(d), y + sz * lh * len(rows)
+    spr = sprite(d)
+    if spr is not None:
+        spr.text = " ".join(rows)
+    return spr, y + sz * lh * len(rows)
 
 def text_sprite(s, x, y, role, size, fill, anchor="la", tracking=0.0):
-    return sprite(lambda im: o.text(im, x, y, s, role, size, fill, anchor=anchor, tracking=tracking))
+    spr = sprite(lambda im: o.text(im, x, y, s, role, size, fill, anchor=anchor, tracking=tracking))
+    if spr is not None:
+        spr.text = s
+    return spr
 
 
 # ------------------------------------------------------------------ finish: statisches Korn + Vignette
@@ -312,9 +326,11 @@ def loudnorm(src_wav, dst_wav, target=-14.0, tp=-1.0, lra=11.0):
     return {"input_i": js["input_i"], "output_i": js2["output_i"], "output_tp": js2["output_tp"],
             "normalization_type": js2.get("normalization_type")}
 
-def master(src_wav, dst_wav, target=-14.0, tp=-2.5, tol=0.3, max_iter=5):
+def master(src_wav, dst_wav, target=-14.0, tp=-2.5, tol=0.3, max_iter=8):
     """Lautheit so einstellen, dass das fertige AAC im MP4 bei target LUFS und <= -1 dBTP liegt.
-    loudnorm verfehlt bei kurzen, transientenreichen Mischungen das Ziel; daher Probe-Encodes und Nachregeln."""
+    loudnorm verfehlt bei kurzen, transientenreichen Mischungen das Ziel; daher Probe-Encodes und Nachregeln.
+    max_iter 8 (seit 15.10.2026, vorher 5): Reels mit laengeren ruhigen Haltezeiten brauchen mehr Spitzenreserve, weil
+    der AAC-Encoder Transienten um bis zu 3 dB ueberschiessen laesst (r003 Fassung 5: -3,5 dBTP im WAV, -0,6 im AAC)."""
     t, meas = target, {}
     probe = dst_wav + ".probe.m4a"
     for _ in range(max_iter):

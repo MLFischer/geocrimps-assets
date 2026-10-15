@@ -1,23 +1,23 @@
 {
  "slug": "2026-10-16_mythorrock-01",
  "datei": "2026-10-16_mythorrock-01",
- "dauer_s": 15.3,
+ "dauer_s": 19.75,
  "fps": 30,
- "frames": 459,
- "mp4_mb": 8.94,
- "woerter_im_bild": 29,
+ "frames": 593,
+ "mp4_mb": 11.3,
+ "woerter_im_bild": 32,
  "labels": 1,
- "woerter_gesamt_mit_labels": 31,
- "payoff_anteil": 0.748,
+ "woerter_gesamt_mit_labels": 34,
+ "payoff_anteil": 0.676,
  "loudnorm": {
-  "loudnorm_ziel": -11.1,
-  "tp_grenze": -3.5,
-  "I_LUFS": -14.2,
-  "TP_dBFS": -1.4
+  "loudnorm_ziel": -11.6,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.1,
+  "TP_dBFS": -1.8
  },
  "messung": {
-  "I_LUFS": -14.2,
-  "TP_dBFS": -1.4
+  "I_LUFS": -14.1,
+  "TP_dBFS": -1.8
  },
  "toene": {
   "hook1-anschwellen": [
@@ -68,6 +68,9 @@
   "zug": [
    "CC0 Kenney: scratch_001.ogg"
   ],
+  "knirschen": [
+   "selbst erzeugt (klang.crunch)"
+  ],
   "riss": [
    "CC0 Kenney: impactMining_000.ogg"
   ],
@@ -86,6 +89,12 @@
   ],
   "tropfen-innen": [
    "selbst erzeugt (drip)"
+  ],
+  "hand-ausschuetteln": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "aufstehen": [
+   "selbst erzeugt (klang.thud)"
   ],
   "kreide-tick": [
    "CC0 Kenney: tick_002.ogg",
@@ -132,15 +141,114 @@
  "hook1_in_frame0_anteil": 0.941,
  "hook1_woerter_extra": 2,
  "hook_ab_s": 1.5,
- "hook_bis_s": 4.8,
- "hook_steht_s": 3.3,
+ "hook_bis_s": 5.1,
+ "hook_steht_s": 3.6,
  "weitere_fragen_stehen_s": [
-  1.25
+  2.1
  ],
  "cover_t": 2.35,
  "meta_hook": "GEOCRIMPS · CLIMBING × GEOLOGY",
  "meta_hook_woerter_extra": 3,
  "meta_hook_im_cover_anteil": 0.968,
+ "lesezeit_regel": "voll sichtbar >= 0.6 s + 0.3 s je Wort, Aufloesung/Fazit +0.6 s (Deckkraft >= 0.95)",
+ "lesezeiten": [
+  {
+   "text": "MYTH OR ROCK",
+   "ab_s": 1.53,
+   "voll_s": 3.43,
+   "noetig_s": 1.5,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "SANDSTONE AFTER RAIN:",
+   "ab_s": 1.53,
+   "voll_s": 3.43,
+   "noetig_s": 1.5,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "WHEN CAN YOU CLIMB AGAIN?",
+   "ab_s": 1.53,
+   "voll_s": 3.43,
+   "noetig_s": 2.1,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "THE SURFACE DRIES FIRST.",
+   "ab_s": 5.43,
+   "voll_s": 2.77,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "BUT PULL ON IT…",
+   "ab_s": 8.67,
+   "voll_s": 2.27,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "WET SAND",
+   "ab_s": 10.67,
+   "voll_s": 4.93,
+   "noetig_s": 1.2,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "ONCE IT LOOKS DRY?",
+   "ab_s": 11.27,
+   "voll_s": 1.93,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "STILL WET INSIDE.",
+   "ab_s": 13.37,
+   "voll_s": 2.3,
+   "noetig_s": 2.1,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "MYTH",
+   "ab_s": 16.17,
+   "voll_s": 2.73,
+   "noetig_s": 1.5,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "WAIT A DAY",
+   "ab_s": 16.53,
+   "voll_s": 2.3,
+   "noetig_s": 2.1,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "OR TWO.",
+   "ab_s": 16.83,
+   "voll_s": 2.0,
+   "noetig_s": 1.8,
+   "verdauen": true,
+   "ok": true
+  }
+ ],
+ "verdauen": [
+  "STILL WET INSIDE.",
+  "MYTH",
+  "WAIT A DAY",
+  "OR TWO."
+ ],
+ "woerter_gemessen": 34,
+ "woerter_laut_meta": 34,
  "pruefungen": {
   "dauer_im_formatrahmen": true,
   "hook1_klettern_geologie_in_frame_0": true,
@@ -149,6 +257,9 @@
   "meta_hook_im_cover": true,
   "hook_frage_mind_3_2_s": true,
   "weitere_fragen_mind_1_2_s": true,
+  "lesezeit_je_info": true,
+  "verdauzeit_aufloesung_und_fazit": true,
+  "alle_texte_gemessen": true,
   "ablauf_wie_im_themenplan": true,
   "ablauf_anders_als_im_slot_davor": true,
   "payoff_65_80_prozent": true,
@@ -159,67 +270,68 @@
  },
  "alle_pruefungen_ok": true,
  "hook_score": {
-  "kriterien": "Luecke, Kletterbezug, Bildbarkeit im Hook-2-Bild, Kuerze, Deckung durch den Payoff (je 0-2)",
+  "kriterien": "Klarheit (Gestein, Lage und Frage in Worten), Kletterbezug, Luecke, Kuerze, Deckung durch den Payoff (je 0-2); Klarheit seit 15.10.2026 (Markus: 'die frage sandstein und wann darf man wieder klettern muss klarer werden')",
   "varianten": [
    {
-    "hook": "IT LOOKS DRY. WHY NOT CLIMB?",
+    "hook": "SANDSTONE AFTER RAIN: WHEN CAN YOU CLIMB AGAIN?",
     "punkte": [
      2,
      2,
      2,
-     2,
+     1,
      2
     ],
-    "summe": 10,
+    "summe": 9,
     "gewaehlt": true,
-    "anmerkung": "offene W-Frage mit Kletterbezug; der Kletterer haengt im Bild am trockenen Block"
+    "anmerkung": "nennt Gestein, Lage und Frage; als Zeile in Sandsteinfarbe plus zweizeilige Frage gesetzt; WAIT A DAY OR TWO beantwortet das WHEN"
    },
    {
-    "hook": "LOOKS DRY. SO WHY WAIT?",
-    "punkte": [
-     2,
-     1,
-     2,
-     2,
-     2
-    ],
-    "summe": 9,
-    "anmerkung": "Fassung 3"
-   },
-   {
-    "hook": "THE ROCK LOOKS DRY. WHY NOT CLIMB?",
-    "punkte": [
-     2,
-     2,
-     2,
-     1,
-     2
-    ],
-    "summe": 9,
-    "anmerkung": "7 Woerter"
-   },
-   {
-    "hook": "WHY WAIT IF THE ROCK LOOKS DRY?",
-    "punkte": [
-     2,
-     1,
-     2,
-     1,
-     2
-    ],
-    "summe": 8
-   },
-   {
-    "hook": "DRY AFTER RAIN? WAIT A DAY.",
+    "hook": "IT LOOKS DRY. WHY NOT CLIMB?",
     "punkte": [
      0,
      2,
      2,
      2,
+     2
+    ],
+    "summe": 8,
+    "anmerkung": "Fassung 4; nennt weder Sandstein noch Regen, laut Markus unklar"
+   },
+   {
+    "hook": "WET SANDSTONE: WHEN CAN YOU CLIMB AGAIN?",
+    "punkte": [
+     2,
+     2,
+     1,
+     1,
+     2
+    ],
+    "summe": 8,
+    "anmerkung": "verraet 'nass' vorweg und schwaecht die Wendung STILL WET INSIDE"
+   },
+   {
+    "hook": "SANDSTONE LOOKS DRY AFTER RAIN. CLIMB NOW?",
+    "punkte": [
+     2,
+     2,
+     1,
+     1,
      1
     ],
     "summe": 7,
-    "anmerkung": "verraet die Antwort"
+    "anmerkung": "Ja/Nein-Frage statt WHEN"
+   },
+   {
+    "hook": "AFTER RAIN: CLIMB SANDSTONE ONCE IT LOOKS DRY?",
+    "punkte": [
+     2,
+     2,
+     1,
+     0,
+     2
+    ],
+    "summe": 7,
+    "anmerkung": "Ja/Nein-Frage, 8 Woerter ohne Gliederung; die Wendung ONCE IT LOOKS DRY? wird stattdessen Callback"
    }
   ]
  },
@@ -237,11 +349,6 @@
   {
    "aussage": "STILL WET INSIDE.",
    "beleg": "015/sources.md, Zeile vom 12.10.2026 (Oberflaeche trocken, Sand darunter feucht)",
-   "status": "belegt"
-  },
-  {
-   "aussage": "MYTH (aussehen wie trocken = kletterbar)",
-   "beleg": "folgt aus den beiden Zeilen oben und der Gebietsethik (Zeile 4)",
    "status": "belegt"
   },
   {
@@ -268,7 +375,25 @@
    "aussage": "Kletterer zieht am Sloper, der Griff bricht, Sturz aufs Pad (Bild, Zug 2)",
    "beleg": "Bild fuer 'nasser Sandstein verliert Festigkeit' (sources.md #015); Caption: nasser Sandstein kann viel Festigkeit verlieren, ein Griff waechst nicht nach",
    "status": "Hinweis: Veranschaulichung, nicht jeder Griff bricht"
+  },
+  {
+   "aussage": "SANDSTONE AFTER RAIN: WHEN CAN YOU CLIMB AGAIN? (Hook 2)",
+   "beleg": "Frage ohne Tatsachenbehauptung; Sandstein: sources.md #015 (Fontainebleau-Sandstein)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "ONCE IT LOOKS DRY? (Callback, die verbreitete Annahme als Frage)",
+   "beleg": "wird im Reel verworfen: Oberflaeche trocken, Sand darunter feucht (sources.md #015, Zeile vom 12.10.2026)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "MYTH (gemeint: klettern, sobald es trocken aussieht)",
+   "beleg": "folgt aus den Zeilen zu Oberflaeche/Innerem und der Gebietsethik (sources.md #015, Zeile 4)",
+   "status": "belegt"
   }
  ],
- "fassung": "4 (14.10.2026), Ablauf \"offene_frage\"; Hook 1 CLIMBING x GEOLOGY 0-1,22 s, Hook 2 ab 1,5 s fuer 3,3 s; Cover bei 2,35 s"
+ "fassung": "5 (15.10.2026), Ablauf \"offene_frage\"; Hook 1 CLIMBING x GEOLOGY 0-1,22 s, Hook 2 ab 1,5 s fuer 3,6 s (SANDSTONE AFTER RAIN: WHEN CAN YOU CLIMB AGAIN?); Lesezeit-Regel; Dauer 19,75 s; Cover bei 2,35 s",
+ "aenderung": "15.10.2026 (Fassung 5, Wuensche Markus 15.10.: laengere Info-Momente zum Verdauen ohne Langeweile; Frage 'Sandstein und wann darf man wieder klettern' klarer): Hook 2 'SANDSTONE AFTER RAIN:' (Sandsteinfarbe) ueber 'WHEN CAN YOU CLIMB AGAIN?' statt 'IT LOOKS DRY. WHY NOT CLIMB?', steht 3,6 s; Callback 'ONCE IT LOOKS DRY?' statt 'WHY NOT CLIMB?' (2,1 s); voll lesbar: Aufloesung 2,3 s statt 0,8 s, Fazit OR TWO. 2,0 s statt 0,9 s, BUT PULL ON IT 2,3 s statt 1,5 s; Bewegung in den Haltezeiten (Griff zittert, Gestein knirscht, Kletterer schuettelt die Hand aus, steht auf und wartet, Tropfen, langsamer Push-in); Flaeche nach dem Payoff 1 dB voller; Dauer 19,75 s statt 15,3 s.",
+ "ton_gehoert": false,
+ "ton_hinweis": "Ton gemessen (Lautheit, Spitze, Tonverlauf), nicht angehoert"
 }
