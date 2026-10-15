@@ -114,6 +114,27 @@ def check_urls(q, item):
         ok = ok and reachable(base + item["cover"], "image/")
     return ok
 
+# Regeln, die jedes neue Reel erfuellen muss (Markus 13.-15.10.2026: Hook 1 + Hook 2, Lesezeit, Verdauzeit).
+# reelkit.run prueft sie beim Rendern; hier wird nur verlangt, dass der QC-Bericht sie enthaelt und gruen ist.
+QC_PFLICHT = ("hook1_klettern_geologie_in_frame_0", "hook_frage_mind_3_2_s", "lesezeit_je_info",
+              "verdauzeit_aufloesung_und_fazit", "alle_texte_gemessen")
+
+def qc_ok(item):
+    """(True, "") nur mit gruenem QC-Bericht nach den aktuellen Regeln, sonst (False, Grund)."""
+    rel = f"v2/qc/{item.get('slug')}/bericht.json"
+    try:
+        with open(os.path.join(ROOT, rel), encoding="utf-8") as fh:
+            rep = json.load(fh)
+    except (OSError, ValueError):
+        return False, f"QC-Bericht fehlt oder ist unlesbar ({rel})"
+    pr = rep.get("pruefungen") or {}
+    fehlt = [k for k in QC_PFLICHT if k not in pr]
+    if fehlt:
+        return False, f"QC-Bericht ohne Pruefung {', '.join(fehlt)} (mit aktuellem reelkit neu rendern)"
+    if rep.get("alle_pruefungen_ok") is not True:
+        return False, "QC nicht bestanden: " + (", ".join(k for k, v in pr.items() if not v) or "alle_pruefungen_ok fehlt")
+    return True, ""
+
 def publish_item(q, item):
     log(f"Reel {item['id']} ({marker(item)}), Termin {item['scheduled']}")
     hit = already_published(item)
@@ -122,6 +143,9 @@ def publish_item(q, item):
         item.update(status="published", media_id=hit["id"], permalink=hit.get("permalink"),
                     published_at=hit.get("timestamp"))
         return True
+    ok, why = qc_ok(item)                  # nur Reels nach den aktuellen Regeln (QC gruen)
+    if not ok:
+        raise RuntimeError(why)
     if not check_urls(q, item):
         raise RuntimeError("Video oder Cover unter GitHub Pages nicht erreichbar")
     cid = create_container(q, item)

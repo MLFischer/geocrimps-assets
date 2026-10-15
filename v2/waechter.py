@@ -22,6 +22,7 @@ import sys
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from reel_publish import qc_ok  # noqa: E402  (QC-Freigabe: dieselbe Regel wie beim Veroeffentlichen)
 from ig_api import (IG, GitHub, OWNER_MENTION, REPO, berlin, fehlertext, load_json, mask,  # noqa: E402
                     now_utc, save_json)
 
@@ -167,6 +168,9 @@ def check_queue(now):
             continue
         if (r.get("probe") or {}).get("result") != "FINISHED":
             fehler.append(f"{tag}: Probelauf für {rid} fehlt oder ist fehlgeschlagen ({(r.get('probe') or {}).get('result')}).")
+        ok_qc, why = qc_ok(r)                    # dieselbe Pruefung wie beim Veroeffentlichen, nur frueher
+        if not ok_qc:
+            fehler.append(f"{tag}: {rid} würde nicht veröffentlicht: {why}.")
         if OFFLINE:
             n_ok += 1
             continue
