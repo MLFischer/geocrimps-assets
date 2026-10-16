@@ -91,21 +91,22 @@
       "first_comment": "Sources: Thiry, M. & Maréchal, B. (2001): Development of tightly cemented sandstone lenses in uncemented sand: example of the Fontainebleau Sand (Oligocene) in the Paris Basin. Journal of Sedimentary Research 71(3). · Duda, M. & Renner, J. (2013): The weakening effect of water on the brittle failure strength of sandstone. Geophysical Journal International 192(3). · Gonçalves, T. D. (2012): Drying of porous materials. CHARISMA course on stone conservation, LNEC. · Access Fund (2021): How to assess sandstone after rain or snow.",
       "audio_name": "GeoCrimps – MYTH OR ROCK",
       "scheduled": "2026-10-16T17:07:00+02:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
         "am": "2026-10-12"
       },
       "hold": false,
-      "media_id": null,
-      "permalink": null,
-      "published_at": null,
+      "media_id": "18081110945715470",
+      "permalink": "https://www.instagram.com/reel/Dej01k6Dc7b/",
+      "published_at": "2026-10-16T15:12:08+0000",
       "probe": {
         "at": "2026-10-15T08:04:40+00:00",
         "result": "FINISHED"
       },
       "ablauf": "offene_frage",
-      "version": "15.10.2026: Fassung 5 – klarere Frage SANDSTONE AFTER RAIN: WHEN CAN YOU CLIMB AGAIN?, Callback ONCE IT LOOKS DRY?, Lesezeit-Regel (Aufloesung und Fazit laenger, Bewegung in den Pausen), 19,75 s; Hook 1 + Hook 2 wie Fassung 4"
+      "version": "15.10.2026: Fassung 5 – klarere Frage SANDSTONE AFTER RAIN: WHEN CAN YOU CLIMB AGAIN?, Callback ONCE IT LOOKS DRY?, Lesezeit-Regel (Aufloesung und Fazit laenger, Bewegung in den Pausen), 19,75 s; Hook 1 + Hook 2 wie Fassung 4",
+      "first_comment_posted": true
     }
   ]
 }
