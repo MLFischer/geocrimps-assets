@@ -114,10 +114,12 @@ def check_urls(q, item):
         ok = ok and reachable(base + item["cover"], "image/")
     return ok
 
-# Regeln, die jedes neue Reel erfuellen muss (Markus 13.-15.10.2026: Hook 1 + Hook 2, Lesezeit, Verdauzeit).
+# Regeln, die jedes neue Reel erfuellen muss (Markus 13.-16.10.2026: Hook 1 + Hook 2, Lesezeit, Verdauzeit,
+# Abspann mit Aufruf, Musik statt metallischer Klaenge).
 # reelkit.run prueft sie beim Rendern; hier wird nur verlangt, dass der QC-Bericht sie enthaelt und gruen ist.
-QC_PFLICHT = ("hook1_klettern_geologie_in_frame_0", "hook_frage_mind_3_2_s", "lesezeit_je_info",
-              "verdauzeit_aufloesung_und_fazit", "alle_texte_gemessen")
+QC_PFLICHT = ("hook1_klettern_geologie_in_frame_0", "hook_frage_mindestdauer", "lesezeit_je_info",
+              "verdauzeit_aufloesung_und_fazit", "alle_texte_gemessen",
+              "abspann_mit_aufruf", "musik_statt_metall")      # seit 16.10.2026: Abspann mit Aufruf, Musik statt Metall
 
 def qc_ok(item):
     """(True, "") nur mit gruenem QC-Bericht nach den aktuellen Regeln, sonst (False, Grund)."""

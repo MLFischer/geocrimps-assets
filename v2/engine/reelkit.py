@@ -17,6 +17,7 @@ from PIL import Image, ImageDraw
 import outcrop as o
 import motion as m
 import klang
+import musik
 from outcrop import C, P
 from motion import W, H, FPS, SR, X0, seg, seilzug, sturz, griff, lerp, put
 
@@ -153,6 +154,52 @@ class EndSting:
         return f
 
 
+# ------------------------------------------------------------------ Abspann mit Aufruf (seit 16.10.2026)
+class Outro(EndSting):
+    """Abspann fuer alle neuen Reels (Markus, 16.10.2026: "am ende sollte noch ein aufruf zum like and subscribe oder so
+    dabei sein"): Isolinien ziehen sich zusammen, das Logo erscheint, darunter "LIKE & FOLLOW" und die Markenzeile
+    "FOR MORE CLIMBING × GEOLOGY", ein Herz schlaegt einmal. Auf Instagram heisst Abonnieren "Follow".
+    Dauer DUR s; das Reel endet mit dem Abspann und laeuft als Loop weiter. Im Reel: self.outro = reelkit.Outro(),
+    in frame(): ab T_END self.outro.frame(t, T_END); META "abspann_ab" = T_END; Ton: SoundBook.klanglogo + musik."""
+    DUR = 3.0
+    CTA = "LIKE & FOLLOW"
+    CLAIM = "FOR MORE CLIMBING × GEOLOGY"
+    Y_LOCK, Y_CTA, Y_CLAIM, Y_HEART = 500, 950, 1120, 1250
+
+    def __init__(self):
+        lock = Image.open(LOCKUP).convert("RGBA")
+        lw = 520; lh = int(lock.height * lw / lock.width)          # Logo kleiner als im Endsignet: der Aufruf ist die Hauptsache
+        self.lockup = m.Sprite(lock.resize((lw, lh), Image.LANCZOS), (W - lw) // 2, self.Y_LOCK)
+        self.mark_c = (self.lockup.x + 505 * lw / 1000, self.lockup.y + 280 * lw / 1000)
+        self.bg = m.background(lambda im: None)
+        self.cta = m.text_sprite(self.CTA, W // 2, self.Y_CTA, "display", 136, C["magnesia"], anchor="ma")
+        self.claim = m.text_sprite(self.CLAIM, W // 2, self.Y_CLAIM, "stencil", 40, C["slate"], anchor="ma", tracking=0.12)
+        self.claim.text = None                     # Markenzeile wie die Kopfzeile: nicht Teil der 40 Woerter
+        hx, hy, r = W // 2, self.Y_HEART + 40, 34
+
+        def heart(im):
+            d = ImageDraw.Draw(im)
+            pts = [P(hx + r * 1.15 * math.sin(a) ** 3, hy - r * (0.95 * math.cos(a) - 0.38 * math.cos(2 * a)
+                                                               - 0.15 * math.cos(3 * a) - 0.05 * math.cos(4 * a)))
+                   for a in np.linspace(0, 2 * math.pi, 120)]
+            d.polygon(pts, fill=o.rgb(C["heat"]))
+        self.heart = m.sprite(heart)
+
+    def frame(self, t, t0):
+        f = self.bg.copy()
+        u = seilzug(seg(t, t0, 0.5))
+        put(f, self.contract(u), op=1 - seg(t, t0 + 0.4, 0.2))
+        put(f, self.lockup, op=seg(t, t0 + 0.3, 0.3))
+        v = seilzug(seg(t, t0 + 0.6, 0.5))
+        put(f, self.cta, dy=lerp(36, 0, v), op=v)
+        put(f, self.claim, op=seg(t, t0 + 0.95, 0.4))
+        w = seg(t, t0 + 1.3, 0.35)
+        if w > 0:                                   # Herz: springt auf und schlaegt danach ruhig
+            beat = 1 + 0.05 * max(0.0, math.sin(2 * math.pi * (t - t0 - 1.65) / 0.9)) if w >= 1 else 1.0
+            put(f, self.heart, op=min(1.0, w * 3), scale=lerp(1.7, 1.0, griff(w)) if w < 1 else beat)
+        return f
+
+
 class ReelBase:
     """Gemeinsame Grundlage: Korn/Vignette und Frame-Iterator."""
     DUR = 12.0
@@ -204,10 +251,59 @@ class SoundBook:
         self.ev.append((max(0.0, t), smp, gain)); self.used.setdefault(label, set()).add(f"selbst erzeugt (klang.{kind})")
         return smp
 
-    def hook1(self, h, root=55.0):
+    def ton(self, kind, t, gain, label, **kw):
+        """Musikbaustein aus engine/musik.py (flaeche, zupf, bass, schwelle, akzent), selbst erzeugt."""
+        smp = musik.KINDS[kind](**kw)
+        self.ev.append((max(0.0, t), smp, gain)); self.used.setdefault(label, set()).add(f"selbst erzeugt (musik.{kind})")
+        return smp
+
+    def musik(self, abschnitte, bpm=84.0, gain=-12.0):
+        """Musikalische Untermalung (seit 16.10.2026, Markus: "eher musikalische untermalung"). abschnitte: Liste
+        (t0, t1, akkord, bassnote, figur) in der Tonart des Reels (MIDI-Noten, Beispiele in musik.py); figur:
+          "flaeche"   nur Akkordflaeche und Bass (Haltezeiten, Aufloesung)
+          "ruhig"     dazu Zupftoene auf Vierteln (Fragen, Fazit, Abspann)
+          "bewegt"    dazu Achtel-Arpeggio auf und ab (Zuege)
+          "steigend"  Achtel aufwaerts und lauter werdend (Spannung vor dem Bruch)
+          "pause"     Stille (z. B. 0,15 s vor dem Payoff)
+        Die Akkorde wechseln mit den Szenen, nicht im festen Takt: Untermalung statt Song. Ersetzt pulse() und pads()."""
+        beat = 60.0 / bpm
+        for k, (t0, t1, akkord, bassnote, figur) in enumerate(abschnitte):
+            d = t1 - t0
+            if figur == "pause" or d <= 0.05:
+                continue
+            self.ton("flaeche", t0, gain, "musik", akkord=akkord, dauer=d, seed=k)
+            self.ton("bass", t0, gain - 1.0, "musik", m=bassnote, dauer=min(d + 0.4, 3.2))
+            if figur not in ("ruhig", "bewegt", "steigend"):
+                continue
+            noten = musik.zerlegt(akkord)
+            folge = noten if figur != "bewegt" else noten + noten[-2:0:-1]
+            step = beat if figur == "ruhig" else beat / 2
+            tt, i = t0 + 0.04, 0
+            while tt < t1 - 0.1:
+                g = gain - 4.0 - (1.5 if i % 2 else 0.0) + (4.0 * (tt - t0) / d if figur == "steigend" else 0.0)
+                self.ton("zupf", tt, g, "musik", m=folge[i % len(folge)], dauer=1.0, pan=0.25 * ((i % 3) - 1))
+                tt += step; i += 1
+
+    def klanglogo(self, t0, tonika=67, gain=-6.0):
+        """Klanglogo zum Abspann (seit 16.10.2026, ohne Kenney-Klicks): Dur-Dreiklang aufwaerts, dann die Oktave."""
+        for k, d in enumerate((0, 4, 7)):
+            self.ton("zupf", t0 + 0.14 * k, gain - 1.0, "klanglogo", m=tonika + d, dauer=1.2, pan=0.2 * (k - 1))
+        self.ton("zupf", t0 + 0.5, gain, "klanglogo", m=tonika + 12, dauer=1.6)
+
+    def hook1(self, h, root=55.0, akkord=None, bassnote=None):
         """Klangsignatur von Hook 1 (h = reelkit.Hook1): Ton ab 0,0 s (Rueckwaerts-Anschwellen bis zum Zugreifen),
         Kreide-Klatsch beim Griff, Einschlag + Braam + Knacken bei "× GEOLOGY", Luftzug beim Uebergang in die Kopfzeile.
-        root: Grundton des Braam (55 = A; je Reel variieren, z. B. 49 = G, 58.3 = B-flat)."""
+        root: Grundton des Braam (55 = A; je Reel variieren, z. B. 49 = G, 58.3 = B-flat).
+        akkord (seit 16.10.2026, fuer alle neuen Reels): musikalische Fassung in der Tonart des Reels, anschwellende
+        Flaeche statt Rauschen, Akkordschlag statt Braam, Einschlag, Klatsch und Gestein leiser."""
+        if akkord:
+            self.ton("schwelle", 0.0, -8.0, "hook1-anschwellen", akkord=akkord, dauer=max(0.2, h.t_grab))
+            self.klang("chalk_slap", h.t_grab, -9.0, "hook1-griff")
+            self.klang("sub_hit", h.t_geo - 0.01, -8.0, "hook1-einschlag")
+            self.ton("akzent", h.t_geo, -5.0, "hook1-akkord", akkord=akkord, bassnote=bassnote or min(akkord) - 12)
+            self.klang("crunch", h.t_geo + 0.02, -15.0, "hook1-gestein")
+            self.synth("whoosh", h.t_out - 0.04, -18.0, "hook1-uebergang", dur=0.5, seed=12)
+            return
         self.klang("reverse", 0.0, -9.0, "hook1-anschwellen", dur=max(0.2, h.t_grab))
         self.klang("chalk_slap", h.t_grab, -3.0, "hook1-griff")
         self.klang("sub_hit", h.t_geo - 0.01, -2.0, "hook1-einschlag")
@@ -227,11 +323,15 @@ class SoundBook:
                         self.no_duck.add(id(smp))
             t += beat; k += 1
 
-    def countdown(self, t0, t1, step=0.33, gain=-12.0):
-        """Rate-Pause im Quiz: Ticks im Abstand step von t0 bis t1, der letzte hoeher (aktive Pause statt Stille)."""
+    def countdown(self, t0, t1, step=0.33, gain=-12.0, tonleiter=None):
+        """Rate-Pause im Quiz: Toene im Abstand step von t0 bis t1, aufsteigend, der letzte eine Oktave ueber dem ersten
+        (aktive Pause statt Stille). Seit 16.10.2026 weiche Zupftoene statt Klicks; tonleiter: MIDI-Noten in der Tonart
+        des Reels (Standard: G-Dur-Pentatonik ab G4)."""
+        ton = tonleiter or [67, 69, 71, 74, 76, 79]
         n = max(1, int((t1 - t0) / step + 1e-6))
         for i in range(n):
-            self.klang("tick", t0 + i * step, gain + (2.0 if i == n - 1 else 0.0), "countdown", freq=1900.0 if i < n - 1 else 2540.0)
+            m_ = ton[min(i, len(ton) - 1)] if i < n - 1 else ton[0] + 12
+            self.ton("zupf", t0 + i * step, gain + (2.0 if i == n - 1 else 0.0), "countdown", m=m_, dauer=0.6)
 
     def sound_logo(self, t_end):
         """Klanglogo zum Endsignet: drei steigende Toene (pluck) + Kreide-Klatsch."""
@@ -405,14 +505,34 @@ class Hook1:
 
 # ------------------------------------------------------------------ Ablauf und Lesezeit (seit 13.10.2026)
 ABLAEUFE = ("quiz", "offene_frage", "erklaerkette")
-HOOK_MIN_S, FRAGE_MIN_S = 3.2, 1.2      # Hook-Frage bzw. jede weitere Frage im Bild, Beginn bis Beginn des Ausblendens
+HOOK_MIN_S, FRAGE_MIN_S = 3.6, 1.5      # Hook-Frage bzw. jede weitere Frage im Bild, Beginn bis Beginn des Ausblendens
+                                         # (16.10.2026: 3,2 -> 3,6 s und 1,2 -> 1,5 s, "alles noch etwas langsamer")
 
-# Lesezeit (seit 15.10.2026, Wunsch Markus: mehr Zeit an Momenten mit neuer Information, ohne Leerlauf).
-# Jeder Text im Bild muss je Auftritt voll sichtbar (Deckkraft >= VOLL_OP) mindestens LESE_BASIS_S + LESE_JE_WORT_S je Wort
-# stehen; Auflösung und Fazit (META "verdauen") zusaetzlich VERDAU_S. 0,3 s je Wort entspricht 200 Woertern pro Minute,
-# etwas langsamer als stilles Lesen englischer Sachtexte (Mittel 238 wpm, Brysbaert 2019), weil viele Zuschauer Englisch
-# als Zweitsprache lesen und gleichzeitig das Bild verfolgen. Startwerte, nach den Kennzahlen nachzujustieren.
-LESE_BASIS_S, LESE_JE_WORT_S, VERDAU_S, VOLL_OP = 0.6, 0.3, 0.6, 0.95
+# Lesezeit (seit 15.10.2026, Wunsch Markus: mehr Zeit an Momenten mit neuer Information, ohne Leerlauf; 16.10.2026:
+# "alles noch etwas langsamer und bewusster"). Jeder Text im Bild muss je Auftritt voll sichtbar (Deckkraft >= VOLL_OP)
+# mindestens LESE_BASIS_S + LESE_JE_WORT_S je Wort stehen; Aufloesung und Fazit (META "verdauen") zusaetzlich VERDAU_S.
+# 0,35 s je Wort entspricht gut 170 Woertern pro Minute: im Bereich der BBC-Untertitelrate (160-180 wpm) und langsamer
+# als stilles Lesen englischer Sachtexte (Mittel 238 wpm, Brysbaert 2019), weil viele Zuschauer Englisch als Zweitsprache
+# lesen und gleichzeitig das Bild verfolgen. 15.10.: 0,6 s + 0,3 s, Verdauen 0,6 s; 16.10.: 0,75 s + 0,35 s, Verdauen 0,8 s.
+LESE_BASIS_S, LESE_JE_WORT_S, VERDAU_S, VOLL_OP = 0.75, 0.35, 0.8, 0.95
+
+# Ton (seit 16.10.2026, Markus: "die toene nicht ganz so klirrend metallisch bitte, eher musikalische untermalung"):
+# Neue Reels haben Musik (SoundBook.musik), keinen Puls mit Hi-Hats und keine metallischen oder UI-Klicks von Kenney.
+KENNEY_VERBOTEN = ("impactMetal", "impactMining", "impactPunch", "impactGeneric", "maximize", "minimize", "question",
+                   "tick_", "pluck_", "drop_", "click_", "switch_", "glass_", "bong_")
+
+
+def hochton_anteil(wav_path, f_grenze=4000.0):
+    """Anteil der Energie oberhalb f_grenze Hz in Prozent und spektraler Schwerpunkt in Hz (Mono-Summe der Mischung)."""
+    import wave
+    with wave.open(wav_path) as w:
+        n, ch, sw = w.getnframes(), w.getnchannels(), w.getsampwidth()
+        a = np.frombuffer(w.readframes(n), dtype={2: np.int16, 4: np.int32}[sw]).reshape(-1, ch).astype(np.float64)
+    x = a.mean(axis=1)
+    X = np.abs(np.fft.rfft(x)) ** 2
+    f = np.fft.rfftfreq(len(x), 1 / SR)
+    tot = X.sum() or 1.0
+    return round(100 * X[f > f_grenze].sum() / tot, 3), round(float((X * f).sum() / tot), 0)
 
 
 def woerter(s):
@@ -471,7 +591,9 @@ def run(ReelCls, sound_events, META):
     Einblendens / des Ausblendens der Themenfrage), weitere_fragen ([[Beginn, Beginn des Ausblendens], ...] je weiterer
     Frage im Bild), hook1_bis (Beginn des Uebergangs von Hook 1 in die Kopfzeile), cover_t (Zeitpunkt des Covers: ein
     Bild aus Hook 2 mit Kopfzeile und Themenfrage), verdauen (Texte der Aufloesung und des Fazits, genau wie die Sprites sie
-    tragen; sie brauchen VERDAU_S mehr Lesezeit). Das Reel stellt seine reelkit.Hook1-Instanz als self.hook1 bereit.
+    tragen; sie brauchen VERDAU_S mehr Lesezeit), abspann_ab (Beginn des Abspanns reelkit.Outro; der Payoff-Anteil
+    bezieht sich dann auf die Zeit bis zum Abspann). Das Reel stellt seine reelkit.Hook1-Instanz als self.hook1 und
+    seinen Abspann als self.outro bereit.
     Text im Bild nur ueber m.text_sprite / m.lines_sprite oder ein Sprite mit .text: nur so misst die Lesezeit-Pruefung ihn."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=os.path.join(HERE, "..", "..", "reels"))
@@ -523,8 +645,14 @@ def run(ReelCls, sound_events, META):
     rep = {"slug": slug, "datei": stem, "dauer_s": r.DUR, "fps": FPS, "frames": n, "mp4_mb": round(os.path.getsize(mp4) / 1e6, 2),
            "woerter_im_bild": words, "labels": len(META.get("labels", [])),
            "woerter_gesamt_mit_labels": words + sum(len(s.split()) for s in META.get("labels", [])),
-           "payoff_anteil": round(META["payoff_t"] / r.DUR, 3), "loudnorm": ln, "messung": m.measure(mp4),
-           "toene": book.licenses()}
+           "payoff_anteil": round(META["payoff_t"] / (META.get("abspann_ab") or r.DUR), 3), "loudnorm": ln,
+           "messung": m.measure(mp4), "toene": book.licenses()}
+    quellen = [q for v in book.used.values() for q in v]          # Ton: Musik statt Metall (seit 16.10.2026)
+    metall = sorted({q for q in quellen if q.startswith("CC0 Kenney") and any(x in q for x in KENNEY_VERBOTEN)})
+    hoch, schwerpunkt = hochton_anteil(norm)
+    rep.update({"metallische_klaenge": metall, "puls_mit_hihat": "puls" in book.used,
+                "hochton_anteil_ueber_4khz_prozent": hoch, "spektraler_schwerpunkt_hz": schwerpunkt})
+    outro = getattr(r, "outro", None)                             # Abspann mit Aufruf (seit 16.10.2026)
     ab, ab_vor = plan_ablauf(slug)
     fragen = META.get("weitere_fragen", [])
     hook_s = round((META.get("hook_bis") or 0) - (META.get("hook_ab") or 0), 2)
@@ -532,7 +660,8 @@ def run(ReelCls, sound_events, META):
     rep.update({"ablauf": META.get("ablauf"), "ablauf_im_themenplan": ab, "ablauf_slot_davor": ab_vor,
                 "hook1": " / ".join(HOOK1_WORDS), "hook1_bis_s": h1_bis, "hook1_in_frame0_anteil": hook1_frame0,
                 "hook1_woerter_extra": sum(len(s.replace("×", " ").split()) for s in HOOK1_WORDS),
-                "hook_ab_s": META.get("hook_ab"), "hook_bis_s": META.get("hook_bis"), "hook_steht_s": hook_s,
+                "hook_ab_s": META.get("hook_ab"), "hook_bis_s": META.get("hook_bis"), "hook_steht_s": hook_s, "hook_min_s": HOOK_MIN_S,
+                "fragen_min_s": FRAGE_MIN_S,
                 "weitere_fragen_stehen_s": [round(b - a, 2) for a, b in fragen], "cover_t": cover_t,
                 "meta_hook": " · ".join(META_HOOK), "meta_hook_woerter_extra": sum(len(s.replace("×", " ").split()) for s in META_HOOK),
                 "meta_hook_im_cover_anteil": meta_ok})
@@ -551,8 +680,8 @@ def run(ReelCls, sound_events, META):
               "hook1_dauer_1_0_bis_1_6_s": h1_bis is not None and HOOK1_RANGE[0] <= h1_bis <= HOOK1_RANGE[1],
               "hook2_nach_hook1": h1_bis is not None and (META.get("hook_ab") or 0) >= h1_bis,
               "meta_hook_im_cover": meta_ok >= 0.9,
-              "hook_frage_mind_3_2_s": hook_s >= HOOK_MIN_S - 1e-6,
-              "weitere_fragen_mind_1_2_s": all(b - a >= FRAGE_MIN_S - 1e-6 for a, b in fragen),
+              "hook_frage_mindestdauer": hook_s >= HOOK_MIN_S - 1e-6,
+              "weitere_fragen_mindestdauer": all(b - a >= FRAGE_MIN_S - 1e-6 for a, b in fragen),
               "lesezeit_je_info": bool(lz) and all(x["ok"] for x in lz),
               "verdauzeit_aufloesung_und_fazit": bool(verd) and all(v in gemessen for v in verd),
               "alle_texte_gemessen": rep["woerter_gemessen"] == soll_w,
@@ -562,7 +691,11 @@ def run(ReelCls, sound_events, META):
               "hoechstens_40_woerter": rep["woerter_gesamt_mit_labels"] <= 40,
               "lautheit_-14_+-0.5": abs(rep["messung"].get("I_LUFS", 0) + 14) <= 0.5,
               "true_peak_max_-1": rep["messung"].get("TP_dBFS", 0) <= -1.0,
-              "mp4_unter_100_mb": rep["mp4_mb"] < 100}
+              "mp4_unter_100_mb": rep["mp4_mb"] < 100,
+              "abspann_mit_aufruf": bool(outro) and META.get("abspann_ab") is not None
+                  and abs(META["abspann_ab"] + Outro.DUR - r.DUR) < 0.05
+                  and any(x["text"] == Outro.CTA and x["ok"] for x in lz),
+              "musik_statt_metall": "musik" in book.used and not metall and "puls" not in book.used}
     rep["pruefungen"] = checks
     rep["alle_pruefungen_ok"] = all(checks.values())
     print(json.dumps(rep, ensure_ascii=False, indent=1))
