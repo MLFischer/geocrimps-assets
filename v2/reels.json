@@ -127,7 +127,10 @@
         "am": "2026-10-12"
       },
       "hold": false,
-      "probe": null,
+      "probe": {
+        "at": "2026-10-17T09:46:42+00:00",
+        "result": "FINISHED"
+      },
       "ablauf": "quiz",
       "version": "17.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 GERMANY'S HIGHEST PEAK: WHAT WAS THIS LIMESTONE ONCE? mit Chips A/B/C, Lesezeit-Regel, Musik A-Moll/C-Dur 84 BPM, Abspann LIKE & FOLLOW, 31,4 s"
     }
