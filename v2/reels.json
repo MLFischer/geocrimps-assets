@@ -107,6 +107,29 @@
       "ablauf": "offene_frage",
       "version": "15.10.2026: Fassung 5 – klarere Frage SANDSTONE AFTER RAIN: WHEN CAN YOU CLIMB AGAIN?, Callback ONCE IT LOOKS DRY?, Lesezeit-Regel (Aufloesung und Fazit laenger, Bewegung in den Pausen), 19,75 s; Hook 1 + Hook 2 wie Fassung 4",
       "first_comment_posted": true
+    },
+    {
+      "id": "r004",
+      "slug": "2026-10-20_rewind-01",
+      "format": "REWIND",
+      "nr": 1,
+      "post_ref": "#018",
+      "thema": "Zugspitze war ein Riff",
+      "video": "reels/2026-10-20_rewind-01.mp4",
+      "cover": "reels/2026-10-20_rewind-01.jpg",
+      "caption": "REWIND #01 · What was the limestone of Germany's highest peak once? An animated climber on the Zugspitze summit wall, then 235 million years in rewind: the mountain sinks, the sea comes back and a reef grows.\n\nThe Zugspitze is built of Wetterstein limestone, the first big carbonate platform of the Northern Calcareous Alps and more than 1,400 m thick there. It formed in the warm Tethys sea about 235–240 million years ago: corals, calcareous sponges and algae built reefs at the platform's rim, with a shallow lagoon behind them, so \"reef\" is a slight simplification for the whole wall. Alpine mountain building later stacked and lifted these rocks into today's summit.\n\nSend this to your climbing partner who has the Zugspitze on their list.\n\nDid you guess A, B or C?\n\nSource: Ortner & Kilian (2022), International Journal of Earth Sciences. Full sources in the first comment.\n\n#climbing #alpineclimbing #geology #limestone #zugspitze",
+      "first_comment": "Sources: Ortner, H. & Kilian, S. (2022): Thrust tectonics in the Wetterstein and Mieming mountains, and a new tectonic subdivision of the Northern Calcareous Alps of western Austria and southern Germany. International Journal of Earth Sciences 111: 543–571. · Nittel, P. (2006): Beiträge zur Stratigraphie und Mikropaläontologie der Mitteltrias der Innsbrucker Nordkette (Nördliche Kalkalpen, Austria). Geo.Alp 3: 93–145. · Missoni, S., Gawlick, H.-J., Sudar, M. N., Jovanović, D. & Lein, R. (2012): Onset and demise of the Wetterstein Carbonate Platform in the mélange areas of the Zlatibor Mountain (Sirogojno, SW Serbia). Facies 58: 95–111.",
+      "audio_name": "GeoCrimps – REWIND",
+      "scheduled": "2026-10-20T18:07:00+02:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "probe": null,
+      "ablauf": "quiz",
+      "version": "17.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 GERMANY'S HIGHEST PEAK: WHAT WAS THIS LIMESTONE ONCE? mit Chips A/B/C, Lesezeit-Regel, Musik A-Moll/C-Dur 84 BPM, Abspann LIKE & FOLLOW, 31,4 s"
     }
   ]
 }

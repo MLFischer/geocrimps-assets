@@ -264,6 +264,7 @@ class SoundBook:
           "ruhig"     dazu Zupftoene auf Vierteln (Fragen, Fazit, Abspann)
           "bewegt"    dazu Achtel-Arpeggio auf und ab (Zuege)
           "steigend"  Achtel aufwaerts und lauter werdend (Spannung vor dem Bruch)
+          "fallend"   Achtel abwaerts (Zeitreise zurueck, Absinken; seit 17.10.2026)
           "pause"     Stille (z. B. 0,15 s vor dem Payoff)
         Die Akkorde wechseln mit den Szenen, nicht im festen Takt: Untermalung statt Song. Ersetzt pulse() und pads()."""
         beat = 60.0 / bpm
@@ -273,10 +274,10 @@ class SoundBook:
                 continue
             self.ton("flaeche", t0, gain, "musik", akkord=akkord, dauer=d, seed=k)
             self.ton("bass", t0, gain - 1.0, "musik", m=bassnote, dauer=min(d + 0.4, 3.2))
-            if figur not in ("ruhig", "bewegt", "steigend"):
+            if figur not in ("ruhig", "bewegt", "steigend", "fallend"):
                 continue
             noten = musik.zerlegt(akkord)
-            folge = noten if figur != "bewegt" else noten + noten[-2:0:-1]
+            folge = {"bewegt": noten + noten[-2:0:-1], "fallend": noten[::-1]}.get(figur, noten)
             step = beat if figur == "ruhig" else beat / 2
             tt, i = t0 + 0.04, 0
             while tt < t1 - 0.1:
