@@ -1,0 +1,378 @@
+{
+ "slug": "2026-10-23_holdid-02",
+ "datei": "2026-10-23_holdid-02",
+ "dauer_s": 23.849999999999998,
+ "fps": 30,
+ "frames": 715,
+ "mp4_mb": 13.13,
+ "woerter_im_bild": 31,
+ "labels": 1,
+ "woerter_gesamt_mit_labels": 32,
+ "payoff_anteil": 0.667,
+ "loudnorm": {
+  "loudnorm_ziel": -13.7,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.4
+ },
+ "messung": {
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.4
+ },
+ "toene": {
+  "hook1-anschwellen": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "hook1-griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "hook1-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "hook1-akkord": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "hook1-gestein": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "hook1-uebergang": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "musik": [
+   "selbst erzeugt (musik.bass)",
+   "selbst erzeugt (musik.flaeche)",
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "welle": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "landung": [
+   "selbst erzeugt (klang.thud)"
+  ],
+  "tropfen": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "bohrhaken": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "zoom": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "label": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "lage": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "blaeschen": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "frage": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "hand-ausschuetteln": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "steigerung": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "payoff-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "payoff": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "lagen-leuchten": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "stempel": [
+   "selbst erzeugt (klang.thud)",
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "fazit": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "klanglogo": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "herz": [
+   "selbst erzeugt (musik.zupf)"
+  ]
+ },
+ "metallische_klaenge": [],
+ "puls_mit_hihat": false,
+ "hochton_anteil_ueber_4khz_prozent": 0.369,
+ "spektraler_schwerpunkt_hz": 344.0,
+ "ablauf": "offene_frage",
+ "ablauf_im_themenplan": "offene_frage",
+ "ablauf_slot_davor": "quiz",
+ "hook1": "CLIMBING / × GEOLOGY",
+ "hook1_bis_s": 1.45,
+ "hook1_in_frame0_anteil": 0.942,
+ "hook1_woerter_extra": 2,
+ "hook_ab_s": 1.8,
+ "hook_bis_s": 5.55,
+ "hook_steht_s": 3.75,
+ "hook_min_s": 3.6,
+ "fragen_min_s": 1.5,
+ "weitere_fragen_stehen_s": [
+  2.15
+ ],
+ "cover_t": 2.65,
+ "meta_hook": "GEOCRIMPS · CLIMBING × GEOLOGY",
+ "meta_hook_woerter_extra": 3,
+ "meta_hook_im_cover_anteil": 0.968,
+ "lesezeit_regel": "voll sichtbar >= 0.75 s + 0.35 s je Wort, Aufloesung/Fazit +0.8 s (Deckkraft >= 0.95)",
+ "lesezeiten": [
+  {
+   "text": "HOLD ID",
+   "ab_s": 1.83,
+   "voll_s": 3.5,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "TUFA ON LIMESTONE:",
+   "ab_s": 1.83,
+   "voll_s": 3.5,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "HOW DID THIS HOLD FORM?",
+   "ab_s": 1.83,
+   "voll_s": 3.5,
+   "noetig_s": 2.5,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "WATER SEEPS OUT.",
+   "ab_s": 6.07,
+   "voll_s": 1.97,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "BUT IT LOSES CO₂…",
+   "ab_s": 8.83,
+   "voll_s": 2.27,
+   "noetig_s": 2.15,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "CO₂",
+   "ab_s": 8.87,
+   "voll_s": 2.77,
+   "noetig_s": 1.1,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "CARVED OUT?",
+   "ab_s": 11.77,
+   "voll_s": 1.93,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "DRIP BY DRIP.",
+   "ab_s": 13.93,
+   "voll_s": 2.7,
+   "noetig_s": 2.6,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "HOLD ID #02",
+   "ab_s": 17.43,
+   "voll_s": 3.37,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "A GROWN-ON HOLD.",
+   "ab_s": 17.93,
+   "voll_s": 2.7,
+   "noetig_s": 2.6,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "LIKE & FOLLOW",
+   "ab_s": 21.47,
+   "voll_s": 2.1,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  }
+ ],
+ "verdauen": [
+  "DRIP BY DRIP.",
+  "A GROWN-ON HOLD."
+ ],
+ "woerter_gemessen": 32,
+ "woerter_laut_meta": 32,
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "hook1_klettern_geologie_in_frame_0": true,
+  "hook1_dauer_1_0_bis_1_6_s": true,
+  "hook2_nach_hook1": true,
+  "meta_hook_im_cover": true,
+  "hook_frage_mindestdauer": true,
+  "weitere_fragen_mindestdauer": true,
+  "lesezeit_je_info": true,
+  "verdauzeit_aufloesung_und_fazit": true,
+  "alle_texte_gemessen": true,
+  "ablauf_wie_im_themenplan": true,
+  "ablauf_anders_als_im_slot_davor": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_40_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true,
+  "abspann_mit_aufruf": true,
+  "musik_statt_metall": true
+ },
+ "alle_pruefungen_ok": true,
+ "hook_score": {
+  "kriterien": "Klarheit (Gestein oder Gegenstand, Lage und Frage in Worten), Kletterbezug, Luecke, Kuerze, Deckung durch den Payoff (je 0-2); mindestens 8/10",
+  "varianten": [
+   {
+    "hook": "TUFA ON LIMESTONE: HOW DID THIS HOLD FORM?",
+    "punkte": [
+     2,
+     2,
+     2,
+     1,
+     2
+    ],
+    "summe": 9,
+    "gewaehlt": true,
+    "anmerkung": "nennt Gegenstand (Tufa), Gestein (Kalk) und Frage; Kletterbezug 'HOLD'; 8 Woerter (3 in der Kontextzeile); DRIP BY DRIP. beantwortet HOW"
+   },
+   {
+    "hook": "THIS ROCK GROWS. HOW?",
+    "punkte": [
+     1,
+     0,
+     1,
+     2,
+     2
+    ],
+    "summe": 6,
+    "anmerkung": "Arbeitshook aus dem Themenplan; verraet das Wachsen, nennt weder Tufa noch Griff"
+   },
+   {
+    "hook": "WHO BUILT THIS TUFA?",
+    "punkte": [
+     1,
+     1,
+     2,
+     2,
+     1
+    ],
+    "summe": 7,
+    "anmerkung": "nennt das Gestein der Wand nicht, 'who' zielt auf einen Taeter (WHODUNIT-Ton)"
+   },
+   {
+    "hook": "WHY DO TUFAS HANG OFF THE WALL?",
+    "punkte": [
+     1,
+     1,
+     2,
+     1,
+     1
+    ],
+    "summe": 6,
+    "anmerkung": "Payoff beantwortet eher HOW als WHY"
+   },
+   {
+    "hook": "TUFA: CARVED OUT OR GROWN ON?",
+    "punkte": [
+     2,
+     1,
+     0,
+     2,
+     2
+    ],
+    "summe": 7,
+    "anmerkung": "Entweder-oder verraet die Antwort halb und passt zum Quiz, nicht zur offenen Frage"
+   }
+  ]
+ },
+ "faktencheck": [
+  {
+   "aussage": "TUFA ON LIMESTONE:",
+   "beleg": "012/sources.md Zeile 3 (Climb Europe: limestone ... tufa pipes and sinter stalactites)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "HOW DID THIS HOLD FORM? / Bild: Kletterer kneift die Tufa",
+   "beleg": "012/sources.md Zeile 3 (Tufas als Griffe an Kletterwaenden)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "WATER SEEPS OUT.",
+   "beleg": "012/sources.md Nachtrag 18.10.2026 (BGS OR/14/043: springs and seepages)",
+   "status": "belegt, web-verifiziert 18.10.2026"
+  },
+  {
+   "aussage": "BUT IT LOSES CO₂… / Label CO₂ an Blaeschen",
+   "beleg": "012/sources.md Zeile 1 (Ford & Pedley 1996; BGS: CO2 evasion)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "CARVED OUT?",
+   "beleg": "Frage, keine Behauptung; die naheliegende falsche Antwort, durch das Folgende verworfen",
+   "status": "keine Tatsachenbehauptung"
+  },
+  {
+   "aussage": "DRIP BY DRIP.",
+   "beleg": "012/caption.md ('Drip by drip'); Nachtrag 18.10.2026 (NPS: after countless water drops a stalactite is formed, grows down)",
+   "status": "belegt, web-verifiziert 18.10.2026"
+  },
+  {
+   "aussage": "Bild: Laengsschnitt mit Anwachslagen, Spitze waechst nach unten",
+   "beleg": "012/sources.md Zeile 2 (schichtweise auf bestehender Wand) und NPS (grow down)",
+   "status": "Veranschaulichung, nicht massstaeblich"
+  },
+  {
+   "aussage": "A GROWN-ON HOLD.",
+   "beleg": "012/sources.md Zeile 2 (juenger als die Traegerwand); caption.md 'grown-on holds'",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Hook 1: Wand als Kalk (Ziegelmuster), Tufa ohne Signatur",
+   "beleg": "Zeile 3 (Kalk); die Tufa bleibt neutral, verraet die Antwort nicht",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Caption: Moose und Algen koennen mitwirken; kein Alter, kein Ort im Bild",
+   "beleg": "Nachtrag 18.10.2026 (BGS: bryophytes and algae); Kalibrierung 012",
+   "status": "belegt"
+  }
+ ],
+ "logline": "Ein Tufa-Griff wurde nicht aus der Wand gehauen, sondern ist Tropfen fuer Tropfen angewachsen.",
+ "fassung": "1 (18.10.2026), Ablauf \"offene_frage\"; Hook 1 CLIMBING x GEOLOGY 0-1,45 s, Hook 2 ab 1,8 s fuer 3,75 s (TUFA ON LIMESTONE: HOW DID THIS HOLD FORM?); Callback CARVED OUT? ab 11,75 s; Payoff DRIP BY DRIP. bei 13,9 s (66,7 % bis zum Abspann); Abspann ab 20,85 s; Dauer 23,85 s; Cover bei 2,65 s",
+ "aenderung": "Erste Fassung nach den Regeln vom 15./16.10.2026. Beim Ansehen der Einzelbilder korrigiert: Kreide-Ticks am Loch entfernt (wirkten im Zoom wie ein fremdes Symbol), Zoom 1,5 -> 1,45 um (650, 1340), damit die Dachkante unter dem Zug-Text bleibt, CO2-Label und Blaeschen groesser.",
+ "ton_gehoert": false,
+ "ton_hinweis": "Ton nur gemessen (Lautheit, True Peak, Hochton-Anteil, Tonverlauf), nicht angehoert: Markus' Ohr entscheidet.",
+ "musik": "D-Dur, 78 BPM",
+ "kletterer_reichweite_px": {
+  "start": 0.0,
+  "hang": 0.0,
+  "hang1": 0.0,
+  "stand": 0.0,
+  "look": 0.0
+ }
+}

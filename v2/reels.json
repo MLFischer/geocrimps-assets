@@ -133,6 +133,28 @@
       },
       "ablauf": "quiz",
       "version": "17.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 GERMANY'S HIGHEST PEAK: WHAT WAS THIS LIMESTONE ONCE? mit Chips A/B/C, Lesezeit-Regel, Musik A-Moll/C-Dur 84 BPM, Abspann LIKE & FOLLOW, 31,4 s"
+    },
+    {
+      "id": "r005",
+      "slug": "2026-10-23_holdid-02",
+      "format": "HOLD ID",
+      "nr": 2,
+      "post_ref": "#012",
+      "thema": "Sinter waechst",
+      "video": "reels/2026-10-23_holdid-02.mp4",
+      "cover": "reels/2026-10-23_holdid-02.jpg",
+      "caption": "HOLD ID #02 · An animated climber pinches a tufa on a limestone wall, then we zoom into its tip and watch how this hold forms.\n\nTufas aren't carved out of the wall, they grow onto it. Water that has dissolved limestone seeps out of the rock; once it loses CO₂, it is oversaturated and calcite comes out of solution, layer by layer, the way a stalactite grows after countless drops. That makes a tufa younger than the wall it hangs on. (Mosses and algae can help along, and most tufas on climbing walls have never been dated.)\n\nSend this to the friend who plans every climbing trip around tufas.\n\nWhat's the best tufa you've ever pinched?\n\nSource: Ford & Pedley (1996), Earth-Science Reviews. Full sources in the first comment.\n\n#climbing #sportclimbing #tufa #limestone #geology",
+      "first_comment": "Sources: Ford, T. D. & Pedley, H. M. (1996): A review of tufa and travertine deposits of the world. Earth-Science Reviews 41(3–4): 117–175. · Farr, G., Graham, J. & Stratford, C. (2014): Survey, characterisation and condition assessment of Palustriella dominated springs 'H7220 Petrifying springs with tufa formation (Cratoneurion)' in Wales. British Geological Survey Internal Report OR/14/043. · U.S. National Park Service, Ozark National Scenic Riverways: How Stalactites and Stalagmites Form.",
+      "audio_name": "GeoCrimps – HOLD ID",
+      "scheduled": "2026-10-23T17:07:00+02:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "offene_frage",
+      "version": "18.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 TUFA ON LIMESTONE: HOW DID THIS HOLD FORM?, Callback CARVED OUT?, Payoff DRIP BY DRIP., Musik D-Dur 78 BPM, Abspann LIKE & FOLLOW, 23,85 s"
     }
   ]
 }
