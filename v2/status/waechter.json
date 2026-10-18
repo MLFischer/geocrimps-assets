@@ -1,16 +1,14 @@
 {
   "fehler": [],
-  "hinweise": [
-    "Termin Di 20.10. 18:07 (REWIND, Post #018): noch kein Reel; die nächste Produktion (So oder Mi 07:41) baut es."
-  ],
+  "hinweise": [],
   "geprueft": [
     "Instagram-Token gültig (@geocrimps)",
-    "Instagram-Token laut Statusdatei gültig bis 14.12.2026 (noch 59 Tage)",
-    "GH_ADMIN_TOKEN gültig bis 10.01.2027 (noch 86 Tage)",
+    "Instagram-Token laut Statusdatei gültig bis 14.12.2026 (noch 57 Tage)",
+    "GH_ADMIN_TOKEN gültig bis 10.01.2027 (noch 84 Tage)",
     "Puffer: 1 Termin(e) in den nächsten 120 h fertig und erreichbar",
-    "Workflow-Läufe der letzten 26 h: 12, davon fehlgeschlagen: 0"
+    "Workflow-Läufe der letzten 26 h: 10, davon fehlgeschlagen: 0"
   ],
   "fingerprint": "",
   "issue": null,
-  "stand": "2026-10-16T09:57:11+00:00"
+  "stand": "2026-10-18T09:43:27+00:00"
 }
