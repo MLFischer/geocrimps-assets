@@ -154,7 +154,11 @@
       },
       "hold": false,
       "ablauf": "offene_frage",
-      "version": "18.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 TUFA ON LIMESTONE: HOW DID THIS HOLD FORM?, Callback CARVED OUT?, Payoff DRIP BY DRIP., Musik D-Dur 78 BPM, Abspann LIKE & FOLLOW, 23,85 s"
+      "version": "18.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 TUFA ON LIMESTONE: HOW DID THIS HOLD FORM?, Callback CARVED OUT?, Payoff DRIP BY DRIP., Musik D-Dur 78 BPM, Abspann LIKE & FOLLOW, 23,85 s",
+      "probe": {
+        "at": "2026-10-18T06:06:12+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
