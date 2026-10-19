@@ -1,2 +1,6 @@
 datum,reel,slug,format,ablauf,tage_online,views,reach,skip_rate_prozent,avg_watch_s,dauer_s,wiedergabequote,likes,comments,shares,saved,shares_pro_reichweite,saves_pro_reichweite,followers
 2026-10-13,r001,2026-10-12_whodunit-01,WHODUNIT #01,quiz,0.7,325,273,52.3,5.79,16.8,34.5,4,1,0,0,0.0,0.0,27
+2026-10-19,r001,2026-10-12_whodunit-01,WHODUNIT #01,quiz,6.8,359,301,51,5.97,16.8,35.5,4,1,0,0,0.0,0.0,27
+2026-10-19,"r002 (Fassung 3, ersetzt)",2026-10-13_holdid-01,HOLD ID #01 (alte Fassung),erklaerkette,5.9,,,,,13.0,,,,,,,,27
+2026-10-19,r002,2026-10-13_holdid-01,HOLD ID #01,erklaerkette,4.9,176,134,47.1,7.92,14.5,54.6,0,1,0,0,0.0,0.0,27
+2026-10-19,r003,2026-10-16_mythorrock-01,MYTH OR ROCK #01,offene_frage,3.0,168,144,64.6,5.82,19.75,29.5,0,1,0,0,0.0,0.0,27
