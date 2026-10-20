@@ -121,7 +121,7 @@
       "first_comment": "Sources: Ortner, H. & Kilian, S. (2022): Thrust tectonics in the Wetterstein and Mieming mountains, and a new tectonic subdivision of the Northern Calcareous Alps of western Austria and southern Germany. International Journal of Earth Sciences 111: 543–571. · Nittel, P. (2006): Beiträge zur Stratigraphie und Mikropaläontologie der Mitteltrias der Innsbrucker Nordkette (Nördliche Kalkalpen, Austria). Geo.Alp 3: 93–145. · Missoni, S., Gawlick, H.-J., Sudar, M. N., Jovanović, D. & Lein, R. (2012): Onset and demise of the Wetterstein Carbonate Platform in the mélange areas of the Zlatibor Mountain (Sirogojno, SW Serbia). Facies 58: 95–111.",
       "audio_name": "GeoCrimps – REWIND",
       "scheduled": "2026-10-20T18:07:00+02:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
         "am": "2026-10-12"
@@ -132,7 +132,11 @@
         "result": "FINISHED"
       },
       "ablauf": "quiz",
-      "version": "17.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 GERMANY'S HIGHEST PEAK: WHAT WAS THIS LIMESTONE ONCE? mit Chips A/B/C, Lesezeit-Regel, Musik A-Moll/C-Dur 84 BPM, Abspann LIKE & FOLLOW, 31,4 s"
+      "version": "17.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 GERMANY'S HIGHEST PEAK: WHAT WAS THIS LIMESTONE ONCE? mit Chips A/B/C, Lesezeit-Regel, Musik A-Moll/C-Dur 84 BPM, Abspann LIKE & FOLLOW, 31,4 s",
+      "media_id": "18345343003251356",
+      "permalink": "https://www.instagram.com/reel/DeuO5U7EolC/",
+      "published_at": "2026-10-20T16:12:13+0000",
+      "first_comment_posted": true
     },
     {
       "id": "r005",
