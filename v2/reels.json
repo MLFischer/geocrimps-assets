@@ -184,7 +184,11 @@
       },
       "hold": false,
       "ablauf": "erklaerkette",
-      "version": "21.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 CHALK ROCK: WHAT'S THIS HOLD MADE OF?, Lupenkreis-Spruenge Griff -> 1 cm -> 10 µm, Payoff BROKEN PLANKTON., Musik F-Dur 86 BPM, Abspann LIKE & FOLLOW, 29,85 s"
+      "version": "21.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 CHALK ROCK: WHAT'S THIS HOLD MADE OF?, Lupenkreis-Spruenge Griff -> 1 cm -> 10 µm, Payoff BROKEN PLANKTON., Musik F-Dur 86 BPM, Abspann LIKE & FOLLOW, 29,85 s",
+      "probe": {
+        "at": "2026-10-21T06:09:02+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
