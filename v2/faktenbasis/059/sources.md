@@ -55,3 +55,13 @@ jetzt „a fifth of the volume **at most**“.
 **Nebenbefund, ebenfalls behoben:** `Scheduler/Woche_09.md` protokollierte unter Textkohärenz,
 Caption und Slide nennten den Anteil beide als „around a fifth“. Das stimmte für die Caption nicht.
 Die Kohärenzprüfung, die den Befund hätte fangen sollen, hatte den Caption-Text falsch notiert.
+
+## Nachtrag 21.10.2026 (Reel r006 SCALE JUMP #01)
+
+| Aussage (im Reel) | Quelle | Status |
+|---|---|---|
+| Nach dem Tod der Algen sinken die Kalkplättchen (Coccolithen) zum Meeresboden, sammeln sich dort und werden zu Kreide (Bild: Alge zerfällt, Plättchen sinken; „ALGAE BUILT THEM.“) | AGU / Bigelow Laboratory, Joint Release (15.09.2016): [Giant algal bloom sheds light on formation of White Cliffs of Dover](https://news.agu.org/press-release/giant-algal-bloom-sheds-light-on-formation-of-white-cliffs-of-dover/) — „calcite plates … that sink and accumulate on the sea floor when the algae die, compacting and hardening into chalk“ | ✅ web-verifiziert 21.10.2026 |
+| An Kreidefelsen wird geklettert (Bild: Kletterer an einem Kreidegriff; keine Ortsnennung, keine Aussage zur Felsqualität) | BMC Regional Access Database: [Dover North – South Coast Chalk](https://services.thebmc.co.uk/modules/rad/view.aspx?id=52) — „Rock Type: Chalk“, Routen am Kliff | ✅ web-verifiziert 21.10.2026 |
+| Kletterchalk ist MgCO₃, nicht Kreide (nur Caption) | siehe 009/sources.md Zeile 1 (Clarke et al. 2024) | ✅ übernommen aus #009 |
+
+Kalibrierung für das Reel: Die Zahl „UP TO 6 BILLION“ (Höchstwert 6,09 × 10⁹/cm³) und „A FIFTH AT MOST“ (≤ 20 Vol.-%, vorläufig) stammen aus der Greenhorn-Kreide in Kansas; das Bild nennt KANSAS am Probenwürfel, die Caption nennt Ort und „tentative“. „BROKEN PLANKTON.“ folgt der Formulierung „mostly plankton that has already fallen apart“ (Kalibrierung oben); die übrigen Bestandteile (Muschelreste, Fischknochen, Schlamm) nennt die Caption.

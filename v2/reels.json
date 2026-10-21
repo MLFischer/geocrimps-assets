@@ -163,6 +163,28 @@
         "at": "2026-10-18T06:06:12+00:00",
         "result": "FINISHED"
       }
+    },
+    {
+      "id": "r006",
+      "slug": "2026-10-27_scalejump-01",
+      "format": "SCALE JUMP",
+      "nr": 1,
+      "post_ref": "#059",
+      "thema": "Kreide ist Plankton",
+      "video": "reels/2026-10-27_scalejump-01.mp4",
+      "cover": "reels/2026-10-27_scalejump-01.jpg",
+      "caption": "SCALE JUMP #01 · What is a chalk hold made of? An animated climber on a chalk wall, then we zoom from the hold into a sugar-cube-sized sample and on into the tiny plates it is built from.\n\nThe plates are coccoliths: calcite armour of single-celled algae, mostly 4–12 micrometres across. When the algae die, the plates sink and pile up on the sea floor, and over time that ooze hardens into chalk. In Cretaceous chalk from Kansas, Hattin and Darko counted between half a billion and six billion coccoliths in a single cubic centimetre. But intact plates fill only about a fifth of the rock at most (their own estimate, which they called tentative): much of the rest is plates that have already fallen apart, plus foraminifera, shell fragments, fish bones and mud. (And the chalk in your bag is something else: climbing chalk is magnesium carbonate.)\n\nSend this to your climbing partner who always wants to know what the rock is made of.\n\nWhat's the strangest thing you've found out a rock was made of?\n\nSource: Hattin & Darko (1971), Kansas Geological Survey Bulletin 202. Full sources in the first comment.\n\n#climbing #bouldering #geology #chalk #micropaleontology",
+      "first_comment": "Sources: Hattin, D. E. & Darko, D. A. (1971): Technique for Determining Coccolith Abundance in Shaly Chalk of Greenhorn Limestone (Upper Cretaceous) of Kansas. Kansas Geological Survey Bulletin 202, part 2. · American Geophysical Union & Bigelow Laboratory for Ocean Sciences (2016): Giant algal bloom sheds light on formation of White Cliffs of Dover. Press release, 15 September 2016. · Clarke, B., Tomlinson, K., Karunakaran, A., Canden, A., Slatter, J., Slatter, T., Carré, M. & Lewis, R. (2024): The effectiveness of chalk as a friction modifier for finger pad contact with rocks of varying roughness. Proceedings of the Institution of Mechanical Engineers, Part P.",
+      "audio_name": "GeoCrimps – SCALE JUMP",
+      "scheduled": "2026-10-27T18:07:00+01:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "erklaerkette",
+      "version": "21.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 CHALK ROCK: WHAT'S THIS HOLD MADE OF?, Lupenkreis-Spruenge Griff -> 1 cm -> 10 µm, Payoff BROKEN PLANKTON., Musik F-Dur 86 BPM, Abspann LIKE & FOLLOW, 29,85 s"
     }
   ]
 }

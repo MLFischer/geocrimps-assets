@@ -1,0 +1,366 @@
+{
+ "slug": "2026-10-27_scalejump-01",
+ "datei": "2026-10-27_scalejump-01",
+ "dauer_s": 29.850000000000005,
+ "fps": 30,
+ "frames": 896,
+ "mp4_mb": 24.39,
+ "woerter_im_bild": 32,
+ "labels": 2,
+ "woerter_gesamt_mit_labels": 38,
+ "payoff_anteil": 0.765,
+ "loudnorm": {
+  "loudnorm_ziel": -13.7,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.3
+ },
+ "messung": {
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.3
+ },
+ "toene": {
+  "hook1-anschwellen": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "hook1-griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "hook1-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "hook1-akkord": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "hook1-gestein": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "hook1-uebergang": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "musik": [
+   "selbst erzeugt (musik.bass)",
+   "selbst erzeugt (musik.flaeche)",
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "sprung": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "sprung-landung": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "lupe": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "bohrhaken": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "massstab": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "plaettchen": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "bruch": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "leuchten": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "steigerung": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "payoff-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "payoff": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "fazit": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "klanglogo": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "herz": [
+   "selbst erzeugt (musik.zupf)"
+  ]
+ },
+ "metallische_klaenge": [],
+ "puls_mit_hihat": false,
+ "hochton_anteil_ueber_4khz_prozent": 0.277,
+ "spektraler_schwerpunkt_hz": 325.0,
+ "ablauf": "erklaerkette",
+ "ablauf_im_themenplan": "erklaerkette",
+ "ablauf_slot_davor": "offene_frage",
+ "hook1": "CLIMBING / × GEOLOGY",
+ "hook1_bis_s": 1.45,
+ "hook1_in_frame0_anteil": 0.942,
+ "hook1_woerter_extra": 2,
+ "hook_ab_s": 1.8,
+ "hook_bis_s": 5.55,
+ "hook_steht_s": 3.75,
+ "hook_min_s": 3.6,
+ "fragen_min_s": 1.5,
+ "weitere_fragen_stehen_s": [],
+ "cover_t": 2.65,
+ "meta_hook": "GEOCRIMPS · CLIMBING × GEOLOGY",
+ "meta_hook_woerter_extra": 3,
+ "meta_hook_im_cover_anteil": 0.969,
+ "lesezeit_regel": "voll sichtbar >= 0.75 s + 0.35 s je Wort, Aufloesung/Fazit +0.8 s (Deckkraft >= 0.95)",
+ "lesezeiten": [
+  {
+   "text": "SCALE JUMP",
+   "ab_s": 1.83,
+   "voll_s": 3.5,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "CHALK ROCK:",
+   "ab_s": 1.83,
+   "voll_s": 3.5,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "WHAT'S THIS HOLD MADE OF?",
+   "ab_s": 1.83,
+   "voll_s": 3.5,
+   "noetig_s": 2.5,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "SUGAR-CUBE SIZE.",
+   "ab_s": 6.43,
+   "voll_s": 1.7,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "1 CM · KANSAS",
+   "ab_s": 6.53,
+   "voll_s": 2.2,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "10 µm",
+   "ab_s": 9.33,
+   "voll_s": 3.3,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "UP TO 6 BILLION PLATES.",
+   "ab_s": 9.73,
+   "voll_s": 2.77,
+   "noetig_s": 2.5,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "ALGAE BUILT THEM.",
+   "ab_s": 13.73,
+   "voll_s": 2.0,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "INTACT: A FIFTH AT MOST.",
+   "ab_s": 17.43,
+   "voll_s": 2.77,
+   "noetig_s": 2.5,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "BROKEN PLANKTON.",
+   "ab_s": 20.57,
+   "voll_s": 2.33,
+   "noetig_s": 2.25,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "PULLING ON PLANKTON.",
+   "ab_s": 23.77,
+   "voll_s": 2.87,
+   "noetig_s": 2.6,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "LIKE & FOLLOW",
+   "ab_s": 27.47,
+   "voll_s": 2.13,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  }
+ ],
+ "verdauen": [
+  "BROKEN PLANKTON.",
+  "PULLING ON PLANKTON."
+ ],
+ "woerter_gemessen": 37,
+ "woerter_laut_meta": 37,
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "hook1_klettern_geologie_in_frame_0": true,
+  "hook1_dauer_1_0_bis_1_6_s": true,
+  "hook2_nach_hook1": true,
+  "meta_hook_im_cover": true,
+  "hook_frage_mindestdauer": true,
+  "weitere_fragen_mindestdauer": true,
+  "lesezeit_je_info": true,
+  "verdauzeit_aufloesung_und_fazit": true,
+  "alle_texte_gemessen": true,
+  "ablauf_wie_im_themenplan": true,
+  "ablauf_anders_als_im_slot_davor": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_40_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true,
+  "abspann_mit_aufruf": true,
+  "musik_statt_metall": true
+ },
+ "alle_pruefungen_ok": true,
+ "hook_score": {
+  "kriterien": "Klarheit (Gestein oder Gegenstand, Lage und Frage in Worten), Kletterbezug, Luecke, Kuerze, Deckung durch den Payoff (je 0-2); mindestens 8/10",
+  "varianten": [
+   {
+    "hook": "CHALK ROCK: WHAT'S THIS HOLD MADE OF?",
+    "punkte": [
+     2,
+     2,
+     2,
+     1,
+     2
+    ],
+    "summe": 9,
+    "gewaehlt": true,
+    "anmerkung": "nennt Gestein (Kreide, ausdruecklich als Fels, nicht Kletterchalk) und Gegenstand (Griff); 7 Woerter (2 in der Kontextzeile); BROKEN PLANKTON. beantwortet MADE OF"
+   },
+   {
+    "hook": "ZOOM INTO A CHALK CLIFF.",
+    "punkte": [
+     1,
+     0,
+     1,
+     2,
+     1
+    ],
+    "summe": 5,
+    "anmerkung": "Arbeitshook aus dem Themenplan; keine Frage, kein Kletterbezug"
+   },
+   {
+    "hook": "WHAT'S INSIDE A CHALK HOLD?",
+    "punkte": [
+     1,
+     2,
+     2,
+     2,
+     1
+    ],
+    "summe": 8,
+    "anmerkung": "'chalk hold' liest sich fuer Kletterer wie ein eingekreideter Griff"
+   },
+   {
+    "hook": "THIS CHALK ISN'T FROM YOUR BAG. WHAT IS IT?",
+    "punkte": [
+     2,
+     2,
+     2,
+     0,
+     2
+    ],
+    "summe": 8,
+    "anmerkung": "9 Woerter, ueber der Grenze von 8"
+   },
+   {
+    "hook": "HOW MANY PLATES FIT IN A SUGAR CUBE?",
+    "punkte": [
+     0,
+     0,
+     1,
+     1,
+     0
+    ],
+    "summe": 2,
+    "anmerkung": "nennt weder Gestein noch Griff, Payoff beantwortet etwas anderes, Quiz-Ton"
+   }
+  ]
+ },
+ "faktencheck": [
+  {
+   "aussage": "CHALK ROCK: / Bild: Kletterer an einer Leiste in Kreide",
+   "beleg": "059/sources.md Nachtrag 21.10.2026 (BMC RAD Dover North: Rock Type Chalk)",
+   "status": "belegt, web-verifiziert 21.10.2026; kein Ort, keine Aussage zur Felsqualitaet"
+  },
+  {
+   "aussage": "SUGAR-CUBE SIZE. / 1 CM · KANSAS",
+   "beleg": "059/sources.md (Hattin & Darko 1971: 1-cm-Wuerfel, Greenhorn Limestone, Kansas); caption.md (sugar lump)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "UP TO 6 BILLION PLATES.",
+   "beleg": "059/sources.md (5,34 x 10^8 bis 6,09 x 10^9 je cm³)",
+   "status": "belegt; Hoechstwert, Ort am Wuerfel genannt"
+  },
+  {
+   "aussage": "Massstab 10 µm, Plaettchen 6,6-9,4 µm gezeichnet",
+   "beleg": "059/sources.md (1-20 µm, meist 4-12 µm)",
+   "status": "belegt"
+  },
+  {
+   "aussage": "ALGAE BUILT THEM. / Coccosphaere, Zerfall, Absinken",
+   "beleg": "059/sources.md (Skelettelemente einzelliger Algen); Nachtrag 21.10.2026 (AGU 2016: sink and accumulate on the sea floor when the algae die)",
+   "status": "belegt, web-verifiziert 21.10.2026"
+  },
+  {
+   "aussage": "INTACT: A FIFTH AT MOST. (Feld: ganze Plaettchen etwa ein Fuenftel der Flaeche)",
+   "beleg": "059/sources.md ('20 percent or less', tentative; Korrektur 24.08.: 'at most')",
+   "status": "belegt; vor_produktion 'a fifth at most' gehalten, 'tentative' in der Caption"
+  },
+  {
+   "aussage": "BROKEN PLANKTON. / PULLING ON PLANKTON.",
+   "beleg": "059/sources.md Kalibrierung ('mostly plankton that has already fallen apart'; Matrix aus zerfallenen Coccolithen, Foraminiferen)",
+   "status": "belegt; uebrige Bestandteile in der Caption"
+  },
+  {
+   "aussage": "Hook 1: Kalk-Signatur auf der Kreidewand",
+   "beleg": "Kreide ist ein Kalkstein (Greenhorn Limestone)",
+   "status": "Lithologie passt, verraet die Antwort nicht"
+  },
+  {
+   "aussage": "Caption: Kletterchalk ist Magnesiumcarbonat",
+   "beleg": "009/sources.md; Clarke et al. (2024/2026) Abstract: chalk (magnesium carbonate), am 21.10.2026 geoeffnet",
+   "status": "belegt"
+  }
+ ],
+ "logline": "Ein Kreidegriff besteht aus Milliarden Kalkplaettchen von Algen, meist schon zerbrochen.",
+ "fassung": "1 (21.10.2026), Ablauf 'erklaerkette'; Hook 1 0-1,45 s, Hook 2 ab 1,8 s fuer 3,75 s (CHALK ROCK: WHAT'S THIS HOLD MADE OF?); Payoff BROKEN PLANKTON. bei 20.55 s (76.5 % bis zum Abspann); Abspann ab 26.85 s; Dauer 29.85 s; Cover bei 2,65 s",
+ "aenderung": "Beim Ansehen der Einzelbilder korrigiert: schraege Lichtlinie auf dem Wuerfel entfernt (wirkte wie ein Kratzer), Textverlauf im Meer abgeschwaecht (sichtbare Stufe), Coccosphaere tiefer und groesser, ganze Plaettchen von 64 auf 52 (Flaechenanteil ca. ein Fuenftel), im Payoff leuchten die Bruchstuecke; Aufloesung 0,25 s laenger (Lesezeit war 2,07 statt 2,25 s).",
+ "ton_gehoert": false,
+ "ton_hinweis": "Ton nur gemessen (Lautheit, True Peak, Hochton-Anteil, Tonverlauf), nicht angehoert: Markus' Ohr entscheidet.",
+ "musik": "F-Dur, 86 BPM",
+ "kletterer_reichweite_px": {
+  "start": 0.0,
+  "hang": 0.0,
+  "swing": 0.28,
+  "pull": 0.0
+ },
+ "abweichungen": "Massstabsbalken (1 CM, 10 µm) als Formatelement zusaetzlich zu den zwei Zahlen (6 billion, a fifth); Ortsangabe KANSAS am Probenwuerfel, weil die Zahlen nur fuer die Greenhorn-Kreide gelten."
+}
