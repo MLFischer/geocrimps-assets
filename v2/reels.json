@@ -151,7 +151,7 @@
       "first_comment": "Sources: Ford, T. D. & Pedley, H. M. (1996): A review of tufa and travertine deposits of the world. Earth-Science Reviews 41(3–4): 117–175. · Farr, G., Graham, J. & Stratford, C. (2014): Survey, characterisation and condition assessment of Palustriella dominated springs 'H7220 Petrifying springs with tufa formation (Cratoneurion)' in Wales. British Geological Survey Internal Report OR/14/043. · U.S. National Park Service, Ozark National Scenic Riverways: How Stalactites and Stalagmites Form.",
       "audio_name": "GeoCrimps – HOLD ID",
       "scheduled": "2026-10-23T17:07:00+02:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
         "am": "2026-10-12"
@@ -162,7 +162,11 @@
       "probe": {
         "at": "2026-10-18T06:06:12+00:00",
         "result": "FINISHED"
-      }
+      },
+      "media_id": "18239541079321217",
+      "permalink": "https://www.instagram.com/reel/De12RqyFLzq/",
+      "published_at": "2026-10-23T15:11:21+0000",
+      "first_comment_posted": true
     },
     {
       "id": "r006",
