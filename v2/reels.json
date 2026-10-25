@@ -193,6 +193,28 @@
         "at": "2026-10-21T06:09:02+00:00",
         "result": "FINISHED"
       }
+    },
+    {
+      "id": "r007",
+      "slug": "2026-10-30_mythorrock-02",
+      "format": "MYTH OR ROCK",
+      "nr": 2,
+      "post_ref": "#039",
+      "thema": "Frankenjura ist Dolomit",
+      "video": "reels/2026-10-30_mythorrock-02.mp4",
+      "cover": "reels/2026-10-30_mythorrock-02.jpg",
+      "caption": "MYTH OR ROCK #02 · Climbers say the Frankenjura is limestone. An animated climber on a pocketed tower next to a bedded wall, then we scan both rocks and zoom into the crystal lattice.\n\nIt depends: the crags of the Franconian Jura are reef dolomites and massive limestones, both from a tropical Jurassic sea about 150 million years ago. Dolomite started out as limestone; later, magnesium replaced part of the calcium, and in the mineral dolomite, CaMg(CO₃)₂, every second calcium site holds magnesium. (The lattice in the reel is a sketch, not to scale, and the tower is one drawn example, not a rule for every crag.)\n\nSend this to the friend who calls every Frankenjura crag perfect limestone.\n\nDid you guess IT DEPENDS?\n\nSource: Bayerisches Landesamt für Umwelt (2010), Geologie Bayerns: Malm. Full sources in the first comment.\n\n#frankenjura #sportclimbing #climbing #dolomite #geology",
+      "first_comment": "Sources: Bayerisches Landesamt für Umwelt (2010): Malm. Geologie Bayerns – Überblick. · Bayerisches Landesamt für Umwelt / StMUV: Bayerns schönste Geotope – Felsburg Tüchersfeld. · Hofbauer, G., Kaulich, B. & Gropp, C. (2005): Sind die Dolomithöhlen der Nördlichen und Mittleren Frankenalb tatsächlich das Ergebnis der Karbonatlösung? GDGH-Berichte B7. · King, H. M.: Dolomite – A sedimentary rock known as dolostone or dolomite rock. geology.com.",
+      "audio_name": "GeoCrimps – MYTH OR ROCK",
+      "scheduled": "2026-10-30T17:07:00+01:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "quiz",
+      "version": "25.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 CLIMBERS SAY: FRANKENJURA IS LIMESTONE. mit Chips TRUE/FALSE/IT DEPENDS, Scan Kalkwand/Dolomitturm, Gitter Ca->Mg, Payoff IT DEPENDS + LIMESTONE AND DOLOMITE., Musik B-Dur 82 BPM, Abspann LIKE & FOLLOW, 27,7 s"
     }
   ]
 }

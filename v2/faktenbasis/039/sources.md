@@ -16,3 +16,19 @@
 **🔵 Korrektur 06.08.2026** (Nachprüfung `Reports/2026-08-06_Kontrollbericht_W5-W6.md`): Die Caption begann mit *„**Half** the Frankenjura isn't limestone"*, der Hero-Slide dagegen mit *„**Much** of the Frankenjura isn't limestone at all"*. Die Quelle quantifiziert den **Flächenanteil nicht** — sie sagt nur, dass die oberen Lagen Dolomit sind und im Osten überwiegend Dolomit ansteht. „Half" war also scheinpräzise und wich zudem vom eigenen Slide ab. Erschwerend: „half" kommt im selben Post ein zweites Mal vor, dort **korrekt** (Stöchiometrie: „roughly half the calcium"). Caption an den Slide angeglichen: „Much of the Frankenjura isn't limestone."
 
 **Bild-Kalibrierung:** Slide 3 zeigt den Ionentausch schematisch als Gitter (nicht maßstäblich, keine Kristallstruktur). Chemische Formeln stehen nur in der Caption, weil die Marken-Fonts keine Subskript-Ziffern haben.
+
+---
+
+## Nachtrag 25.10.2026 (Reel r007, MYTH OR ROCK #02)
+
+| Claim (im Reel) | Quelle | Status |
+|---|---|---|
+| Die Fränkische Alb prägen hoch aufragende Felsbildungen aus Riffdolomiten und Massenkalken; im flachen Schelfmeer entstanden Kalk-, Mergel- und Dolomitsteine (Malm) | [Bayerisches Landesamt für Umwelt (2010): Malm (Geologie Bayerns, Überblick)](https://www.lfu.bayern.de/geologie/geologie_bayerns/ueberblick/doc/16_malm.pdf) | ✅ web-verifiziert 25.10.2026 |
+| Steil aufragende Felsen sind Reste eines Jura-Riffs (ca. 150 Mio. Jahre, Oberer Jura); sie säumen als Felsstotzen aus Frankendolomit die Talflanken; Magnesium aus dem Meerwasser ersetzte teilweise das Calcium der ursprünglichen Kalkablagerungen | [LfU / StMUV: Bayerns schönste Geotope – Felsburg Tüchersfeld (Schautafel)](https://www.lfu.bayern.de/geologie/bayerns_schoenste_geotope/29/doc/29_schautafel.pdf) | ✅ web-verifiziert 25.10.2026 |
+| Dolomit(gestein) besteht vorwiegend aus dem Mineral Dolomit, CaMg(CO₃)₂ (gegenüber Calcit CaCO₃: die Hälfte der Ca-Plätze trägt Mg → „half the calcium") | [King, H. M.: Dolomite – A sedimentary rock known as dolostone or dolomite rock (geology.com)](https://geology.com/rocks/dolomite.shtml) | ✅ web-verifiziert 25.10.2026 |
+| Kalkfelsen der Frankenalb zeigen Klüftung und Schichtung; löchrige Dolomittürme; Dolomit der Frankenalb ist zuckerkörnig | [Hofbauer, G., Kaulich, B. & Gropp, C. (2005): Sind die Dolomithöhlen der Nördlichen und Mittleren Frankenalb tatsächlich das Ergebnis der Karbonatlösung? GDGH-Bericht B7](https://www.gdgh.de/berichte/b07/dolomitkarst.pdf) | ✅ web-verifiziert 25.10.2026 (Bildmittel: gebankte Kalkwand, löchriger Turm) |
+| Kletterer beschreiben die Frankenjura-Felsen als Kalk („perfect white and grey limestone") – die Behauptung im Hook | [UKClimbing, Artikel 2742 (Frankenjura Sport Climbing, zuerst 2010)](https://www.ukclimbing.com/articles/page.php?id=2742) | ✅ web-verifiziert 25.10.2026 |
+
+**🟠 Befund 25.10.2026 (Nachprüfung für r007):** Die UKC-Seite (Artikel 2742), auf die sich die Zeilen „obere Lagen Dolomit" und „im Westen Kalk, im Osten überwiegend Dolomit" stützen, enthält in der heute abrufbaren Fassung weder „dolomite" noch „Jurassic" noch „magnesium" (nur „perfect white and grey limestone"). Beide Aussagen sind damit derzeit **nicht belegt** und kommen nicht ins Reel; der Teaser-Post #039 trägt sie noch (Fun Fact West/Ost) – bei Gelegenheit neu belegen oder streichen.
+
+**🟠 Befund 25.10.2026 (Löslichkeit):** Szramek et al. (2007), G³ 8, Q04002 („Relative weathering intensity of calcite versus dolomite …", [Abstract](https://experts.arizona.edu/en/publications/relative-weathering-intensity-of-calcite-versus-dolomite-in-carbo/)) schreiben, Dolomit sei unter 25 °C *löslicher* als Calcit und löse sich in den untersuchten Einzugsgebieten molar *stärker*; Hofbauer et al. (2005) nennen die Löslichkeit von Dolomit „wesentlich geringer". Die Zeile „Dolomit löst sich langsamer" (Kinetik) ist also umstritten und steht weder im Reel noch in seiner Caption.
