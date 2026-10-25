@@ -1,2 +1,2 @@
 Aenderung startet .github/workflows/reel-probe.yml (Probelauf ohne Veroeffentlichung).
-r006 SCALE JUMP #01 2026-10-21T06:08:20Z
+r007 MYTH OR ROCK #02 2026-10-25T07:12:15Z
