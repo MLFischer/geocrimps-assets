@@ -214,7 +214,11 @@
       },
       "hold": false,
       "ablauf": "quiz",
-      "version": "25.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 CLIMBERS SAY: FRANKENJURA IS LIMESTONE. mit Chips TRUE/FALSE/IT DEPENDS, Scan Kalkwand/Dolomitturm, Gitter Ca->Mg, Payoff IT DEPENDS + LIMESTONE AND DOLOMITE., Musik B-Dur 82 BPM, Abspann LIKE & FOLLOW, 27,7 s"
+      "version": "25.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 CLIMBERS SAY: FRANKENJURA IS LIMESTONE. mit Chips TRUE/FALSE/IT DEPENDS, Scan Kalkwand/Dolomitturm, Gitter Ca->Mg, Payoff IT DEPENDS + LIMESTONE AND DOLOMITE., Musik B-Dur 82 BPM, Abspann LIKE & FOLLOW, 27,7 s",
+      "probe": {
+        "at": "2026-10-25T07:12:57+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
