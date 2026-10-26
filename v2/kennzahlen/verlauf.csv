@@ -4,3 +4,9 @@ datum,reel,slug,format,ablauf,tage_online,views,reach,skip_rate_prozent,avg_watc
 2026-10-19,"r002 (Fassung 3, ersetzt)",2026-10-13_holdid-01,HOLD ID #01 (alte Fassung),erklaerkette,5.9,,,,,13.0,,,,,,,,27
 2026-10-19,r002,2026-10-13_holdid-01,HOLD ID #01,erklaerkette,4.9,176,134,47.1,7.92,14.5,54.6,0,1,0,0,0.0,0.0,27
 2026-10-19,r003,2026-10-16_mythorrock-01,MYTH OR ROCK #01,offene_frage,3.0,168,144,64.6,5.82,19.75,29.5,0,1,0,0,0.0,0.0,27
+2026-10-26,r001,2026-10-12_whodunit-01,WHODUNIT #01,quiz,13.8,361,301,51,5.95,16.8,35.4,4,1,0,0,0.0,0.0,27
+2026-10-26,"r002 (Fassung 3, ersetzt)",2026-10-13_holdid-01,HOLD ID #01 (alte Fassung),erklaerkette,12.9,,,,,13.0,,,,,,,,27
+2026-10-26,r002,2026-10-13_holdid-01,HOLD ID #01,erklaerkette,11.9,178,135,47.8,7.86,14.5,54.2,0,1,0,0,0.0,0.0,27
+2026-10-26,r003,2026-10-16_mythorrock-01,MYTH OR ROCK #01,offene_frage,9.9,174,146,63.8,5.84,19.75,29.6,1,1,0,0,0.0,0.0,27
+2026-10-26,r004,2026-10-20_rewind-01,REWIND #01,quiz,5.9,137,116,66.1,5.55,31.4,17.7,3,1,0,0,0.0,0.0,27
+2026-10-26,r005,2026-10-23_holdid-02,HOLD ID #02,offene_frage,2.9,204,182,59.7,5.93,23.849999999999998,24.9,0,1,0,0,0.0,0.0,27
