@@ -181,7 +181,7 @@
       "first_comment": "Sources: Hattin, D. E. & Darko, D. A. (1971): Technique for Determining Coccolith Abundance in Shaly Chalk of Greenhorn Limestone (Upper Cretaceous) of Kansas. Kansas Geological Survey Bulletin 202, part 2. · American Geophysical Union & Bigelow Laboratory for Ocean Sciences (2016): Giant algal bloom sheds light on formation of White Cliffs of Dover. Press release, 15 September 2016. · Clarke, B., Tomlinson, K., Karunakaran, A., Canden, A., Slatter, J., Slatter, T., Carré, M. & Lewis, R. (2024): The effectiveness of chalk as a friction modifier for finger pad contact with rocks of varying roughness. Proceedings of the Institution of Mechanical Engineers, Part P.",
       "audio_name": "GeoCrimps – SCALE JUMP",
       "scheduled": "2026-10-27T18:07:00+01:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
         "am": "2026-10-12"
@@ -192,7 +192,11 @@
       "probe": {
         "at": "2026-10-21T06:09:02+00:00",
         "result": "FINISHED"
-      }
+      },
+      "media_id": "18119382028777587",
+      "permalink": "https://www.instagram.com/reel/DfAq3qEALcF/",
+      "published_at": "2026-10-27T20:02:57+0000",
+      "first_comment_posted": true
     },
     {
       "id": "r007",
