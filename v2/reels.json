@@ -223,6 +223,28 @@
         "at": "2026-10-25T07:12:57+00:00",
         "result": "FINISHED"
       }
+    },
+    {
+      "id": "r008",
+      "slug": "2026-11-03_whodunit-02",
+      "format": "WHODUNIT",
+      "nr": 2,
+      "post_ref": "#057",
+      "thema": "Gradierte Schichtung: Which way was up?",
+      "video": "reels/2026-11-03_whodunit-02.mp4",
+      "cover": "reels/2026-11-03_whodunit-02.jpg",
+      "caption": "WHODUNIT #02 · Which way was up on a sandstone crag? An animated climber brushes a bedded wall and finds the coarse grains at the top of every bed.\n\nMany sedimentary beds look different right-side-up and upside-down. In normal graded bedding, coarse grains sit at the bottom of a bed and fine ones at the top, so in most cases the strata get younger towards the fine side. Compression can fold beds into upside-down positions, and on an overturned wall, climbing up takes you into older beds. Reverse grading exists too, so a single bed proves nothing: geologists look for as many way-up clues as possible and check that they agree. (The wall in the reel is a sketch, not a real crag.)\n\nSend this to the friend who thinks the top of the wall is always the youngest rock.\n\nHave you ever climbed something you later found out was overturned?\n\nSource: Bentley et al. (2023), Historical Geology, OpenGeology / LibreTexts. Full sources in the first comment.\n\n#climbing #bouldering #geology #sedimentology #stratigraphy",
+      "first_comment": "Sources: Bentley, C., Layou, K., Kohrs, R., Jaye, S., Affolter, M. & Ricketts, B.: Way-up structures. In: Historical Geology. OpenGeology (opengeology.org/historicalgeology). · Bentley, C. et al. (2023): (Tools of the Trade) Way-up structures – Introduction. In: Historical Geology, Geosciences LibreTexts (CC BY-NC 4.0).",
+      "audio_name": "GeoCrimps – WHODUNIT",
+      "scheduled": "2026-11-03T18:07:00+01:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "offene_frage",
+      "version": "28.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 SANDSTONE CRAG: WHICH WAY WAS UP?, Schaufenster (grob unten), Buersten der Wand (grob oben), EVERY BED AGREES., Callback UP THE WALL?, Payoff UP WAS DOWN. mit Drehung der Koernung, Fazit HERE, UP MEANS OLDER., Musik A-Dur 76 BPM, Abspann LIKE & FOLLOW, 32,45 s; Thema getauscht mit Slot 10.11. (#061 Vorbedingung nicht pruefbar)"
     }
   ]
 }

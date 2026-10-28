@@ -75,11 +75,12 @@
       "termin": "2026-11-03T18:07:00+01:00",
       "format": "WHODUNIT",
       "ablauf": "offene_frage",
-      "post": "#061",
-      "thema": "Schwarze Partikel sind Schuhgummi (unveroeffentlicht)",
-      "hook": "WHAT ARE THESE BLACK SPECKS?",
-      "vor_produktion": "Befund (orange) vom 29.08. beheben, sonst Thema tauschen",
-      "reel": null
+      "post": "#057",
+      "thema": "Gradierte Schichtung (unveroeffentlicht)",
+      "hook": "WHICH WAY WAS UP?",
+      "vor_produktion": "",
+      "reel": "r008",
+      "tausch": "28.10.2026: Thema mit dem Slot 10.11.2026 getauscht (#061 <-> #057), weil die Vorbedingung von #061 (Befund orange vom 29.08.) im Repo nicht dokumentiert und damit nicht pruefbar ist; Ablauf je Slot unveraendert."
     },
     {
       "termin": "2026-11-06T17:07:00+01:00",
@@ -95,11 +96,12 @@
       "termin": "2026-11-10T18:07:00+01:00",
       "format": "WHODUNIT",
       "ablauf": "quiz",
-      "post": "#057",
-      "thema": "Gradierte Schichtung (unveroeffentlicht)",
-      "hook": "WHICH WAY WAS UP?",
-      "vor_produktion": "",
-      "reel": null
+      "post": "#061",
+      "thema": "Schwarze Partikel sind Schuhgummi (unveroeffentlicht)",
+      "hook": "WHAT ARE THESE BLACK SPECKS?",
+      "vor_produktion": "Befund (orange) vom 29.08. beheben, sonst Thema tauschen",
+      "reel": null,
+      "tausch": "28.10.2026: #061 von 03.11. hierher verschoben (Vorbedingung offen: Befund vom 29.08. klaeren), Ablauf quiz dieses Slots bleibt."
     },
     {
       "termin": "2026-11-13T17:07:00+01:00",

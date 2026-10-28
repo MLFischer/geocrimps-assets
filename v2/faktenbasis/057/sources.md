@@ -37,3 +37,12 @@ Erster für diese Woche vorgesehener Foto-Hero. Ein Aufschlussfoto mit gekappten
 Grund: Die Wikimedia-Commons-API war in diesem Lauf über `web_fetch` nicht erreichbar (Provenance-Sperre), und `list_connected_browsers` meldete über den gesamten Lauf kein Gerät. Damit war weder die **Lizenzlesung pro Datei aus `extmetadata`** möglich noch das Ablegen einer Binärdatei in `Assets/Photos/`. Ohne geprüfte Lizenz kein `PHOTOS`-Eintrag — Projektregel eingehalten.
 
 Für den nächsten Versuch: Commons `Category:Graded bedding` oder `Category:Cross-bedding`, gesucht wird ein **Aufschluss im Nahbereich mit Maßstab**, bei dem die Kappung oben tatsächlich zu sehen ist. Lizenz pro Datei lesen; CC BY-SA bleibt ausgeschlossen. **Motivprüfung gegen den Posttext:** Das Bild muss aufrecht stehende Schichten zeigen, sonst widerspricht es dem eigenen Slide.
+
+## Nachtrag 28.10.2026 (Reel r008 WHODUNIT #02)
+
+| Aussage (im Reel / in der Caption) | Quelle | Status |
+|---|---|---|
+| Kompression (konvergente Plattengrenzen) kann Bänke **auf den Kopf falten**; dann liest man die Erdgeschichte rückwärts → im Reel: „UP WAS DOWN.“, „HERE, UP MEANS OLDER.“ (in einer überkippten Folge zeigt die Younging Direction nach unten) | [Bentley, Layou, Kohrs, Jaye, Affolter & Ricketts: Historical Geology, Kap. 61.1 „(Tools of the Trade) Way-up structures – Introduction“, Geosciences LibreTexts (veröffentlicht 27.07.2023, CC BY-NC 4.0)](https://geo.libretexts.org/Bookshelves/Geology/Historical_Geology_(Bentley_et_al.)/61%3A_(Tools_of_the_Trade)_Way-up_structures/61.01%3A_Introduction) — „compressive stresses … fold beds into up-side-down positions“, „would be reading Earth history backward!“ | ✅ web-verifiziert 28.10.2026 |
+| Definition, Younging Direction und „A note of caution“ (viele Beispiele suchen, Übereinstimmung prüfen) stehen in derselben LibreTexts-Fassung wie auf opengeology.org → im Reel „EVERY BED AGREES.“ (mehrere Bänke als mehrere Indikatoren) | wie oben | ✅ web-verifiziert 28.10.2026 (opengeology.org war in diesem Lauf nicht abrufbar; die Zeilen vom 24.08.2026 gelten weiter) |
+
+**Reel-Kalibrierung:** Die Wand ist schematisch (kein Ort), sie zeigt überall dasselbe Kriterium (gradierte Bänke); das Reel sagt nicht, dass ein einzelnes Kriterium beweist, und die Caption nennt die inverse Gradierung. Das Zwischenbild „Bank setzt sich ab, unten zuerst“ zeigt nur die Reihenfolge der Ablagerung (unten älter), keine Sinkgeschwindigkeit.
