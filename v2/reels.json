@@ -244,7 +244,11 @@
       },
       "hold": false,
       "ablauf": "offene_frage",
-      "version": "28.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 SANDSTONE CRAG: WHICH WAY WAS UP?, Schaufenster (grob unten), Buersten der Wand (grob oben), EVERY BED AGREES., Callback UP THE WALL?, Payoff UP WAS DOWN. mit Drehung der Koernung, Fazit HERE, UP MEANS OLDER., Musik A-Dur 76 BPM, Abspann LIKE & FOLLOW, 32,45 s; Thema getauscht mit Slot 10.11. (#061 Vorbedingung nicht pruefbar)"
+      "version": "28.10.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 SANDSTONE CRAG: WHICH WAY WAS UP?, Schaufenster (grob unten), Buersten der Wand (grob oben), EVERY BED AGREES., Callback UP THE WALL?, Payoff UP WAS DOWN. mit Drehung der Koernung, Fazit HERE, UP MEANS OLDER., Musik A-Dur 76 BPM, Abspann LIKE & FOLLOW, 32,45 s; Thema getauscht mit Slot 10.11. (#061 Vorbedingung nicht pruefbar)",
+      "probe": {
+        "at": "2026-10-28T07:03:08+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
