@@ -1,2 +1,2 @@
 Aenderung startet .github/workflows/reel-publish.yml (faellige Reels aus v2/reels.json).
-2026-10-23T15:10:12Z Startschuss für r005 (geplante Aufgabe)
+2026-10-30T16:40:48Z Startschuss für r007 (geplante Aufgabe)
