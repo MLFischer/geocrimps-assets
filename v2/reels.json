@@ -274,7 +274,11 @@
       },
       "hold": false,
       "ablauf": "erklaerkette",
-      "version": "01.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 SANDSTONE HUECO: HOW DID IT GET HOLLOW?, Riss-Linie + Zoom in den Profilschnitt, SALTY WATER SOAKS IN., IT DRIES IN THE HOLE. (Lippen trocken, Salz am Muldengrund, Koerner fallen), Payoff HOLLOWED BY SALT., Stempel HOLD ID #03, Musik Es-Dur 88 BPM, Abspann LIKE & FOLLOW, 23,15 s; ohne Case hardening (Bruthans et al. 2018)"
+      "version": "01.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 SANDSTONE HUECO: HOW DID IT GET HOLLOW?, Riss-Linie + Zoom in den Profilschnitt, SALTY WATER SOAKS IN., IT DRIES IN THE HOLE. (Lippen trocken, Salz am Muldengrund, Koerner fallen), Payoff HOLLOWED BY SALT., Stempel HOLD ID #03, Musik Es-Dur 88 BPM, Abspann LIKE & FOLLOW, 23,15 s; ohne Case hardening (Bruthans et al. 2018)",
+      "probe": {
+        "at": "2026-11-01T07:00:39+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
