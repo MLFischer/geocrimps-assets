@@ -253,6 +253,28 @@
         "at": "2026-10-28T07:03:08+00:00",
         "result": "FINISHED"
       }
+    },
+    {
+      "id": "r009",
+      "slug": "2026-11-06_holdid-03",
+      "format": "HOLD ID",
+      "nr": 3,
+      "post_ref": "#026",
+      "thema": "Tafoni: Salz hoehlt den Hueco aus",
+      "video": "reels/2026-11-06_holdid-03.mp4",
+      "cover": "reels/2026-11-06_holdid-03.jpg",
+      "caption": "HOLD ID #03 · Sandstone hueco: how did it get hollow? An animated climber pulls on a big hueco, then we cut the wall open and watch salty water, drying and salt at work.\n\nSalty water soaks through porous sandstone and evaporates near the surface. When the rock is only slightly wet, the lips of a hole stay dry, while the evaporation reaches the back of the hole. That's where salt crystallises in the pores and breaks the rock up grain by grain, so the hole gets deeper and the lips stay. Honeycombs and tafoni probably have more than one cause: salt is the main suspect, wetting and drying may help, and in a 2018 field study a hard outer crust did not explain the honeycombs. (Wall and grains are a sketch, not to scale.)\n\nSend this to the friend who always fist-jams the biggest hueco.\n\nWhat's the best hueco you've ever pulled on?\n\nSource: Bruthans et al. (2018), Geomorphology. Full sources in the first comment.\n\n#climbing #bouldering #sandstone #geology #weathering",
+      "first_comment": "Sources: Bruthans, J., Filippi, M., Slavík, M. & Svobodová, E. (2018): Origin of honeycombs: Testing the hydraulic and case hardening hypotheses. Geomorphology 303: 68–83. · Slavík, M., Bruthans, J., Weiss, T., Filippi, M. & Svobodová, E. (2018): Testing the hydraulic and case hardening hypotheses of honeycombs origin. Geophysical Research Abstracts 20, EGU2018-3042. · Weiss, T.: How are holes in sandstone formed? Faculty of Science, Charles University (popular science). · Wikipedia: Honeycomb weathering.",
+      "audio_name": "GeoCrimps – HOLD ID",
+      "scheduled": "2026-11-06T17:07:00+01:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "erklaerkette",
+      "version": "01.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY, Hook 2 SANDSTONE HUECO: HOW DID IT GET HOLLOW?, Riss-Linie + Zoom in den Profilschnitt, SALTY WATER SOAKS IN., IT DRIES IN THE HOLE. (Lippen trocken, Salz am Muldengrund, Koerner fallen), Payoff HOLLOWED BY SALT., Stempel HOLD ID #03, Musik Es-Dur 88 BPM, Abspann LIKE & FOLLOW, 23,15 s; ohne Case hardening (Bruthans et al. 2018)"
     }
   ]
 }
