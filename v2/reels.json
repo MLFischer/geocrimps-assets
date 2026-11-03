@@ -241,7 +241,7 @@
       "first_comment": "Sources: Bentley, C., Layou, K., Kohrs, R., Jaye, S., Affolter, M. & Ricketts, B.: Way-up structures. In: Historical Geology. OpenGeology (opengeology.org/historicalgeology). · Bentley, C. et al. (2023): (Tools of the Trade) Way-up structures – Introduction. In: Historical Geology, Geosciences LibreTexts (CC BY-NC 4.0).",
       "audio_name": "GeoCrimps – WHODUNIT",
       "scheduled": "2026-11-03T18:07:00+01:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
         "am": "2026-10-12"
@@ -252,7 +252,11 @@
       "probe": {
         "at": "2026-10-28T07:03:08+00:00",
         "result": "FINISHED"
-      }
+      },
+      "media_id": "18141827704526895",
+      "permalink": "https://www.instagram.com/reel/DfSy0AxkRfY/",
+      "published_at": "2026-11-03T20:58:46+0000",
+      "first_comment_posted": true
     },
     {
       "id": "r009",
