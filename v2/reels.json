@@ -304,7 +304,11 @@
       },
       "hold": false,
       "ablauf": "quiz",
-      "version": "04.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6, Quiz und Zeitreise wie r004: Hook 1 CLIMBING x GEOLOGY, Hook 2 GRITSTONE EDGE: WHERE DID ITS SAND COME FROM?, Chips A DESERT / B REEF / C HIGHLAND, Countdown, Zeitreise auf ≈320 Mio. Jahre, RIVERS CARRIED IT SOUTH. (Fluss, Delta), Payoff A NORTHERN HIGHLAND. (Chip C), Fazit THIS EDGE IS IMPORTED HIGHLAND., Musik E-Moll 81 BPM, Abspann LIKE & FOLLOW, 33,4 s; Thema getauscht mit Slot 17.11. (#061 Vorbedingung nicht pruefbar)"
+      "version": "04.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6, Quiz und Zeitreise wie r004: Hook 1 CLIMBING x GEOLOGY, Hook 2 GRITSTONE EDGE: WHERE DID ITS SAND COME FROM?, Chips A DESERT / B REEF / C HIGHLAND, Countdown, Zeitreise auf ≈320 Mio. Jahre, RIVERS CARRIED IT SOUTH. (Fluss, Delta), Payoff A NORTHERN HIGHLAND. (Chip C), Fazit THIS EDGE IS IMPORTED HIGHLAND., Musik E-Moll 81 BPM, Abspann LIKE & FOLLOW, 33,4 s; Thema getauscht mit Slot 17.11. (#061 Vorbedingung nicht pruefbar)",
+      "probe": {
+        "at": "2026-11-04T18:14:28+00:00",
+        "result": "ERROR"
+      }
     }
   ]
 }
