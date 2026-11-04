@@ -28,3 +28,12 @@ Hauptquelle: [**Baseline Report Series 18: The Millstone Grit of Northern Englan
 - **Nichts über Reibung, Grip oder Hautverschleiß.** Das war der erste Arbeitstitel („Why gritstone eats skin") und wurde vor der Produktion gestrichen: Es gibt keine Messung, die Reibung auf Gritstone mit seiner Korngröße oder seinem Feldspatgehalt verknüpft. Exakt die Falle aus #032 (Flechten), #046 (Serpentinit) und dem 🟡-Befund zu #031 (Gletscherschliff) im Kontrollbericht vom 06.08. Der Post bleibt bei Zusammensetzung, Herkunft und Ablagerung.
 - **Keine Aussage darüber, warum die Kanten frei stehen.** Die Reliefbildung der gritstone edges (Härteunterschied Sandstein/Tonstein, periglaziale Überprägung) wäre ein eigener Post und ist hier nicht belegt.
 - **Kein Superlativ.** Kein „das gröbste", kein „das einzige" — die Quelle sagt ausdrücklich, dass Feldspatgehalt und Korngröße *variieren*.
+
+## Nachtrag 04.11.2026 (Reel r010, REWIND #02)
+
+| Aussage (im Reel / in der Caption) | Quelle | Status |
+|---|---|---|
+| Bibliografie der Hauptquelle: Abesser, C., Shand, P. & Ingram, J. (2005): Baseline Report Series 18: The Millstone Grit of Northern England. BGS Commissioned Report CR/05/015N, Environment Agency Technical Report NC/99/74/18 | [PDF, gov.uk](https://assets.publishing.service.gov.uk/media/5a7c777140f0b626628ac43f/scho0207blyp-e-e.pdf) | ✅ web-verifiziert 04.11.2026 (Titel, Autoren, Jahr, Berichtsnummern) |
+| „A NORTHERN HIGHLAND.“ / „RIVERS CARRIED IT SOUTH.“: Liefergebiet „a granitic/gneiss terrain in the north, probably Scotland and Scandanavia“; „intermittently southwards-prograding delta systems, fed by large river systems“ | dieselbe Quelle | ✅ web-verifiziert 04.11.2026 (Sätze im PDF gelesen) |
+
+Kalibrierung Reel: Das Bild nennt keinen Ort (nur „northern“); „probably Scotland and Scandinavia“ steht mit dem Hedge in der Caption. Landschaft schematisch. Keine Reibungsaussage.

@@ -283,6 +283,28 @@
         "at": "2026-11-01T07:00:39+00:00",
         "result": "FINISHED"
       }
+    },
+    {
+      "id": "r010",
+      "slug": "2026-11-10_rewind-02",
+      "format": "REWIND",
+      "nr": 2,
+      "post_ref": "#051",
+      "thema": "Gritstone: Sand aus einem Hochland im Norden",
+      "video": "reels/2026-11-10_rewind-02.mp4",
+      "cover": "reels/2026-11-10_rewind-02.jpg",
+      "caption": "REWIND #02 · Gritstone edge: where did its sand come from? An animated climber pulls on a gritstone break, then we rewind about 320 million years to the rivers and deltas that delivered the sand.\n\nThe Millstone Grit formed in the Namurian, around 320 million years ago, when large river systems built deltas out southwards across northern England. Its coarse, feldspar-bearing sand came from a granitic and gneissic highland to the north: provenance studies and zircon ages point to probably Scotland and Scandinavia. (The landscape is a sketch, not to scale.)\n\nSend this to the friend who calls a gritstone edge their home crag.\n\nDid you guess the highland, or did you go for the desert?\n\nSource: Abesser, Shand & Ingram (2005), British Geological Survey / Environment Agency. Full sources in the first comment.\n\n#climbing #gritstone #geology #sandstone #peakdistrict",
+      "first_comment": "Sources: Abesser, C., Shand, P. & Ingram, J. (2005): Baseline Report Series 18: The Millstone Grit of Northern England. British Geological Survey Commissioned Report CR/05/015N / Environment Agency Technical Report NC/99/74/18.",
+      "audio_name": "GeoCrimps – REWIND",
+      "scheduled": "2026-11-10T18:07:00+01:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "quiz",
+      "version": "04.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6, Quiz und Zeitreise wie r004: Hook 1 CLIMBING x GEOLOGY, Hook 2 GRITSTONE EDGE: WHERE DID ITS SAND COME FROM?, Chips A DESERT / B REEF / C HIGHLAND, Countdown, Zeitreise auf ≈320 Mio. Jahre, RIVERS CARRIED IT SOUTH. (Fluss, Delta), Payoff A NORTHERN HIGHLAND. (Chip C), Fazit THIS EDGE IS IMPORTED HIGHLAND., Musik E-Moll 81 BPM, Abspann LIKE & FOLLOW, 33,4 s; Thema getauscht mit Slot 17.11. (#061 Vorbedingung nicht pruefbar)"
     }
   ]
 }

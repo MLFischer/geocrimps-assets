@@ -94,14 +94,14 @@
     },
     {
       "termin": "2026-11-10T18:07:00+01:00",
-      "format": "WHODUNIT",
+      "format": "REWIND",
       "ablauf": "quiz",
-      "post": "#061",
-      "thema": "Schwarze Partikel sind Schuhgummi (unveroeffentlicht)",
-      "hook": "WHAT ARE THESE BLACK SPECKS?",
-      "vor_produktion": "Befund (orange) vom 29.08. beheben, sonst Thema tauschen",
-      "reel": null,
-      "tausch": "28.10.2026: #061 von 03.11. hierher verschoben (Vorbedingung offen: Befund vom 29.08. klaeren), Ablauf quiz dieses Slots bleibt."
+      "post": "#051",
+      "thema": "Gritstone kommt aus einem Hochland (unveroeffentlicht)",
+      "hook": "REWIND A GRITSTONE EDGE.",
+      "vor_produktion": "",
+      "reel": "r010",
+      "tausch": "04.11.2026: Thema mit dem Slot 17.11.2026 getauscht (#061 WHODUNIT <-> #051 REWIND, gleiche Formatklasse Geschichte), weil die Vorbedingung von #061 (Befund orange vom 29.08.) im Repo weiterhin nicht dokumentiert und damit nicht pruefbar ist; Ablauf je Slot unveraendert (10.11. quiz, 17.11. erklaerkette). Frueher: 28.10.2026 #061 von 03.11. hierher verschoben."
     },
     {
       "termin": "2026-11-13T17:07:00+01:00",
@@ -115,13 +115,14 @@
     },
     {
       "termin": "2026-11-17T18:07:00+01:00",
-      "format": "REWIND",
+      "format": "WHODUNIT",
       "ablauf": "erklaerkette",
-      "post": "#051",
-      "thema": "Gritstone kommt aus einem Hochland (unveroeffentlicht)",
-      "hook": "REWIND A GRITSTONE EDGE.",
-      "vor_produktion": "",
-      "reel": null
+      "post": "#061",
+      "thema": "Schwarze Partikel sind Schuhgummi (unveroeffentlicht)",
+      "hook": "WHAT ARE THESE BLACK SPECKS?",
+      "vor_produktion": "Befund (orange) vom 29.08. beheben, sonst Thema tauschen",
+      "reel": null,
+      "tausch": "04.11.2026: #061 vom 10.11. hierher verschoben (Vorbedingung weiter offen: Befund vom 29.08. klaeren, sonst erneut tauschen); Ablauf erklaerkette dieses Slots bleibt."
     }
   ],
   "danach": "Weitere Termine im selben Rhythmus anlegen, jeweils mit \"ablauf\" (quiz, offene_frage, erklaerkette; nie derselbe wie im Slot davor), und Themen aus v2/faktenbasis/Themenbibliothek.md nach Reel-Potenzial-Score waehlen (je 0-2: sichtbare Verwandlung, Kletterbezug, Hook-Luecke, Formatpassung, Beleglage). #053 und #054 erst nach Korrektur ihrer Befunde. #047 (Duenen) ist als Thema moeglich, aber ohne Fischgraetenschichtung im Bild (Befund des V1-Titelbilds, wird dort nicht korrigiert)."
