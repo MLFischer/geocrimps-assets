@@ -271,7 +271,7 @@
       "first_comment": "Sources: Bruthans, J., Filippi, M., Slavík, M. & Svobodová, E. (2018): Origin of honeycombs: Testing the hydraulic and case hardening hypotheses. Geomorphology 303: 68–83. · Slavík, M., Bruthans, J., Weiss, T., Filippi, M. & Svobodová, E. (2018): Testing the hydraulic and case hardening hypotheses of honeycombs origin. Geophysical Research Abstracts 20, EGU2018-3042. · Weiss, T.: How are holes in sandstone formed? Faculty of Science, Charles University (popular science). · Wikipedia: Honeycomb weathering.",
       "audio_name": "GeoCrimps – HOLD ID",
       "scheduled": "2026-11-06T17:07:00+01:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
         "am": "2026-10-12"
@@ -282,7 +282,11 @@
       "probe": {
         "at": "2026-11-01T07:00:39+00:00",
         "result": "FINISHED"
-      }
+      },
+      "media_id": "17889088794492765",
+      "permalink": "https://www.instagram.com/reel/DfaAYYClJ7E/",
+      "published_at": "2026-11-06T16:11:51+0000",
+      "first_comment_posted": true
     },
     {
       "id": "r010",
