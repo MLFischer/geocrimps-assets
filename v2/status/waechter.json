@@ -1,16 +1,14 @@
 {
-  "fehler": [
-    "Workflow \"Reel-Probelauf\" ist am Mi 04.11. 19:14 fehlgeschlagen: https://github.com/MLFischer/geocrimps-assets/actions/runs/41885090749"
-  ],
+  "fehler": [],
   "hinweise": [],
   "geprueft": [
     "Instagram-Token gültig (@geocrimps)",
-    "Instagram-Token laut Statusdatei gültig bis 31.12.2026 (noch 56 Tage)",
-    "GH_ADMIN_TOKEN gültig bis 10.01.2027 (noch 66 Tage)",
-    "Puffer: 1 Termin(e) in den nächsten 120 h fertig und erreichbar",
-    "Workflow-Läufe der letzten 26 h: 9, davon fehlgeschlagen: 1"
+    "Instagram-Token laut Statusdatei gültig bis 31.12.2026 (noch 55 Tage)",
+    "GH_ADMIN_TOKEN gültig bis 10.01.2027 (noch 65 Tage)",
+    "Puffer: 2 Termin(e) in den nächsten 120 h fertig und erreichbar",
+    "Workflow-Läufe der letzten 26 h: 3, davon fehlgeschlagen: 0"
   ],
-  "fingerprint": "54cdaf4c6895",
-  "issue": 3,
-  "stand": "2026-11-05T13:20:40+00:00"
+  "fingerprint": "",
+  "issue": null,
+  "stand": "2026-11-06T13:03:49+00:00"
 }
