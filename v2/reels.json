@@ -334,7 +334,11 @@
       },
       "hold": false,
       "ablauf": "offene_frage",
-      "version": "08.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY (Granitplatte mit Schliff-Flecken), Hook 2 GLACIER-POLISHED GRANITE: WHAT MAKES THIS SLAB SHINE?, Zug 1 ICE SANDED IT SMOOTH. (Gletscher im Profil), Zug 2 BUT LOOK CLOSER… (Mikroschnitt, Gesteinsmehl loest sich, Schicht waechst), Callback JUST SANDED SMOOTH? mit Stempel MYTH, Payoff A SILICA COATING., Fazit IT OUTLASTS THE ICE., Musik D-Moll/F-Dur 85 BPM, Abspann LIKE & FOLLOW, 27,8 s; keine Reibungsaussage"
+      "version": "08.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY (Granitplatte mit Schliff-Flecken), Hook 2 GLACIER-POLISHED GRANITE: WHAT MAKES THIS SLAB SHINE?, Zug 1 ICE SANDED IT SMOOTH. (Gletscher im Profil), Zug 2 BUT LOOK CLOSER… (Mikroschnitt, Gesteinsmehl loest sich, Schicht waechst), Callback JUST SANDED SMOOTH? mit Stempel MYTH, Payoff A SILICA COATING., Fazit IT OUTLASTS THE ICE., Musik D-Moll/F-Dur 85 BPM, Abspann LIKE & FOLLOW, 27,8 s; keine Reibungsaussage",
+      "probe": {
+        "at": "2026-11-08T06:59:06+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
