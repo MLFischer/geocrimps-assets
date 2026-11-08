@@ -313,6 +313,28 @@
         "at": "2026-11-04T18:17:24+00:00",
         "result": "FINISHED"
       }
+    },
+    {
+      "id": "r011",
+      "slug": "2026-11-13_mythorrock-03",
+      "format": "MYTH OR ROCK",
+      "nr": 3,
+      "post_ref": "#031",
+      "thema": "Gletscherschliff ist eine Schicht (Silikatbeschichtung, nicht nur Abrasion)",
+      "video": "reels/2026-11-13_mythorrock-03.mp4",
+      "cover": "reels/2026-11-13_mythorrock-03.jpg",
+      "caption": "MYTH OR ROCK #03 · Glacier-polished granite: what makes the slab shine? An animated climber on a polished slab, a glacier grinding over it, then a zoom into the surface.\n\nGlacial polish is not only rock sanded smooth. The abrasion is real: grit at the base of the ice scratched the striations. But work on Yosemite's polished surfaces showed the shine is also a separate coating, only micrometres thick: subglacial water dissolves the ground-up rock flour and re-precipitates it as a film enriched in silica. That film is nearly impermeable, keeps lichen and moss from taking hold and slows weathering, which is why the polish outlasts the ice. (The coating in the animation is drawn far thicker than it is.)\n\nSend this to the friend who can't walk past a polished slab without touching it.\n\nHave you climbed on glacier-polished rock? Where?\n\nSource: Siman-Tov et al. (2017), Geology. Full sources in the first comment.\n\n#climbing #slabclimbing #geology #glaciers #yosemite",
+      "first_comment": "Sources: Siman-Tov, S. et al. (2017): The coating layer of glacial polish. Geology 45(11), 987. · (2019): Composition and formation age of amorphous silica coating glacially polished surfaces. Geology 47(4), 347.",
+      "audio_name": "GeoCrimps – MYTH OR ROCK",
+      "scheduled": "2026-11-13T17:07:00+01:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "offene_frage",
+      "version": "08.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY (Granitplatte mit Schliff-Flecken), Hook 2 GLACIER-POLISHED GRANITE: WHAT MAKES THIS SLAB SHINE?, Zug 1 ICE SANDED IT SMOOTH. (Gletscher im Profil), Zug 2 BUT LOOK CLOSER… (Mikroschnitt, Gesteinsmehl loest sich, Schicht waechst), Callback JUST SANDED SMOOTH? mit Stempel MYTH, Payoff A SILICA COATING., Fazit IT OUTLASTS THE ICE., Musik D-Moll/F-Dur 85 BPM, Abspann LIKE & FOLLOW, 27,8 s; keine Reibungsaussage"
     }
   ]
 }

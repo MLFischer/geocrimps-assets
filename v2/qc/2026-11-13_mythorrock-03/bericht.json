@@ -1,0 +1,380 @@
+{
+ "slug": "2026-11-13_mythorrock-03",
+ "datei": "2026-11-13_mythorrock-03",
+ "dauer_s": 27.800000000000004,
+ "fps": 30,
+ "frames": 834,
+ "mp4_mb": 18.19,
+ "woerter_im_bild": 31,
+ "labels": 0,
+ "woerter_gesamt_mit_labels": 31,
+ "payoff_anteil": 0.712,
+ "loudnorm": {
+  "loudnorm_ziel": -13.7,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.4
+ },
+ "messung": {
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.4
+ },
+ "toene": {
+  "hook1-anschwellen": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "hook1-griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "hook1-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "hook1-akkord": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "hook1-gestein": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "hook1-uebergang": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "musik": [
+   "selbst erzeugt (musik.bass)",
+   "selbst erzeugt (musik.flaeche)",
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "lichtstreifen": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "glanz": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "bohrhaken": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "schleifen": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "zoom": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "mehl": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "schicht": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "frage": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "stempel": [
+   "selbst erzeugt (klang.thud)",
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "steigerung": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "payoff-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "payoff": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "zurueck": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "fazit": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "klanglogo": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "herz": [
+   "selbst erzeugt (musik.zupf)"
+  ]
+ },
+ "metallische_klaenge": [],
+ "puls_mit_hihat": false,
+ "hochton_anteil_ueber_4khz_prozent": 0.513,
+ "spektraler_schwerpunkt_hz": 319.0,
+ "ablauf": "offene_frage",
+ "ablauf_im_themenplan": "offene_frage",
+ "ablauf_slot_davor": "quiz",
+ "hook1": "CLIMBING / × GEOLOGY",
+ "hook1_bis_s": 1.45,
+ "hook1_in_frame0_anteil": 0.942,
+ "hook1_woerter_extra": 2,
+ "hook_ab_s": 1.8,
+ "hook_bis_s": 5.45,
+ "hook_steht_s": 3.65,
+ "hook_min_s": 3.6,
+ "fragen_min_s": 1.5,
+ "weitere_fragen_stehen_s": [
+  3.75
+ ],
+ "cover_t": 2.65,
+ "meta_hook": "GEOCRIMPS · CLIMBING × GEOLOGY",
+ "meta_hook_woerter_extra": 3,
+ "meta_hook_im_cover_anteil": 0.968,
+ "lesezeit_regel": "voll sichtbar >= 0.75 s + 0.35 s je Wort, Aufloesung/Fazit +0.8 s (Deckkraft >= 0.95)",
+ "lesezeiten": [
+  {
+   "text": "MYTH OR ROCK",
+   "ab_s": 1.83,
+   "voll_s": 3.4,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "GLACIER-POLISHED GRANITE:",
+   "ab_s": 1.83,
+   "voll_s": 3.4,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "WHAT MAKES THIS SLAB SHINE?",
+   "ab_s": 1.83,
+   "voll_s": 3.4,
+   "noetig_s": 2.5,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "ICE SANDED IT SMOOTH.",
+   "ab_s": 6.67,
+   "voll_s": 2.63,
+   "noetig_s": 2.15,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "BUT LOOK CLOSER…",
+   "ab_s": 10.63,
+   "voll_s": 2.17,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "JUST SANDED SMOOTH?",
+   "ab_s": 13.67,
+   "voll_s": 3.53,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "MYTH",
+   "ab_s": 16.03,
+   "voll_s": 1.33,
+   "noetig_s": 1.1,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "A SILICA COATING.",
+   "ab_s": 17.67,
+   "voll_s": 2.73,
+   "noetig_s": 2.6,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "IT OUTLASTS THE ICE.",
+   "ab_s": 21.27,
+   "voll_s": 3.33,
+   "noetig_s": 2.95,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "LIKE & FOLLOW",
+   "ab_s": 25.43,
+   "voll_s": 2.13,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  }
+ ],
+ "verdauen": [
+  "A SILICA COATING.",
+  "IT OUTLASTS THE ICE."
+ ],
+ "woerter_gemessen": 31,
+ "woerter_laut_meta": 31,
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "hook1_klettern_geologie_in_frame_0": true,
+  "hook1_dauer_1_0_bis_1_6_s": true,
+  "hook2_nach_hook1": true,
+  "meta_hook_im_cover": true,
+  "hook_frage_mindestdauer": true,
+  "weitere_fragen_mindestdauer": true,
+  "lesezeit_je_info": true,
+  "verdauzeit_aufloesung_und_fazit": true,
+  "alle_texte_gemessen": true,
+  "ablauf_wie_im_themenplan": true,
+  "ablauf_anders_als_im_slot_davor": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_40_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true,
+  "abspann_mit_aufruf": true,
+  "musik_statt_metall": true
+ },
+ "alle_pruefungen_ok": true,
+ "hook_score": {
+  "kriterien": "Klarheit (Gestein oder Gegenstand, Lage und Frage in Worten), Kletterbezug, Luecke, Kuerze, Deckung durch den Payoff (je 0-2); mindestens 8/10",
+  "varianten": [
+   {
+    "hook": "GLACIER-POLISHED GRANITE: WHAT MAKES THIS SLAB SHINE?",
+    "punkte": [
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "summe": 10,
+    "gewaehlt": true,
+    "anmerkung": "Gestein (Granit), Lage (Gletscherschliff), Kletterbegriff (Slab), W-Frage; 7 Woerter (2 in der Kontextzeile); Payoff A SILICA COATING. beantwortet WHAT"
+   },
+   {
+    "hook": "WHAT MAKES THIS ROCK SHINE?",
+    "punkte": [
+     1,
+     0,
+     2,
+     2,
+     2
+    ],
+    "summe": 7,
+    "anmerkung": "Arbeitshook aus dem Themenplan: nennt weder Gestein noch Lage noch Kletterbezug"
+   },
+   {
+    "hook": "POLISHED SLAB: JUST SANDED SMOOTH?",
+    "punkte": [
+     1,
+     2,
+     1,
+     2,
+     1
+    ],
+    "summe": 7,
+    "anmerkung": "Ja/Nein-Frage statt offener W-Frage, Gestein fehlt"
+   },
+   {
+    "hook": "GLACIER POLISH: WHY IS THIS GRANITE SO SHINY?",
+    "punkte": [
+     2,
+     1,
+     2,
+     1,
+     2
+    ],
+    "summe": 8,
+    "anmerkung": "8 Woerter, Kletterbezug nur indirekt"
+   },
+   {
+    "hook": "YOSEMITE SLAB: WHAT IS THE SHINE?",
+    "punkte": [
+     1,
+     2,
+     1,
+     2,
+     2
+    ],
+    "summe": 8,
+    "anmerkung": "setzt Ortswissen voraus, Gestein fehlt"
+   }
+  ]
+ },
+ "faktencheck": [
+  {
+   "aussage": "GLACIER-POLISHED GRANITE (Granit-Signatur Kreuze, Schliff-Flecken)",
+   "beleg": "031/caption.md (Alt-Text: glacially polished granite at Polly Dome, Yosemite) und sources.md (Untersuchungsgebiet Yosemite)",
+   "status": "belegt aus der Faktenbasis; in diesem Lauf nicht erneut im Web geoeffnet"
+  },
+  {
+   "aussage": "ICE SANDED IT SMOOTH. (Gletscher mit Schutt an der Basis schleift)",
+   "beleg": "031/sources.md: Abrasion bleibt Teil des Prozesses; Striae vom Gesteinsschutt an der Gletscherbasis",
+   "status": "belegt (web-verifiziert 03.08.2026)"
+  },
+  {
+   "aussage": "BUT LOOK CLOSER… / Schicht im Mikroschnitt, Wasserfilm, Gesteinsmehl loest sich",
+   "beleg": "031/sources.md: eigenstaendige Schicht im µm-Bereich; Loesung und Wiederausfaellung des Abriebs durch subglaziales Wasser",
+   "status": "belegt (web-verifiziert 03.08.2026); Dicke im Bild ueberhoeht, Caption sagt das"
+  },
+  {
+   "aussage": "JUST SANDED SMOOTH? + Stempel MYTH",
+   "beleg": "031/sources.md: nicht nur Abrasion ('not only something removed'); 'JUST' traegt den Mythos, Zug 1 bestaetigt die Abrasion",
+   "status": "belegt"
+  },
+  {
+   "aussage": "A SILICA COATING.",
+   "beleg": "031/sources.md: an Silizium angereichert (10-50 %), Titel der Arbeit 2019 'amorphous silica coating'",
+   "status": "belegt (web-verifiziert 03.08.2026)"
+  },
+  {
+   "aussage": "IT OUTLASTS THE ICE.",
+   "beleg": "031/sources.md, Korrektur 06.08.2026: nahezu undurchlaessig, haelt Flechten und Moose fern, bremst die chemische Verwitterung (Haltbarkeit); der Schliff besteht nach dem Gletscher fort",
+   "status": "belegt; keine Zeitangabe im Bild"
+  },
+  {
+   "aussage": "Keine Reibungsaussage (Vorbedingung des Slots)",
+   "beleg": "sources.md: Reibung fuer Kletterschuhe nicht publiziert",
+   "status": "eingehalten in Bild, Caption und Kommentar"
+  }
+ ],
+ "logline": "Gletscherschliff glaenzt, weil auf dem geschliffenen Granit eine duenne Silikatschicht sitzt.",
+ "fassung": "1 (08.11.2026), Ablauf 'offene_frage'; Hook 1 0-1,45 s, Hook 2 ab 1,8 s; Payoff A SILICA COATING. bei 17.65 s (71.2 % bis zum Abspann); Abspann ab 24.80 s; Dauer 27.80 s; Cover bei 2.65 s",
+ "musik": "D-Moll mit F-Dur-Aufloesung, 85 BPM",
+ "ton_gehoert": false,
+ "ton_hinweis": "Ton nur gemessen (Lautheit, True Peak, Hochton-Anteil, Tonverlauf), nicht angehoert. Klanglogo und Herz im Abspann nach erster Messung leiser gesetzt.",
+ "kletterer_reichweite_px": {
+  "start": 0.0,
+  "hang": 0.0,
+  "swing": 0.0,
+  "high": 0.0
+ },
+ "stills_angesehen": [
+  0,
+  0.4,
+  0.72,
+  0.95,
+  1.1,
+  1.6,
+  2.65,
+  5.3,
+  5.35,
+  6.0,
+  6.05,
+  7.8,
+  7.9,
+  9.3,
+  9.4,
+  10.6,
+  10.65,
+  12.0,
+  12.95,
+  13.0,
+  14.5,
+  16.8,
+  18.6,
+  18.85,
+  19.0,
+  20.5,
+  21.6,
+  22.0,
+  24.6,
+  26.8
+ ],
+ "abweichungen": "Webseiten der Quellen in diesem Lauf nicht abrufbar (Abruf-Freigabe unbeantwortet): Titel und Jahr der Quellen nicht erneut an der Quelle geprueft, nur gegen sources.md (web-verifiziert 03.08.2026) und Suchergebnis-Titel; keine neue Aussage aufgenommen; Autoren der Arbeit von 2019 nicht in der Faktenbasis, daher im Kommentar ohne Autor. Erste Stills: Schliff-Flecken zu gross, Eis zu nah am Text, Eisflaeche im Mikroschnitt hinter der Antwort -> korrigiert."
+}
