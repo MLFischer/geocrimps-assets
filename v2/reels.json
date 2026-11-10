@@ -301,7 +301,7 @@
       "first_comment": "Sources: Abesser, C., Shand, P. & Ingram, J. (2005): Baseline Report Series 18: The Millstone Grit of Northern England. British Geological Survey Commissioned Report CR/05/015N / Environment Agency Technical Report NC/99/74/18.",
       "audio_name": "GeoCrimps – REWIND",
       "scheduled": "2026-11-10T18:07:00+01:00",
-      "status": "ready",
+      "status": "published",
       "freigabe": {
         "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
         "am": "2026-10-12"
@@ -312,7 +312,11 @@
       "probe": {
         "at": "2026-11-04T18:17:24+00:00",
         "result": "FINISHED"
-      }
+      },
+      "media_id": "17993800407061727",
+      "permalink": "https://www.instagram.com/reel/DfkaVa-E78T/",
+      "published_at": "2026-11-10T17:11:08+0000",
+      "first_comment_posted": true
     },
     {
       "id": "r011",
