@@ -343,6 +343,28 @@
         "at": "2026-11-08T06:59:06+00:00",
         "result": "FINISHED"
       }
+    },
+    {
+      "id": "r012",
+      "slug": "2026-11-17_whodunit-03",
+      "format": "WHODUNIT",
+      "nr": 3,
+      "post_ref": "#025",
+      "thema": "Saeulenklueftung: Devils Tower, das Gestein riss beim Abkuehlen selbst (Thema getauscht mit #061)",
+      "video": "reels/2026-11-17_whodunit-03.mp4",
+      "cover": "reels/2026-11-17_whodunit-03.jpg",
+      "caption": "WHODUNIT #03 · Phonolite columns: who cut the cracks you climb? An animated climber in a crack between rock columns, then a cross-section of the rock cooling and cracking.\n\nThe culprit is the rock itself. Devils Tower in Wyoming is phonolite porphyry, a rock that formed from magma. Once the magma had set solid, it kept shrinking as it cooled further, and that pull tore it apart along a network of joints: cooling causes contraction, contraction causes fracturing. The cracks grow inward from the cooling surfaces, and the columns stand at right angles to them. Later, erosion stripped away the softer rock around it. How the magma body got there is still debated, so the cross-section is schematic and leaves that open.\n\nThose joints are the routes today: the park service calls the tower one of the finest traditional crack climbing areas in North America.\n\nSend this to the friend who always picks the crack line.\n\nHave you climbed on columns? Where?\n\nSource: National Park Service, Columnar Jointing. Full sources in the first comment.\n\n#climbing #crackclimbing #geology #columnarjointing #devilstower",
+      "first_comment": "Sources: National Park Service: Columnar Jointing (Volcanoes, Craters & Lava Flows) · National Park Service: Climbing Information, Devils Tower National Monument · Lamur, A. et al. (2018): Disclosing the temperature of columnar jointing in lavas. Nature Communications 9. · National Park Service (2008): Devils Tower National Monument Geologic Resource Evaluation Report, Natural Resource Report NRR-2008/046.",
+      "audio_name": "GeoCrimps – WHODUNIT",
+      "scheduled": "2026-11-17T18:07:00+01:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "erklaerkette",
+      "version": "11.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6: Hook 1 CLIMBING x GEOLOGY (Saeulenwand, Kletterer im Riss, Porphyr-Signatur), Hook 2 PHONOLITE COLUMNS: WHO CUT THE CRACKS YOU CLIMB?, Zug 1 THE MAGMA SET SOLID. (Profilschnitt, Kristalle), Zug 2 COOLING, IT SHRANK... (Abkuehlfront, Risse von oben und unten), Erosion ohne Text, Payoff IT TORE ITSELF APART. (Fugen leuchten, Kletterer zieht), Fazit NOW YOU CLIMB THOSE CRACKS., Musik As-Dur/F-Moll 79 BPM, Abspann LIKE & FOLLOW, 27,4 s; keine Zahlen"
     }
   ]
 }

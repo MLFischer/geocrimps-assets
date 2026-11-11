@@ -117,13 +117,13 @@
       "termin": "2026-11-17T18:07:00+01:00",
       "format": "WHODUNIT",
       "ablauf": "erklaerkette",
-      "post": "#061",
-      "thema": "Schwarze Partikel sind Schuhgummi (unveroeffentlicht)",
-      "hook": "WHAT ARE THESE BLACK SPECKS?",
-      "vor_produktion": "Befund (orange) vom 29.08. beheben, sonst Thema tauschen",
-      "reel": null,
-      "tausch": "04.11.2026: #061 vom 10.11. hierher verschoben (Vorbedingung weiter offen: Befund vom 29.08. klaeren, sonst erneut tauschen); Ablauf erklaerkette dieses Slots bleibt."
+      "post": "#025",
+      "thema": "Saeulenklueftung: Devils Tower (Phonolith-Porphyr)",
+      "hook": "PHONOLITE COLUMNS: WHO CUT THE CRACKS YOU CLIMB?",
+      "vor_produktion": "",
+      "reel": "r012",
+      "tausch": "11.11.2026: Thema #061 (Vorbedingung 'Befund (orange) vom 29.08.' weiter nicht im Repo dokumentiert, also nicht pruefbar) getauscht gegen #025 (Geschichte, Format WHODUNIT und Ablauf erklaerkette bleiben); kein spaeterer Slot derselben Formatklasse war angelegt, #061 ist fuer den naechsten Geschichte-Slot vorgemerkt (siehe 'danach'). Frueher: 04.11.2026 #061 vom 10.11. hierher verschoben."
     }
   ],
-  "danach": "Weitere Termine im selben Rhythmus anlegen, jeweils mit \"ablauf\" (quiz, offene_frage, erklaerkette; nie derselbe wie im Slot davor), und Themen aus v2/faktenbasis/Themenbibliothek.md nach Reel-Potenzial-Score waehlen (je 0-2: sichtbare Verwandlung, Kletterbezug, Hook-Luecke, Formatpassung, Beleglage). #053 und #054 erst nach Korrektur ihrer Befunde. #047 (Duenen) ist als Thema moeglich, aber ohne Fischgraetenschichtung im Bild (Befund des V1-Titelbilds, wird dort nicht korrigiert)."
+  "danach": "Weitere Termine im selben Rhythmus anlegen, jeweils mit \"ablauf\" (quiz, offene_frage, erklaerkette; nie derselbe wie im Slot davor), und Themen aus v2/faktenbasis/Themenbibliothek.md nach Reel-Potenzial-Score waehlen (je 0-2: sichtbare Verwandlung, Kletterbezug, Hook-Luecke, Formatpassung, Beleglage). #053 und #054 erst nach Korrektur ihrer Befunde. #047 (Duenen) ist als Thema moeglich, aber ohne Fischgraetenschichtung im Bild (Befund des V1-Titelbilds, wird dort nicht korrigiert). Vorgemerkt (11.11.2026): #061 (Schuhgummi) fuer den naechsten Geschichte-Slot, sobald der Befund vom 29.08. geklaert ist; sonst ein anderes Thema."
 }
