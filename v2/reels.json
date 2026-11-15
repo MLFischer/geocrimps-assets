@@ -394,7 +394,11 @@
       },
       "hold": false,
       "ablauf": "quiz",
-      "version": "15.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6, Chips wie r010: Hook 1 CLIMBING x GEOLOGY (Konglomeratwand, Kletterer kneift den runden Kiesel), Hook 2 CONGLOMERATE: WHAT MADE THIS HOLD SO ROUND?, Chips A LAVA / B RIVER / C CLIMBERS, YOUR GUESS? mit Countdown, Zug 1 GLUED GRAVEL. (Zoom, Bindemasse leuchtet), Zug 2 BEFORE: LOOSE GRAVEL. (Zeitraffer rueckwaerts in den Fluss), Payoff A RIVER ROLLED IT. mit Chip B, Fazit GLUE USUALLY WEARS FIRST. (Matrix wittert zurueck, Kletterer greift weiter), Musik E-Dur/Cis-Moll 83 BPM, Abspann LIKE & FOLLOW, 23,85 s; keine Zahlen, kein Stempel"
+      "version": "15.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6, Chips wie r010: Hook 1 CLIMBING x GEOLOGY (Konglomeratwand, Kletterer kneift den runden Kiesel), Hook 2 CONGLOMERATE: WHAT MADE THIS HOLD SO ROUND?, Chips A LAVA / B RIVER / C CLIMBERS, YOUR GUESS? mit Countdown, Zug 1 GLUED GRAVEL. (Zoom, Bindemasse leuchtet), Zug 2 BEFORE: LOOSE GRAVEL. (Zeitraffer rueckwaerts in den Fluss), Payoff A RIVER ROLLED IT. mit Chip B, Fazit GLUE USUALLY WEARS FIRST. (Matrix wittert zurueck, Kletterer greift weiter), Musik E-Dur/Cis-Moll 83 BPM, Abspann LIKE & FOLLOW, 23,85 s; keine Zahlen, kein Stempel",
+      "probe": {
+        "at": "2026-11-15T06:59:59+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
