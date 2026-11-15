@@ -123,6 +123,17 @@
       "vor_produktion": "",
       "reel": "r012",
       "tausch": "11.11.2026: Thema #061 (Vorbedingung 'Befund (orange) vom 29.08.' weiter nicht im Repo dokumentiert, also nicht pruefbar) getauscht gegen #025 (Geschichte, Format WHODUNIT und Ablauf erklaerkette bleiben); kein spaeterer Slot derselben Formatklasse war angelegt, #061 ist fuer den naechsten Geschichte-Slot vorgemerkt (siehe 'danach'). Frueher: 04.11.2026 #061 vom 10.11. hierher verschoben."
+    },
+    {
+      "termin": "2026-11-20T17:07:00+01:00",
+      "format": "HOLD ID",
+      "ablauf": "quiz",
+      "post": "#024",
+      "thema": "Konglomerat: Kiesel als Griffe sind Flussgeroell",
+      "hook": "CONGLOMERATE: WHAT MADE THIS HOLD SO ROUND?",
+      "vor_produktion": "Zement 'usually weaker' halten; Mallorca nicht nennen (Korrektur 03.08.)",
+      "reel": "r013",
+      "angelegt": "15.11.2026: kein freier Slot mehr, neuer Slot im Rhythmus angelegt (Freitag = Kurzformat, Rotation nach MYTH OR ROCK: HOLD ID; Ablauf quiz, weil der Slot davor erklaerkette hat). Thema #024 aus der Themenbibliothek: sichtbare Verwandlung 2, Kletterbezug 2, Hook-Luecke 2, Formatpassung 2 (Griff-Herkunft), Beleglage 2."
     }
   ],
   "danach": "Weitere Termine im selben Rhythmus anlegen, jeweils mit \"ablauf\" (quiz, offene_frage, erklaerkette; nie derselbe wie im Slot davor), und Themen aus v2/faktenbasis/Themenbibliothek.md nach Reel-Potenzial-Score waehlen (je 0-2: sichtbare Verwandlung, Kletterbezug, Hook-Luecke, Formatpassung, Beleglage). #053 und #054 erst nach Korrektur ihrer Befunde. #047 (Duenen) ist als Thema moeglich, aber ohne Fischgraetenschichtung im Bild (Befund des V1-Titelbilds, wird dort nicht korrigiert). Vorgemerkt (11.11.2026): #061 (Schuhgummi) fuer den naechsten Geschichte-Slot, sobald der Befund vom 29.08. geklaert ist; sonst ein anderes Thema."

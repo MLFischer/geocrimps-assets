@@ -373,6 +373,28 @@
         "at": "2026-11-11T07:00:51+00:00",
         "result": "FINISHED"
       }
+    },
+    {
+      "id": "r013",
+      "slug": "2026-11-20_holdid-04",
+      "format": "HOLD ID",
+      "nr": 4,
+      "post_ref": "#024",
+      "thema": "Konglomerat: der runde Griff ist Flusskies, verkittet; die Bindemasse wittert meist zuerst",
+      "video": "reels/2026-11-20_holdid-04.mp4",
+      "cover": "reels/2026-11-20_holdid-04.jpg",
+      "caption": "HOLD ID #04 · Conglomerate: what made this hold so round? An animated climber pinches a round pebble that sticks out of a conglomerate wall, then the gravel is traced back to a river.\n\nDid you guess B? Conglomerate is old gravel glued back together: rounded pebbles in a finer matrix, cemented by minerals such as calcite, iron oxide or silica. The pebbles got round while rivers or debris flows carried them, before the gravel was dumped in fans and deltas. The cement is usually weaker than the pebbles, so weathering strips it back and leaves the cobbles standing out of the wall. Usually, not always: climbers report that the cement changes from route to route, and some pebbles come off in your hand.\n\nSend this to the friend who always trusts the big round pebble.\n\nHave you climbed on conglomerate? Where?\n\nSource: Sandatlas, Conglomerate. Full sources in the first comment.\n\n#climbing #rockclimbing #geology #conglomerate",
+      "first_comment": "Sources: Sandatlas: Conglomerate (sandatlas.org/conglomerate) · Geology Science: Conglomerate (geologyscience.com) · Mountain Project: Meteora, area description (climbers' reports on cement quality).",
+      "audio_name": "GeoCrimps – HOLD ID",
+      "scheduled": "2026-11-20T17:07:00+01:00",
+      "status": "ready",
+      "freigabe": {
+        "regel": "stilles OK nach Benachrichtigung, von Markus am 12.10.2026 für die Testphase bestätigt",
+        "am": "2026-10-12"
+      },
+      "hold": false,
+      "ablauf": "quiz",
+      "version": "15.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.10.2026), Vorlage r003 Fassung 6, Chips wie r010: Hook 1 CLIMBING x GEOLOGY (Konglomeratwand, Kletterer kneift den runden Kiesel), Hook 2 CONGLOMERATE: WHAT MADE THIS HOLD SO ROUND?, Chips A LAVA / B RIVER / C CLIMBERS, YOUR GUESS? mit Countdown, Zug 1 GLUED GRAVEL. (Zoom, Bindemasse leuchtet), Zug 2 BEFORE: LOOSE GRAVEL. (Zeitraffer rueckwaerts in den Fluss), Payoff A RIVER ROLLED IT. mit Chip B, Fazit GLUE USUALLY WEARS FIRST. (Matrix wittert zurueck, Kletterer greift weiter), Musik E-Dur/Cis-Moll 83 BPM, Abspann LIKE & FOLLOW, 23,85 s; keine Zahlen, kein Stempel"
     }
   ]
 }

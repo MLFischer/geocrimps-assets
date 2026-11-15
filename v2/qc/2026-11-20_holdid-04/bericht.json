@@ -1,0 +1,398 @@
+{
+ "slug": "2026-11-20_holdid-04",
+ "datei": "2026-11-20_holdid-04",
+ "dauer_s": 23.85,
+ "fps": 30,
+ "frames": 716,
+ "mp4_mb": 19.76,
+ "woerter_im_bild": 33,
+ "labels": 0,
+ "woerter_gesamt_mit_labels": 33,
+ "payoff_anteil": 0.659,
+ "loudnorm": {
+  "loudnorm_ziel": -13.5,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.1
+ },
+ "messung": {
+  "I_LUFS": -14.0,
+  "TP_dBFS": -2.1
+ },
+ "toene": {
+  "hook1-anschwellen": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "hook1-griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "hook1-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "hook1-akkord": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "hook1-gestein": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "hook1-uebergang": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "musik": [
+   "selbst erzeugt (musik.bass)",
+   "selbst erzeugt (musik.flaeche)",
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "chips": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "countdown": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "bohrhaken": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "zoom": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "bindemasse": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "loesen": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "ueberblendung": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "kiesel": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "geroell": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "steigerung": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "payoff-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "payoff": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "chip": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "zurueck": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "verwitterung": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "griff": [
+   "selbst erzeugt (klang.chalk_slap)",
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "klanglogo": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "herz": [
+   "selbst erzeugt (musik.zupf)"
+  ]
+ },
+ "metallische_klaenge": [],
+ "puls_mit_hihat": false,
+ "hochton_anteil_ueber_4khz_prozent": 0.501,
+ "spektraler_schwerpunkt_hz": 353.0,
+ "ablauf": "quiz",
+ "ablauf_im_themenplan": "quiz",
+ "ablauf_slot_davor": "erklaerkette",
+ "hook1": "CLIMBING / × GEOLOGY",
+ "hook1_bis_s": 1.45,
+ "hook1_in_frame0_anteil": 0.941,
+ "hook1_woerter_extra": 2,
+ "hook_ab_s": 1.8,
+ "hook_bis_s": 7.8,
+ "hook_steht_s": 6.0,
+ "hook_min_s": 3.6,
+ "fragen_min_s": 1.5,
+ "weitere_fragen_stehen_s": [
+  1.95
+ ],
+ "cover_t": 2.65,
+ "meta_hook": "GEOCRIMPS · CLIMBING × GEOLOGY",
+ "meta_hook_woerter_extra": 3,
+ "meta_hook_im_cover_anteil": 0.968,
+ "lesezeit_regel": "voll sichtbar >= 0.75 s + 0.35 s je Wort, Aufloesung/Fazit +0.8 s (Deckkraft >= 0.95)",
+ "lesezeiten": [
+  {
+   "text": "HOLD ID",
+   "ab_s": 1.83,
+   "voll_s": 5.77,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "CONGLOMERATE:",
+   "ab_s": 1.83,
+   "voll_s": 5.77,
+   "noetig_s": 1.1,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "WHAT MADE THIS HOLD SO ROUND?",
+   "ab_s": 1.83,
+   "voll_s": 5.77,
+   "noetig_s": 2.85,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "A LAVA",
+   "ab_s": 4.63,
+   "voll_s": 3.0,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "B RIVER",
+   "ab_s": 4.93,
+   "voll_s": 2.7,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "C CLIMBERS",
+   "ab_s": 5.23,
+   "voll_s": 2.4,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "YOUR GUESS?",
+   "ab_s": 5.87,
+   "voll_s": 1.73,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "GLUED GRAVEL.",
+   "ab_s": 8.27,
+   "voll_s": 1.93,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "BEFORE: LOOSE GRAVEL.",
+   "ab_s": 10.63,
+   "voll_s": 2.7,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "B RIVER",
+   "ab_s": 13.77,
+   "voll_s": 3.03,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "A RIVER ROLLED IT.",
+   "ab_s": 13.77,
+   "voll_s": 3.03,
+   "noetig_s": 2.95,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "GLUE USUALLY WEARS FIRST.",
+   "ab_s": 17.43,
+   "voll_s": 3.2,
+   "noetig_s": 2.95,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "LIKE & FOLLOW",
+   "ab_s": 21.47,
+   "voll_s": 2.13,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  }
+ ],
+ "verdauen": [
+  "A RIVER ROLLED IT.",
+  "GLUE USUALLY WEARS FIRST."
+ ],
+ "woerter_gemessen": 33,
+ "woerter_laut_meta": 33,
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "hook1_klettern_geologie_in_frame_0": true,
+  "hook1_dauer_1_0_bis_1_6_s": true,
+  "hook2_nach_hook1": true,
+  "meta_hook_im_cover": true,
+  "hook_frage_mindestdauer": true,
+  "weitere_fragen_mindestdauer": true,
+  "lesezeit_je_info": true,
+  "verdauzeit_aufloesung_und_fazit": true,
+  "alle_texte_gemessen": true,
+  "ablauf_wie_im_themenplan": true,
+  "ablauf_anders_als_im_slot_davor": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_40_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true,
+  "abspann_mit_aufruf": true,
+  "musik_statt_metall": true
+ },
+ "alle_pruefungen_ok": true,
+ "hook_score": {
+  "kriterien": "Klarheit (Gestein oder Gegenstand, Lage und Frage in Worten), Kletterbezug, Luecke, Kuerze, Deckung durch den Payoff (je 0-2); mindestens 8/10",
+  "varianten": [
+   {
+    "hook": "CONGLOMERATE: WHAT MADE THIS HOLD SO ROUND?",
+    "punkte": [
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "summe": 10,
+    "gewaehlt": true,
+    "anmerkung": "Gestein als Kontextzeile, Gegenstand Griff, offene Ursache, 7 Woerter, Payoff 'A RIVER ROLLED IT.' beantwortet genau das 'what made'"
+   },
+   {
+    "hook": "WHERE DID THIS HOLD COME FROM?",
+    "punkte": [
+     1,
+     2,
+     2,
+     2,
+     1
+    ],
+    "summe": 8,
+    "gewaehlt": false,
+    "anmerkung": "Gestein fehlt; 'where' wuerde einen Ort verlangen, den das Reel nicht nennt"
+   },
+   {
+    "hook": "CONGLOMERATE: WHY DO THESE PEBBLES STICK OUT?",
+    "punkte": [
+     2,
+     1,
+     2,
+     2,
+     1
+    ],
+    "summe": 8,
+    "gewaehlt": false,
+    "anmerkung": "Payoff waere die Verwitterung, nicht die Rundung; Kletterbezug schwach"
+   },
+   {
+    "hook": "WHO POLISHED THIS ROUND HOLD?",
+    "punkte": [
+     1,
+     2,
+     2,
+     2,
+     1
+    ],
+    "summe": 8,
+    "gewaehlt": false,
+    "anmerkung": "'polished' legt Trittpolitur nahe (Falle aus #061), Gestein fehlt"
+   },
+   {
+    "hook": "THIS HOLD WAS ONCE LOOSE. WHERE?",
+    "punkte": [
+     1,
+     1,
+     2,
+     2,
+     1
+    ],
+    "summe": 7,
+    "gewaehlt": false,
+    "anmerkung": "Gestein fehlt, verraet einen Teil der Antwort"
+   }
+  ]
+ },
+ "faktencheck": [
+  {
+   "aussage": "CONGLOMERATE (Signatur Ellipsen, runde Kiesel in feinerer Matrix)",
+   "beleg": "v2/faktenbasis/024/sources.md Zeile 1 (sandatlas.org, geologyscience.com)",
+   "status": "belegt aus der Faktenbasis (web-verifiziert 03.08.2026)"
+  },
+  {
+   "aussage": "GLUED GRAVEL. (Bindemasse zwischen den Kieseln leuchtet)",
+   "beleg": "sources.md Zeile 1: verkittet durch Calcit, Eisenoxid, Silica oder verhaerteten Ton; Caption #024 'old river gravel, glued back together'",
+   "status": "belegt"
+  },
+  {
+   "aussage": "BEFORE: LOOSE GRAVEL. / A RIVER ROLLED IT. (Kiesel rollen im Fluss)",
+   "beleg": "sources.md Zeile 2: Rundung durch Transport in Fluessen/Schuttstroemen, Ablagerung in Faechern und Deltas",
+   "status": "belegt; Bild zeigt den Fluss, die Caption nennt auch Schuttstroeme"
+  },
+  {
+   "aussage": "GLUE USUALLY WEARS FIRST. (Matrix wittert zurueck, Kiesel stehen heraus)",
+   "beleg": "sources.md Zeile 3 und Kalibrierung 'usually weaker' statt 'immer schwaecher'",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Chips A LAVA / C CLIMBERS",
+   "beleg": "Falsche Antwortmoeglichkeiten, keine Aussage",
+   "status": "keine Behauptung"
+  },
+  {
+   "aussage": "Caption: Zementqualitaet schwankt, Kiesel koennen sich loesen",
+   "beleg": "sources.md Zeile 5 (Mountain Project, als Kletterer-Erfahrung gekennzeichnet)",
+   "status": "belegt, als Erfahrungsbericht formuliert"
+  }
+ ],
+ "logline": "Der runde Griff im Konglomerat ist Flusskies: rundgerollt, verkittet, die Bindemasse wittert zuerst.",
+ "fassung": "Fassung 1 vom 15.11.2026",
+ "musik": "E-Dur mit Cis-Moll-Flaechen, 83 BPM (r012: As-Dur 79 BPM)",
+ "ton_gehoert": false,
+ "ton_hinweis": "Ton nur gemessen (Lautheit, True Peak, Hochton-Anteil 0,5 %, Tonverlauf), nicht angehoert.",
+ "kletterer_reichweite_px": {
+  "start": 0.0,
+  "grab": 0.0,
+  "swing": 0.0,
+  "reach": 0.0
+ },
+ "stills_angesehen": [
+  0.0,
+  0.4,
+  0.5,
+  0.72,
+  0.95,
+  2.65,
+  5.6,
+  7.6,
+  9.4,
+  10.9,
+  11.6,
+  13.0,
+  13.4,
+  14.5,
+  17.6,
+  19.5,
+  20.8,
+  22.5
+ ],
+ "abweichungen": [
+  "Kein Stempel HOLD ID #04: Quiz, Lesezeit und Abspann fuellen den Rahmen 17-24 s (23,85 s).",
+  "Quellen-Titel im ersten Kommentar nicht an der Quelle geprueft: Seitenabruf im unbeaufsichtigten Lauf nicht freigegeben; Titel wie in sources.md, ohne Jahr.",
+  "Neuer Slot 20.11.2026 angelegt (kein freier Slot mehr)."
+ ]
+}
