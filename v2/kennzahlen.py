@@ -100,7 +100,11 @@ def main():
     for r, name, dauer_alt in posts:
         vals, missing = insights(ig, r["media_id"])
         rep = load_json(f"v2/qc/{r['slug']}/bericht.json", {}) or {}
+        if name != r["id"] and not vals:          # ersetzte Fassung, bei Instagram geloescht: keine Zeile, keine Fehlerliste
+            notes.append(f"{name}: bei Instagram nicht mehr vorhanden, ausgelassen")
+            continue
         dauer = dauer_alt or rep.get("dauer_s")
+        dauer = round(float(dauer), 2) if isinstance(dauer, (int, float)) else None
         reach = vals.get("reach")
         avg_ms = vals.get("ig_reels_avg_watch_time")
         avg_s = round(avg_ms / 1000, 2) if isinstance(avg_ms, (int, float)) else None

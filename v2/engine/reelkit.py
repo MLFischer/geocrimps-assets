@@ -432,7 +432,14 @@ def meta_hook_sichtbar(cover):
 # Themenfrage, mindestens 3,2 s) faehrt ein; der Kletterer bleibt im Bild. Die Hook-1-Woerter sind wie die Kopfzeile
 # ein Markenelement und zaehlen nicht zu den 40 Woertern.
 HOOK1_WORDS = ("CLIMBING", "× GEOLOGY")
-HOOK1_RANGE = (1.0, 1.6)            # Frame 0 bis Beginn des Uebergangs in die Kopfzeile
+HOOK1_RANGE = (0.7, 1.0)            # Frame 0 bis Beginn des Uebergangs in die Kopfzeile (bis 16.11.2026: 1,0-1,6 s)
+# Kennzahlen 16.11.2026 (v2/kennzahlen/2026-11-16.md): Zuschauer bleiben im Median 6,0 s, egal wie lang das Reel ist,
+# und die Skip-Rate (erste 3 s) stieg auf 63-72 %. Deshalb seit 17.11.2026: Hook 1 kurz (t_grab 0,25, t_geo 0,45,
+# t_out 0,75), die Themenfrage faehrt spaetestens bei THEMA_AB_S ein und ist vor 1,6 s lesbar; kuerzere Reels.
+THEMA_AB_S = 1.15                   # spaetester Beginn der Hook-2-Frage (hook_ab)
+FORMAT_DAUER = {"holdid": (16.0, 22.0), "mythorrock": (16.0, 22.0),          # Kurzformate (seit 17.11.2026)
+                "whodunit": (18.0, 24.0), "rewind": (18.0, 24.0), "scalejump": (18.0, 24.0)}   # Geschichten
+MAX_WOERTER = 30                    # Woerter im Bild inklusive Labels (bis 16.11.2026: 40)
 HOOK1_OUT = 0.34                    # Dauer des Uebergangs
 
 
@@ -446,7 +453,7 @@ class Hook1:
     (t_grab), Einschlag "× GEOLOGY" (t_geo), Uebergang in die Kopfzeile (t_out .. t_out + HOOK1_OUT), danach die
     Kopfzeile bis hook_bis (dann blendet sie mit der Themenfrage aus). Bild (Kletterer, Aufklappen) zeichnet das Reel."""
 
-    def __init__(self, t_grab=0.38, t_geo=0.68, t_out=1.40, size=214, y=FORMAT_Y - 6):
+    def __init__(self, t_grab=0.25, t_geo=0.45, t_out=0.75, size=214, y=FORMAT_Y - 6):
         self.t_grab, self.t_geo, self.t_out = t_grab, t_geo, t_out
         self.kicker = meta_hook()
         self.brand = m.text_sprite(META_HOOK[0], X0, META_HOOK_Y, "stencil", 40, C["magnesia"], tracking=0.12)
@@ -676,10 +683,14 @@ def run(ReelCls, sound_events, META):
                 "woerter_gemessen": sum(woerter(s) for s in gemessen), "woerter_laut_meta": soll_w})
     for x in lz:
         print(f"  Lesezeit {'ok ' if x['ok'] else 'ZU KURZ'} {x['ab_s']:6.2f} s  {x['voll_s']:4.2f} / {x['noetig_s']:4.2f} s  {x['text']}")
-    checks = {"dauer_im_formatrahmen": META.get("dur_range", [0, 99])[0] <= r.DUR <= META.get("dur_range", [0, 99])[1],
+    fk = slug[11:].split("-")[0] if len(slug) > 11 else ""
+    rahmen = FORMAT_DAUER.get(fk) or tuple(META.get("dur_range", [0, 99]))
+    rep.update({"formatrahmen_s": list(rahmen), "thema_ab_max_s": THEMA_AB_S, "max_woerter": MAX_WOERTER})
+    checks = {"dauer_im_formatrahmen": rahmen[0] <= r.DUR <= rahmen[1],
               "hook1_klettern_geologie_in_frame_0": hook1_frame0 >= 0.9,
               "hook1_dauer_1_0_bis_1_6_s": h1_bis is not None and HOOK1_RANGE[0] <= h1_bis <= HOOK1_RANGE[1],
               "hook2_nach_hook1": h1_bis is not None and (META.get("hook_ab") or 0) >= h1_bis,
+              "thema_frage_frueh": META.get("hook_ab") is not None and META["hook_ab"] <= THEMA_AB_S + 1e-6,
               "meta_hook_im_cover": meta_ok >= 0.9,
               "hook_frage_mindestdauer": hook_s >= HOOK_MIN_S - 1e-6,
               "weitere_fragen_mindestdauer": all(b - a >= FRAGE_MIN_S - 1e-6 for a, b in fragen),
@@ -689,7 +700,7 @@ def run(ReelCls, sound_events, META):
               "ablauf_wie_im_themenplan": META.get("ablauf") in ABLAEUFE and META.get("ablauf") == ab,
               "ablauf_anders_als_im_slot_davor": ab is not None and ab != ab_vor,
               "payoff_65_80_prozent": 0.65 <= rep["payoff_anteil"] <= 0.80,
-              "hoechstens_40_woerter": rep["woerter_gesamt_mit_labels"] <= 40,
+              "hoechstens_30_woerter": rep["woerter_gesamt_mit_labels"] <= MAX_WOERTER,
               "lautheit_-14_+-0.5": abs(rep["messung"].get("I_LUFS", 0) + 14) <= 0.5,
               "true_peak_max_-1": rep["messung"].get("TP_dBFS", 0) <= -1.0,
               "mp4_unter_100_mb": rep["mp4_mb"] < 100,
