@@ -1,0 +1,378 @@
+{
+ "slug": "2026-11-24_scalejump-02",
+ "datei": "2026-11-24_scalejump-02",
+ "dauer_s": 22.9,
+ "fps": 30,
+ "frames": 687,
+ "mp4_mb": 13.18,
+ "woerter_im_bild": 25,
+ "labels": 0,
+ "woerter_gesamt_mit_labels": 25,
+ "payoff_anteil": 0.653,
+ "loudnorm": {
+  "loudnorm_ziel": -13.6,
+  "tp_grenze": -2.5,
+  "I_LUFS": -14.1,
+  "TP_dBFS": -2.5
+ },
+ "messung": {
+  "I_LUFS": -14.1,
+  "TP_dBFS": -2.5
+ },
+ "toene": {
+  "hook1-anschwellen": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "hook1-griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "hook1-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "hook1-akkord": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "hook1-gestein": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "hook1-uebergang": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "musik": [
+   "selbst erzeugt (musik.bass)",
+   "selbst erzeugt (musik.flaeche)",
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "lupe": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "lupe-landung": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "sprung": [
+   "selbst erzeugt (whoosh)"
+  ],
+  "bohrhaken": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "frage": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "schnitt": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "steigerung": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "payoff-einschlag": [
+   "selbst erzeugt (klang.sub_hit)"
+  ],
+  "korn-bricht": [
+   "selbst erzeugt (klang.crunch)"
+  ],
+  "payoff": [
+   "selbst erzeugt (musik.akzent)"
+  ],
+  "saum": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "fazit": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "lupe-zu": [
+   "selbst erzeugt (musik.schwelle)"
+  ],
+  "griff": [
+   "selbst erzeugt (klang.chalk_slap)"
+  ],
+  "klanglogo": [
+   "selbst erzeugt (musik.zupf)"
+  ],
+  "herz": [
+   "selbst erzeugt (musik.zupf)"
+  ]
+ },
+ "metallische_klaenge": [],
+ "puls_mit_hihat": false,
+ "hochton_anteil_ueber_4khz_prozent": 0.242,
+ "spektraler_schwerpunkt_hz": 299.0,
+ "ablauf": "offene_frage",
+ "ablauf_im_themenplan": "offene_frage",
+ "ablauf_slot_davor": "quiz",
+ "hook1": "CLIMBING / × GEOLOGY",
+ "hook1_bis_s": 0.75,
+ "hook1_in_frame0_anteil": 0.943,
+ "hook1_woerter_extra": 2,
+ "hook_ab_s": 1.05,
+ "hook_bis_s": 4.85,
+ "hook_steht_s": 3.8,
+ "hook_min_s": 3.6,
+ "fragen_min_s": 1.5,
+ "weitere_fragen_stehen_s": [
+  2.65
+ ],
+ "cover_t": 1.9,
+ "meta_hook": "GEOCRIMPS · CLIMBING × GEOLOGY",
+ "meta_hook_woerter_extra": 3,
+ "meta_hook_im_cover_anteil": 0.969,
+ "lesezeit_regel": "voll sichtbar >= 0.75 s + 0.35 s je Wort, Aufloesung/Fazit +0.8 s (Deckkraft >= 0.95)",
+ "lesezeiten": [
+  {
+   "text": "SCALE JUMP",
+   "ab_s": 1.07,
+   "voll_s": 3.57,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "RED SANDSTONE:",
+   "ab_s": 1.07,
+   "voll_s": 3.57,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "WHAT COLOUR ARE THE GRAINS?",
+   "ab_s": 1.07,
+   "voll_s": 3.57,
+   "noetig_s": 2.5,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "RED, RIGHT?",
+   "ab_s": 5.77,
+   "voll_s": 2.43,
+   "noetig_s": 1.45,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "BUT CUT ONE OPEN…",
+   "ab_s": 9.63,
+   "voll_s": 2.77,
+   "noetig_s": 2.15,
+   "verdauen": false,
+   "ok": true
+  },
+  {
+   "text": "MOSTLY PALE GREY.",
+   "ab_s": 13.03,
+   "voll_s": 2.7,
+   "noetig_s": 2.6,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "THE RED IS SKIN-DEEP.",
+   "ab_s": 16.47,
+   "voll_s": 3.2,
+   "noetig_s": 2.95,
+   "verdauen": true,
+   "ok": true
+  },
+  {
+   "text": "LIKE & FOLLOW",
+   "ab_s": 20.53,
+   "voll_s": 2.13,
+   "noetig_s": 1.8,
+   "verdauen": false,
+   "ok": true
+  }
+ ],
+ "verdauen": [
+  "MOSTLY PALE GREY.",
+  "THE RED IS SKIN-DEEP."
+ ],
+ "woerter_gemessen": 25,
+ "woerter_laut_meta": 25,
+ "formatrahmen_s": [
+  18.0,
+  24.0
+ ],
+ "thema_ab_max_s": 1.15,
+ "max_woerter": 30,
+ "pruefungen": {
+  "dauer_im_formatrahmen": true,
+  "hook1_klettern_geologie_in_frame_0": true,
+  "hook1_dauer_1_0_bis_1_6_s": true,
+  "hook2_nach_hook1": true,
+  "thema_frage_frueh": true,
+  "meta_hook_im_cover": true,
+  "hook_frage_mindestdauer": true,
+  "weitere_fragen_mindestdauer": true,
+  "lesezeit_je_info": true,
+  "verdauzeit_aufloesung_und_fazit": true,
+  "alle_texte_gemessen": true,
+  "ablauf_wie_im_themenplan": true,
+  "ablauf_anders_als_im_slot_davor": true,
+  "payoff_65_80_prozent": true,
+  "hoechstens_30_woerter": true,
+  "lautheit_-14_+-0.5": true,
+  "true_peak_max_-1": true,
+  "mp4_unter_100_mb": true,
+  "abspann_mit_aufruf": true,
+  "musik_statt_metall": true
+ },
+ "alle_pruefungen_ok": true,
+ "hook_score": {
+  "kriterien": "Klarheit, Kletterbezug, Luecke, Kuerze, Deckung durch den Payoff, Raetsel ohne Vorwissen (je 0-2, seit 17.11.2026 mit 'Raetsel ohne Vorwissen'); mindestens 10/12",
+  "varianten": [
+   {
+    "hook": "RED SANDSTONE: WHAT COLOUR ARE THE GRAINS?",
+    "punkte": [
+     2,
+     1,
+     2,
+     2,
+     2,
+     2
+    ],
+    "summe": 11,
+    "gewaehlt": true,
+    "anmerkung": "Gestein als Kontextzeile, Gegenstand Koerner, 7 Woerter; jeder sieht die rote Wand und kann raten (rot?), ohne Fachwissen; Payoff 'MOSTLY PALE GREY.' nennt genau eine Farbe; Kletterbezug ueber den Kletterer an der Wand, nicht in Worten"
+   },
+   {
+    "hook": "WHY IS THIS SANDSTONE RED?",
+    "punkte": [
+     2,
+     1,
+     2,
+     2,
+     1,
+     1
+    ],
+    "summe": 9,
+    "gewaehlt": false,
+    "anmerkung": "Antwort 'Haematit/Eisenoxid' braucht Fachwissen zum Mitraten; Payoff waere eine Erklaerung, keine Farbe"
+   },
+   {
+    "hook": "RED WALL: IS THE SAND RED, TOO?",
+    "punkte": [
+     1,
+     1,
+     2,
+     2,
+     2,
+     2
+    ],
+    "summe": 10,
+    "gewaehlt": false,
+    "anmerkung": "Ja/Nein-Frage, 'red wall' nennt das Gestein nicht"
+   },
+   {
+    "hook": "YOU CRIMP RED SANDSTONE. WHAT'S INSIDE A GRAIN?",
+    "punkte": [
+     2,
+     2,
+     1,
+     0,
+     2,
+     1
+    ],
+    "summe": 8,
+    "gewaehlt": false,
+    "anmerkung": "9 Woerter, 'inside' laesst zu viele Antworten offen"
+   },
+   {
+    "hook": "WHAT COLOUR IS THIS HOLD INSIDE?",
+    "punkte": [
+     1,
+     2,
+     2,
+     2,
+     1,
+     2
+    ],
+    "summe": 10,
+    "gewaehlt": false,
+    "anmerkung": "Gestein fehlt; der Griff innen ist nicht dasselbe wie das Korn innen (Payoff deckt nur halb)"
+   }
+  ]
+ },
+ "faktencheck": [
+  {
+   "aussage": "RED SANDSTONE (Wand rot, Signatur Punkte = Sandstein)",
+   "beleg": "v2/faktenbasis/014/sources.md Zeile 1: Rotsedimente/roter Sandstein, Faerbung durch Haematit",
+   "status": "belegt (web-verifiziert 20.07.2026)"
+  },
+  {
+   "aussage": "Lupe: alle Koerner aussen rot",
+   "beleg": "v2/faktenbasis/014/sources.md Zeile 1: Haematit als Kornueberzug; Caption #014 'wrapped around each grain'",
+   "status": "belegt"
+  },
+  {
+   "aussage": "MOSTLY PALE GREY. (Korn innen hellgrau)",
+   "beleg": "v2/faktenbasis/014/sources.md Kalibrierung: Quarzkoerner 'usually pale grey' (Feldspat-/Lithoklast-Anteile variieren), daher MOSTLY",
+   "status": "belegt, vorsichtig formuliert"
+  },
+  {
+   "aussage": "THE RED IS SKIN-DEEP. (duenner roter Saum um das Korn)",
+   "beleg": "v2/faktenbasis/014/sources.md Zeilen 1-2: Ueberzug um jedes Korn, volumetrisch unbedeutend, optisch dominant",
+   "status": "belegt; keine Dicke als Zahl im Bild"
+  },
+  {
+   "aussage": "Caption: much of the colour formed after burial",
+   "beleg": "v2/faktenbasis/014/sources.md Zeile 3 und Kalibrierung ('much of that colour formed after burial')",
+   "status": "belegt"
+  },
+  {
+   "aussage": "Keine Zahl, kein Ortsname, keine Reibungsaussage im Bild",
+   "beleg": "-",
+   "status": "bewusst weggelassen"
+  }
+ ],
+ "kennzahlen_bezug": "Kurzbericht 16.11.2026: Median-Sehdauer ~6 s, Skip-Rate 63-72 %, Ausreisser WHODUNIT #02 war ein Raetsel ohne Vorwissen. Deshalb steht die Frage ab 1,05 s (voll lesbar 1,29 s) und ist ein Farbraetsel, das jeder an der roten Wand mitraten kann; die naheliegende Antwort 'RED, RIGHT?' kommt bei 5,75 s, also noch innerhalb der typischen 6 s; 22,9 s, zwei Zuege, 25 Woerter.",
+ "logline": "Roter Sandstein ist innen meist hellgrau: rot ist nur ein hauchduenner Eisenoxid-Ueberzug um jedes Korn.",
+ "fassung": "Fassung 1 vom 22.11.2026",
+ "musik": "H-Moll mit D-Dur-Aufloesung, 77 BPM (r013: E-Dur 83 BPM)",
+ "ton_gehoert": false,
+ "ton_hinweis": "Ton nur gemessen (Lautheit -14.1 LUFS, True Peak -2.5 dBTP, Hochton-Anteil 0.242 %, Tonverlauf), nicht angehoert.",
+ "kletterer_reichweite_px": {
+  "start": 0.0,
+  "hang": 0.0,
+  "swing": 0.28,
+  "pull": 0.0
+ },
+ "stills_angesehen": [
+  0.0,
+  0.25,
+  0.45,
+  0.55,
+  0.9,
+  1.9,
+  4.55,
+  4.6,
+  5.3,
+  5.35,
+  6.5,
+  8.1,
+  8.6,
+  9.0,
+  9.2,
+  9.3,
+  11.2,
+  11.35,
+  12.9,
+  13.1,
+  13.6,
+  15.55,
+  15.6,
+  16.8,
+  17.05,
+  17.6,
+  18.2,
+  18.5,
+  18.8,
+  19.7,
+  21.5,
+  21.9
+ ],
+ "abweichungen": [
+  "Neuer Slot 24.11.2026 angelegt (kein freier Slot mehr; die Mittwochsproduktion am 18.11. hat keinen Eintrag hinterlassen).",
+  "Quellen-Titel im ersten Kommentar nur ueber Suchergebnisse geprueft (Walker 1967 aus sources.md; Minerals 2022 und Parnell et al. 2021 Geofluids per Websuche), Seitenabruf im unbeaufsichtigten Lauf nicht freigegeben.",
+  "Kein Massstabsbalken mit Zahl: der Massstabssprung laeuft ueber Lupe und Korn, weil eine Korngroesse oder Ueberzugsdicke in sources.md nicht web-belegt ist (Haar-Vergleich nur 'konservativ')."
+ ]
+}

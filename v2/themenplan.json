@@ -134,6 +134,17 @@
       "vor_produktion": "Zement 'usually weaker' halten; Mallorca nicht nennen (Korrektur 03.08.)",
       "reel": "r013",
       "angelegt": "15.11.2026: kein freier Slot mehr, neuer Slot im Rhythmus angelegt (Freitag = Kurzformat, Rotation nach MYTH OR ROCK: HOLD ID; Ablauf quiz, weil der Slot davor erklaerkette hat). Thema #024 aus der Themenbibliothek: sichtbare Verwandlung 2, Kletterbezug 2, Hook-Luecke 2, Formatpassung 2 (Griff-Herkunft), Beleglage 2."
+    },
+    {
+      "termin": "2026-11-24T18:07:00+01:00",
+      "format": "SCALE JUMP",
+      "ablauf": "offene_frage",
+      "post": "#014",
+      "thema": "Roter Sandstein: die Koerner sind meist hellgrau, rot ist nur der Haematit-Ueberzug",
+      "hook": "RED SANDSTONE: WHAT COLOUR ARE THE GRAINS?",
+      "vor_produktion": "Quarz 'usually pale grey' halten; keine Zahl, kein Ortsname",
+      "reel": "r014",
+      "angelegt": "22.11.2026: kein freier Slot mehr, neuer Slot im Rhythmus angelegt (Dienstag = Geschichte; Rotation: nach WHODUNIT am 17.11. SCALE JUMP, bisher erst einmal gelaufen; Ablauf offene_frage, weil der Slot davor quiz hat). #061 weiter nicht pruefbar (Befund vom 29.08. nicht im Repo). Thema #014 aus der Themenbibliothek nach Kennzahlen-Regel 5a: Raetsel ohne Vorwissen (jeder sieht die rote Wand und kann die Kornfarbe raten) 2, sichtbare Verwandlung 2, Kletterbezug 1, Hook-Luecke 2, Formatpassung 2 (Massstabssprung ins Korn), Beleglage 2."
     }
   ],
   "danach": "Weitere Termine im selben Rhythmus anlegen, jeweils mit \"ablauf\" (quiz, offene_frage, erklaerkette; nie derselbe wie im Slot davor), und Themen aus v2/faktenbasis/Themenbibliothek.md nach Reel-Potenzial-Score waehlen (je 0-2: sichtbare Verwandlung, Kletterbezug, Hook-Luecke, Formatpassung, Beleglage). #053 und #054 erst nach Korrektur ihrer Befunde. #047 (Duenen) ist als Thema moeglich, aber ohne Fischgraetenschichtung im Bild (Befund des V1-Titelbilds, wird dort nicht korrigiert). Vorgemerkt (11.11.2026): #061 (Schuhgummi) fuer den naechsten Geschichte-Slot, sobald der Befund vom 29.08. geklaert ist; sonst ein anderes Thema."
