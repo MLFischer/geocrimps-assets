@@ -428,7 +428,11 @@
       },
       "hold": false,
       "ablauf": "offene_frage",
-      "version": "22.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.11.2026, Kennzahlen-Regeln 5a), Vorlage r003 Fassung 6, Lupenkreis wie r006: Hook 1 kurz (rote Sandsteinwand, Kletterer greift die Leiste, Aufklappen Sandstein), Hook 2 ab 1,05 s RED SANDSTONE: WHAT COLOUR ARE THE GRAINS?, Zug 1 RED, RIGHT? (Lupe neben dem Kletterer, alle Koerner rot), Zug 2 BUT CUT ONE OPEN… (Sprung auf ein Korn, Schnittlinie), Payoff MOSTLY PALE GREY. (Korn klappt auf, innen hellgrau, roter Saum), Fazit THE RED IS SKIN-DEEP. (Saum leuchtet, Lupe schliesst sich, Kletterer zieht durch), Musik H-Moll/D-Dur 77 BPM, Abspann LIKE & FOLLOW, 22,9 s, 25 Woerter; keine Zahlen, kein Stempel"
+      "version": "22.11.2026: Fassung 1 nach PRODUKTION.md (Stand 16.11.2026, Kennzahlen-Regeln 5a), Vorlage r003 Fassung 6, Lupenkreis wie r006: Hook 1 kurz (rote Sandsteinwand, Kletterer greift die Leiste, Aufklappen Sandstein), Hook 2 ab 1,05 s RED SANDSTONE: WHAT COLOUR ARE THE GRAINS?, Zug 1 RED, RIGHT? (Lupe neben dem Kletterer, alle Koerner rot), Zug 2 BUT CUT ONE OPEN… (Sprung auf ein Korn, Schnittlinie), Payoff MOSTLY PALE GREY. (Korn klappt auf, innen hellgrau, roter Saum), Fazit THE RED IS SKIN-DEEP. (Saum leuchtet, Lupe schliesst sich, Kletterer zieht durch), Musik H-Moll/D-Dur 77 BPM, Abspann LIKE & FOLLOW, 22,9 s, 25 Woerter; keine Zahlen, kein Stempel",
+      "probe": {
+        "at": "2026-11-22T06:59:30+00:00",
+        "result": "FINISHED"
+      }
     }
   ]
 }
